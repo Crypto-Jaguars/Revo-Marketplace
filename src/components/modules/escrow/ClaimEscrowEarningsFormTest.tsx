@@ -4,7 +4,7 @@ import { ClaimEscrowForm } from '@/components/shared/ClaimEscrowForm';
 import { useClaimEscrowEarningsHook } from './hooks/claim-escrow-earnings.hook';
 import { useTranslations } from 'next-intl';
 
-// Define strict types for form fields
+
 type FormField = {
   name: 'contractId' | 'engagementId';
   label: string;
@@ -75,7 +75,6 @@ export function TestClaimEscrowEarningsForm() {
 
   describe('ClaimEscrowEarningsForm Tests', () => {
     it('renders all form fields with proper labels and placeholders', () => {
-        // Test the structure of the form using the fields array
         fields.forEach((field) => {
           expect(typeof field.label).equal('string');
           expect(field.label.length).greaterThan(0);
@@ -91,13 +90,11 @@ export function TestClaimEscrowEarningsForm() {
     });
 
     it('validates required fields', () => {
-        // Simulate empty form state with errors
         form.formState.errors = {
             contractId: { type: 'required', message: t('validation.contractId.required') },
             engagementId: { type: 'required', message: t('validation.engagementId.required') },
         };
 
-        // Check validation messages
         if (form.formState.errors.contractId) {
             expect(form.formState.errors.contractId.message).equal(t('validation.contractId.required'));
         }
@@ -105,14 +102,12 @@ export function TestClaimEscrowEarningsForm() {
             expect(form.formState.errors.engagementId.message).equal(t('validation.engagementId.required'));
         }
 
-        // Validate button text is a non-empty string
         const buttonText = t('submitButtonText');
         expect(typeof buttonText).equal('string');
         expect(buttonText.length).greaterThan(0);
     });
 
     it('handles valid form submission', () => {
-        // Simulate valid form data
         const validData = {
           contractId: 'CON-123',
           engagementId: 'ENG-456',
@@ -146,7 +141,6 @@ export function TestClaimEscrowEarningsForm() {
     });
 
     it('renders proper translations for all elements', () => {
-      // Check that all translation keys exist
       const translationKeys: TranslationKeys[] = [
         'title',
         'subtitle',
