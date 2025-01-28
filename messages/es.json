@@ -123,5 +123,18 @@
     "errorMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
     "alreadyHaveAccount": "¿Ya tienes una cuenta?",
     "login": "Iniciar sesión"
+  },
+  "SignIn": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Ingresa tus datos a continuación",
+    "emailLabel": "Correo electrónico o Número de teléfono",
+    "passwordLabel": "Contraseña",
+    "submit": "Iniciar Sesión",
+    "submitting": "Iniciando Sesión...",
+    "successTitle": "Hecho!",
+    "successMessage": "Se ha Iniciado Sesión. Redirigiendo a la página principal...",
+    "errorTitle": "Error",
+    "errorMessage": "Algo salió mal. Por favor intente de nuevo.",
+    "forgetPassword": "Olvidaste tu Contraseña?"
   }
 }

@@ -123,5 +123,18 @@
     "errorMessage": "Something went wrong. Please try again.",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Log in"
+  },
+  "SignIn": {
+    "title": "Log in to Exclusive",
+    "subtitle": "Enter your details below",
+    "emailLabel": "Email or Phone Number",
+    "passwordLabel": "Password",
+    "submit": "Log In",
+    "submitting": "Loging...",
+    "successTitle": "Success!",
+    "successMessage": "Loged In. Redirecting to main page...",
+    "errorTitle": "Error",
+    "errorMessage": "Something went wrong. Please try again.",
+    "forgetPassword": "Forget Password?"
   }
 }
