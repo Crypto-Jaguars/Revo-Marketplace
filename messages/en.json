@@ -163,5 +163,30 @@
     "emailValidation": "Please enter a valid email address.",
     "passwordLength": "Password must be at least 8 characters.",
     "passwordPattern": "Password must contain uppercase, lowercase and numbers."
+  },
+  "Checkout": {
+    "billingDetails": "Billing Details",
+    "form": {
+      "firstName": "First Name",
+      "companyName": "Company Name",
+      "streetAddress": "Street Address",
+      "apartment": "Apartment, floor, etc. (optional)",
+      "town": "Town/City",
+      "phoneNumber": "Phone Number",
+      "email": "Email Address",
+      "errors": {
+        "firstName": "First name is required",
+        "streetAddress": "Street address is required",
+        "town": "Town/City is required",
+        "phoneNumber": "Phone number must be at least 9 digits",
+        "email": "Invalid email address"
+      }
+    },
+    "subTotal": "Subtotal:",
+    "shipping": "Shipping:",
+    "free": "Free",
+    "total": "Total:",
+    "processing": "Processing",
+    "placeOrder": "Place Order"
   }
 }

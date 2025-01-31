@@ -163,5 +163,30 @@
     "emailValidation": "Por favor ingrese un correo válido.",
     "passwordLength": "La contraseña debe tener al menos 8 caracteres.",
     "passwordPattern": "La contraseña debe conterner una letra mayúscula, una minúscula y números."
+  },
+  "Checkout": {
+    "billingDetails": "Detalles de Facturación",
+    "form": {
+      "firstName": "Nombre",
+      "companyName": "Nombre de la Empresa",
+      "streetAddress": "Dirección",
+      "apartment": "Apartamento, piso, etc. (opcional)",
+      "town": "Ciudad/Pueblo",
+      "phoneNumber": "Número de Teléfono",
+      "email": "Correo Electrónico",
+      "errors": {
+        "firstName": "El nombre es obligatorio",
+        "streetAddress": "La dirección es obligatoria",
+        "town": "La ciudad es obligatoria",
+        "phoneNumber": "El número de teléfono debe tener al menos 9 dígitos",
+        "email": "Dirección de correo electrónico no válida"
+      }
+    },
+    "subTotal": "Subtotal:",
+    "shipping": "Envío",
+    "free": "Gratis",
+    "total": "Total",
+    "processing": "Procesando",
+    "placeOrder": "Realizar Pedido"
   }
 }
