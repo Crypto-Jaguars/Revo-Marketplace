@@ -303,5 +303,70 @@
       },
       "title": "Editar Tu Perfil"
     }
-  }
+  },
+    "OrderHistory": {
+      "title": "Historial de Pedidos",
+      "filters": {
+        "search": "Buscar Pedidos",
+        "dateRange": "Rango de Fechas",
+        "status": "Estado del Pedido",
+        "sortBy": "Ordenar Por",
+        "amountRange": "Rango de Monto",
+        "minAmount": "Monto Mínimo",
+        "maxAmount": "Monto Máximo",
+        "present": "Presente"
+      },
+      "status": {
+        "all": "Todos los Estados",
+        "pending": "Pendiente",
+        "processing": "Procesando",
+        "delivered": "Entregado",
+        "cancelled": "Cancelado"
+      },
+      "sortBy": {
+        "dateDesc": "Más Recientes Primero",
+        "dateAsc": "Más Antiguos Primero",
+        "totalDesc": "Monto Más Alto",
+        "totalAsc": "Monto Más Bajo"
+      },
+      "table": {
+        "orderId": "ID del Pedido",
+        "date": "Fecha",
+        "total": "Total",
+        "status": "Estado",
+        "seller": "Vendedor",
+        "actions": "Acciones"
+      },
+      "details": {
+        "title": "Detalles del Pedido",
+        "orderInfo": {
+          "title": "Información del Pedido",
+          "status": "Estado",
+          "date": "Fecha",
+          "total": "Total"
+        },
+        "sellerInfo": {
+          "title": "Información del Vendedor",
+          "name": "Nombre",
+          "rating": "Calificación"
+        },
+        "items": {
+          "title": "Artículos",
+          "quantity": "Cantidad",
+          "price": "Precio"
+        },
+        "shipping": {
+          "title": "Envío",
+          "address": "Dirección de Entrega",
+          "trackingNumber": "Número de Seguimiento",
+          "estimatedDelivery": "Fecha Estimada de Entrega"
+        },
+        "payment": {
+          "title": "Detalles de Pago",
+          "method": "Método de Pago",
+          "status": "Estado del Pago",
+          "total": "Monto Total"
+        }
+      }
+    }
 }
