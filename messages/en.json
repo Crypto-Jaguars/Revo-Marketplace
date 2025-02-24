@@ -301,5 +301,60 @@
       },
       "title": "Edit Your Profile"
     }
+  },
+  "Farm": {
+    "title": "Farm Dashboard",
+    "description": "Monitor and manage your farm operations",
+    "breadcrumb": {
+      "home": "Home",
+      "dashboard": "Farm Dashboard"
+    },
+    "weather": {
+      "title": "Weather Information",
+      "loading": "Loading weather information...",
+      "error": "Error loading weather information",
+      "locale": "en-US",
+      "humidity": "{value}% Humidity",
+      "windSpeed": "{value} km/h",
+      "condition": {
+        "sunny": "Sunny",
+        "partly cloudy": "Partly Cloudy",
+        "light rain": "Light Rain"
+      },
+      "forecast": {
+        "title": "3-Day Forecast",
+        "temperature": "{min}° - {max}°C"
+      }
+    },
+    "stats": {
+      "title": "Farm Statistics",
+      "totalCrops": "Total Crops",
+      "activeFields": "Active Fields",
+      "harvestReady": "Harvest Ready"
+    },
+    "tasks": {
+      "title": "Today's Tasks",
+      "checkIrrigation": "Check irrigation system",
+      "harvestTomatoes": "Harvest tomatoes",
+      "applyFertilizer": "Apply fertilizer"
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "irrigation": {
+        "title": "Irrigation Completed",
+        "description": "Field 3 - Corn",
+        "time": "2 hours ago"
+      },
+      "fertilizer": {
+        "title": "Fertilizer Applied",
+        "description": "Field 1 - Wheat",
+        "time": "5 hours ago"
+      },
+      "harvest": {
+        "title": "Harvest Completed",
+        "description": "Field 2 - Soybeans",
+        "time": "Yesterday"
+      }
+    }
   }
 }

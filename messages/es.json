@@ -303,5 +303,60 @@
       },
       "title": "Editar Tu Perfil"
     }
+  },
+  "Farm": {
+    "title": "Panel de Control de la Granja",
+    "description": "Monitorea y gestiona las operaciones de tu granja",
+    "breadcrumb": {
+      "home": "Inicio",
+      "dashboard": "Panel de Control de la Granja"
+    },
+    "weather": {
+      "title": "Información del Clima",
+      "loading": "Cargando información del clima...",
+      "error": "Error al cargar la información del clima",
+      "locale": "es-ES",
+      "humidity": "{value}% de Humedad",
+      "windSpeed": "{value} km/h",
+      "condition": {
+        "sunny": "Soleado",
+        "partly cloudy": "Parcialmente Nublado",
+        "light rain": "Lluvia Ligera"
+      },
+      "forecast": {
+        "title": "Pronóstico de 3 Días",
+        "temperature": "{min}° - {max}°C"
+      }
+    },
+    "stats": {
+      "title": "Estadísticas de la Granja",
+      "totalCrops": "Cultivos Totales",
+      "activeFields": "Campos Activos",
+      "harvestReady": "Listos para Cosechar"
+    },
+    "tasks": {
+      "title": "Tareas de Hoy",
+      "checkIrrigation": "Revisar sistema de riego",
+      "harvestTomatoes": "Cosechar tomates",
+      "applyFertilizer": "Aplicar fertilizante"
+    },
+    "activity": {
+      "title": "Actividad Reciente",
+      "irrigation": {
+        "title": "Riego Completado",
+        "description": "Campo 3 - Maíz",
+        "time": "hace 2 horas"
+      },
+      "fertilizer": {
+        "title": "Fertilizante Aplicado",
+        "description": "Campo 1 - Trigo",
+        "time": "hace 5 horas"
+      },
+      "harvest": {
+        "title": "Cosecha Completada",
+        "description": "Campo 2 - Soja",
+        "time": "Ayer"
+      }
+    }
   }
 }

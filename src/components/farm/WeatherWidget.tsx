@@ -70,7 +70,7 @@ const WeatherWidget = ({ location }: Props) => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const t = useTranslations('farm.weather');
+  const t = useTranslations('Farm.weather');
 
   useEffect(() => {
     // Simulate API call delay
@@ -110,24 +110,24 @@ const WeatherWidget = ({ location }: Props) => {
           <WeatherIcon className="w-16 h-16 text-yellow-500" />
           <div>
             <div className="text-4xl font-bold text-gray-800">{weather.temperature}°C</div>
-            <div className="text-gray-600 text-lg">{weather.condition}</div>
+            <div className="text-gray-600 text-lg">{t('condition.' + weather.condition.toLowerCase())}</div>
           </div>
         </div>
         <div className="text-right space-y-2">
           <div className="flex items-center justify-end gap-2 text-gray-600">
             <WiHumidity className="w-6 h-6" />
-            <span>{weather.humidity}% Humidity</span>
+            <span>{t('humidity', { value: weather.humidity })}</span>
           </div>
           <div className="flex items-center justify-end gap-2 text-gray-600">
             <WiStrongWind className="w-6 h-6" />
-            <span>{weather.windSpeed} km/h</span>
+            <span>{t('windSpeed', { value: weather.windSpeed })}</span>
           </div>
         </div>
       </div>
 
       {/* Forecast */}
       <div>
-        <h3 className="text-xl font-semibold mb-4 text-gray-800">3-Day Forecast</h3>
+        <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('forecast.title')}</h3>
         <div className="grid gap-3">
           {weather.forecast.map((day) => {
             const DayIcon = getWeatherIcon(day.condition);
@@ -139,13 +139,13 @@ const WeatherWidget = ({ location }: Props) => {
                 <div className="flex items-center gap-3">
                   <DayIcon className="w-8 h-8 text-blue-500" />
                   <span className="text-gray-700 font-medium">
-                    {new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}
+                    {new Date(day.date).toLocaleDateString(t('locale'), { weekday: 'short' })}
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="text-gray-600">{day.condition}</span>
+                  <span className="text-gray-600">{t('condition.' + day.condition.toLowerCase())}</span>
                   <span className="font-medium text-gray-800">
-                    {day.temperature.min}° - {day.temperature.max}°C
+                    {t('forecast.temperature', { min: day.temperature.min, max: day.temperature.max })}
                   </span>
                 </div>
               </div>
