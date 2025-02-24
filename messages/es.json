@@ -346,17 +346,17 @@
       "irrigation": {
         "title": "Riego Completado",
         "description": "Campo 3 - Maíz",
-        "time": "hace 2 horas"
+        "time": "hace {value} {unit}"
       },
       "fertilizer": {
         "title": "Fertilizante Aplicado",
         "description": "Campo 1 - Trigo",
-        "time": "hace 5 horas"
+        "time": "hace {value} {unit}"
       },
       "harvest": {
         "title": "Cosecha Completada",
         "description": "Campo 2 - Soja",
-        "time": "Ayer"
+        "time": "hace {value} {unit}"
       }
     }
   }

@@ -130,14 +130,25 @@ export default function FarmDetails({
               </TableHeader>
               <TableBody>
                 {infrastructure.storage.map((facility) => (
-                  <TableRow key={facility.type}>
+                  <TableRow 
+                    key={facility.type}
+                    role="row"
+                    tabIndex={0}
+                    aria-label={`${facility.type}: ${facility.capacity} ${facility.unit}, Utilization: ${facility.currentUtilization}%`}
+                  >
                     <TableCell>{facility.type}</TableCell>
                     <TableCell>
                       {facility.capacity} {facility.unit}
                     </TableCell>
                     <TableCell>
                       <div className="space-y-1">
-                        <Progress value={facility.currentUtilization} />
+                        <Progress 
+                          value={facility.currentUtilization}
+                          aria-label={`${facility.type} utilization`}
+                          aria-valuemin={0}
+                          aria-valuemax={100}
+                          aria-valuenow={facility.currentUtilization}
+                        />
                         <p className="text-xs text-muted-foreground">
                           {facility.currentUtilization}%
                         </p>

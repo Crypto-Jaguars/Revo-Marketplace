@@ -70,8 +70,10 @@ export default function MapView({ location, className }: MapViewProps) {
     }
 
     return () => {
+      marker.current?.remove();
       map.current?.remove();
       map.current = null;
+      marker.current = null;
     };
   }, [location]);
 
@@ -88,6 +90,24 @@ export default function MapView({ location, className }: MapViewProps) {
         style={{ minHeight: '400px' }}
         tabIndex={0}
         aria-label={`Map showing ${location.address}, ${location.city}, ${location.state}`}
+        onKeyDown={(e) => {
+          if (!map.current) return;
+          const MOVE_AMOUNT = 100;
+          switch(e.key) {
+            case 'ArrowUp':
+              map.current.panBy([0, -MOVE_AMOUNT]); break;
+            case 'ArrowDown':
+              map.current.panBy([0, MOVE_AMOUNT]); break;
+            case 'ArrowLeft':
+              map.current.panBy([-MOVE_AMOUNT, 0]); break;
+            case 'ArrowRight':
+              map.current.panBy([MOVE_AMOUNT, 0]); break;
+            case '+':
+              map.current.zoomIn(); break;
+            case '-':
+              map.current.zoomOut(); break;
+          }
+        }}
       />
     </Card>
   );

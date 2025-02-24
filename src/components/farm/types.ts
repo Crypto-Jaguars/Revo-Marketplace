@@ -13,8 +13,8 @@ export interface FarmCertification {
   id: string;
   name: string;
   issuer: string;
-  issueDate: string;
-  expiryDate: string;
+  issueDate: string; // ISO 8601 format (YYYY-MM-DD)
+  expiryDate: string; // ISO 8601 format (YYYY-MM-DD)
   status: 'active' | 'expired' | 'pending';
   documentUrl?: string;
 }
@@ -29,9 +29,9 @@ export interface Crop {
   id: string;
   name: string;
   status: 'active' | 'planned' | 'harvested';
-  plantingDate: string;
-  expectedHarvestDate: string;
-  actualHarvestDate?: string;
+  plantingDate: string; // ISO 8601 format (YYYY-MM-DD)
+  expectedHarvestDate: string; // ISO 8601 format (YYYY-MM-DD)
+  actualHarvestDate?: string; // ISO 8601 format (YYYY-MM-DD)
   quantity: number;
   unit: string;
 }
@@ -106,6 +106,8 @@ export interface FarmProfileProps {
     email: string;
     website?: string;
   };
+  ariaLabel?: string;
+  role?: string;
 }
 
 export interface FarmGalleryProps {
@@ -118,6 +120,8 @@ export interface FarmGalleryProps {
 export interface FarmDetailsProps {
   farmingMethods: FarmingMethod[];
   infrastructure: Infrastructure;
+  ariaLabel?: string;
+  role?: string;
 }
 
 export interface FarmMetricsProps {
