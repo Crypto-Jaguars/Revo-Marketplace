@@ -357,5 +357,11 @@
         "time": "Yesterday"
       }
     }
+  },
+  "FarmDetails": {
+    "farmingMethods": "Farming Methods",
+    "farmingMethodsDescription": "Our sustainable farming practices and techniques",
+    "sustainabilityScore": "Score: {score}/10",
+    "processingCapabilitiesDescription": "Our processing and production capabilities"
   }
 }

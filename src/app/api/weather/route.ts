@@ -43,9 +43,16 @@ export async function GET(request: Request) {
       return NextResponse.json(cachedData.data);
     }
 
-    const response = await fetch(
-      `${BASE_URL}/forecast.json?key=${API_KEY}&q=${latitude},${longitude}&days=7&aqi=no`
-    );
+    const url = new URL(`${BASE_URL}/forecast.json`);
+    url.searchParams.append('q', `${latitude},${longitude}`);
+    url.searchParams.append('days', '7');
+    url.searchParams.append('aqi', 'no');
+    
+    const response = await fetch(url, {
+      headers: new Headers({
+        'key': API_KEY || ''
+      })
+    });
 
     if (!response.ok) {
       return NextResponse.json(

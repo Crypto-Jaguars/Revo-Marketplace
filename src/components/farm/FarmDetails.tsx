@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import {
   Card,
   CardContent,
@@ -23,14 +24,16 @@ export default function FarmDetails({
   farmingMethods,
   infrastructure,
 }: FarmDetailsProps) {
+  const t = useTranslations('FarmDetails');
+  
   return (
     <div className="space-y-6">
       {/* Farming Methods */}
       <Card>
         <CardHeader>
-          <CardTitle>Farming Methods</CardTitle>
+          <CardTitle>{t('farmingMethods')}</CardTitle>
           <CardDescription>
-            Our sustainable farming practices and techniques
+            {t('farmingMethodsDescription')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -45,7 +48,7 @@ export default function FarmDetails({
                 <div className="flex items-center justify-between">
                   <h4 id={`method-${method.type}`} className="font-medium">{method.type}</h4>
                   <Badge variant="outline">
-                    Score: {method.sustainabilityScore}/10
+                    {t('sustainabilityScore', { score: method.sustainabilityScore })}
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">
