@@ -1,0 +1,78 @@
+{
+  "farm": {
+    "profile": {
+      "title": "Farm Information",
+      "established": "Established {date}",
+      "contact": {
+        "title": "Contact Details",
+        "visitWebsite": "Visit Website"
+      }
+    },
+    "gallery": {
+      "title": "Farm Gallery",
+      "imageViewer": "Image viewer",
+      "close": "Close image viewer",
+      "previous": "Previous image",
+      "next": "Next image",
+      "view": "View {alt}"
+    },
+    "weather": {
+      "title": "Weather Conditions",
+      "subtitle": "Current weather at the farm location",
+      "loading": "Loading weather data",
+      "error": "Failed to load weather data",
+      "retrying": "Retrying... ({current}/{max})",
+      "wind": "Wind",
+      "humidity": "Humidity",
+      "forecast": "7-Day Forecast",
+      "temperature": "{value}°C",
+      "temperatureRange": "{min}°C - {max}°C"
+    },
+    "metrics": {
+      "resourceUsage": {
+        "title": "Resource Usage",
+        "subtitle": "Water and energy consumption",
+        "waterUsage": "Water Usage",
+        "renewableEnergy": "Renewable Energy",
+        "totalUsage": "{value}% of total usage"
+      },
+      "environmentalImpact": {
+        "title": "Environmental Impact",
+        "subtitle": "Carbon footprint and waste management",
+        "carbonFootprint": "Carbon Footprint",
+        "wasteManagement": "Waste Management",
+        "recyclingRate": "Recycling Rate",
+        "compostingRate": "Composting Rate"
+      }
+    }
+  },
+  "Index": {
+    "title": "Welcome to Revolutionary Farmers"
+  },
+  "Farm": {
+    "title": "Farm Dashboard",
+    "subtitle": "Monitor and manage your farm operations",
+    "weather": {
+      "title": "Weather Information",
+      "loading": "Loading weather data..."
+    },
+    "stats": {
+      "title": "Farm Statistics",
+      "totalCrops": "Total Crops",
+      "activeFields": "Active Fields",
+      "harvestReady": "Harvest Ready"
+    },
+    "tasks": {
+      "title": "Today's Tasks",
+      "irrigation": "Check irrigation system",
+      "harvest": "Harvest tomatoes",
+      "fertilizer": "Apply fertilizer"
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "irrigation": "Irrigation Completed",
+      "fertilizer": "Fertilizer Applied",
+      "harvest": "Harvest Completed"
+    }
+  }
+} 

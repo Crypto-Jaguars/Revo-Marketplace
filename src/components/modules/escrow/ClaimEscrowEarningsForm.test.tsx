@@ -4,6 +4,11 @@ import { ClaimEscrowForm } from '@/components/shared/ClaimEscrowForm';
 import { useClaimEscrowEarningsHook } from './hooks/claim-escrow-earnings.hook';
 import { useTranslations } from 'next-intl';
 
+// Add interface for form data
+interface EscrowFormData {
+  contractId: string;
+  engagementId: string;
+}
 
 type FormField = {
   name: 'contractId' | 'engagementId';
@@ -108,13 +113,13 @@ export function TestClaimEscrowEarningsForm() {
     });
 
     it('handles valid form submission', () => {
-        const validData = {
+        const validData: EscrowFormData = {
           contractId: 'CON-123',
           engagementId: 'ENG-456',
         };
       
-        let submittedData = null;
-        const mockOnSubmit = (data: any) => {
+        let submittedData: EscrowFormData | null = null;
+        const mockOnSubmit = (data: EscrowFormData) => {
           submittedData = data;
         };
       
@@ -124,14 +129,14 @@ export function TestClaimEscrowEarningsForm() {
     });
 
     it('handles invalid form submission', () => {
-        const invalidData = {
+        const invalidData: EscrowFormData = {
           contractId: '',
           engagementId: '',
         };
 
         let submissionOccurred = false;
       
-        const mockOnSubmit = (data: any) => {
+        const mockOnSubmit = (data: EscrowFormData) => {
           submissionOccurred = true;
         };
       
