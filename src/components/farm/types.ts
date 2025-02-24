@@ -60,11 +60,13 @@ export interface SustainabilityMetrics {
     amount: number;
     unit: string;
     period: string;
+    percentage: number;
   };
   carbonFootprint: {
     amount: number;
     unit: string;
     period: string;
+    percentage: number;
   };
   renewableEnergy: {
     percentage: number;
@@ -109,6 +111,8 @@ export interface FarmProfileProps {
 export interface FarmGalleryProps {
   images: FarmImage[];
   onImageClick?: (image: FarmImage) => void;
+  ariaLabel?: string;
+  role?: string;
 }
 
 export interface FarmDetailsProps {
@@ -119,8 +123,11 @@ export interface FarmDetailsProps {
 export interface FarmMetricsProps {
   crops: Crop[];
   sustainabilityMetrics: SustainabilityMetrics;
+  ariaLabel?: string;
+  ariaLive?: 'polite' | 'assertive' | 'off';
 }
 
 export interface FarmCertificationsProps {
   certifications: FarmCertification[];
+  ariaLabel?: string;
 } 

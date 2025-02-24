@@ -21,6 +21,15 @@ export default function MapView({ location, className }: MapViewProps) {
   useEffect(() => {
     if (!MAPBOX_TOKEN) {
       console.error('Mapbox token is not configured');
+      // Render a fallback UI
+      if (mapContainer.current) {
+        mapContainer.current.innerHTML = `
+          <div role="alert" class="p-4 text-center">
+            <p>Map is currently unavailable.</p>
+            <p class="text-sm text-muted-foreground">Please try again later.</p>
+          </div>
+        `;
+      }
       return;
     }
 
@@ -70,11 +79,15 @@ export default function MapView({ location, className }: MapViewProps) {
     <Card
       className={`relative overflow-hidden ${className || ''}`}
       style={{ minHeight: '400px' }}
+      role="region"
+      aria-label="Farm location map"
     >
       <div
         ref={mapContainer}
         className="absolute inset-0"
         style={{ minHeight: '400px' }}
+        tabIndex={0}
+        aria-label={`Map showing ${location.address}, ${location.city}, ${location.state}`}
       />
     </Card>
   );

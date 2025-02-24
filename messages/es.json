@@ -126,7 +126,8 @@
   "Marketplace": {
     "navigation": {
       "home": "Inicio",
-      "products": "Productos"
+      "products": "Productos",
+      "farm": "Granja"
     },
     "search": {
       "placeholder": "Buscar productos..."

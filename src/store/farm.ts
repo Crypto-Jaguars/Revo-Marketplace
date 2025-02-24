@@ -124,9 +124,14 @@ export const useFarmStore = create<FarmState & FarmActions>()(
       updateCrop: (id, updates) =>
         set((state) => ({
           ...state,
-          activeCrops: state.activeCrops.map((crop) =>
-            crop.id === id ? { ...crop, ...updates } : crop
-          ),
+          activeCrops: state.activeCrops.some(crop => crop.id === id)
+            ? state.activeCrops.map((crop) =>
+                crop.id === id ? { ...crop, ...updates } : crop
+              )
+            : (
+                set({ error: `Crop with ID ${id} not found` }),
+                state.activeCrops
+              ),
         })),
 
       setLoading: (isLoading) => set({ isLoading }),

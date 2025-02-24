@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, MockedFunction } from 'vitest';
 import WeatherWidget from '../WeatherWidget';
 import { WeatherData, getWeatherData } from '../../../services/weather';
 import { act } from '@testing-library/react';
@@ -44,8 +44,7 @@ const mockWeatherData = {
   ],
 };
 
-// Add type for mocked function
-const mockedGetWeatherData = getWeatherData as jest.MockedFunction<typeof getWeatherData>;
+const mockedGetWeatherData = getWeatherData as MockedFunction<typeof getWeatherData>;
 
 describe('WeatherWidget', () => {
   beforeEach(() => {

@@ -84,7 +84,12 @@ const WeatherWidget = ({ location }: Props) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-40" role="status" aria-label={t('loading')}>
+      <div 
+        className="flex items-center justify-center h-40" 
+        role="status" 
+        tabIndex={0}
+        aria-live="polite"
+        aria-label={t('loading')}>
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
@@ -133,11 +138,19 @@ const WeatherWidget = ({ location }: Props) => {
             const DayIcon = getWeatherIcon(day.condition);
             return (
               <div 
-                key={day.date} 
-                className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                key={day.date}
+                role="article"
+                tabIndex={0}
+                aria-label={t('forecast.dayDetails', {
+                  day: new Date(day.date).toLocaleDateString(t('locale'), { weekday: 'long' }),
+                  condition: t('condition.' + day.condition.toLowerCase()),
+                  min: day.temperature.min,
+                  max: day.temperature.max
+                })}
+                className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
                 <div className="flex items-center gap-3">
-                  <DayIcon className="w-8 h-8 text-blue-500" />
+                  <DayIcon className="w-8 h-8 text-blue-500" aria-hidden="true" />
                   <span className="text-gray-700 font-medium">
                     {new Date(day.date).toLocaleDateString(t('locale'), { weekday: 'short' })}
                   </span>

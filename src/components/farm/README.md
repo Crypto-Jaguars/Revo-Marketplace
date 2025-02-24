@@ -140,6 +140,13 @@ Supports multiple languages through next-intl:
 
 Required environment variables:
 ```env
-NEXT_PUBLIC_WEATHER_API_KEY=your_weather_api_key
-NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
+# API Keys (store securely and never commit to repository)
+NEXT_PUBLIC_WEATHER_API_KEY=your_weather_api_key  # Restrict to specific domains
+NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token       # Set usage limits
+
+# Security best practices:
+# 1. Use environment-specific keys
+# 2. Rotate keys periodically
+# 3. Monitor API usage
+# 4. Implement rate limiting
 ``` 

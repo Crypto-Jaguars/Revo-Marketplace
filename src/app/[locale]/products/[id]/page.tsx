@@ -6,8 +6,15 @@ import RelatedProducts from "@/components/products/RelatedProducts";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import { useTranslations } from "next-intl";
 
-// TODO: Replace with actual data fetching
-const mockProductData = {
+interface ProductData {
+  price: number;
+  description: string;
+  rating: number;
+  reviews: number;
+}
+
+// TODO(#56): Replace with actual data fetching from API
+const mockProductData: ProductData = {
   price: 299.99,
   description: "High-quality product with premium features",
   rating: 4.5,

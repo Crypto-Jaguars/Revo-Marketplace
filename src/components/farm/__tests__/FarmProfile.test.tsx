@@ -99,4 +99,22 @@ describe('FarmProfile', () => {
     render(<FarmProfile {...dataWithoutImages} />);
     expect(screen.getByText('Green Valley Farm')).toBeInTheDocument();
   });
+
+  it('has proper accessibility attributes', () => {
+    render(<FarmProfile {...mockFarmData} />);
+    
+    expect(screen.getByRole('heading', { name: 'Green Valley Farm' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Visit Website' })).toHaveAttribute('aria-label', 'Visit Green Valley Farm website');
+  });
+
+  it('renders with RTL support', () => {
+    render(
+      <div dir="rtl">
+        <FarmProfile {...mockFarmData} />
+      </div>
+    );
+    
+    const container = screen.getByRole('article');
+    expect(container).toHaveStyle({ direction: 'rtl' });
+  });
 }); 

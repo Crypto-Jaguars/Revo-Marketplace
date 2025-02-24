@@ -34,10 +34,15 @@ export default function FarmCertifications({
         <CardContent>
           <div className="grid gap-6 md:grid-cols-2">
             {certifications.map((cert) => (
-              <Card key={cert.id} className="overflow-hidden">
+              <Card 
+                key={cert.id} 
+                className="overflow-hidden"
+                role="article"
+                aria-labelledby={`cert-${cert.id}-name`}
+              >
                 <div className="border-b bg-muted/50 p-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">{cert.name}</h3>
+                    <h3 id={`cert-${cert.id}-name`} className="font-semibold">{cert.name}</h3>
                     <Badge
                       variant={
                         cert.status === 'active'
@@ -46,6 +51,8 @@ export default function FarmCertifications({
                           ? 'warning'
                           : 'destructive'
                       }
+                      role="status"
+                      aria-label={`Certification status: ${cert.status}`}
                     >
                       {cert.status}
                     </Badge>
@@ -72,7 +79,17 @@ export default function FarmCertifications({
                           <Button
                             variant="outline"
                             className="w-full"
-                            onClick={() => window.open(cert.documentUrl, '_blank')}
+                            onClick={() => {
+                              if (!cert.documentUrl) return;
+                              try {
+                                const url = new URL(cert.documentUrl);
+                                if (['http:', 'https:'].includes(url.protocol)) {
+                                  window.open(url.href, '_blank', 'noopener,noreferrer');
+                                }
+                              } catch (error) {
+                                console.error('Invalid URL:', error);
+                              }
+                            }}
                           >
                             <FileText className="mr-2 h-4 w-4" />
                             View Certificate

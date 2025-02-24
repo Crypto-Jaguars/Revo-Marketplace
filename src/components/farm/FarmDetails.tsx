@@ -36,9 +36,14 @@ export default function FarmDetails({
         <CardContent>
           <div className="space-y-4">
             {farmingMethods.map((method) => (
-              <div key={method.type} className="space-y-2">
+              <div 
+                key={method.type} 
+                role="region"
+                aria-labelledby={`method-${method.type}`}
+                className="space-y-2"
+              >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-medium">{method.type}</h4>
+                  <h4 id={`method-${method.type}`} className="font-medium">{method.type}</h4>
                   <Badge variant="outline">
                     Score: {method.sustainabilityScore}/10
                   </Badge>
@@ -46,7 +51,13 @@ export default function FarmDetails({
                 <p className="text-sm text-muted-foreground">
                   {method.description}
                 </p>
-                <Progress value={method.sustainabilityScore * 10} />
+                <Progress 
+                  value={method.sustainabilityScore * 10}
+                  aria-label={`Sustainability score for ${method.type}`}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={method.sustainabilityScore * 10}
+                />
               </div>
             ))}
           </div>
@@ -72,7 +83,12 @@ export default function FarmDetails({
               </TableHeader>
               <TableBody>
                 {infrastructure.equipment.map((item) => (
-                  <TableRow key={item.name}>
+                  <TableRow 
+                    key={item.name}
+                    role="row"
+                    tabIndex={0}
+                    aria-label={`${item.name}: ${item.quantity} units, Status: ${item.status}`}
+                  >
                     <TableCell>{item.name}</TableCell>
                     <TableCell>{item.quantity}</TableCell>
                     <TableCell>
@@ -84,6 +100,8 @@ export default function FarmDetails({
                             ? 'warning'
                             : 'destructive'
                         }
+                        role="status"
+                        aria-label={`Status: ${item.status}`}
                       >
                         {item.status}
                       </Badge>

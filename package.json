@@ -10,7 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "vitest",
     "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage",
+    "test:coverage": "vitest run --coverage --coverage.thresholds.lines=70 --coverage.thresholds.functions=70 --coverage.thresholds.branches=70 --coverage.thresholds.statements=70",
     "test:ci": "jest --ci --coverage --maxWorkers=2 --coverageThreshold='{\"global\":{\"branches\":70,\"functions\":70,\"lines\":70,\"statements\":70}}'",
     "test:e2e:ci": "start-server-and-test start:test http://localhost:3001 test:e2e",
     "start:test": "next start -p 3001",

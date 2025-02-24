@@ -91,7 +91,13 @@ export default function FarmMetrics({
                   {sustainabilityMetrics.waterUsage.period}
                 </span>
               </div>
-              <Progress value={70} />
+              <Progress 
+                value={50}
+                aria-label="Water usage progress"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={50}
+              />
             </div>
 
             {/* Renewable Energy */}
@@ -105,6 +111,10 @@ export default function FarmMetrics({
               </div>
               <Progress
                 value={sustainabilityMetrics.renewableEnergy.percentage}
+                aria-label="Renewable energy usage progress"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={sustainabilityMetrics.renewableEnergy.percentage}
               />
               <div className="flex flex-wrap gap-2">
                 {sustainabilityMetrics.renewableEnergy.sources.map((source) => (
@@ -134,7 +144,13 @@ export default function FarmMetrics({
                   {sustainabilityMetrics.carbonFootprint.period}
                 </span>
               </div>
-              <Progress value={60} />
+              <Progress 
+                value={50}
+                aria-label="Carbon footprint progress"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={50}
+              />
             </div>
 
             {/* Waste Management */}
@@ -150,6 +166,10 @@ export default function FarmMetrics({
                   </div>
                   <Progress
                     value={sustainabilityMetrics.wasteManagement.recyclingRate}
+                    aria-label="Recycling rate progress"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={sustainabilityMetrics.wasteManagement.recyclingRate}
                   />
                 </div>
                 <div className="space-y-2">
@@ -161,6 +181,10 @@ export default function FarmMetrics({
                   </div>
                   <Progress
                     value={sustainabilityMetrics.wasteManagement.compostingRate}
+                    aria-label="Composting rate progress"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={sustainabilityMetrics.wasteManagement.compostingRate}
                   />
                 </div>
               </div>

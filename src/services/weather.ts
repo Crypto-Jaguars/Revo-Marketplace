@@ -28,6 +28,8 @@ interface WeatherAPIForecastDay {
 
 const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 const BASE_URL = 'https://api.weatherapi.com/v1';
+const CACHE_DURATION = 1800000; // 30 minutes
+const weatherCache = new Map();
 
 export async function getWeatherData(
   latitude: number,
@@ -38,6 +40,13 @@ export async function getWeatherData(
   }
 
   try {
+    const cacheKey = `${latitude},${longitude}`;
+    const cachedData = weatherCache.get(cacheKey);
+    
+    if (cachedData && Date.now() - cachedData.timestamp < CACHE_DURATION) {
+      return cachedData.data;
+    }
+
     const response = await fetch(
       `${BASE_URL}/forecast.json?key=${API_KEY}&q=${latitude},${longitude}&days=7&aqi=no`
     );
@@ -47,6 +56,12 @@ export async function getWeatherData(
     }
 
     const data = await response.json();
+    
+    // Cache the new data
+    weatherCache.set(cacheKey, {
+      data,
+      timestamp: Date.now()
+    });
 
     return {
       temperature: data.current.temp_c,

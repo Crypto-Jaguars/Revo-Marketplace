@@ -124,7 +124,8 @@
   "Marketplace": {
     "navigation": {
       "home": "Home",
-      "products": "Products"
+      "products": "Products",
+      "farm": "Farm"
     },
     "search": {
       "placeholder": "Search for products..."
