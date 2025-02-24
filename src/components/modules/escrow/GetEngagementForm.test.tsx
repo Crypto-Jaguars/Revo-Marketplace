@@ -4,7 +4,7 @@ import { GetEngagementForm } from './GetEngagementForm';
 import { useGetEngagementEscrowHook } from './hooks/get-engagement-escrow.hook';
 import { UseFormReturn } from 'react-hook-form';
 
-// Define the form data type
+
 interface EngagementFormData {
     engagementId: string;
 }
