@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Crop, Equipment } from "./types";
 import { Award, Tractor } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { useTranslations } from "use-intl";
+import { useTranslations } from "next-intl";
+
 interface CropTimelineProps {
   totalAcreage: number;
   crops: Crop[];
@@ -12,15 +13,33 @@ interface CropTimelineProps {
   certifications: { name: string; status: string; }[];
 }
 
+const CROP_STATE = {
+  GOOD: 'good',
+  FAIR: 'fair',
+  POOR: 'poor'
+};
+
+const EQUIPMENT_STATE = {
+  ACTIVE: 'active',
+  MAINTENANCE: 'maintenance',
+  INACTIVE: 'inactive'
+};
+
+const CERTIFICATION_STATE = {
+  ACTIVE: 'active',
+  PENDING: 'pending',
+  EXPIRED: 'expired'
+};
+
 export function CropTimeline({ totalAcreage, crops, equipment, certifications }: CropTimelineProps) {
   const t = useTranslations('farm.crop');
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
-      case 'active':
+      case EQUIPMENT_STATE.ACTIVE:
         return 'text-emerald-500';
-      case 'maintenance':
+      case EQUIPMENT_STATE.MAINTENANCE:
         return 'text-amber-500';
-      case 'inactive':
+      case EQUIPMENT_STATE.INACTIVE:
         return 'text-red-500';
       default:
         return 'text-gray-500';
@@ -29,11 +48,11 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
 
   const getStatusEquipmentLabel = (status: string) => {
     switch (status.toLowerCase()) {
-      case 'active':
+      case EQUIPMENT_STATE.ACTIVE:
         return t('equipment.status.active');
-      case 'maintenance':
+      case EQUIPMENT_STATE.MAINTENANCE:
         return t('equipment.status.maintenance');
-      case 'inactive':
+      case EQUIPMENT_STATE.INACTIVE:
         return t('equipment.status.inactive');
       default:
         return t('equipment.status.inactive');
@@ -65,11 +84,11 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
 
   const getStatusCertificationLabel = (status: string) => {
     switch (status.toLowerCase()) {
-      case 'active':
+      case CERTIFICATION_STATE.ACTIVE:
         return t('certifications.status.active');
-      case 'pending':
+      case CERTIFICATION_STATE.PENDING:
         return t('certifications.status.pending');
-      case 'expired':
+      case CERTIFICATION_STATE.EXPIRED:
         return t('certifications.status.expired');
       default:
         return t('certifications.status.inactive');
@@ -78,11 +97,11 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
 
   const getStatusCertificationColor = (status: string) => {
     switch (status.toLowerCase()) {
-      case 'active':
+      case CERTIFICATION_STATE.ACTIVE:
         return 'text-emerald-500';
-      case 'pending':
+      case CERTIFICATION_STATE.PENDING:
         return 'text-amber-500';
-      case 'expired':
+      case CERTIFICATION_STATE.EXPIRED:
         return 'text-red-500';
       default:
         return 'text-gray-500';
@@ -91,7 +110,6 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {/* Active Crops Card */}
       <Card className="w-full">
         <CardHeader className="space-y-1">
           <CardTitle className="text-xl md:text-2xl">{t('activeCrops.title')}</CardTitle>
@@ -112,7 +130,7 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
                   className="h-4"
                 />
                 <div className="flex justify-between items-center gap-2 w-full">
-                  <span className={`text-xs ${getStatusCropColor(getCropState(crop.acreage))}`}>{getCropState(crop.acreage)}</span>
+                  <span className={`text-xs ${getStatusCropColor(getCropState(crop.acreage))}`}>{`${getCropState(crop.acreage)}`}</span>
                   <span className="text-sm font-semibold">{crop.acreage} acres</span>
                 </div>
               </div>
@@ -121,7 +139,6 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
         </CardContent>
       </Card>
 
-      {/* Equipment Status Card */}
       <Card className="w-full">
         <CardHeader className="space-y-1">
           <CardTitle className="text-xl md:text-2xl">{t('equipment.title')}</CardTitle>
@@ -144,7 +161,6 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
         </CardContent>
       </Card>
 
-      {/* Certifications Card */}
       <Card className="w-full md:col-span-2 lg:col-span-1">
         <CardHeader className="space-y-1">
           <CardTitle className="text-xl md:text-2xl">{t('certifications.title')}</CardTitle>

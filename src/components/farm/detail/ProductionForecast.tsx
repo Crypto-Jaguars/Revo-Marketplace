@@ -9,16 +9,26 @@ interface ProductionForecastProps {
   farm: Farm;
 }
 
+interface CropHarvestData {
+  [key: string]: { harvestMonth: string; progress: number };
+}
+
 export function ProductionForecast({ farm }: ProductionForecastProps) {
   const t = useTranslations('farm.forecast');
   const months = [t('months.january'), t('months.february'), t('months.march'), t('months.april'), t('months.may'), t('months.june'), t('months.july'), t('months.august'), t('months.september'), t('months.october'), t('months.november'), t('months.december')];
   
-  // Map crops to their harvest months (example data)
-  const cropHarvestData = {
-    'Corn': { harvestMonth: 'Aug', progress: 66 },
-    'Soybeans': { harvestMonth: 'Sep', progress: 75 },
-    'Wheat': { harvestMonth: 'Jul', progress: 58 }
-  };
+  const cropHarvestData : CropHarvestData = farm.activeCrops.reduce((acc, crop) => {
+    const mockMonths = ['Jul', 'Aug', 'Sep'];
+    const mockProgress = [58, 66, 75];
+    const index = farm.activeCrops.indexOf(crop) % 3;
+    return {
+      ...acc,
+      [crop.name]: {
+        harvestMonth: mockMonths[index],
+        progress: mockProgress[index]
+      }
+    };
+    }, {});
 
   return (
     <Card className="w-full overflow-hidden">
@@ -27,7 +37,6 @@ export function ProductionForecast({ farm }: ProductionForecastProps) {
       </CardHeader>
       <CardContent className="overflow-x-auto">
         <div className="min-w-[768px]">
-          {/* Months header */}
           <div className="grid grid-cols-12 text-xs text-muted-foreground mb-6">
             {months.map((month) => (
               <div key={month} className="text-center px-1">
@@ -36,10 +45,9 @@ export function ProductionForecast({ farm }: ProductionForecastProps) {
             ))}
           </div>
 
-          {/* Crops with progress bars */}
           <div className="space-y-6">
             {farm.activeCrops.map((crop) => {
-              const harvestData = cropHarvestData[crop.name as keyof typeof cropHarvestData];
+              const harvestData = cropHarvestData[crop.name as keyof typeof cropHarvestData] || { harvestMonth: 'N/A', progress: 0 };
               
               return (
                 <div key={crop.name} className="space-y-2">

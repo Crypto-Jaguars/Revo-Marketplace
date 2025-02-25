@@ -44,23 +44,36 @@ function MetricCard({
 
 interface EnvironmentalMetricsProps {
   metrics: Metrics;
+  targets?: {
+    carbonFootprint: number;
+    waterUsage: number;
+  };
 }
 
-export function EnvironmentalMetrics({ metrics }: EnvironmentalMetricsProps) {
+export function EnvironmentalMetrics({ 
+  metrics, 
+  targets = { 
+    carbonFootprint: 100, 
+    waterUsage: 1000 
+  } 
+}: EnvironmentalMetricsProps) {
+  const calculateProgress = (value: number, target: number) => {
+    return Math.max(0, Math.min(100, (1 - value / target) * 100));
+  };
   return (
     <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
       <MetricCard
         translationKey="carbonFootprint"
         value={metrics.carbonFootprint}
         unit="t"
-        progress={75}
+        progress={calculateProgress(metrics.carbonFootprint, targets.carbonFootprint)}
       />
 
       <MetricCard
         translationKey="waterUsage"
         value={metrics.waterUsage}
         unit="kL"
-        progress={60}
+        progress={calculateProgress(metrics.waterUsage, targets.waterUsage)}
       />
 
       <MetricCard
