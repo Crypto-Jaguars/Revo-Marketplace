@@ -39,9 +39,13 @@ export function OrderFilter({ filters, onFilterChange }: OrderFilterProps) {
     [filters, onFilterChange]
   );
 
+
   const handleAmountChange = useCallback(
     (type: "min" | "max", value: string) => {
-      const amount = Number.parseFloat(value) || 0;
+      const amount = value.trim() === "" ? null : Number.parseFloat(value);
+      if (amount !== null && (isNaN(amount) || amount < 0)) {
+        return; 
+      }
       onFilterChange({
         ...filters,
         [type === "min" ? "minAmount" : "maxAmount"]: amount,
@@ -49,6 +53,8 @@ export function OrderFilter({ filters, onFilterChange }: OrderFilterProps) {
     },
     [filters, onFilterChange]
   );
+
+  
 
   const handleDateRangeChange = useCallback(
     (range: { from?: Date; to?: Date } | undefined) => {
@@ -140,12 +146,14 @@ export function OrderFilter({ filters, onFilterChange }: OrderFilterProps) {
           <Input
             type="number"
             placeholder={t('filters.minAmount')}
+            max={filters.maxAmount || undefined}
             value={filters.minAmount || ""}
             onChange={(e) => handleAmountChange("min", e.target.value)}
           />
           <Input
             type="number"
             placeholder={t('filters.maxAmount')}
+            max={filters.maxAmount || undefined}
             value={filters.maxAmount || ""}
             onChange={(e) => handleAmountChange("max", e.target.value)}
           />

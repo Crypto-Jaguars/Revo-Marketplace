@@ -12,8 +12,8 @@ const config: Config = {
     extend: {
 
       textColor: {
-        'white-light': 'rgb(0 0 0)', // For light mode
-        'white-dark': 'rgb(255 255 255)', // For dark mode
+        'white-light': 'rgb(0 0 0)', 
+        'white-dark': 'rgb(255 255 255)'
       },
       
       backgroundImage: {

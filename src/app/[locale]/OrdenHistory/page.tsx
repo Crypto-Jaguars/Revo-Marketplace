@@ -164,9 +164,14 @@ export default function OrderHistoryPage() {
     return sortOrders(filtered, filters.sortBy);
   }, [filters]);
 
+
   const handleViewDetails = useCallback((orderId: string) => {
     const order = sampleOrders.find((o) => o.id === orderId);
-    if (order) setSelectedOrder(order);
+    if (order) {
+      setSelectedOrder(order);
+    } else {
+      console.error(`Order ${orderId} not found`);
+    }
   }, []);
 
   const handleBack = useCallback(() => setSelectedOrder(null), []);
