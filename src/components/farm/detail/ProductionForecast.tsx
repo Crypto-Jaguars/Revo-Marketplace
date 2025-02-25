@@ -17,18 +17,17 @@ export function ProductionForecast({ farm }: ProductionForecastProps) {
   const t = useTranslations('farm.forecast');
   const months = [t('months.january'), t('months.february'), t('months.march'), t('months.april'), t('months.may'), t('months.june'), t('months.july'), t('months.august'), t('months.september'), t('months.october'), t('months.november'), t('months.december')];
   
-  const cropHarvestData : CropHarvestData = farm.activeCrops.reduce((acc, crop) => {
-    const mockMonths = ['Jul', 'Aug', 'Sep'];
-    const mockProgress = [58, 66, 75];
-    const index = farm.activeCrops.indexOf(crop) % 3;
-    return {
-      ...acc,
-      [crop.name]: {
-        harvestMonth: mockMonths[index],
-        progress: mockProgress[index]
-      }
+  const cropHarvestData: CropHarvestData = {};
+  const mockMonths = ['Jul', 'Aug', 'Sep'];
+  const mockProgress = [58, 66, 75];
+  
+  farm.activeCrops.forEach((crop, idx) => {
+    const index = idx % 3;
+    cropHarvestData[crop.name] = {
+      harvestMonth: mockMonths[index],
+      progress: mockProgress[index]
     };
-    }, {});
+  });
 
   return (
     <Card className="w-full overflow-hidden">
