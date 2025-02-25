@@ -2,9 +2,9 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Crop, Equipment } from "./types";
-import { WrenchIcon, CheckCircleIcon } from "lucide-react";
+import { Award, Tractor } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-
+import { useTranslations } from "use-intl";
 interface CropTimelineProps {
   totalAcreage: number;
   crops: Crop[];
@@ -13,39 +13,107 @@ interface CropTimelineProps {
 }
 
 export function CropTimeline({ totalAcreage, crops, equipment, certifications }: CropTimelineProps) {
+  const t = useTranslations('farm.crop');
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'active':
         return 'text-emerald-500';
       case 'maintenance':
         return 'text-amber-500';
+      case 'inactive':
+        return 'text-red-500';
+      default:
+        return 'text-gray-500';
+    }
+  };
+
+  const getStatusEquipmentLabel = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return t('equipment.status.active');
+      case 'maintenance':
+        return t('equipment.status.maintenance');
+      case 'inactive':
+        return t('equipment.status.inactive');
+      default:
+        return t('equipment.status.inactive');
+    }
+  };
+
+  const getStatusCropColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case t('activeCrops.state.good').toLowerCase():
+        return 'text-emerald-500';
+      case t('activeCrops.state.fair').toLowerCase():
+        return 'text-amber-500';
+      case t('activeCrops.state.poor').toLowerCase():
+        return 'text-red-500';
+      default:
+        return 'text-gray-500';
+    }
+  };
+
+  const getCropState = (acreage: number) => {
+    if (acreage > totalAcreage * 0.7) {
+      return t('activeCrops.state.good');
+    } else if (acreage > totalAcreage * 0.3) {
+      return t('activeCrops.state.fair');
+    } else {
+      return t('activeCrops.state.poor');
+    }
+  };
+
+  const getStatusCertificationLabel = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return t('certifications.status.active');
+      case 'pending':
+        return t('certifications.status.pending');
+      case 'expired':
+        return t('certifications.status.expired');
+      default:
+        return t('certifications.status.inactive');
+    }
+  };
+
+  const getStatusCertificationColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return 'text-emerald-500';
+      case 'pending':
+        return 'text-amber-500';
+      case 'expired':
+        return 'text-red-500';
       default:
         return 'text-gray-500';
     }
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
       {/* Active Crops Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Active Crops</CardTitle>
-          <p className="text-sm text-muted-foreground">Current growing status</p>
+      <Card className="w-full">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-xl md:text-2xl">{t('activeCrops.title')}</CardTitle>
+          <p className="text-sm text-muted-foreground">{t('activeCrops.subtitle')}</p>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {crops.map((crop) => (
-              <div key={crop.name} className="space-y-1">
-                <div className="flex justify-between items-center text-sm">
-                  <div className="flex items-center gap-2">
-                    <span>{crop.name}</span>
-                    <span className="text-muted-foreground">{crop.status}</span>
+              <div key={crop.name} className="space-y-2">
+                <div className="flex flex-wrap justify-between items-center text-sm gap-2">
+                  <div className="flex justify-between items-center gap-2 w-full">
+                    <span className="font-medium">{crop.name}</span>
+                    <span className="text-muted-foreground">{crop.type}</span>
                   </div>
-                  <span>{crop.acreage} acres</span>
                 </div>
-                <Progress value={(crop.acreage / totalAcreage) * 100} />
-                <div className="flex">
-                  <span className="text-xs text-emerald-600">good</span>
+                <Progress
+                  value={(crop.acreage / totalAcreage) * 100}
+                  className="h-4"
+                />
+                <div className="flex justify-between items-center gap-2 w-full">
+                  <span className={`text-xs ${getStatusCropColor(getCropState(crop.acreage))}`}>{getCropState(crop.acreage)}</span>
+                  <span className="text-sm font-semibold">{crop.acreage} acres</span>
                 </div>
               </div>
             ))}
@@ -54,21 +122,21 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
       </Card>
 
       {/* Equipment Status Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Equipment Status</CardTitle>
-          <p className="text-sm text-muted-foreground">Currently deployed machinery</p>
+      <Card className="w-full">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-xl md:text-2xl">{t('equipment.title')}</CardTitle>
+          <p className="text-sm text-muted-foreground">{t('equipment.subtitle')}</p>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {equipment.map((item) => (
-              <div key={item.name} className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <WrenchIcon className="h-4 w-4 text-gray-500" />
+              <div key={item.name} className="flex flex-wrap items-center justify-between gap-2 py-1">
+                <div className="flex items-center gap-2 min-w-[150px]">
+                  <Tractor className="h-4 w-4 text-gray-500 flex-shrink-0" />
                   <span className="text-sm">{item.name}</span>
                 </div>
-                <span className={`text-sm ${getStatusColor(item.status)}`}>
-                  {item.status}
+                <span className={`text-sm ${getStatusColor(item.status)} flex-shrink-0`}>
+                  {getStatusEquipmentLabel(item.status)}
                 </span>
               </div>
             ))}
@@ -77,21 +145,21 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
       </Card>
 
       {/* Certifications Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Certifications</CardTitle>
-          <p className="text-sm text-muted-foreground">Quality and compliance</p>
+      <Card className="w-full md:col-span-2 lg:col-span-1">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-xl md:text-2xl">{t('certifications.title')}</CardTitle>
+          <p className="text-sm text-muted-foreground">{t('certifications.subtitle')}</p>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {certifications.map((cert) => (
-              <div key={cert.name} className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <CheckCircleIcon className="h-4 w-4 text-gray-500" />
+              <div key={cert.name} className="flex flex-wrap items-center justify-between gap-2 py-1">
+                <div className="flex items-center gap-2 min-w-[150px]">
+                  <Award className="h-4 w-4 text-gray-500 flex-shrink-0" />
                   <span className="text-sm">{cert.name}</span>
                 </div>
-                <span className="text-sm text-emerald-500">
-                  {cert.status}
+                <span className={`text-sm ${getStatusCertificationColor(cert.status)} flex-shrink-0`}>
+                  {getStatusCertificationLabel(cert.status)}
                 </span>
               </div>
             ))}

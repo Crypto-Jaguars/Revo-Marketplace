@@ -16,9 +16,9 @@ const mockFarm = {
     growingSeason: 180
   },
   activeCrops: [
-    { name: "Corn", acreage: 200, status: "Growing" },
-    { name: "Soybeans", acreage: 150, status: "Ready to harvest" },
-    { name: "Wheat", acreage: 100, status: "Winter wheat" }
+    { name: "Corn", acreage: 200, type: "Sweet Corn" },
+    { name: "Soybeans", acreage: 150, type: "Roundup Ready" },
+    { name: "Wheat", acreage: 100, type: "Winter wheat" }
   ],
   equipment: [
     { name: "John Deere Tractor", status: "active" },

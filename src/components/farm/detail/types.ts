@@ -7,7 +7,7 @@ export interface Climate {
 export interface Crop {
   name: string;
   acreage: number;
-  status: string;
+  type: string;
 }
 
 export interface Equipment {

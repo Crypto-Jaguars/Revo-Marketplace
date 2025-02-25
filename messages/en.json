@@ -66,14 +66,14 @@
       "clear": "Clear filters"
     },
     "cart": {
-        "title": "Shopping Cart",
-        "subtotal": "Subtotal",
-        "shipping": "Shipping",
-        "total": "Total",
-        "clear": "Clear Cart",
-        "remove": "Remove Item",
-        "checkout": "Proceed to Checkout"
-      },
+      "title": "Shopping Cart",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "total": "Total",
+      "clear": "Clear Cart",
+      "remove": "Remove Item",
+      "checkout": "Proceed to Checkout"
+    },
     "sortBy": {
       "showing": "Showing",
       "of": "of",
@@ -301,6 +301,127 @@
         }
       },
       "title": "Edit Your Profile"
+    }
+  },
+  "farm": {
+    "detail": {
+      "firstSection": {
+        "totalAcreage": "Total Acreage",
+        "unit": "Acres",
+        "acresActive": "acres active"
+      },
+      "secondSection": {
+        "laborForce": "Labor Force",
+        "unit": "Workers",
+        "activeWorkers": "active workers"
+      },
+      "thirdSection": {
+        "climate": "Climate & Conditions",
+        "subtitle": "Current environment metrics",
+        "temperature": {
+          "title": "Temperature",
+          "unit": "°C"
+        },
+        "rainfall": {
+          "title": "Rainfall",
+          "unit": "mm"
+        },
+        "growingSeason": {
+          "title": "Growing Season",
+          "unit": "days"
+        }
+      }
+    },
+    "metrics": {
+      "carbonFootprint": {
+        "title": "Carbon Footprint",
+        "subtitle": "Annual emissions tracking",
+        "description": "CO₂ equivalent per year"
+      },
+      "waterUsage": {
+        "title": "Water Usage",
+        "subtitle": "Resource consumption",
+        "description": "Kiloliters per hectare"
+      },
+      "biodiversity": {
+        "title": "Biodiversity Score",
+        "subtitle": "Ecosystem health index",
+        "description": "Based on species diversity"
+      }
+    },
+    "crop": {
+      "activeCrops": {
+        "title": "Active Crops",
+        "subtitle": "Current crops in production",
+        "state": {
+          "good": "Good",
+          "fair": "Fair",
+          "poor": "Poor"
+        },
+        "acres": "Acres"
+      },
+      "equipment": {
+        "title": "Equipment Status",
+        "subtitle": "Currently deployed machinery",
+        "status": {
+          "active": "Active",
+          "maintenance": "Maintenance",
+          "inactive": "Inactive"
+        }
+      },
+      "certifications": {
+        "title": "Certifications",
+        "subtitle": "Certifications of the farm",
+        "status": {
+          "active": "Active",
+          "pending": "Pending",
+          "expired": "Expired"
+        }
+      }
+    },
+    "contracts": {
+      "title": "Contract History",
+      "subtitle": "Past and current contracts",
+      "columns": {
+        "client": "Client",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "status": "Status",
+        "value": "Value",
+        "completion": "Completion",
+        "satisfaction": "Satisfaction"
+      },
+      "status": {
+        "active": "Active",
+        "completed": "Completed"
+      }
+    },
+    "forecast": {
+      "title": "Harvest Timeline",
+      "months": {
+        "january": "Jan",
+        "february": "Feb",
+        "march": "Mar",
+        "april": "Apr",
+        "may": "May",
+        "june": "Jun",
+        "july": "Jul",
+        "august": "Aug",
+        "september": "Sep",
+        "october": "Oct",
+        "november": "Nov",
+        "december": "Dec"
+      }
+    },
+    "tabs": {
+      "breadcrumb": {
+        "home": "Home",
+        "farms": "Farms"
+      },
+      "operations": "Current Operations",
+      "contracts": "Contracts",
+      "environmental": "Environmental Impact",
+      "forecast": "Production Forecast"
     }
   }
 }
