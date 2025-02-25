@@ -306,6 +306,15 @@
   "Farm": {
     "title": "Farm Dashboard",
     "description": "Monitor and manage your farm operations",
+    "aria": {
+      "weatherWidget": "Weather information panel",
+      "statsPanel": "Farm statistics panel",
+      "tasksPanel": "Today's tasks panel",
+      "taskStatus": "Task status: {status}",
+      "taskComplete": "Mark task as complete",
+      "refreshWeather": "Refresh weather information",
+      "navigationMenu": "Farm dashboard navigation"
+    },
     "breadcrumb": {
       "home": "Home",
       "dashboard": "Farm Dashboard"
@@ -344,17 +353,17 @@
       "irrigation": {
         "title": "Irrigation Completed",
         "description": "Field 3 - Corn",
-        "time": "2 hours ago"
+        "time": "{value, plural, =0 {just now} =1 {# hour ago} other {# hours ago}}"
       },
       "fertilizer": {
         "title": "Fertilizer Applied",
         "description": "Field 1 - Wheat",
-        "time": "5 hours ago"
+        "time": "{value, plural, =0 {just now} =1 {# hour ago} other {# hours ago}}"
       },
       "harvest": {
         "title": "Harvest Completed",
         "description": "Field 2 - Soybeans",
-        "time": "Yesterday"
+        "time": "{value, select, today {Today} yesterday {Yesterday} other {{value, date}}}"
       }
     }
   },
