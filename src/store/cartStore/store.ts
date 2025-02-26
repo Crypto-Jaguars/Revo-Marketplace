@@ -29,7 +29,7 @@ interface CartState {
   bulkRemove: (ids: number[]) => void;
   undoRemove: () => void;
   clearCart: () => void;
-  syncStorage: () => void;
+  resetCart: () => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -66,14 +66,6 @@ export const useCartStore = create<CartState>()(
 
       setLoading: (loading) => set({ loading }),
       setError: (error) => set({ error }),
-
-      syncStorage: () => {
-        const storedData = JSON.parse(localStorage.getItem("cart-storage") || "{}");
-        if (storedData.Items && storedData.Items.length > 0) {
-          set({ Items: storedData.Items });
-          get().calculateSummary();
-        }
-      },
 
       updateQuantity: (id: number, quantity: number) => {
         set((state) => ({
@@ -141,6 +133,35 @@ export const useCartStore = create<CartState>()(
 
       clearCart: () => {
         set({ Items: [] });
+        get().calculateSummary();
+      },
+
+      resetCart: () => {
+        localStorage.removeItem("cart-storage");
+        set({
+          Items: [
+            {
+              id: 1,
+              name: "Cafe Orgánico",
+              price: {
+                amount: 100,
+                unit: "$",
+              },
+              quantity: 1,
+              images: "/images/tomatoes.jpg?height=80&width=80",
+            },
+            {
+              id: 2,
+              name: "Huevos de Campo",
+              price: {
+                amount: 200,
+                unit: "$",
+              },
+              quantity: 2,
+              images: "/images/eggs.jpg?height=80&width=80",
+            },
+          ],
+        });
         get().calculateSummary();
       },
     }),

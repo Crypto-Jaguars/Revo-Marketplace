@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
-import { useCartStore } from "@/store/cartStore/store";
+import { useCartStore } from "@/store/cartStore";
 import { useRouter } from 'next/navigation';
-import { CartItem as CartItemType } from "./RemoveItem/types";
 import UndoNotification from "./RemoveItem/UndoNotification";
 import RemoveButton from "./RemoveItem/RemoveButton";
 
@@ -19,15 +18,11 @@ const CartItem = () => {
     bulkRemove, 
     undoRemove, 
     lastRemovedItems, 
-    syncStorage 
+    resetCart 
   } = useCartStore();
 
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [showUndo, setShowUndo] = useState(false);
-
-  useEffect(() => {
-    syncStorage();
-  }, [syncStorage]);
 
   const handleQuantityChange = (id: number, quantity: number) => {
     updateQuantity(id, quantity);
@@ -56,7 +51,7 @@ const CartItem = () => {
 
   useEffect(() => {
     if (showUndo) {
-      const timer = setTimeout(() => setShowUndo(false), 5000); 
+      const timer = setTimeout(() => setShowUndo(false), 15000); 
       return () => clearTimeout(timer);
     }
   }, [showUndo]);
@@ -167,9 +162,13 @@ const CartItem = () => {
           <Button 
             variant="outline" 
             className="px-6 py-3 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition"
-            onClick={() => clearCart()}
+            onClick={() => {
+              if (window.confirm("Are you sure you want to clear the entire cart?")) {
+                clearCart();
+              }
+            }}
           >
-            Update Cart
+            Clear Cart
           </Button>
           <Button 
             variant="destructive" 
@@ -178,6 +177,13 @@ const CartItem = () => {
             disabled={selectedItems.length === 0}
           >
             Remove Selected
+          </Button>
+          <Button 
+            variant="outline" 
+            className="px-6 py-3 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition"
+            onClick={() => resetCart()}
+          >
+            Reset Cart
           </Button>
         </div>
       </div>

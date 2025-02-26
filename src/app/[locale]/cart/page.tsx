@@ -1,18 +1,10 @@
 'use client';
-// page.tsx
+
 import { Card, CardContent } from "@/components/ui/card";
 import CartItem from "@/components/cart/cartItem";
 import CartSummary from "@/components/cart/cartSummary";
-import { useCartStore } from "@/store/cartStore/store";
-import { useEffect } from "react";
 
 const CartPage = () => {
-  const { syncStorage } = useCartStore();
-
-  useEffect(() => {
-    syncStorage();
-  }, [syncStorage]);
-
   const handleCheckout = () => {
     console.log("Proceeding to checkout");
   };
@@ -22,11 +14,11 @@ const CartPage = () => {
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
-        <div className="col-span-4">
+        <div className="lg:col-span-2">
           <CartItem />
         </div>
 
-        <div>
+        <div className="lg:col-span-1">
           <CartSummary />
         </div>
       </div>
