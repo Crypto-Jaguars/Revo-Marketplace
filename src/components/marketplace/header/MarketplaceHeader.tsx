@@ -9,6 +9,7 @@ import UserMenu from './UserMenu';
 import LanguageSwitcher from '@/components/header/LanguageSwitcher';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import CartDropdown from '@/components/cart/cartDropdown';
 
 const MarketplaceHeader = () => {
   const { language } = useLanguageStore();
@@ -60,7 +61,7 @@ const MarketplaceHeader = () => {
             </div>
 
             <div className="flex items-center space-x-6">
-              <CartWidget />
+              <CartDropdown />
               <UserMenu />
             </div>
           </div>
