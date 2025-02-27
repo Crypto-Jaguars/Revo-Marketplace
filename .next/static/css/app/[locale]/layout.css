@@ -827,6 +827,9 @@ video {
 .inline-flex {
   display: inline-flex;
 }
+.table {
+  display: table;
+}
 .grid {
   display: grid;
 }
@@ -1076,6 +1079,9 @@ video {
 .min-w-\[var\(--radix-select-trigger-width\)\] {
   min-width: var(--radix-select-trigger-width);
 }
+.min-w-full {
+  min-width: 100%;
+}
 .min-w-max {
   min-width: max-content;
 }
@@ -1304,6 +1310,11 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .space-x-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1593,6 +1604,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
 }
+.bg-red-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+}
 .bg-secondary {
   background-color: hsl(var(--secondary));
 }
@@ -1609,6 +1624,9 @@ video {
 }
 .bg-white\/5 {
   background-color: rgb(255 255 255 / 0.05);
+}
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
 }
 .bg-gradient-to-tr {
   background-image: linear-gradient(to top right, var(--tw-gradient-stops));
@@ -1983,6 +2001,10 @@ video {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity, 1));
 }
 .text-gray-900 {
   --tw-text-opacity: 1;
@@ -2366,6 +2388,16 @@ body {
 
 .hover\:bg-primary\/90:hover {
   background-color: rgb(0 107 228 / 0.9);
+}
+
+.hover\:bg-red-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-red-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-secondary:hover {
@@ -3050,10 +3082,6 @@ body {
     margin: 0px;
   }
 
-  .md\:ml-10 {
-    margin-left: 2.5rem;
-  }
-
   .md\:mt-20 {
     margin-top: 5rem;
   }
@@ -3230,6 +3258,14 @@ body {
 }
 
 @media (min-width: 1024px) {
+
+  .lg\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
 
   .lg\:mb-32 {
     margin-bottom: 8rem;
