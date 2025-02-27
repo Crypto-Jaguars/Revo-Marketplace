@@ -14,18 +14,18 @@ const CartSummary = () => {
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      // Add your checkout logic here (e.g., navigate to checkout page or call API)
+
       console.log("Redirecting to checkout...");
     } catch (error) {
       console.error("Checkout failed:", error);
-      // Show error toast/alert
+
       toast.error("Checkout failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  // TO Ensure the summary is recalculated when the component loads
+
   React.useEffect(() => {
     calculateSummary();
   }, [calculateSummary]);
