@@ -4,6 +4,7 @@
     "subtitle": "Farmers",
     "description": "Escrows for the field of agriculture, and with the objective of benefiting farmers as well as the buyers of the products grown."
   },
+
   "AboutUs": {
     "title": "What is Revolutionary Farmers?",
     "description": "Revolutionary Farmers is a decentralized platform that provides trust and transparency in agricultural transactions using blockchain technology. We connect farmers with buyers, ensuring fair trade, secure transactions, and traceability of products.",
@@ -57,6 +58,12 @@
       }
     }
   },
+  "cta": {
+      "ready": "Ready to Get Started?",
+      "startSelling": "Start Selling",
+      "exploreProducts": "Explore Products"
+    },
+
   "ItemsHeader": {
     "initializeEscrow": "Create Escrow",
     "claimEarnings": "Claim Escrow Earnings"
