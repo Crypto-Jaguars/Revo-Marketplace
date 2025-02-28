@@ -59,7 +59,7 @@ describe('WeatherWidget', () => {
   it('renders weather information correctly', () => {
     render(<WeatherWidget latitude={51.5074} longitude={-0.1278} />);
     
-    // Use regex patterns instead of exact strings
+    // More resilient to formatting changes
     expect(screen.getByText(/20.*C/)).toBeInTheDocument();
     expect(screen.getByText(/Sunny/i)).toBeInTheDocument();
     expect(screen.getByText(/Humidity/i)).toBeInTheDocument();

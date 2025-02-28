@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -21,11 +21,26 @@ const GALLERY_ITEM_SIZE = 250; // Size of each gallery item in pixels
 export default function FarmGallery({ images, onImageClick }: FarmGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<FarmImage | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [columnCount, setColumnCount] = useState(4);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Update column count based on viewport width
+  useEffect(() => {
+    const updateColumnCount = () => {
+      const width = window.innerWidth;
+      if (width < 768) setColumnCount(2);
+      else if (width < 1024) setColumnCount(3);
+      else setColumnCount(4);
+    };
+
+    updateColumnCount();
+    window.addEventListener('resize', updateColumnCount);
+    return () => window.removeEventListener('resize', updateColumnCount);
+  }, []);
 
   // Create virtualizer instance
   const rowVirtualizer = useVirtualizer({
-    count: Math.ceil(images.length / 4),
+    count: Math.ceil(images.length / columnCount),
     getScrollElement: () => containerRef.current,
     estimateSize: () => GALLERY_ITEM_SIZE,
     overscan: 5,
@@ -68,11 +83,11 @@ export default function FarmGallery({ images, onImageClick }: FarmGalleryProps) 
   // Memoize the virtualized items
   const virtualItems = useMemo(() => {
     return rowVirtualizer.getVirtualItems().map(virtualRow => {
-      const startIndex = virtualRow.index * 4;
-      const rowImages = images.slice(startIndex, startIndex + 4);
+      const startIndex = virtualRow.index * columnCount;
+      const rowImages = images.slice(startIndex, startIndex + columnCount);
       return { virtualRow, rowImages };
     });
-  }, [rowVirtualizer, images]);
+  }, [rowVirtualizer, images, columnCount]);
 
   return (
     <>

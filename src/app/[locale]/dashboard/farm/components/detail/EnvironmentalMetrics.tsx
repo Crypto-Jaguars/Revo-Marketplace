@@ -91,7 +91,7 @@ export default function EnvironmentalMetrics({ metrics }: EnvironmentalMetricsPr
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={progress}
-            aria-valuetext={t(`${translationKey}.progressText`, { progress: Math.round(progress) })}
+            aria-valuetext={`${progress}%`}
           />
         )}
         <p className="text-sm text-muted-foreground">
