@@ -75,11 +75,13 @@ const initialState: Omit<FarmState, 'isLoading' | 'error'> = {
       amount: 0,
       unit: 'liters',
       period: 'day',
+      percentage: 0,
     },
     carbonFootprint: {
       amount: 0,
       unit: 'kg',
       period: 'year',
+      percentage: 0,
     },
     renewableEnergy: {
       percentage: 0,

@@ -17,7 +17,7 @@ const NavMenu = ({ className }: NavMenuProps) => {
   const navItems = [
     { key: 'home', label: 'Home', href: `/${language}` },
     { key: 'products', label: 'Products', href: `/${language}/products` },
-    { key: 'farm', label: 'Farm', href: `/${language}/farm` },
+    { key: 'farm', label: 'Farm', href: `/${language}/dashboard/farm` },
   ].map(item => ({
     ...item,
     label: t(item.key)

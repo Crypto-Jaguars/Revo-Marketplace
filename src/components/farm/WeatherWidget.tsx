@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { WiDaySunny, WiCloudy, WiRain, WiHumidity, WiStrongWind } from 'react-icons/wi';
 
 interface Location {
@@ -70,13 +70,21 @@ const WeatherWidget = ({ location }: Props) => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const t = useTranslations('Farm.weather');
+  const locale = useLocale();
+  
+  // Use the correct namespace that matches your JSON structure
+  const t = useTranslations('farm.weather');
 
   useEffect(() => {
     // Simulate API call delay
     const timer = setTimeout(() => {
-      setWeather(mockWeatherData);
-      setLoading(false);
+      try {
+        setWeather(mockWeatherData);
+        setLoading(false);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+        setLoading(false);
+      }
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -106,6 +114,15 @@ const WeatherWidget = ({ location }: Props) => {
   if (!weather) return null;
 
   const WeatherIcon = getWeatherIcon(weather.condition);
+
+  const formatDate = (date: string) => {
+    try {
+      return new Date(date).toLocaleDateString(locale, { weekday: 'short' });
+    } catch (e) {
+      console.error('Date formatting error:', e);
+      return date;
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -142,7 +159,7 @@ const WeatherWidget = ({ location }: Props) => {
                 role="article"
                 tabIndex={0}
                 aria-label={t('forecast.dayDetails', {
-                  day: new Date(day.date).toLocaleDateString(t('locale'), { weekday: 'long' }),
+                  day: formatDate(day.date),
                   condition: t('condition.' + day.condition.toLowerCase()),
                   min: day.temperature.min,
                   max: day.temperature.max
@@ -152,7 +169,7 @@ const WeatherWidget = ({ location }: Props) => {
                 <div className="flex items-center gap-3">
                   <DayIcon className="w-8 h-8 text-blue-500" aria-hidden="true" />
                   <span className="text-gray-700 font-medium">
-                    {new Date(day.date).toLocaleDateString(t('locale'), { weekday: 'short' })}
+                    {formatDate(day.date)}
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
