@@ -78,6 +78,7 @@ export default function CheckoutPage() {
 
       // Save billing info if requested
       if (data.saveInfo) {
+        // Will be stored in secure server-side session or an encrypted storage strategy in future implementation
         localStorage.setItem("billingInfo", JSON.stringify(data))
       }
 
@@ -89,6 +90,7 @@ export default function CheckoutPage() {
 
       // Redirect to success page after a delay
       setTimeout(() => {
+        //Order-Success page will be implemented in future
         router.push("/order-success")
       }, 3000)
     } catch (err) {

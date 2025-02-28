@@ -83,9 +83,10 @@ export function ProductCard({ product, viewMode, onClick, locale = "en" }: Produ
       >
         <Image
           src={
-            product.images[0].startsWith("/") || product.images[0].startsWith("http")
+            product.images?.length > 0 &&
+              (product.images[0].startsWith("/") || product.images[0].startsWith("http"))
               ? product.images[0]
-              : `/images/${product.images[0]}`
+              : "/images/cart-small.png"
           }
           alt={product.name}
           className="object-contain"

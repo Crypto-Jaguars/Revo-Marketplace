@@ -59,9 +59,10 @@ export default function CartDropdown({ className }: CartDropdownProps) {
             {!loading &&
               Items.map((item) => {
                 // Calculate price with discount if applicable
-                const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1
-                const itemPrice = item.price.amount * discountMultiplier
-                const itemTotal = itemPrice * item.quantity
+                const validDiscount = Math.min(Math.max(item.discount ?? 0, 0), 100);
+                const discountMultiplier = (100 - validDiscount) / 100;
+                const itemPrice = item.price.amount * discountMultiplier;
+                const itemTotal = itemPrice * item.quantity;
 
                 return (
                   <DropdownMenuItem key={item.id} className="flex justify-between">
