@@ -85,6 +85,12 @@ const MarketplaceHeader = () => {
               >
                 {t('products')}
               </Link>
+              <Link 
+                href={`/${language}/farms`}
+                className="block px-4 py-2 text-gray-600 hover:text-gray-900"
+              >
+                {t('farms')}
+              </Link>
             </div>
           </div>
         )}

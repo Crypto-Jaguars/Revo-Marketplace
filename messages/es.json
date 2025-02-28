@@ -4,6 +4,67 @@
     "subtitle": "Farmers",
     "description": "Fideicomisos especializados para el sector agrícola, cuyo objetivo principal es beneficiar tanto a los agricultores como a los compradores de los productos cultivados."
   },
+
+  "AboutUs": {
+    "title": "¿Qué es Revolutionary Farmers?",
+    "description": "Revolutionary Farmers es una plataforma descentralizada que proporciona confianza y transparencia en las transacciones agrícolas mediante tecnología blockchain. Conectamos a los agricultores con los compradores, garantizando comercio justo, transacciones seguras y trazabilidad de los productos.",
+    "features": {
+      "smartContracts": {
+        "title": "Contratos Inteligentes",
+        "description": "Pagos y transacciones seguras mediante tecnología blockchain."
+      },
+      "trustSystem": {
+        "title": "Sistema de Confianza Verificado",
+        "description": "Sistema de reputación integrado para agricultores y compradores."
+      },
+      "supplyChain": {
+        "title": "Cadena de Suministro Sostenible",
+        "description": "Productos agrícolas transparentes y rastreables."
+      }
+    }
+  },
+  "HowItWorks": {
+    "title": "Cómo Funciona",
+    "toggle": {
+      "farmer": "Agricultor",
+      "buyer": "Comprador"
+    },
+    "farmerSteps": {
+      "listProducts": {
+        "title": "Publicar Productos",
+        "description": "Los agricultores pueden listar sus productos para la venta con total transparencia."
+      },
+      "receiveOrders": {
+        "title": "Recibir Pedidos",
+        "description": "Recibe notificaciones cuando los compradores hagan pedidos en tus productos."
+      },
+      "prepareShipment": {
+        "title": "Preparar Envío",
+        "description": "Empaqueta y envía los productos a través de socios logísticos verificados."
+      }
+    },
+    "buyerSteps": {
+      "browsePurchase": {
+        "title": "Explorar y Comprar",
+        "description": "Los compradores pueden explorar una variedad de productos frescos y realizar pedidos."
+      },
+      "securePayment": {
+        "title": "Pago Seguro",
+        "description": "Los pagos están asegurados mediante blockchain y contratos inteligentes."
+      },
+      "deliveryTracking": {
+        "title": "Entrega y Seguimiento",
+        "description": "Los productos son entregados con seguimiento en tiempo real y transparencia."
+      }
+    }
+  },
+
+  "cta": {
+      "ready": "¿Listo para Empezar?",
+      "startSelling": "Empezar a Vender",
+      "exploreProducts": "Explorar Productos"
+    },
+
   "ItemsHeader": {
     "initializeEscrow": "Crear Escrow",
     "claimEarnings": "Reclamar Ganancias de Escrow"
@@ -50,17 +111,16 @@
       }
     },
     "submitButtonText": "Financiar fideicomiso"
-  
   },
-    "cart": {
-      "title": "Carrito de Compras",
-      "subtotal": "Subtotal",
-      "shipping": "Envío",
-      "total": "Total",
-      "clear": "Vaciar Carrito",
-      "remove": "Eliminar Artículo",
-      "checkout": "Proceder al Pago"
-    },
+  "cart": {
+    "title": "Carrito de Compras",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "total": "Total",
+    "clear": "Vaciar Carrito",
+    "remove": "Eliminar Artículo",
+    "checkout": "Proceder al Pago"
+  },
   "Products": {
     "title": "Productos",
     "description": "Explora nuestra amplia gama de productos, cuidadosamente seleccionados para satisfacer tus necesidades y preferencias.",
@@ -109,7 +169,6 @@
       "buyNow": "Comprar Ahora",
       "addToCart": "Agregar al Carrito"
     },
-
     "delivery": {
       "free": "Envío Gratis",
       "checkPostalCode": "Ingresa tu código postal para verificar disponibilidad de envío"
@@ -126,7 +185,8 @@
   "Marketplace": {
     "navigation": {
       "home": "Inicio",
-      "products": "Productos"
+      "products": "Productos",
+      "farms": "Granjas"
     },
     "search": {
       "placeholder": "Buscar productos..."
@@ -302,6 +362,193 @@
         }
       },
       "title": "Editar Tu Perfil"
+    }
+  },
+  "farm": {
+    "detail": {
+      "firstSection": {
+        "totalAcreage": "Total de Hectáreas",
+        "unit": "Hectáreas",
+        "acresActive": "Hectáreas Activas"
+      },
+      "secondSection": {
+        "laborForce": "Fuerza Laboral",
+        "unit": "Trabajadores",
+        "activeWorkers": "Trabajadores Activos"
+      },
+      "thirdSection": {
+        "climate": "Clima y Condiciones",
+        "subtitle": "Métricas actuales del entorno",
+        "temperature": {
+          "title": "Temperatura",
+          "unit": "°C"
+        },
+        "rainfall": {
+          "title": "Precipitación",
+          "unit": "mm"
+        },
+        "growingSeason": {  
+          "title": "Temporada de Crecimiento",
+          "unit": "días"
+        }
+      }
+    },
+    "metrics": {
+      "carbonFootprint": {
+        "title": "Huella de Carbono",
+        "subtitle": "Seguimiento de emisiones anuales",
+        "description": "CO₂ equivalente por año"
+      },
+      "waterUsage": {
+        "title": "Uso de Agua",
+        "subtitle": "Consumo de recursos",
+        "description": "Kilolitros por hectárea"
+      },
+      "biodiversity": {
+        "title": "Índice de Biodiversidad",
+        "subtitle": "Índice de salud del ecosistema",
+        "description": "Basado en diversidad de especies"
+      }
+    },
+    "crop": {
+      "activeCrops": {
+        "title": "Cultivos Activos",
+        "subtitle": "Cultivos actuales en producción",
+        "state": {
+          "good": "Bueno",
+          "fair": "Regular",
+          "poor": "Malo"
+        },
+        "acres": "Hectáreas"
+      },
+      "equipment": {
+        "title": "Estado de Equipos",
+        "subtitle": "Equipos desplegados actualmente",
+        "status": {
+          "active": "Activo",
+          "maintenance": "En Mantenimiento",
+          "inactive": "Inactivo"
+        }
+      },
+      "certifications": {
+        "title": "Certificaciones",
+        "subtitle": "Certificaciones de la granja",
+        "status": {
+          "active": "Activo",
+          "pending": "Pendiente",
+          "expired": "Expirado"
+        }
+      }
+    },
+    "contracts": {
+      "title": "Historial de Contratos",
+      "subtitle": "Contratos pasados y actuales",
+      "columns": {
+        "client": "Cliente",
+        "startDate": "Fecha de Inicio",
+        "endDate": "Fecha de Fin",
+        "status": "Estado",
+        "value": "Valor",
+        "completion": "Completado",
+        "satisfaction": "Satisfacción"
+      },
+      "status": {
+        "active": "Activo",
+        "completed": "Completado"
+      }
+    },
+    "forecast": {
+      "title": "Cronograma de Cosecha",
+      "subtitle": "Predicción de rendimiento y ganancias",
+      "months": {
+        "january": "Ene",
+        "february": "Feb",
+        "march": "Mar",
+        "april": "Abr",
+        "may": "May",
+        "june": "Jun",
+        "july": "Jul",
+        "august": "Ago",
+        "september": "Sep",
+        "october": "Oct",
+        "november": "Nov",
+        "december": "Dic"
+      }
+    },
+    "tabs": {
+      "breadcrumb": {
+        "home": "Inicio",
+        "farms": "Granjas"
+      },
+      "operations": "Operaciones Actuales",
+      "contracts": "Contratos",
+      "environmental": "Impacto Ambiental",
+      "forecast": "Pronóstico de Cosecha"
+    }
+  },
+  "OrderHistory": {
+    "title": "Historial de Pedidos",
+    "filters": {
+      "search": "Buscar Pedidos",
+      "dateRange": "Rango de Fechas",
+      "status": "Estado del Pedido",
+      "sortBy": "Ordenar Por",
+      "amountRange": "Rango de Monto",
+      "minAmount": "Monto Mínimo",
+      "maxAmount": "Monto Máximo",
+      "present": "Presente"
+    },
+    "status": {
+      "all": "Todos los Estados",
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "delivered": "Entregado",
+      "cancelled": "Cancelado"
+    },
+    "sortBy": {
+      "dateDesc": "Más Recientes Primero",
+      "dateAsc": "Más Antiguos Primero",
+      "totalDesc": "Monto Más Alto",
+      "totalAsc": "Monto Más Bajo"
+    },
+    "table": {
+      "orderId": "ID del Pedido",
+      "date": "Fecha",
+      "total": "Total",
+      "status": "Estado",
+      "seller": "Vendedor",
+      "actions": "Acciones"
+    },
+    "details": {
+      "title": "Detalles del Pedido",
+      "orderInfo": {
+        "title": "Información del Pedido",
+        "status": "Estado",
+        "date": "Fecha",
+        "total": "Total"
+      },
+      "sellerInfo": {
+        "title": "Información del Vendedor",
+        "name": "Nombre",
+        "rating": "Calificación"
+      },
+      "items": {
+        "title": "Artículos",
+        "quantity": "Cantidad",
+        "price": "Precio"
+      },
+      "shipping": {
+        "title": "Envío",
+        "address": "Dirección de Entrega",
+        "trackingNumber": "Número de Seguimiento",
+        "estimatedDelivery": "Fecha Estimada de Entrega"
+      },
+      "payment": {
+        "title": "Detalles de Pago",
+        "method": "Método de Pago",
+        "status": "Estado del Pago",
+        "total": "Monto Total"
+      }
     }
   }
 }
