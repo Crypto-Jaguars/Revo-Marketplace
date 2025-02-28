@@ -43,46 +43,89 @@ function MetricCard({
 }
 
 interface EnvironmentalMetricsProps {
-  metrics: Metrics;
-  targets?: {
-    carbonFootprint: number;
-    waterUsage: number;
+  metrics: {
+    carbonFootprint: {
+      current: number;
+      target: number;
+    };
+    waterUsage: {
+      current: number;
+      target: number;
+    };
+    biodiversity: {
+      current: number;
+      target: number;
+    };
   };
 }
 
-export function EnvironmentalMetrics({ 
-  metrics, 
-  targets = { 
-    carbonFootprint: 100, 
-    waterUsage: 1000 
-  } 
-}: EnvironmentalMetricsProps) {
+export default function EnvironmentalMetrics({ metrics }: EnvironmentalMetricsProps) {
+  const t = useTranslations('Farm.environmental');
+
   const calculateProgress = (value: number, target: number) => {
+    if (!target) return 0;
     return Math.max(0, Math.min(100, (1 - value / target) * 100));
   };
+
+  const renderMetric = (
+    translationKey: string,
+    current: number,
+    target: number,
+    unit: string
+  ) => {
+    const progress = calculateProgress(current, target);
+
+    return (
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <h4 className="font-medium">{t(`${translationKey}.title`)}</h4>
+          <span className="text-sm text-muted-foreground">
+            {t(`${translationKey}.value`, { current, target, unit })}
+          </span>
+        </div>
+        {progress !== undefined && (
+          <Progress 
+            value={progress} 
+            className="h-4" 
+            aria-label={t(`${translationKey}.progressLabel`)}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progress}
+            aria-valuetext={t(`${translationKey}.progressText`, { progress: Math.round(progress) })}
+          />
+        )}
+        <p className="text-sm text-muted-foreground">
+          {t(`${translationKey}.description`)}
+        </p>
+      </div>
+    );
+  };
+
   return (
-    <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <MetricCard
-        translationKey="carbonFootprint"
-        value={metrics.carbonFootprint}
-        unit="t"
-        progress={calculateProgress(metrics.carbonFootprint, targets.carbonFootprint)}
-      />
-
-      <MetricCard
-        translationKey="waterUsage"
-        value={metrics.waterUsage}
-        unit="kL"
-        progress={calculateProgress(metrics.waterUsage, targets.waterUsage)}
-      />
-
-      <MetricCard
-        translationKey="biodiversity"
-        value={metrics.biodiversityScore}
-        unit="/100"
-        progress={metrics.biodiversityScore}
-        className="md:col-span-2 lg:col-span-1"
-      />
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>{t('title')}</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {renderMetric(
+          'carbonFootprint',
+          metrics.carbonFootprint.current,
+          metrics.carbonFootprint.target,
+          't/year'
+        )}
+        {renderMetric(
+          'waterUsage',
+          metrics.waterUsage.current,
+          metrics.waterUsage.target,
+          'm³/day'
+        )}
+        {renderMetric(
+          'biodiversity',
+          metrics.biodiversity.current,
+          metrics.biodiversity.target,
+          'species'
+        )}
+      </CardContent>
+    </Card>
   );
 }

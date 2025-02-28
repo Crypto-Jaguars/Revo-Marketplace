@@ -5,6 +5,7 @@ import { Crop, Equipment } from "./types";
 import { Award, Tractor } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 interface CropTimelineProps {
   totalAcreage: number;
@@ -14,10 +15,12 @@ interface CropTimelineProps {
 }
 
 const CROP_STATE = {
-  GOOD: 'good',
-  FAIR: 'fair',
-  POOR: 'poor'
-};
+  GOOD: 'GOOD',
+  FAIR: 'FAIR',
+  POOR: 'POOR',
+} as const;
+
+type CropState = typeof CROP_STATE[keyof typeof CROP_STATE];
 
 const EQUIPMENT_STATE = {
   ACTIVE: 'active',
@@ -32,7 +35,7 @@ const CERTIFICATION_STATE = {
 };
 
 export function CropTimeline({ totalAcreage, crops, equipment, certifications }: CropTimelineProps) {
-  const t = useTranslations('farm.crop');
+  const t = useTranslations('Farm.crops');
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case EQUIPMENT_STATE.ACTIVE:
@@ -59,13 +62,13 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
     }
   };
 
-  const getStatusCropColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case t('activeCrops.state.good').toLowerCase():
+  const getStatusCropColor = (status: CropState) => {
+    switch (status) {
+      case CROP_STATE.GOOD:
         return 'text-emerald-500';
-      case t('activeCrops.state.fair').toLowerCase():
+      case CROP_STATE.FAIR:
         return 'text-amber-500';
-      case t('activeCrops.state.poor').toLowerCase():
+      case CROP_STATE.POOR:
         return 'text-red-500';
       default:
         return 'text-gray-500';
@@ -116,23 +119,34 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
           <p className="text-sm text-muted-foreground">{t('activeCrops.subtitle')}</p>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {crops.map((crop) => (
-              <div key={crop.name} className="space-y-2">
-                <div className="flex flex-wrap justify-between items-center text-sm gap-2">
-                  <div className="flex justify-between items-center gap-2 w-full">
-                    <span className="font-medium">{crop.name}</span>
-                    <span className="text-muted-foreground">{crop.type}</span>
+              <div key={crop.id} className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-medium">{crop.name}</h3>
+                    <p className={cn("text-sm", getStatusCropColor(crop.status as CropState))}>
+                      {t(`status.${crop.status.toLowerCase()}`)}
+                    </p>
                   </div>
+                  <span className="text-sm text-muted-foreground">
+                    {t('acreage', { value: crop.acreage, total: totalAcreage })}
+                  </span>
                 </div>
                 <Progress
                   value={(crop.acreage / totalAcreage) * 100}
                   className="h-4"
+                  aria-label={t('acreageProgress', { crop: crop.name })}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={(crop.acreage / totalAcreage) * 100}
+                  aria-valuetext={t('acreageProgressText', {
+                    crop: crop.name,
+                    value: crop.acreage,
+                    total: totalAcreage,
+                    percentage: Math.round((crop.acreage / totalAcreage) * 100)
+                  })}
                 />
-                <div className="flex justify-between items-center gap-2 w-full">
-                  <span className={`text-xs ${getStatusCropColor(getCropState(crop.acreage))}`}>{`${getCropState(crop.acreage)}`}</span>
-                  <span className="text-sm font-semibold">{crop.acreage} {t('activeCrops.acres')}</span>
-                </div>
               </div>
             ))}
           </div>

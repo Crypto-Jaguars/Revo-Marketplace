@@ -4,15 +4,10 @@ import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { WiDaySunny, WiCloudy, WiRain, WiHumidity, WiStrongWind } from 'react-icons/wi';
 import Breadcrumb from '@/components/shared/Breadcrumb';
+import { FarmLocation } from './components/types';
 
-interface Location {
-  latitude: number;
-  longitude: number;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-}
+// Use FarmLocation or create an alias if needed
+type Location = FarmLocation;
 
 interface WeatherData {
   temperature: number;

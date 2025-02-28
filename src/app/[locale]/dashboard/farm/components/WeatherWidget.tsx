@@ -1,173 +1,137 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Cloud, Droplets, Wind } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { WiDaySunny, WiCloudy, WiRain, WiHumidity, WiStrongWind } from 'react-icons/wi';
-
-interface Location {
-  latitude: number;
-  longitude: number;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-}
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface WeatherData {
   temperature: number;
   condition: string;
   humidity: number;
   windSpeed: number;
-  precipitation: number;
-  forecast: Array<{
-    date: string;
-    temperature: {
-      min: number;
-      max: number;
-    };
-    condition: string;
-  }>;
+  icon: string;
 }
-
-// Mock weather data
-const mockWeatherData: WeatherData = {
-  temperature: 22,
-  condition: 'Sunny',
-  humidity: 65,
-  windSpeed: 12,
-  precipitation: 0,
-  forecast: [
-    {
-      date: new Date(Date.now()).toISOString().split('T')[0],
-      temperature: { min: 18, max: 24 },
-      condition: 'Sunny'
-    },
-    {
-      date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
-      temperature: { min: 17, max: 23 },
-      condition: 'Partly cloudy'
-    },
-    {
-      date: new Date(Date.now() + 2 * 86400000).toISOString().split('T')[0],
-      temperature: { min: 16, max: 22 },
-      condition: 'Light rain'
-    }
-  ]
-};
-
-const getWeatherIcon = (condition: string) => {
-  const conditionLower = condition.toLowerCase();
-  if (conditionLower.includes('rain')) return WiRain;
-  if (conditionLower.includes('cloud')) return WiCloudy;
-  return WiDaySunny;
-};
 
 interface Props {
-  location: Location;
+  latitude: number;
+  longitude: number;
 }
 
-const WeatherWidget = ({ location }: Props) => {
+const WEATHER_API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+
+export default function WeatherWidget({ latitude, longitude }: Props) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const t = useTranslations('Farm.weather');
+  const t = useTranslations('Weather');
 
   useEffect(() => {
-    // Simulate API call delay
-    const timer = setTimeout(() => {
-      setWeather(mockWeatherData);
-      setLoading(false);
-    }, 1000);
+    const fetchWeather = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    return () => clearTimeout(timer);
-  }, [location]);
+        if (!WEATHER_API_KEY) {
+          throw new Error('Weather API key is not configured');
+        }
 
-  if (loading) {
-    return (
-      <div 
-        className="flex items-center justify-center h-40" 
-        role="status" 
-        tabIndex={0}
-        aria-live="polite"
-        aria-label={t('loading')}>
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric`
+        );
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch weather data');
+        }
+
+        const data = await response.json();
+        
+        setWeather({
+          temperature: Math.round(data.main.temp),
+          condition: data.weather[0].main,
+          humidity: data.main.humidity,
+          windSpeed: Math.round(data.wind.speed),
+          icon: data.weather[0].icon,
+        });
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch weather data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeather();
+    // Refresh weather data every 30 minutes
+    const interval = setInterval(fetchWeather, 30 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [latitude, longitude]);
 
   if (error) {
     return (
-      <div className="text-red-500 text-center p-4" role="alert">
-        {t('error')}
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>{t('error')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-destructive">{error}</p>
+        </CardContent>
+      </Card>
     );
   }
 
-  if (!weather) return null;
-
-  const WeatherIcon = getWeatherIcon(weather.condition);
-
   return (
-    <div className="space-y-6">
-      {/* Current Weather */}
-      <div className="flex items-center justify-between bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
-        <div className="flex items-center gap-4">
-          <WeatherIcon className="w-16 h-16 text-yellow-500" />
-          <div>
-            <div className="text-4xl font-bold text-gray-800">{weather.temperature}°C</div>
-            <div className="text-gray-600 text-lg">{t('condition.' + weather.condition.toLowerCase())}</div>
+    <Card>
+      <CardHeader>
+        <CardTitle>{t('title')}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        {loading ? (
+          <div className="space-y-4" data-testid="weather-loading">
+            <Skeleton className="h-8 w-24" />
+            <div className="flex justify-between">
+              <Skeleton className="h-6 w-20" />
+              <Skeleton className="h-6 w-20" />
+            </div>
           </div>
-        </div>
-        <div className="text-right space-y-2">
-          <div className="flex items-center justify-end gap-2 text-gray-600">
-            <WiHumidity className="w-6 h-6" />
-            <span>{t('humidity', { value: weather.humidity })}</span>
-          </div>
-          <div className="flex items-center justify-end gap-2 text-gray-600">
-            <WiStrongWind className="w-6 h-6" />
-            <span>{t('windSpeed', { value: weather.windSpeed })}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Forecast */}
-      <div>
-        <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('forecast.title')}</h3>
-        <div className="grid gap-3">
-          {weather.forecast.map((day) => {
-            const DayIcon = getWeatherIcon(day.condition);
-            return (
-              <div 
-                key={day.date}
-                role="article"
-                tabIndex={0}
-                aria-label={t('forecast.dayDetails', {
-                  day: new Date(day.date).toLocaleDateString(t('locale'), { weekday: 'long' }),
-                  condition: t('condition.' + day.condition.toLowerCase()),
-                  min: day.temperature.min,
-                  max: day.temperature.max
-                })}
-                className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              >
-                <div className="flex items-center gap-3">
-                  <DayIcon className="w-8 h-8 text-blue-500" aria-hidden="true" />
-                  <span className="text-gray-700 font-medium">
-                    {new Date(day.date).toLocaleDateString(t('locale'), { weekday: 'short' })}
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-gray-600">{t('condition.' + day.condition.toLowerCase())}</span>
-                  <span className="font-medium text-gray-800">
-                    {t('forecast.temperature', { min: day.temperature.min, max: day.temperature.max })}
-                  </span>
-                </div>
+        ) : weather ? (
+          <>
+            <div className="mb-4 flex items-center gap-2">
+              {weather.icon && (
+                <img
+                  src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                  alt={weather.condition}
+                  width={50}
+                  height={50}
+                  className="h-12 w-12"
+                />
+              )}
+              <div>
+                <p className="text-2xl font-bold">
+                  {weather.temperature}°C
+                </p>
+                <p className="text-muted-foreground">
+                  {t(`conditions.${weather.condition.toLowerCase()}`)}
+                </p>
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-2">
+                <Droplets className="h-4 w-4 text-muted-foreground" />
+                <span>
+                  {t('humidity', { value: weather.humidity })}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Wind className="h-4 w-4 text-muted-foreground" />
+                <span>
+                  {t('windSpeed', { value: weather.windSpeed })}
+                </span>
+              </div>
+            </div>
+          </>
+        ) : null}
+      </CardContent>
+    </Card>
   );
-};
-
-export default WeatherWidget; 
+} 

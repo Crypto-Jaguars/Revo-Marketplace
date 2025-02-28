@@ -565,6 +565,12 @@
     "farmingMethods": "Farming Methods",
     "farmingMethodsDescription": "Our sustainable farming practices and techniques",
     "sustainabilityScore": "Score: {score}/10",
-    "processingCapabilitiesDescription": "Our processing and production capabilities"
+    "processingCapabilitiesDescription": "Our processing and production capabilities",
+    "accessibility": {
+      "detailsHeading": "Farm details and specifications",
+      "methodsDescription": "List of farming methods used",
+      "sustainabilityRating": "Sustainability rating: {score} out of 10",
+      "processingCapabilities": "Processing capabilities information"
+    }
   }
 }

@@ -19,28 +19,31 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { FarmMetricsProps } from './types';
 import { formatDate } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 export default function FarmMetrics({
   crops,
   sustainabilityMetrics,
 }: FarmMetricsProps) {
+  const t = useTranslations('Farm.metrics');
+
   return (
     <div className="space-y-6">
       {/* Active Crops */}
       <Card>
         <CardHeader>
-          <CardTitle>Crop Management</CardTitle>
-          <CardDescription>Current and planned crop production</CardDescription>
+          <CardTitle>{t('crop.title')}</CardTitle>
+          <CardDescription>{t('crop.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Crop</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Planting Date</TableHead>
-                <TableHead>Expected Harvest</TableHead>
-                <TableHead>Quantity</TableHead>
+                <TableHead>{t('crop.table.crop')}</TableHead>
+                <TableHead>{t('crop.table.status')}</TableHead>
+                <TableHead>{t('crop.table.plantingDate')}</TableHead>
+                <TableHead>{t('crop.table.expectedHarvest')}</TableHead>
+                <TableHead>{t('crop.table.quantity')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,13 +60,13 @@ export default function FarmMetrics({
                           : 'default'
                       }
                     >
-                      {crop.status}
+                      {t(`crop.status.${crop.status}`)}
                     </Badge>
                   </TableCell>
                   <TableCell>{formatDate(crop.plantingDate)}</TableCell>
                   <TableCell>{formatDate(crop.expectedHarvestDate)}</TableCell>
                   <TableCell>
-                    {crop.quantity} {crop.unit}
+                    {t('crop.quantity', { value: crop.quantity, unit: crop.unit })}
                   </TableCell>
                 </TableRow>
               ))}
@@ -77,41 +80,47 @@ export default function FarmMetrics({
         {/* Resource Usage */}
         <Card>
           <CardHeader>
-            <CardTitle>Resource Usage</CardTitle>
-            <CardDescription>Water and energy consumption</CardDescription>
+            <CardTitle>{t('resource.title')}</CardTitle>
+            <CardDescription>{t('resource.description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Water Usage */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <h4 className="font-medium">Water Usage</h4>
-                <span className="text-sm text-muted-foreground">
-                  {sustainabilityMetrics.waterUsage.amount}{' '}
-                  {sustainabilityMetrics.waterUsage.unit}/
-                  {sustainabilityMetrics.waterUsage.period}
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">
+                    {t('resource.waterUsage.title')}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {t('resource.waterUsage.description')}
+                  </p>
+                </div>
+                <span className="text-sm font-medium">
+                  {t('resource.percentage', { value: sustainabilityMetrics.waterUsage.percentage })}
                 </span>
               </div>
               <Progress 
-                value={50}
-                aria-label="Water usage progress"
+                value={sustainabilityMetrics.waterUsage.percentage || 0}
+                aria-label={t('resource.waterUsage.ariaLabel')}
                 aria-valuemin={0}
                 aria-valuemax={100}
-                aria-valuenow={50}
+                aria-valuenow={sustainabilityMetrics.waterUsage.percentage || 0}
               />
             </div>
 
             {/* Renewable Energy */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <h4 className="font-medium">Renewable Energy</h4>
+                <h4 className="font-medium">{t('resource.renewableEnergy.title')}</h4>
                 <span className="text-sm text-muted-foreground">
-                  {sustainabilityMetrics.renewableEnergy.percentage}% of total
-                  usage
+                  {t('resource.renewableEnergy.usage', { 
+                    percentage: sustainabilityMetrics.renewableEnergy.percentage 
+                  })}
                 </span>
               </div>
               <Progress
                 value={sustainabilityMetrics.renewableEnergy.percentage}
-                aria-label="Renewable energy usage progress"
+                aria-label={t('resource.renewableEnergy.ariaLabel')}
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={sustainabilityMetrics.renewableEnergy.percentage}
@@ -119,7 +128,7 @@ export default function FarmMetrics({
               <div className="flex flex-wrap gap-2">
                 {sustainabilityMetrics.renewableEnergy.sources.map((source) => (
                   <Badge key={source} variant="outline">
-                    {source}
+                    {t(`resource.renewableEnergy.sources.${source}`)}
                   </Badge>
                 ))}
               </div>
@@ -130,43 +139,48 @@ export default function FarmMetrics({
         {/* Environmental Impact */}
         <Card>
           <CardHeader>
-            <CardTitle>Environmental Impact</CardTitle>
-            <CardDescription>Carbon footprint and waste management</CardDescription>
+            <CardTitle>{t('environmental.title')}</CardTitle>
+            <CardDescription>{t('environmental.description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Carbon Footprint */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <h4 className="font-medium">Carbon Footprint</h4>
-                <span className="text-sm text-muted-foreground">
-                  {sustainabilityMetrics.carbonFootprint.amount}{' '}
-                  {sustainabilityMetrics.carbonFootprint.unit}/
-                  {sustainabilityMetrics.carbonFootprint.period}
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">
+                    {t('environmental.carbonFootprint.title')}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {t('environmental.carbonFootprint.description')}
+                  </p>
+                </div>
+                <span className="text-sm font-medium">
+                  {t('environmental.percentage', { value: sustainabilityMetrics.carbonFootprint.percentage })}
                 </span>
               </div>
               <Progress 
-                value={50}
-                aria-label="Carbon footprint progress"
+                value={sustainabilityMetrics.carbonFootprint.percentage || 0}
+                aria-label={t('environmental.carbonFootprint.ariaLabel')}
                 aria-valuemin={0}
                 aria-valuemax={100}
-                aria-valuenow={50}
+                aria-valuenow={sustainabilityMetrics.carbonFootprint.percentage || 0}
               />
             </div>
 
             {/* Waste Management */}
             <div className="space-y-4">
-              <h4 className="font-medium">Waste Management</h4>
+              <h4 className="font-medium">{t('environmental.wasteManagement.title')}</h4>
               <div className="grid gap-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">Recycling Rate</span>
+                    <span className="text-sm">{t('environmental.wasteManagement.recycling.title')}</span>
                     <span className="text-sm text-muted-foreground">
-                      {sustainabilityMetrics.wasteManagement.recyclingRate}%
+                      {t('environmental.percentage', { value: sustainabilityMetrics.wasteManagement.recyclingRate })}
                     </span>
                   </div>
                   <Progress
                     value={sustainabilityMetrics.wasteManagement.recyclingRate}
-                    aria-label="Recycling rate progress"
+                    aria-label={t('environmental.wasteManagement.recycling.ariaLabel')}
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-valuenow={sustainabilityMetrics.wasteManagement.recyclingRate}
@@ -174,14 +188,14 @@ export default function FarmMetrics({
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">Composting Rate</span>
+                    <span className="text-sm">{t('environmental.wasteManagement.composting.title')}</span>
                     <span className="text-sm text-muted-foreground">
-                      {sustainabilityMetrics.wasteManagement.compostingRate}%
+                      {t('environmental.percentage', { value: sustainabilityMetrics.wasteManagement.compostingRate })}
                     </span>
                   </div>
                   <Progress
                     value={sustainabilityMetrics.wasteManagement.compostingRate}
-                    aria-label="Composting rate progress"
+                    aria-label={t('environmental.wasteManagement.composting.ariaLabel')}
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-valuenow={sustainabilityMetrics.wasteManagement.compostingRate}
@@ -191,7 +205,7 @@ export default function FarmMetrics({
               <div className="flex flex-wrap gap-2">
                 {sustainabilityMetrics.wasteManagement.methods.map((method) => (
                   <Badge key={method} variant="outline">
-                    {method}
+                    {t(`environmental.wasteManagement.methods.${method}`)}
                   </Badge>
                 ))}
               </div>

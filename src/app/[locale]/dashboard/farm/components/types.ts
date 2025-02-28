@@ -106,32 +106,33 @@ export interface FarmProfileProps {
     email: string;
     website?: string;
   };
-  ariaLabel?: string;
-  role?: string;
+  ariaLabel: string;
+  role: string;
 }
 
 export interface FarmGalleryProps {
   images: FarmImage[];
   onImageClick?: (image: FarmImage) => void;
-  ariaLabel?: string;
-  role?: string;
+  ariaLabel: string;
+  role: string;
 }
 
 export interface FarmDetailsProps {
   farmingMethods: FarmingMethod[];
   infrastructure: Infrastructure;
-  ariaLabel?: string;
-  role?: string;
+  ariaLabel: string;
+  role: string;
 }
 
 export interface FarmMetricsProps {
   crops: Crop[];
   sustainabilityMetrics: SustainabilityMetrics;
-  ariaLabel?: string;
-  ariaLive?: 'polite' | 'assertive' | 'off';
+  ariaLabel: string;
+  ariaLive: 'polite' | 'assertive' | 'off';
 }
 
 export interface FarmCertificationsProps {
   certifications: FarmCertification[];
-  ariaLabel?: string;
+  ariaLabel: string;
+  role: string;
 } 

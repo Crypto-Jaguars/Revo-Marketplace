@@ -9,6 +9,11 @@ vi.mock('@/services/weather', () => ({
   getWeatherData: vi.fn(),
 }));
 
+// Mock next-intl
+jest.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 const mockLocation = {
   latitude: 51.5074,
   longitude: -0.1278,
@@ -49,6 +54,27 @@ const mockedGetWeatherData = getWeatherData as MockedFunction<typeof getWeatherD
 describe('WeatherWidget', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  it('renders weather information correctly', () => {
+    render(<WeatherWidget latitude={51.5074} longitude={-0.1278} />);
+    
+    // Use regex patterns instead of exact strings
+    expect(screen.getByText(/20.*C/)).toBeInTheDocument();
+    expect(screen.getByText(/Sunny/i)).toBeInTheDocument();
+    expect(screen.getByText(/Humidity/i)).toBeInTheDocument();
+    expect(screen.getByText(/Wind/i)).toBeInTheDocument();
+  });
+
+  it('handles loading state', () => {
+    render(<WeatherWidget latitude={51.5074} longitude={-0.1278} />);
+    expect(screen.getByTestId('weather-loading')).toBeInTheDocument();
+  });
+
+  it('handles error state', async () => {
+    render(<WeatherWidget latitude={0} longitude={0} />);
+    const errorMessage = await screen.findByText(/error/i);
+    expect(errorMessage).toBeInTheDocument();
   });
 
   it('shows loading state initially', async () => {

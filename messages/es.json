@@ -482,7 +482,14 @@
       "title": "Tareas Pendientes",
       "checkIrrigation": "Revisar Sistema de Riego",
       "harvestTomatoes": "Cosechar Tomates",
-      "applyFertilizer": "Aplicar Fertilizante"
+      "applyFertilizer": "Aplicar Fertilizante",
+      "aria": {
+        "taskStatus": "Estado de la tarea: {status}",
+        "taskComplete": "Marcar tarea como completada",
+        "priorityHigh": "Prioridad alta",
+        "priorityMedium": "Prioridad media",
+        "priorityLow": "Prioridad baja"
+      }
     },
     "stats": {
       "title": "Estadísticas de la Granja",

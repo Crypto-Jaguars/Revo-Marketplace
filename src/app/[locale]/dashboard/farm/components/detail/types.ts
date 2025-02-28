@@ -5,9 +5,15 @@ export interface Climate {
 }
 
 export interface Crop {
+  id: string;
   name: string;
   acreage: number;
   type: string;
+  status: 'GOOD' | 'FAIR' | 'POOR';
+  plantingDate: string;
+  expectedHarvestDate: string;
+  quantity: number;
+  unit: string;
 }
 
 export interface Equipment {
@@ -37,6 +43,14 @@ export interface Farm {
   totalAcreage: number;
   activeAcreage: number;
   laborForce: number;
+  location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+  };
   climate: Climate;
   activeCrops: Crop[];
   equipment: Equipment[];

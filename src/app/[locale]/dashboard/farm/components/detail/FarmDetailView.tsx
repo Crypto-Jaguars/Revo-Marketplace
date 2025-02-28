@@ -1,15 +1,15 @@
 'use client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Farm } from "./types";
 import { CropTimeline } from "./CropTimeline";
 import { ContractHistory } from "./ContractHistory";
-import { EnvironmentalMetrics } from "./EnvironmentalMetrics";
-import { ProductionForecast } from "./ProductionForecast";
+import EnvironmentalMetrics from "./EnvironmentalMetrics";
+import ProductionForecast from "./ProductionForecast";
 import { Users, ThermometerSun, Droplet, Trees } from "lucide-react";
-import { useTranslations } from "use-intl";
+import { useTranslations } from 'next-intl';
 import Breadcrumb from "@/components/shared/Breadcrumb";
 
 interface FarmDetailViewProps {
@@ -17,13 +17,45 @@ interface FarmDetailViewProps {
 }
 
 export function FarmDetailView({ farm }: FarmDetailViewProps) {
-  const t = useTranslations('farm.tabs');
+  const t = useTranslations('Farm.detail');
   const tDetail = useTranslations('farm.detail');
   const breadcrumbItems = [
     { label: t('breadcrumb.home'), href: '/' },
     { label: t('breadcrumb.farms'), href: '/farms' },
     { label: farm.name, href: '', isCurrent: true }
   ];
+
+  // Transform the metrics data to match the new interface
+  const environmentalMetrics = {
+    carbonFootprint: {
+      current: farm.environmentalMetrics.carbonFootprint,
+      target: 100 // Set appropriate target values
+    },
+    waterUsage: {
+      current: farm.environmentalMetrics.waterUsage,
+      target: 1000 // Set appropriate target values
+    },
+    biodiversity: {
+      current: farm.environmentalMetrics.biodiversityScore,
+      target: 100 // Set appropriate target values
+    }
+  };
+
+  // Transform the farm data for production forecast
+  const productionData = {
+    crops: farm.activeCrops.map(crop => ({
+      id: crop.id,
+      name: crop.name,
+      harvest: [
+        // Add appropriate harvest data
+        {
+          month: new Date(crop.expectedHarvestDate).toLocaleString('default', { month: 'short' }),
+          progress: 75, // Calculate appropriate progress
+          forecast: 100 // Set appropriate forecast
+        }
+      ]
+    }))
+  };
 
   return (
     <div className="w-full min-h-screen bg-background pt-16 pb-48">
@@ -37,13 +69,34 @@ export function FarmDetailView({ farm }: FarmDetailViewProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
             {/* Total Acreage */}
             <Card className="w-full h-2/3">
+              <CardHeader>
+                <CardTitle>{tDetail('firstSection.title')}</CardTitle>
+                <CardDescription>{tDetail('firstSection.description')}</CardDescription>
+              </CardHeader>
               <CardContent className="pt-6">
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold">{tDetail('firstSection.totalAcreage')}</h3>
-                  <div className="flex items-baseline space-x-2">
-                    <span className="text-2xl font-bold">{farm.totalAcreage} {tDetail('firstSection.unit')}</span>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-medium">{tDetail('firstSection.activeAcreage')}</h4>
+                      <span className="text-sm text-muted-foreground">
+                        {tDetail('firstSection.acreageValue', {
+                          active: farm.activeAcreage,
+                          total: farm.totalAcreage
+                        })}
+                      </span>
+                    </div>
+                    <Progress 
+                      value={(farm.activeAcreage / farm.totalAcreage) * 100} 
+                      className="h-4"
+                      aria-label={tDetail('firstSection.activeProgress')}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={(farm.activeAcreage / farm.totalAcreage) * 100}
+                      aria-valuetext={tDetail('firstSection.activeProgressText', {
+                        percentage: Math.round((farm.activeAcreage / farm.totalAcreage) * 100)
+                      })}
+                    />
                   </div>
-                  <Progress value={(farm.activeAcreage / farm.totalAcreage) * 100} className="h-4" />
                   <p className="text-sm text-muted-foreground">
                     {farm.activeAcreage} {tDetail('firstSection.acresActive')}
                   </p>
@@ -135,11 +188,11 @@ export function FarmDetailView({ farm }: FarmDetailViewProps) {
               </TabsContent>
 
               <TabsContent value="environmental" className="m-0">
-                <EnvironmentalMetrics metrics={farm.environmentalMetrics} />
+                <EnvironmentalMetrics metrics={environmentalMetrics} />
               </TabsContent>
 
               <TabsContent value="forecast" className="m-0">
-                <ProductionForecast farm={farm} />
+                <ProductionForecast crops={productionData.crops} />
               </TabsContent>
             </div>
           </Tabs>

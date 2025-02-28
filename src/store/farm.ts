@@ -114,7 +114,12 @@ export const useFarmStore = create<FarmState & FarmActions>()(
       addCertification: (certification) =>
         set((state) => ({
           ...state,
-          certifications: [...state.certifications, certification],
+          certifications: state.certifications.some(cert => cert.id === certification.id)
+            ? (
+                set({ error: `Certification with ID ${certification.id} already exists` }),
+                state.certifications
+              )
+            : [...state.certifications, certification],
         })),
 
       removeCertification: (id) =>

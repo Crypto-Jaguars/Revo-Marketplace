@@ -2,62 +2,62 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Farm } from "./types";
 import { useTranslations } from "next-intl";
 
+interface HarvestData {
+  month: string;
+  progress: number;
+  forecast: number;
+}
+
 interface ProductionForecastProps {
-  farm: Farm;
+  crops: Array<{
+    id: string;
+    name: string;
+    harvest: HarvestData[];
+  }>;
 }
 
-interface CropHarvestData {
-  [key: string]: { harvestMonth: string; progress: number };
-}
-
-export function ProductionForecast({ farm }: ProductionForecastProps) {
-  const t = useTranslations('farm.forecast');
-  const months = [t('months.january'), t('months.february'), t('months.march'), t('months.april'), t('months.may'), t('months.june'), t('months.july'), t('months.august'), t('months.september'), t('months.october'), t('months.november'), t('months.december')];
-  
-  const cropHarvestData: CropHarvestData = {};
-  const mockMonths = ['Jul', 'Aug', 'Sep'];
-  const mockProgress = [58, 66, 75];
-  
-  farm.activeCrops.forEach((crop, idx) => {
-    const index = idx % 3;
-    cropHarvestData[crop.name] = {
-      harvestMonth: mockMonths[index],
-      progress: mockProgress[index]
-    };
-  });
+export default function ProductionForecast({ crops }: ProductionForecastProps) {
+  const t = useTranslations('Farm.production');
 
   return (
     <Card className="w-full overflow-hidden">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-xl md:text-2xl">{t('title')}</CardTitle>
+        <CardTitle className="text-xl md:text-2xl">{t('forecast.title')}</CardTitle>
       </CardHeader>
       <CardContent className="overflow-x-auto">
         <div className="min-w-[768px]">
-          <div className="grid grid-cols-12 text-xs text-muted-foreground mb-6">
-            {months.map((month) => (
-              <div key={month} className="text-center px-1">
-                {month}
+          <div className="space-y-8">
+            {crops.map((crop) => (
+              <div key={crop.id} className="space-y-2">
+                <h3 className="font-medium">{crop.name}</h3>
+                <div className="space-y-4">
+                  {crop.harvest.map((harvestData) => (
+                    <div key={harvestData.month} className="space-y-1">
+                      <div className="flex justify-between text-sm">
+                        <span>{t('month', { month: harvestData.month })}</span>
+                        <span>{t('forecast.progress', { value: harvestData.progress })}</span>
+                      </div>
+                      <Progress 
+                        value={harvestData.progress} 
+                        className="h-4" 
+                        aria-label={t('forecast.progressLabel', { crop: crop.name, month: harvestData.month })}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-valuenow={harvestData.progress}
+                        aria-valuetext={t('forecast.progressText', {
+                          crop: crop.name,
+                          month: harvestData.month,
+                          progress: harvestData.progress,
+                          forecast: harvestData.forecast
+                        })}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
-          </div>
-
-          <div className="space-y-6">
-            {farm.activeCrops.map((crop) => {
-              const harvestData = cropHarvestData[crop.name as keyof typeof cropHarvestData] || { harvestMonth: 'N/A', progress: 0 };
-              
-              return (
-                <div key={crop.name} className="space-y-2">
-                  <div className="flex justify-between items-center px-1">
-                    <span className="font-medium text-sm md:text-base">{crop.name}</span>
-                    <span className="text-xs md:text-sm text-muted-foreground">{harvestData?.harvestMonth}</span>
-                  </div>
-                  <Progress value={harvestData?.progress} className="h-4" />
-                </div>
-              );
-            })}
           </div>
         </div>
       </CardContent>

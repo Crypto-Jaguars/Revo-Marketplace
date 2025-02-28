@@ -5,23 +5,19 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(
-  date: string,
-  locale: string = 'en-US',
-  options: Intl.DateTimeFormatOptions = {
+export function formatDate(date: string | Date, locale: string = 'en', options: Intl.DateTimeFormatOptions = {}) {
+  const defaultOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  }
-): string {
+    ...options,
+  };
+
   try {
-    const parsedDate = new Date(date);
-    if (isNaN(parsedDate.getTime())) {
-      throw new Error('Invalid date string provided');
-    }
-    return parsedDate.toLocaleDateString(locale, options);
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
+    return new Intl.DateTimeFormat(locale, defaultOptions).format(dateObj);
   } catch (error) {
     console.error('Error formatting date:', error);
-    return date; // Return original string on error
+    return typeof date === 'string' ? date : date.toISOString();
   }
 }

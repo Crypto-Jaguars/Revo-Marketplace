@@ -24,16 +24,16 @@ export default function FarmDetails({
   farmingMethods,
   infrastructure,
 }: FarmDetailsProps) {
-  const t = useTranslations('FarmDetails');
+  const t = useTranslations('Farm.details');
   
   return (
     <div className="space-y-6">
       {/* Farming Methods */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('farmingMethods')}</CardTitle>
+          <CardTitle>{t('farmingMethods.title')}</CardTitle>
           <CardDescription>
-            {t('farmingMethodsDescription')}
+            {t('farmingMethods.description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -46,17 +46,19 @@ export default function FarmDetails({
                 className="space-y-2"
               >
                 <div className="flex items-center justify-between">
-                  <h4 id={`method-${method.type}`} className="font-medium">{method.type}</h4>
+                  <h4 id={`method-${method.type}`} className="font-medium">
+                    {t(`farmingMethods.types.${method.type}`)}
+                  </h4>
                   <Badge variant="outline">
                     {t('sustainabilityScore', { score: method.sustainabilityScore })}
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {method.description}
+                  {t(`farmingMethods.descriptions.${method.type}`)}
                 </p>
                 <Progress 
                   value={method.sustainabilityScore * 10}
-                  aria-label={`Sustainability score for ${method.type}`}
+                  aria-label={t('farmingMethods.sustainabilityAriaLabel', { type: method.type })}
                   aria-valuemin={0}
                   aria-valuemax={100}
                   aria-valuenow={method.sustainabilityScore * 10}
@@ -72,16 +74,16 @@ export default function FarmDetails({
         {/* Equipment */}
         <Card>
           <CardHeader>
-            <CardTitle>Equipment</CardTitle>
-            <CardDescription>Farm machinery and tools</CardDescription>
+            <CardTitle>{t('equipment.title')}</CardTitle>
+            <CardDescription>{t('equipment.description')}</CardDescription>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Quantity</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead>{t('equipment.columns.name')}</TableHead>
+                  <TableHead>{t('equipment.columns.quantity')}</TableHead>
+                  <TableHead>{t('equipment.columns.status')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -90,10 +92,14 @@ export default function FarmDetails({
                     key={item.name}
                     role="row"
                     tabIndex={0}
-                    aria-label={`${item.name}: ${item.quantity} units, Status: ${item.status}`}
+                    aria-label={t('equipment.itemAriaLabel', {
+                      name: item.name,
+                      quantity: item.quantity,
+                      status: item.status
+                    })}
                   >
-                    <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.quantity}</TableCell>
+                    <TableCell>{t(`equipment.items.${item.name}`)}</TableCell>
+                    <TableCell>{t('equipment.quantity', { value: item.quantity })}</TableCell>
                     <TableCell>
                       <Badge
                         variant={
@@ -104,9 +110,9 @@ export default function FarmDetails({
                             : 'destructive'
                         }
                         role="status"
-                        aria-label={`Status: ${item.status}`}
+                        aria-label={t('equipment.statusAriaLabel', { status: item.status })}
                       >
-                        {item.status}
+                        {t(`equipment.status.${item.status}`)}
                       </Badge>
                     </TableCell>
                   </TableRow>
@@ -119,16 +125,16 @@ export default function FarmDetails({
         {/* Storage Facilities */}
         <Card>
           <CardHeader>
-            <CardTitle>Storage Facilities</CardTitle>
-            <CardDescription>Storage capacity and utilization</CardDescription>
+            <CardTitle>{t('storage.title')}</CardTitle>
+            <CardDescription>{t('storage.description')}</CardDescription>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Capacity</TableHead>
-                  <TableHead>Utilization</TableHead>
+                  <TableHead>{t('storage.columns.type')}</TableHead>
+                  <TableHead>{t('storage.columns.capacity')}</TableHead>
+                  <TableHead>{t('storage.columns.utilization')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -137,23 +143,28 @@ export default function FarmDetails({
                     key={facility.type}
                     role="row"
                     tabIndex={0}
-                    aria-label={`${facility.type}: ${facility.capacity} ${facility.unit}, Utilization: ${facility.currentUtilization}%`}
+                    aria-label={t('storage.facilityAriaLabel', {
+                      type: facility.type,
+                      capacity: facility.capacity,
+                      unit: facility.unit,
+                      utilization: facility.currentUtilization
+                    })}
                   >
-                    <TableCell>{facility.type}</TableCell>
+                    <TableCell>{t(`storage.types.${facility.type}`)}</TableCell>
                     <TableCell>
-                      {facility.capacity} {facility.unit}
+                      {t('storage.capacity', { value: facility.capacity, unit: facility.unit })}
                     </TableCell>
                     <TableCell>
                       <div className="space-y-1">
                         <Progress 
                           value={facility.currentUtilization}
-                          aria-label={`${facility.type} utilization`}
+                          aria-label={t('storage.utilizationAriaLabel', { type: facility.type })}
                           aria-valuemin={0}
                           aria-valuemax={100}
                           aria-valuenow={facility.currentUtilization}
                         />
                         <p className="text-xs text-muted-foreground">
-                          {facility.currentUtilization}%
+                          {t('storage.utilization', { value: facility.currentUtilization })}
                         </p>
                       </div>
                     </TableCell>
@@ -168,23 +179,23 @@ export default function FarmDetails({
       {/* Processing Facilities */}
       <Card>
         <CardHeader>
-          <CardTitle>Processing Facilities</CardTitle>
+          <CardTitle>{t('processing.title')}</CardTitle>
           <CardDescription>
-            Our processing and production capabilities
+            {t('processing.description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {infrastructure.processing.map((facility) => (
               <div key={facility.facility} className="space-y-2">
-                <h4 className="font-medium">{facility.facility}</h4>
+                <h4 className="font-medium">{t(`processing.facilities.${facility.facility}`)}</h4>
                 <p className="text-sm text-muted-foreground">
-                  Capacity: {facility.capacity} units
+                  {t('processing.capacity', { value: facility.capacity })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {facility.capabilities.map((capability) => (
                     <Badge key={capability} variant="outline">
-                      {capability}
+                      {t(`processing.capabilities.${capability}`)}
                     </Badge>
                   ))}
                 </div>

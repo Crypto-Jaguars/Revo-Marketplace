@@ -18,17 +18,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useTranslations } from 'next-intl';
+import { Label } from '@/components/ui/label';
 
 export default function FarmCertifications({
   certifications,
 }: FarmCertificationsProps) {
+  const t = useTranslations('Farm.Certifications');
+  
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Certifications & Compliance</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
           <CardDescription>
-            Our quality standards and certifications
+            {t('description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -57,18 +61,19 @@ export default function FarmCertifications({
                       {cert.status}
                     </Badge>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Issued by {cert.issuer}
-                  </p>
+                  <div>
+                    <Label>{t('issuedBy')}</Label>
+                    <p>{cert.issuer}</p>
+                  </div>
                 </div>
                 <CardContent className="grid gap-4 p-4">
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <p className="text-muted-foreground">Issue Date</p>
+                      <Label>{t('issueDate')}</Label>
                       <p className="font-medium">{formatDate(cert.issueDate)}</p>
                     </div>
                     <div>
-                      <p className="text-muted-foreground">Expiry Date</p>
+                      <Label>{t('expiryDate')}</Label>
                       <p className="font-medium">{formatDate(cert.expiryDate)}</p>
                     </div>
                   </div>
@@ -92,11 +97,11 @@ export default function FarmCertifications({
                             }}
                           >
                             <FileText className="mr-2 h-4 w-4" />
-                            View Certificate
+                            {t('viewCertificate')}
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Open certificate in new tab</p>
+                          <p>{t('openCertificateInNewTab')}</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
