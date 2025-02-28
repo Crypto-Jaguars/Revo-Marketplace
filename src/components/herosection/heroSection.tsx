@@ -28,7 +28,7 @@ export default function HeroSection() {
             asChild
             className="bg-white text-green-700 hover:bg-gray-200 px-6 py-3 text-lg border border-green-700"
           >
-            <a href="/join-farmer"> Join as a Farmer </a>
+            <Link href="/join-farmer"> Join as a Farmer </Link>
           </Button>
         </div>
       </motion.div>
