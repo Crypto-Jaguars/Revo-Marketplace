@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { EnvironmentalMetrics as Metrics } from "./types";
 import { Leaf } from "lucide-react";
 import { useTranslations } from 'next-intl';
 

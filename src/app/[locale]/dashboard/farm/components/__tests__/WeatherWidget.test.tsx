@@ -99,7 +99,7 @@ describe('WeatherWidget', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/20.*C/)).toBeInTheDocument();
-      expect(screen.getByText(/Sunny/i)).toBeInTheDocument();
+      expect(screen.getByText('Sunny')).toBeInTheDocument();
       expect(screen.getByText(/65.*%/)).toBeInTheDocument();
       expect(screen.getByText(/10.*km\/h/)).toBeInTheDocument();
     });
