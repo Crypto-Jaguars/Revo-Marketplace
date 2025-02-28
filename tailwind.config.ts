@@ -6,13 +6,14 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/[locale]/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
 
       textColor: {
-        'white-light': 'rgb(0 0 0)', // For light mode
-        'white-dark': 'rgb(255 255 255)', // For dark mode
+        'white-light': 'rgb(0 0 0)', 
+        'white-dark': 'rgb(255 255 255)'
       },
       
       backgroundImage: {

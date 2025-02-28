@@ -4,7 +4,6 @@ import { ClaimEscrowForm } from '@/components/shared/ClaimEscrowForm';
 import { useClaimEscrowEarningsHook } from './hooks/claim-escrow-earnings.hook';
 import { useTranslations } from 'next-intl';
 
-// Add interface for form data
 interface EscrowFormData {
   contractId: string;
   engagementId: string;
