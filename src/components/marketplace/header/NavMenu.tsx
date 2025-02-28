@@ -17,6 +17,7 @@ const NavMenu = ({ className }: NavMenuProps) => {
   const navItems = [
     { label: t('home'), href: `/${language}` },
     { label: t('products'), href: `/${language}/products` },
+    { label: t('farms'), href: `/${language}/farms` },
   ];
 
   const isActive = (href: string) => pathname === href;
