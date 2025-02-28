@@ -249,7 +249,7 @@ export default function CheckoutPage() {
                                   ? item.images.startsWith("http") || item.images.startsWith("/")
                                     ? item.images
                                     : `/images/${item.images}`
-                                  : "/placeholder.svg"
+                                  : "/cart-small.png"
                               }
                               alt={item.name}
                               fill

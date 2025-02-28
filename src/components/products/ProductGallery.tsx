@@ -60,8 +60,13 @@ const ProductGallery = ({ images = ["/images/placeholder.jpg"] }: ProductGallery
           >
             <div className="relative w-[80px] h-[60px] md:w-[133px] md:h-[91px]">
               <Image
-                src={image.startsWith("/") || image.startsWith("http") ? image : `/images/${image}`}
-                alt={`Product view ${index + 1}`}
+                src={
+                  image && (image.startsWith("/") || image.startsWith("http"))
+                    ? image
+                    : image
+                      ? `/images/${image}`
+                      : "/images/cart-small.png"
+                } alt={`Product view ${index + 1}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 173px"
                 className="object-cover"
@@ -112,8 +117,8 @@ const ProductGallery = ({ images = ["/images/placeholder.jpg"] }: ProductGallery
             style={
               isZoomed
                 ? {
-                    transformOrigin: `${mousePosition.x}% ${mousePosition.y}%`,
-                  }
+                  transformOrigin: `${mousePosition.x}% ${mousePosition.y}%`,
+                }
                 : undefined
             }
             priority
