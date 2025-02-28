@@ -1,7 +1,7 @@
 # Farm Components Documentation
 
 ## Overview
-The farm components provide a comprehensive UI for displaying and managing farm information in the Revolutionary Farmers platform. Built with Next.js 14, TypeScript, and Zustand for state management.
+The Farm components provide a comprehensive UI for displaying and managing farm information in the Revolutionary Farmers platform. Built with Next.js 14, TypeScript, and Zustand for state management.
 
 ## Components
 
