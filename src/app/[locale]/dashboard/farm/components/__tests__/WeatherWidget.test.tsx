@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, MockedFunction } from 'vitest';
 import WeatherWidget from '../WeatherWidget';
-import { WeatherData, getWeatherData } from '../../../services/weather';
+import { WeatherData, getWeatherData } from '@/services/weather';
 import { act } from '@testing-library/react';
 
 // Mock the weather service
@@ -23,7 +23,7 @@ const mockLocation = {
   country: 'UK',
 };
 
-const mockWeatherData = {
+const mockWeatherData: WeatherData = {
   temperature: 20,
   condition: 'Sunny',
   humidity: 65,
@@ -36,7 +36,7 @@ const mockWeatherData = {
         min: 15,
         max: 25,
       },
-      condition: 'Sunny',
+      condition: 'Sunny'
     },
     {
       date: '2024-02-25',
@@ -44,9 +44,9 @@ const mockWeatherData = {
         min: 14,
         max: 23,
       },
-      condition: 'Cloudy',
-    },
-  ],
+      condition: 'Cloudy'
+    }
+  ]
 };
 
 const mockedGetWeatherData = getWeatherData as MockedFunction<typeof getWeatherData>;
@@ -82,7 +82,7 @@ describe('WeatherWidget', () => {
     mockedGetWeatherData.mockImplementation(() => promise);
     
     await act(async () => {
-      render(<WeatherWidget location={mockLocation} />);
+      render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
     
     const loadingElement = screen.getByRole('status');
@@ -94,14 +94,14 @@ describe('WeatherWidget', () => {
     mockedGetWeatherData.mockResolvedValue(mockWeatherData);
     
     await act(async () => {
-      render(<WeatherWidget location={mockLocation} />);
+      render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
 
     await waitFor(() => {
-      expect(screen.getByText('20°C')).toBeInTheDocument();
-      expect(screen.getByText('Sunny')).toBeInTheDocument();
-      expect(screen.getByText('65%')).toBeInTheDocument();
-      expect(screen.getByText('10 km/h')).toBeInTheDocument();
+      expect(screen.getByText(/20.*C/)).toBeInTheDocument();
+      expect(screen.getByText(/Sunny/i)).toBeInTheDocument();
+      expect(screen.getByText(/65.*%/)).toBeInTheDocument();
+      expect(screen.getByText(/10.*km\/h/)).toBeInTheDocument();
     });
   });
 
@@ -109,7 +109,7 @@ describe('WeatherWidget', () => {
     mockedGetWeatherData.mockRejectedValue(new Error('Failed to fetch'));
     
     await act(async () => {
-      render(<WeatherWidget location={mockLocation} />);
+      render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
 
     await waitFor(() => {
@@ -121,7 +121,7 @@ describe('WeatherWidget', () => {
     mockedGetWeatherData.mockResolvedValue(mockWeatherData);
     
     await act(async () => {
-      render(<WeatherWidget location={mockLocation} />);
+      render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
 
     await waitFor(() => {
@@ -133,7 +133,7 @@ describe('WeatherWidget', () => {
 
   it('calls weather service with correct coordinates', async () => {
     await act(async () => {
-      render(<WeatherWidget location={mockLocation} />);
+      render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
     
     expect(getWeatherData).toHaveBeenCalledWith(

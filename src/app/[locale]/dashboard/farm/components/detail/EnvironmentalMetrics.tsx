@@ -32,7 +32,15 @@ function MetricCard({
       <CardContent>
         <div className="text-2xl font-bold mb-2">{value}{unit}</div>
         {progress !== undefined && (
-          <Progress value={progress} className="h-4" />
+          <Progress 
+            value={progress} 
+            className="h-4" 
+            aria-label={t(`${translationKey}.progressLabel`)}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progress}
+            aria-valuetext={`${progress}%`}
+          />
         )}
         <p className="text-sm text-muted-foreground mt-3">
           {t(`${translationKey}.description`)}
