@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { Rating } from "@/components/ui/rating"
 import { calculateDiscountedPrice } from "@/constants/helpers/CalculateDiscountedPrice"
-import { AddToCartButton } from "./AddToCartButton"
+import { AddToCartButton } from "../cart/AddToCartButton"
 
 interface ProductCardProps {
   product: Product

@@ -1,17 +1,61 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useCartStore } from "@/store/cartStore/store"
 import CartItemComponent from "./cartItem"
 import CartSummary from "./cartSummary"
 import { Button } from "@/components/ui/button"
-import { Loader2, AlertCircle, Truck, Store } from "lucide-react"
+import { Loader2, AlertCircle, Truck, Store, Undo2, Trash2 } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export default function CartPage() {
-  const { Items, removeItem, updateQuantity, clearCart, subtotal, shipping, total, loading, error } = useCartStore()
+  const {
+    Items,
+    removeItem,
+    updateQuantity,
+    clearCart,
+    subtotal,
+    shipping,
+    total,
+    loading,
+    error,
+    bulkRemove,
+    undoRemove,
+    lastRemovedItems,
+    resetCart,
+  } = useCartStore()
 
   const [isCheckingOut, setIsCheckingOut] = useState(false)
+  const [selectedItems, setSelectedItems] = useState<number[]>([])
+
+  // Reset selected items when cart items change
+  useEffect(() => {
+    setSelectedItems([])
+  }, [])
+
+  // Toggle item selection for bulk actions
+  const toggleItemSelection = (id: number) => {
+    setSelectedItems((prev) => (prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]))
+  }
+
+  // Select all items
+  const selectAllItems = () => {
+    if (selectedItems.length === Items.length) {
+      setSelectedItems([])
+    } else {
+      setSelectedItems(Items.map((item) => item.id))
+    }
+  }
+
+  // Handle bulk remove
+  const handleBulkRemove = async () => {
+    if (selectedItems.length > 0) {
+      await bulkRemove(selectedItems)
+      setSelectedItems([])
+    }
+  }
 
   // Group items by farmer
   const itemsByFarmer = Items.reduce(
@@ -56,7 +100,7 @@ export default function CartPage() {
     }, 1500)
   }
 
-  if (Items.length === 0) {
+  if (Items.length === 0 && lastRemovedItems.length === 0) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-4">
         <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
@@ -73,6 +117,28 @@ export default function CartPage() {
     )
   }
 
+  if (Items.length === 0 && lastRemovedItems.length > 0) {
+    return (
+      <div className="max-w-4xl mx-auto py-12 px-4">
+        <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
+        <div className="bg-muted/30 rounded-lg p-12 text-center">
+          <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
+          <p className="text-muted-foreground mb-6">You've removed all items from your cart.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button onClick={undoRemove} className="flex items-center gap-2">
+              <Undo2 className="h-4 w-4" />
+              Restore Removed Items
+            </Button>
+            <Button asChild className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
+              <a href="/en/products">Browse Products</a>
+            </Button>
+          </div>
+        </div>
+        <ToastContainer />
+      </div>
+    )
+  }
+
   return (
     <div className="max-w-6xl mx-auto py-12 px-4">
       <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
@@ -84,22 +150,59 @@ export default function CartPage() {
         </Alert>
       )}
 
+      {lastRemovedItems.length > 0 && (
+        <Alert className="mb-6 bg-muted/30 border-muted">
+          <div className="flex justify-between items-center w-full">
+            <AlertDescription>
+              {lastRemovedItems.length} {lastRemovedItems.length === 1 ? "item" : "items"} removed from cart
+            </AlertDescription>
+            <Button variant="outline" size="sm" onClick={undoRemove} className="flex items-center gap-1">
+              <Undo2 className="h-3 w-3" />
+              Undo
+            </Button>
+          </div>
+        </Alert>
+      )}
+
       {loading && (
         <div className="flex justify-center py-8">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       )}
 
-      {!loading && (
+      {!loading && Items.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-medium">
-                {Items.length} {Items.length === 1 ? "Item" : "Items"}
-              </h2>
-              <Button variant="outline" size="sm" onClick={clearCart}>
-                Clear Cart
-              </Button>
+              <div className="flex items-center gap-4">
+                <h2 className="text-lg font-medium">
+                  {Items.length} {Items.length === 1 ? "Item" : "Items"}
+                </h2>
+                {Items.length > 1 && (
+                  <Button variant="outline" size="sm" onClick={selectAllItems} className="text-xs">
+                    {selectedItems.length === Items.length ? "Deselect All" : "Select All"}
+                  </Button>
+                )}
+              </div>
+              <div className="flex gap-2">
+                {selectedItems.length > 0 && (
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={handleBulkRemove}
+                    className="flex items-center gap-1"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                    Remove Selected
+                  </Button>
+                )}
+                <Button variant="outline" size="sm" onClick={resetCart}>
+                  Reset Cart
+                </Button>
+                <Button variant="outline" size="sm" onClick={clearCart}>
+                  Clear Cart
+                </Button>
+              </div>
             </div>
 
             {/* Group items by farmer */}
@@ -126,6 +229,12 @@ export default function CartPage() {
                         item={item}
                         onRemove={removeItem}
                         onUpdateQuantity={updateQuantity}
+                        onBulkRemove={bulkRemove}
+                        onUndoRemove={undoRemove}
+                        hasRemovedItems={lastRemovedItems.length > 0}
+                        onResetCart={resetCart}
+                        selectedItems={selectedItems}
+                        onToggleSelect={toggleItemSelection}
                       />
                     ))}
 
@@ -179,6 +288,8 @@ export default function CartPage() {
           </div>
         </div>
       )}
+
+      <ToastContainer />
     </div>
   )
 }

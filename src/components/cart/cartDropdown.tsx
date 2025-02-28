@@ -18,7 +18,7 @@ interface CartDropdownProps {
 }
 
 export default function CartDropdown({ className }: CartDropdownProps) {
-  const { Items, subtotal, loading } = useCartStore()
+  const { Items, subtotal, loading, clearCart } = useCartStore()
 
   // Calculate total items in cart
   const cartCount = Items.reduce((acc, item) => acc + item.quantity, 0)
@@ -36,7 +36,14 @@ export default function CartDropdown({ className }: CartDropdownProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80">
-        <DropdownMenuLabel>Your Cart</DropdownMenuLabel>
+        <div className="flex items-center justify-between">
+          <DropdownMenuLabel>Your Cart</DropdownMenuLabel>
+          {cartCount > 0 &&
+            <Button variant="outline" size="sm" onClick={clearCart}>
+              Clear Cart
+            </Button>
+          }
+        </div>
         <DropdownMenuSeparator />
 
         {loading && (

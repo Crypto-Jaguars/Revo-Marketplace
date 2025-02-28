@@ -65,4 +65,3 @@ export default function CartSummary({ subtotal, shipping, total }: CartSummaryPr
     </div>
   )
 }
-

@@ -7,7 +7,7 @@ import { useState } from "react"
 import { Rating } from "../ui/rating"
 import { useTranslations } from "next-intl"
 import { products } from "@/mocks/relatedProducts"
-import { AddToCartButton } from "./AddToCartButton"
+import { AddToCartButton } from "../cart/AddToCartButton"
 import Link from "next/link"
 
 const ProductCard = ({ product }: { product: Product }) => {

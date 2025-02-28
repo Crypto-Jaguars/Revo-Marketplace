@@ -5,7 +5,7 @@ import { Rating } from "../ui/rating"
 import { HeartIcon, UpdateIcon } from "@radix-ui/react-icons"
 import { TruckIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { AddToCartButton } from "./AddToCartButton"
+import { AddToCartButton } from "../cart/AddToCartButton"
 import type { Product } from "@/types/product"
 import { calculateDiscountedPrice } from "@/constants/helpers/CalculateDiscountedPrice"
 

@@ -9,11 +9,12 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       Items: [],
       subtotal: 0,
-      shipping: 10, // Default shipping cost
+      shipping: 10,
       total: 0,
       loading: false,
       error: null,
       isOpen: false,
+      lastRemovedItems: [],
 
       setLoading: (loading) => set({ loading }),
       setError: (error) => set({ error }),
@@ -28,13 +29,11 @@ export const useCartStore = create<CartState>()(
 
           set({ loading: true, error: null })
 
-          // Check stock quantity if available
           const item = get().Items.find((item) => item.id === id)
           if (item?.stockQuantity && quantity > item.stockQuantity) {
             throw new Error(`Only ${item.stockQuantity} items available in stock`)
           }
 
-          // Simulate async operation
           await new Promise((resolve) => setTimeout(resolve, 300))
 
           set((state) => ({
@@ -52,7 +51,6 @@ export const useCartStore = create<CartState>()(
       calculateSummary: () => {
         const Items = get().Items
         const subtotal = Items.reduce((acc, item) => {
-          // Apply discount if available
           const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1
           return acc + item.price.amount * discountMultiplier * item.quantity
         }, 0)
@@ -64,14 +62,12 @@ export const useCartStore = create<CartState>()(
         try {
           set({ loading: true, error: null })
 
-          // Simulate async operation
           await new Promise((resolve) => setTimeout(resolve, 300))
 
           set((state) => {
             const existingItem = state.Items.find((item) => item.id === newItem.id)
 
             if (existingItem) {
-              // Check stock quantity if available
               const newQuantity = existingItem.quantity + newItem.quantity
               const maxQuantity = existingItem.stockQuantity || Number.MAX_SAFE_INTEGER
 
@@ -102,12 +98,15 @@ export const useCartStore = create<CartState>()(
         try {
           set({ loading: true, error: null })
 
-          // Simulate async operation
           await new Promise((resolve) => setTimeout(resolve, 300))
 
-          set((state) => ({
-            Items: state.Items.filter((item) => item.id !== id),
-          }))
+          set((state) => {
+            const itemToRemove = state.Items.find((item) => item.id === id)
+            return {
+              Items: state.Items.filter((item) => item.id !== id),
+              lastRemovedItems: itemToRemove ? [itemToRemove, ...state.lastRemovedItems] : state.lastRemovedItems,
+            }
+          })
 
           get().calculateSummary()
         } catch (err) {
@@ -117,11 +116,46 @@ export const useCartStore = create<CartState>()(
         }
       },
 
+      bulkRemove: async (ids) => {
+        try {
+          set({ loading: true, error: null })
+
+          await new Promise((resolve) => setTimeout(resolve, 300))
+
+          set((state) => {
+            const removedItems = state.Items.filter((item) => ids.includes(item.id))
+            return {
+              Items: state.Items.filter((item) => !ids.includes(item.id)),
+              lastRemovedItems: [...removedItems, ...state.lastRemovedItems],
+            }
+          })
+
+          get().calculateSummary()
+        } catch (err) {
+          set({ error: "Failed to remove items" })
+        } finally {
+          set({ loading: false })
+        }
+      },
+
+      undoRemove: () => {
+        set((state) => ({
+          Items: [...state.lastRemovedItems, ...state.Items],
+          lastRemovedItems: [],
+        }))
+
+        get().calculateSummary()
+      },
+
+      resetCart: () => {
+        set({ Items: [], lastRemovedItems: [] })
+        get().calculateSummary()
+      },
+
       clearCart: async () => {
         try {
           set({ loading: true, error: null })
 
-          // Simulate async operation
           await new Promise((resolve) => setTimeout(resolve, 300))
 
           set({ Items: [] })
@@ -145,4 +179,3 @@ export const useCartStore = create<CartState>()(
     },
   ),
 )
-
