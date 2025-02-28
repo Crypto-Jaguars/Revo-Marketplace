@@ -4,6 +4,7 @@
     "subtitle": "Farmers",
     "description": "Escrows for the field of agriculture, and with the objective of benefiting farmers as well as the buyers of the products grown."
   },
+
   "AboutUs": {
     "title": "What is Revolutionary Farmers?",
     "description": "Revolutionary Farmers is a decentralized platform that provides trust and transparency in agricultural transactions using blockchain technology. We connect farmers with buyers, ensuring fair trade, secure transactions, and traceability of products.",
@@ -57,6 +58,12 @@
       }
     }
   },
+  "cta": {
+      "ready": "Ready to Get Started?",
+      "startSelling": "Start Selling",
+      "exploreProducts": "Explore Products"
+    },
+
   "ItemsHeader": {
     "initializeEscrow": "Create Escrow",
     "claimEarnings": "Claim Escrow Earnings"
@@ -476,5 +483,70 @@
       "environmental": "Environmental Impact",
       "forecast": "Production Forecast"
     }
-  }
+  },
+  "OrderHistory": {
+      "title": "Order History",
+      "filters": {
+        "search": "Search Orders",
+        "dateRange": "Date Range",
+        "status": "Order Status",
+        "sortBy": "Sort By",
+        "amountRange": "Amount Range",
+        "minAmount": "Min Amount",
+        "maxAmount": "Max Amount",
+        "present": "Present"
+      },
+      "status": {
+        "all": "All Statuses",
+        "pending": "Pending",
+        "processing": "Processing",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      },
+      "sortBy": {
+        "dateDesc": "Newest First",
+        "dateAsc": "Oldest First",
+        "totalDesc": "Highest Amount",
+        "totalAsc": "Lowest Amount"
+      },
+      "table": {
+        "orderId": "Order ID",
+        "date": "Date",
+        "total": "Total",
+        "status": "Status",
+        "seller": "Seller",
+        "actions": "Actions"
+      },
+      "details": {
+        "title": "Order Details",
+        "orderInfo": {
+          "title": "Order Information",
+          "status": "Status",
+          "date": "Date",
+          "total": "Total"
+        },
+        "sellerInfo": {
+          "title": "Seller Information",
+          "name": "Name",
+          "rating": "Rating"
+        },
+        "items": {
+          "title": "Items",
+          "quantity": "Quantity",
+          "price": "Price"
+        },
+        "shipping": {
+          "title": "Shipping",
+          "address": "Delivery Address",
+          "trackingNumber": "Tracking Number",
+          "estimatedDelivery": "Estimated Delivery"
+        },
+        "payment": {
+          "title": "Payment Details",
+          "method": "Payment Method",
+          "status": "Payment Status",
+          "total": "Total Amount"
+        }
+      }
+    }
 }

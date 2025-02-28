@@ -131,7 +131,7 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
                 />
                 <div className="flex justify-between items-center gap-2 w-full">
                   <span className={`text-xs ${getStatusCropColor(getCropState(crop.acreage))}`}>{`${getCropState(crop.acreage)}`}</span>
-                  <span className="text-sm font-semibold">{crop.acreage} acres</span>
+                  <span className="text-sm font-semibold">{crop.acreage} {t('activeCrops.acres')}</span>
                 </div>
               </div>
             ))}
