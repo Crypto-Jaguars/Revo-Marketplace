@@ -1,14 +1,25 @@
 "use client"
 
-import ProductGallery from "@/components/products/ProductGallery"
-import ProductInfo from "@/components/products/ProductInfo"
-import RelatedProducts from "@/components/products/RelatedProducts"
-import Breadcrumb from "@/components/shared/Breadcrumb"
-import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
-import type { Product } from "@/types/product"
-import { productsMock } from "@/mocks/products"
+import ProductGallery from "@/components/products/ProductGallery";
+import ProductInfo from "@/components/products/ProductInfo";
+import RelatedProducts from "@/components/products/RelatedProducts";
+import Breadcrumb from "@/components/shared/Breadcrumb";
+import { useTranslations } from "next-intl";
+
+interface ProductData {
+  price: number;
+  description: string;
+  rating: number;
+  reviews: number;
+}
+
+// TODO(#56): Replace with actual data fetching from API
+const mockProductData: ProductData = {
+  price: 299.99,
+  description: "High-quality product with premium features",
+  rating: 4.5,
+  reviews: 128
+};
 
 const ProductPage = () => {
   const t = useTranslations("Products")
@@ -87,7 +98,12 @@ const ProductPage = () => {
         </div>
 
         <div className="w-full">
-          <ProductInfo product={product} />
+          <ProductInfo 
+            price={mockProductData.price}
+            description={mockProductData.description}
+            rating={mockProductData.rating}
+            reviews={mockProductData.reviews}
+          />
         </div>
       </div>
 

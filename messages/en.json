@@ -126,14 +126,14 @@
       "clear": "Clear filters"
     },
     "cart": {
-        "title": "Shopping Cart",
-        "subtotal": "Subtotal",
-        "shipping": "Shipping",
-        "total": "Total",
-        "clear": "Clear Cart",
-        "remove": "Remove Item",
-        "checkout": "Proceed to Checkout"
-      },
+      "title": "Shopping Cart",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "total": "Total",
+      "clear": "Clear Cart",
+      "remove": "Remove Item",
+      "checkout": "Proceed to Checkout"
+    },
     "sortBy": {
       "showing": "Showing",
       "of": "of",
@@ -184,7 +184,9 @@
   "Marketplace": {
     "navigation": {
       "home": "Home",
-      "products": "Products"
+      "products": "Products",
+      "farm": "Farm",
+      "farms": "Farms"
     },
     "search": {
       "placeholder": "Search for products..."
@@ -362,7 +364,139 @@
       "title": "Edit Your Profile"
     }
   },
-    "OrderHistory": {
+  "farm": {
+    "detail": {
+      "firstSection": {
+        "totalAcreage": "Total Acreage",
+        "unit": "Acres",
+        "acresActive": "Active Acres"
+      },
+      "secondSection": {
+        "laborForce": "Labor Force",
+        "unit": "Workers",
+        "activeWorkers": "Active Workers"
+      },
+      "thirdSection": {
+        "climate": "Climate & Conditions",
+        "subtitle": "Current environment metrics",
+        "temperature": {
+          "title": "Temperature",
+          "unit": "°C"
+        },
+        "rainfall": {
+          "title": "Rainfall",
+          "unit": "mm"
+        },
+        "growingSeason": {
+          "title": "Growing Season",
+          "unit": "days"
+        }
+      }
+    },
+    "weather": {
+      "title": "Weather",
+      "loading": "Loading weather information...",
+      "error": "Error loading weather information",
+      "humidity": "{value}% humidity",
+      "windSpeed": "{value}km/h wind",
+      "forecast": {
+        "title": "Forecast",
+        "dayDetails": "{day}: {condition}, min: {min}°C, max: {max}°C",
+        "temperature": "{min}°C - {max}°C"
+      },
+      "condition": {
+        "sunny": "Sunny",
+        "partly cloudy": "Partly Cloudy",
+        "cloudy": "Cloudy",
+        "light rain": "Light Rain",
+        "rain": "Rain"
+      }
+    },
+    "metrics": {
+      "carbonFootprint": {
+        "title": "Carbon Footprint",
+        "subtitle": "Annual emissions tracking",
+        "description": "CO₂ equivalent per year"
+      },
+      "waterUsage": {
+        "title": "Water Usage",
+        "subtitle": "Resource consumption",
+        "description": "Kiloliters per acre"
+      },
+      "biodiversity": {
+        "title": "Biodiversity Index",
+        "subtitle": "Ecosystem health index",
+        "description": "Based on species diversity"
+      }
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "irrigation": {
+        "title": "Irrigation System Activated",
+        "description": "Automated irrigation system completed scheduled cycle",
+        "time": "2 hours ago"
+      },
+      "fertilizer": {
+        "title": "Fertilizer Applied",
+        "description": "Scheduled organic fertilizer application",
+        "time": "4 hours ago"
+      },
+      "harvest": {
+        "title": "Harvest Completed",
+        "description": "Tomato harvest completed in North Field",
+        "time": "6 hours ago"
+      }
+    },
+    "crop": {
+      "activeCrops": {
+        "title": "Active Crops",
+        "subtitle": "Currently in production",
+        "state": {
+          "good": "Good",
+          "fair": "Fair",
+          "poor": "Poor"
+        },
+        "acres": "Acres"
+      },
+      "equipment": {
+        "title": "Equipment Status",
+        "subtitle": "Currently deployed equipment",
+        "status": {
+          "active": "Active",
+          "maintenance": "In Maintenance",
+          "inactive": "Inactive"
+        }
+      },
+      "certifications": {
+        "title": "Certifications",
+        "subtitle": "Farm certifications",
+        "status": {
+          "active": "Active",
+          "pending": "Pending",
+          "expired": "Expired"
+        }
+      }
+    },
+    "tasks": {
+      "title": "Pending Tasks",
+      "checkIrrigation": "Check Irrigation System",
+      "harvestTomatoes": "Harvest Tomatoes",
+      "applyFertilizer": "Apply Fertilizer"
+    },
+    "stats": {
+      "title": "Farm Statistics",
+      "totalCrops": "Total Crops",
+      "activeFields": "Active Fields",
+      "harvestReady": "Ready to Harvest"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "dashboard": "Dashboard"
+    },
+    "title": "My Farm",
+    "description": "Farm operations management and monitoring"
+  },
+  "OrderHistory": {
       "title": "Order History",
       "filters": {
         "search": "Search Orders",
@@ -426,5 +560,17 @@
           "total": "Total Amount"
         }
       }
+    },
+  "FarmDetails": {
+    "farmingMethods": "Farming Methods",
+    "farmingMethodsDescription": "Our sustainable farming practices and techniques",
+    "sustainabilityScore": "Score: {score}/10",
+    "processingCapabilitiesDescription": "Our processing and production capabilities",
+    "accessibility": {
+      "detailsHeading": "Farm details and specifications",
+      "methodsDescription": "List of farming methods used",
+      "sustainabilityRating": "Sustainability rating: {score} out of 10",
+      "processingCapabilities": "Processing capabilities information"
     }
+  }
 }
