@@ -15,10 +15,13 @@ const NavMenu = ({ className }: NavMenuProps) => {
   const t = useTranslations('Marketplace.navigation');
 
   const navItems = [
-    { label: t('home'), href: `/${language}` },
-    { label: t('products'), href: `/${language}/products` },
-    { label: t('farms'), href: `/${language}/farms` },
-  ];
+    { key: 'home', label: 'Home', href: `/${language}` },
+    { key: 'products', label: 'Products', href: `/${language}/products` },
+    { key: 'farm', label: 'Farm', href: `/${language}/dashboard/farm` },
+  ].map(item => ({
+    ...item,
+    label: t(item.key)
+  }));
 
   const isActive = (href: string) => pathname === href;
 

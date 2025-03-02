@@ -1,15 +1,20 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import {GetEngagementForm} from './GetEngagementForm';
+import { GetEngagementForm } from './GetEngagementForm';
 import { useGetEngagementEscrowHook } from './hooks/get-engagement-escrow.hook';
+import { UseFormReturn } from 'react-hook-form';
 
+
+interface EngagementFormData {
+    engagementId: string;
+}
 
 jest.mock('./hooks/get-engagement-escrow.hook');
 
 describe('GetEngagementForm', () => {
     const mockOnSubmit = jest.fn();
-    const mockForm = {
-        handleSubmit: jest.fn((fn) => (e: any) => {
+    const mockForm: Partial<UseFormReturn<EngagementFormData>> = {
+        handleSubmit: jest.fn((fn) => (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             fn();
         }),
@@ -17,7 +22,7 @@ describe('GetEngagementForm', () => {
     };
 
     beforeEach(() => {
-        (useGetEngagementEscrowHook as any).mockReturnValue({
+        (useGetEngagementEscrowHook as jest.MockedFunction<typeof useGetEngagementEscrowHook>).mockReturnValue({
             onSubmit: mockOnSubmit,
             form: mockForm,
         });

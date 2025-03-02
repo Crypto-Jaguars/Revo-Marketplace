@@ -18,8 +18,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
     return translationPath[0] || "en";
   }
 
-  console.log(getCurrentTranslation(pathname));
-
   return (
     <nav aria-label="Breadcrumb" className="text-sm text-gray-500 mb-4">
       <ol className="list-none p-0 inline-flex">
