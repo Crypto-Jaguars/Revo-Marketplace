@@ -4,7 +4,11 @@ import ProductGallery from "@/components/products/ProductGallery";
 import ProductInfo from "@/components/products/ProductInfo";
 import RelatedProducts from "@/components/products/RelatedProducts";
 import Breadcrumb from "@/components/shared/Breadcrumb";
+import { productsMock } from "@/mocks/products";
+import { Product } from "@/types/product";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface ProductData {
   price: number;
@@ -98,12 +102,7 @@ const ProductPage = () => {
         </div>
 
         <div className="w-full">
-          <ProductInfo 
-            price={mockProductData.price}
-            description={mockProductData.description}
-            rating={mockProductData.rating}
-            reviews={mockProductData.reviews}
-          />
+          <ProductInfo product={product} />
         </div>
       </div>
 
