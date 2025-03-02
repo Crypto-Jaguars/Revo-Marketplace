@@ -20,3 +20,9 @@ export interface UndoNotificationProps {
   itemId: number;
   itemName: string;
 }
+
+export interface ConfirmDialogProps {
+  open: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+}
