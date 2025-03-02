@@ -5,10 +5,22 @@ import { RiTwitterLine } from 'react-icons/ri';
 import { FaGithub } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';
 
+interface FooterLinkItem {
+  label: string;
+  href: string;
+  img?: string;
+}
+
+interface SocialLink {
+  label: string;
+  href: string;
+  component: JSX.Element;
+}
+
 interface FooterLink {
   title: string;
-  items: string[] | { label: string; href: string; img?: string }[];
-  social?: { label: string; href?: string; component: JSX.Element }[];
+  items: (string | FooterLinkItem)[];
+  social?: SocialLink[];
 }
 
 const footerLinks: FooterLink[] = [
@@ -45,6 +57,7 @@ const footerLinks: FooterLink[] = [
       {
         label: 'Barcode',
         img: '/qrcode.png',
+        href: '#',
       },
       {
         label: 'Play store',
@@ -52,7 +65,6 @@ const footerLinks: FooterLink[] = [
         img: '/googleplay.png',
       },
     ],
-
     social: [
       {
         label: 'Twitter',
@@ -77,6 +89,10 @@ const Footer = () => {
   const t = useTranslations('footer');
   const currentYear = new Date().getFullYear();
 
+  const isFooterLinkItem = (item: string | FooterLinkItem): item is FooterLinkItem => {
+    return typeof item !== 'string';
+  };
+
   return (
     <div className="bg-[#375B42] dark:bg-background-dark h-auto w-full ">
       <div className="py-16 px-10 md:px-40">
@@ -91,16 +107,16 @@ const Footer = () => {
               >
                 {items.map((item, index) => (
                   <li key={index}>
-                    {typeof item === 'string' && title === 'Support' ? (
+                    {!isFooterLinkItem(item) && title === 'Support' ? (
                       <span className="text-white-dark">{item}</span>
-                    ) : (
+                    ) : isFooterLinkItem(item) && (
                       <a
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white-dark hover:underline"
                       >
-                        {item.img && (
+                        {item.img ? (
                           <Image
                             src={item.img}
                             alt={t(item.label)}
@@ -109,15 +125,16 @@ const Footer = () => {
                             quality={75}
                             className="w-full h-full object-contain"
                           />
+                        ) : (
+                          t(item.label)
                         )}
-                        {!item.img && t(item.label)} {/* Show label only if no image */}
                       </a>
                     )}
                   </li>
                 ))}
               </ul>
-              {/* Render images and social links only for 'Download App' */}
-              {title === 'Download App' && (
+              {/* Render social links only for 'Download App' */}
+              {title === 'Download App' && social && (
                 <div className="flex flex-col">
                   {/* Display social icons in a row */}
                   <div className="flex flex-row gap-4">

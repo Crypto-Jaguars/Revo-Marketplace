@@ -6,6 +6,21 @@ import RelatedProducts from "@/components/products/RelatedProducts";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import { useTranslations } from "next-intl";
 
+interface ProductData {
+  price: number;
+  description: string;
+  rating: number;
+  reviews: number;
+}
+
+// TODO(#56): Replace with actual data fetching from API
+const mockProductData: ProductData = {
+  price: 299.99,
+  description: "High-quality product with premium features",
+  rating: 4.5,
+  reviews: 128
+};
+
 const ProductPage = () => {
   const t = useTranslations('Products');
   
@@ -26,7 +41,12 @@ const ProductPage = () => {
         </div>
 
         <div className="w-full">
-          <ProductInfo />
+          <ProductInfo 
+            price={mockProductData.price}
+            description={mockProductData.description}
+            rating={mockProductData.rating}
+            reviews={mockProductData.reviews}
+          />
         </div>
       </div>
 

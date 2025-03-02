@@ -185,6 +185,7 @@
     "navigation": {
       "home": "Home",
       "products": "Products",
+      "farm": "Farm",
       "farms": "Farms"
     },
     "search": {
@@ -368,12 +369,12 @@
       "firstSection": {
         "totalAcreage": "Total Acreage",
         "unit": "Acres",
-        "acresActive": "acres active"
+        "acresActive": "Active Acres"
       },
       "secondSection": {
         "laborForce": "Labor Force",
         "unit": "Workers",
-        "activeWorkers": "active workers"
+        "activeWorkers": "Active Workers"
       },
       "thirdSection": {
         "climate": "Climate & Conditions",
@@ -392,6 +393,25 @@
         }
       }
     },
+    "weather": {
+      "title": "Weather",
+      "loading": "Loading weather information...",
+      "error": "Error loading weather information",
+      "humidity": "{value}% humidity",
+      "windSpeed": "{value}km/h wind",
+      "forecast": {
+        "title": "Forecast",
+        "dayDetails": "{day}: {condition}, min: {min}°C, max: {max}°C",
+        "temperature": "{min}°C - {max}°C"
+      },
+      "condition": {
+        "sunny": "Sunny",
+        "partly cloudy": "Partly Cloudy",
+        "cloudy": "Cloudy",
+        "light rain": "Light Rain",
+        "rain": "Rain"
+      }
+    },
     "metrics": {
       "carbonFootprint": {
         "title": "Carbon Footprint",
@@ -401,18 +421,36 @@
       "waterUsage": {
         "title": "Water Usage",
         "subtitle": "Resource consumption",
-        "description": "Kiloliters per hectare"
+        "description": "Kiloliters per acre"
       },
       "biodiversity": {
-        "title": "Biodiversity Score",
+        "title": "Biodiversity Index",
         "subtitle": "Ecosystem health index",
         "description": "Based on species diversity"
+      }
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "irrigation": {
+        "title": "Irrigation System Activated",
+        "description": "Automated irrigation system completed scheduled cycle",
+        "time": "2 hours ago"
+      },
+      "fertilizer": {
+        "title": "Fertilizer Applied",
+        "description": "Scheduled organic fertilizer application",
+        "time": "4 hours ago"
+      },
+      "harvest": {
+        "title": "Harvest Completed",
+        "description": "Tomato harvest completed in North Field",
+        "time": "6 hours ago"
       }
     },
     "crop": {
       "activeCrops": {
         "title": "Active Crops",
-        "subtitle": "Current crops in production",
+        "subtitle": "Currently in production",
         "state": {
           "good": "Good",
           "fair": "Fair",
@@ -422,16 +460,16 @@
       },
       "equipment": {
         "title": "Equipment Status",
-        "subtitle": "Currently deployed machinery",
+        "subtitle": "Currently deployed equipment",
         "status": {
           "active": "Active",
-          "maintenance": "Maintenance",
+          "maintenance": "In Maintenance",
           "inactive": "Inactive"
         }
       },
       "certifications": {
         "title": "Certifications",
-        "subtitle": "Certifications of the farm",
+        "subtitle": "Farm certifications",
         "status": {
           "active": "Active",
           "pending": "Pending",
@@ -439,50 +477,24 @@
         }
       }
     },
-    "contracts": {
-      "title": "Contract History",
-      "subtitle": "Past and current contracts",
-      "columns": {
-        "client": "Client",
-        "startDate": "Start Date",
-        "endDate": "End Date",
-        "status": "Status",
-        "value": "Value",
-        "completion": "Completion",
-        "satisfaction": "Satisfaction"
-      },
-      "status": {
-        "active": "Active",
-        "completed": "Completed"
-      }
+    "tasks": {
+      "title": "Pending Tasks",
+      "checkIrrigation": "Check Irrigation System",
+      "harvestTomatoes": "Harvest Tomatoes",
+      "applyFertilizer": "Apply Fertilizer"
     },
-    "forecast": {
-      "title": "Harvest Timeline",
-      "months": {
-        "january": "Jan",
-        "february": "Feb",
-        "march": "Mar",
-        "april": "Apr",
-        "may": "May",
-        "june": "Jun",
-        "july": "Jul",
-        "august": "Aug",
-        "september": "Sep",
-        "october": "Oct",
-        "november": "Nov",
-        "december": "Dec"
-      }
+    "stats": {
+      "title": "Farm Statistics",
+      "totalCrops": "Total Crops",
+      "activeFields": "Active Fields",
+      "harvestReady": "Ready to Harvest"
     },
-    "tabs": {
-      "breadcrumb": {
-        "home": "Home",
-        "farms": "Farms"
-      },
-      "operations": "Current Operations",
-      "contracts": "Contracts",
-      "environmental": "Environmental Impact",
-      "forecast": "Production Forecast"
-    }
+    "breadcrumb": {
+      "home": "Home",
+      "dashboard": "Dashboard"
+    },
+    "title": "My Farm",
+    "description": "Farm operations management and monitoring"
   },
   "OrderHistory": {
       "title": "Order History",
@@ -548,5 +560,17 @@
           "total": "Total Amount"
         }
       }
+    },
+  "FarmDetails": {
+    "farmingMethods": "Farming Methods",
+    "farmingMethodsDescription": "Our sustainable farming practices and techniques",
+    "sustainabilityScore": "Score: {score}/10",
+    "processingCapabilitiesDescription": "Our processing and production capabilities",
+    "accessibility": {
+      "detailsHeading": "Farm details and specifications",
+      "methodsDescription": "List of farming methods used",
+      "sustainabilityRating": "Sustainability rating: {score} out of 10",
+      "processingCapabilities": "Processing capabilities information"
     }
+  }
 }

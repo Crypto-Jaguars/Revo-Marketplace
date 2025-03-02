@@ -186,6 +186,7 @@
     "navigation": {
       "home": "Inicio",
       "products": "Productos",
+      "farm": "Granja",
       "farms": "Granjas"
     },
     "search": {
@@ -393,6 +394,25 @@
         }
       }
     },
+    "weather": {
+      "title": "Clima",
+      "loading": "Cargando información del clima...",
+      "error": "Error al cargar la información del clima",
+      "humidity": "{value}% humedad",
+      "windSpeed": "{value}km/h viento",
+      "forecast": {
+        "title": "Pronóstico",
+        "dayDetails": "{day}: {condition}, mín: {min}°C, máx: {max}°C",
+        "temperature": "{min}°C - {max}°C"
+      },
+      "condition": {
+        "sunny": "Soleado",
+        "partly cloudy": "Parcialmente nublado",
+        "cloudy": "Nublado",
+        "light rain": "Lluvia ligera",
+        "rain": "Lluvia"
+      }
+    },
     "metrics": {
       "carbonFootprint": {
         "title": "Huella de Carbono",
@@ -408,6 +428,24 @@
         "title": "Índice de Biodiversidad",
         "subtitle": "Índice de salud del ecosistema",
         "description": "Basado en diversidad de especies"
+      }
+    },
+    "activity": {
+      "title": "Actividad Reciente",
+      "irrigation": {
+        "title": "Sistema de Riego Activado",
+        "description": "El sistema de riego automático completó su ciclo programado",
+        "time": "Hace 2 horas"
+      },
+      "fertilizer": {
+        "title": "Fertilizante Aplicado",
+        "description": "Aplicación programada de fertilizantes orgánicos",
+        "time": "Hace 4 horas"
+      },
+      "harvest": {
+        "title": "Cosecha Completada",
+        "description": "Cosecha de tomates completada en el Campo Norte",
+        "time": "Hace 6 horas"
       }
     },
     "crop": {
@@ -440,51 +478,31 @@
         }
       }
     },
-    "contracts": {
-      "title": "Historial de Contratos",
-      "subtitle": "Contratos pasados y actuales",
-      "columns": {
-        "client": "Cliente",
-        "startDate": "Fecha de Inicio",
-        "endDate": "Fecha de Fin",
-        "status": "Estado",
-        "value": "Valor",
-        "completion": "Completado",
-        "satisfaction": "Satisfacción"
-      },
-      "status": {
-        "active": "Activo",
-        "completed": "Completado"
+    "tasks": {
+      "title": "Tareas Pendientes",
+      "checkIrrigation": "Revisar Sistema de Riego",
+      "harvestTomatoes": "Cosechar Tomates",
+      "applyFertilizer": "Aplicar Fertilizante",
+      "aria": {
+        "taskStatus": "Estado de la tarea: {status}",
+        "taskComplete": "Marcar tarea como completada",
+        "priorityHigh": "Prioridad alta",
+        "priorityMedium": "Prioridad media",
+        "priorityLow": "Prioridad baja"
       }
     },
-    "forecast": {
-      "title": "Cronograma de Cosecha",
-      "subtitle": "Predicción de rendimiento y ganancias",
-      "months": {
-        "january": "Ene",
-        "february": "Feb",
-        "march": "Mar",
-        "april": "Abr",
-        "may": "May",
-        "june": "Jun",
-        "july": "Jul",
-        "august": "Ago",
-        "september": "Sep",
-        "october": "Oct",
-        "november": "Nov",
-        "december": "Dic"
-      }
+    "stats": {
+      "title": "Estadísticas de la Granja",
+      "totalCrops": "Total de Cultivos",
+      "activeFields": "Campos Activos",
+      "harvestReady": "Listos para Cosechar"
     },
-    "tabs": {
-      "breadcrumb": {
-        "home": "Inicio",
-        "farms": "Granjas"
-      },
-      "operations": "Operaciones Actuales",
-      "contracts": "Contratos",
-      "environmental": "Impacto Ambiental",
-      "forecast": "Pronóstico de Cosecha"
-    }
+    "breadcrumb": {
+      "home": "Inicio",
+      "dashboard": "Panel de Control"
+    },
+    "title": "Mi Granja",
+    "description": "Gestión y monitoreo de operaciones agrícolas"
   },
   "OrderHistory": {
     "title": "Historial de Pedidos",
@@ -550,5 +568,6 @@
         "total": "Monto Total"
       }
     }
-  }
+  },
+  "locale": "es-ES"
 }
