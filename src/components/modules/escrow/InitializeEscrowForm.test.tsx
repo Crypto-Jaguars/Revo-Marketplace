@@ -44,6 +44,14 @@ type TranslationKeys =
   | 'validation.engagementId.required'
   | 'validation.description.required';
 
+// Add interface for form data
+interface InitializeEscrowFormData {
+  engagementId: string;
+  description: string;
+  serviceProvider: string;
+  amount: string;
+}
+
 export function TestInitializeEscrowForm() {
   const { form, onSubmit } = useInitializeEscrowHook();
   const t = useTranslations('InitializeEscrowForm');
@@ -140,15 +148,15 @@ export function TestInitializeEscrowForm() {
 
     it('handles valid form submission', () => {
         // Simulate valid form data
-        const validData = {
+        const validData: InitializeEscrowFormData = {
           engagementId: '123-ABC',
           description: 'Valid description',
           serviceProvider: 'Provider X',
           amount: '100',
         };
       
-        let submittedData = null;
-        const mockOnSubmit = (data: any) => {
+        let submittedData: InitializeEscrowFormData | null = null;
+        const mockOnSubmit = (data: InitializeEscrowFormData) => {
           submittedData = data;
         };
       
@@ -158,7 +166,7 @@ export function TestInitializeEscrowForm() {
     });
 
     it('handles invalid form submission', () => {
-        const invalidData = {
+        const invalidData: InitializeEscrowFormData = {
           engagementId: '',
           description: '',
           serviceProvider: '',
@@ -167,7 +175,7 @@ export function TestInitializeEscrowForm() {
 
         let submissionOccurred = false;
       
-        const mockOnSubmit = (data: any) => {
+        const mockOnSubmit = (data: InitializeEscrowFormData) => {
           submissionOccurred = true;
         };
       

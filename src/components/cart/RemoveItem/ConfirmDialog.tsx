@@ -8,7 +8,7 @@ import { ConfirmDialogProps } from './types';
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({ open, onConfirm, onCancel }) => {
   return (
     <Dialog open={open}>
-      <DialogContent>
+      <DialogContent> 
         <DialogTitle>Remove Item</DialogTitle>
         <DialogDescription>
           Are you sure you want to remove this item from your cart?

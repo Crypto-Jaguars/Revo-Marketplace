@@ -1,194 +1,199 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Image from "next/image";
-import { useCartStore } from "@/store/cartStore";
-import { useRouter } from 'next/navigation';
-import UndoNotification from "./RemoveItem/UndoNotification";
-import RemoveButton from "./RemoveItem/RemoveButton";
+import { useState } from "react"
+import Image from "next/image"
+import { Minus, Plus, Heart } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import type { CartItem } from "@/store/cartStore/types"
+import RemoveButton from "@/components/cart/RemoveItem/RemoveButton"
+import UndoNotification from "@/components/cart/RemoveItem/UndoNotification"
 
-const CartItem = () => {
-  const router = useRouter(); 
-  const { 
-    Items, 
-    updateQuantity, 
-    clearCart, 
-    bulkRemove, 
-    undoRemove, 
-    lastRemovedItems, 
-    resetCart 
-  } = useCartStore();
+interface CartItemProps {
+  item: CartItem
+  onRemove: (id: number) => Promise<void>
+  onUpdateQuantity: (id: number, quantity: number) => Promise<void>
+  onSaveForLater?: (id: number) => void
+  onBulkRemove?: (ids: number[]) => Promise<void>
+  onUndoRemove?: () => void
+  hasRemovedItems?: boolean
+  onResetCart?: () => void
+  selectedItems?: number[]
+  onToggleSelect?: (id: number) => void
+}
 
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
-  const [showUndo, setShowUndo] = useState(false);
+export default function CartItemComponent({
+  item,
+  onRemove,
+  onUpdateQuantity,
+  onSaveForLater,
+  onBulkRemove,
+  onUndoRemove,
+  hasRemovedItems,
+  onResetCart,
+  selectedItems = [],
+  onToggleSelect,
+}: CartItemProps) {
+  const [showUndoNotification, setShowUndoNotification] = useState(false)
 
-  const handleQuantityChange = (id: number, quantity: number) => {
-    updateQuantity(id, quantity);
-  };
-
-  const handleSelectItem = (id: number) => {
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
-    } else {
-      setSelectedItems([...selectedItems, id]);
+  const handleIncrement = async () => {
+    if (!item.stockQuantity || item.quantity < item.stockQuantity) {
+      await onUpdateQuantity(item.id, item.quantity + 1)
     }
-  };
+  }
 
-  const handleBulkRemove = () => {
-    bulkRemove(selectedItems);
-    setSelectedItems([]);
-    setShowUndo(true); 
-  };
-
-  useEffect(() => {
-    if (Items.length === 0 && selectedItems.length > 0) {
-      setShowUndo(true);
-      setSelectedItems([]);
+  const handleDecrement = async () => {
+    if (item.quantity > 1) {
+      await onUpdateQuantity(item.id, item.quantity - 1)
     }
-  }, [Items, selectedItems]);
+  }
 
-  useEffect(() => {
-    if (showUndo) {
-      const timer = setTimeout(() => setShowUndo(false), 15000); 
-      return () => clearTimeout(timer);
+  const handleItemRemoved = async () => {
+    setShowUndoNotification(true)
+    // The actual removal is handled by the RemoveButton component
+  }
+
+  const handleUndo = () => {
+    if (onUndoRemove) {
+      onUndoRemove()
     }
-  }, [showUndo]);
+    setShowUndoNotification(false)
+  }
+
+  // Calculate discounted price if discount exists
+  const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1
+  const discountedPrice = item.price.amount * discountMultiplier
+  const itemTotal = discountedPrice * item.quantity
+
+  // Handle image source
+  const imageSrc = (() => {
+    if (typeof item.images === "string") {
+      // If it's a string, ensure it has a leading slash or is an absolute URL
+      if (item.images.startsWith("http") || item.images.startsWith("/")) {
+        return item.images
+      } else {
+        // Add leading slash to relative paths
+        return `/images/${item.images}`
+      }
+    } else if (Array.isArray(item.images) && item.images.length > 0) {
+      // If it's an array, ensure the first item has a leading slash or is an absolute URL
+      const firstImage = item.images[0]
+      if (firstImage.startsWith("http") || firstImage.startsWith("/")) {
+        return firstImage
+      } else {
+        // Add leading slash to relative paths
+        return `/images/${firstImage}`
+      }
+    }
+    // Default fallback
+    return "/placeholder.svg"
+  })()
+
+  const isSelected = selectedItems.includes(item.id)
 
   return (
-    <div className="container mx-auto p-6">
-      {showUndo && lastRemovedItems.length > 0 && (
-        <UndoNotification 
-          itemName={lastRemovedItems.length > 1 ? "multiple items" : lastRemovedItems[0]?.name} 
-          onUndo={undoRemove} 
-        />
-      )}
+    <>
+      <div className="flex items-start gap-4 py-4 border-b">
+        {onToggleSelect && (
+          <div className="flex items-center h-20">
+            <input
+              type="checkbox"
+              checked={isSelected}
+              onChange={() => onToggleSelect(item.id)}
+              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+          </div>
+        )}
 
-      <div className="overflow-x-auto shadow-lg rounded-lg">
-        <table className="min-w-full bg-white rounded-lg">
-          <thead>
-            <tr className="bg-gray-100 border-b">
-              <th className="text-left p-4">
-                <input 
-                  type="checkbox" 
-                  checked={selectedItems.length === Items.length}
-                  onChange={() => {
-                    if (selectedItems.length === Items.length) {
-                      setSelectedItems([]);
-                    } else {
-                      setSelectedItems(Items.map(item => item.id));
-                    }
-                  }}
-                />
-              </th>
-              <th className="text-left p-4 font-semibold text-gray-600">Products</th>
-              <th className="text-left p-4 font-semibold text-gray-600">Price</th>
-              <th className="text-left p-4 font-semibold text-gray-600">Quantity</th>
-              <th className="text-left p-4 font-semibold text-gray-600">Subtotal</th>
-              <th className="text-left p-4 font-semibold text-gray-600">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Items.length > 0 ? (
-              Items.map((item) => (
-                <tr key={item.id} className="border-b hover:bg-gray-50 transition-colors">
-                  <td className="p-4">
-                    <input 
-                      type="checkbox" 
-                      checked={selectedItems.includes(item.id)}
-                      onChange={() => handleSelectItem(item.id)}
-                    />
-                  </td>
-                  <td className="flex items-center space-x-4 p-4">
-                    <Image 
-                      src={item.images} 
-                      alt={`${item.name} image`}
-                      className="rounded-md object-cover h-16 w-16 border border-gray-200"
-                      width={64}
-                      height={64}
-                    />
-                    <p className="text-lg font-medium text-gray-800">{item.name}</p>
-                  </td>
-                  <td className="p-4 text-lg text-gray-600">
-                    <span className="font-semibold">{item.price.unit}</span>
-                    {item.price.amount}
-                  </td>
-                  <td className="p-4">
-                    <Select
-                      defaultValue={item.quantity.toString()}
-                      onValueChange={(value) => handleQuantityChange(item.id, parseInt(value))}
-                    >
-                      <SelectTrigger className="w-20 border border-gray-300 rounded-md">
-                        <SelectValue placeholder="Qty" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {[...Array(10)].map((_, i) => (
-                          <SelectItem key={i} value={(i + 1).toString()}>
-                            {i + 1}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </td>
-                  <td className="p-4 text-lg text-gray-600">
-                    {item.price.unit}{item.price.amount * item.quantity}
-                  </td>
-                  <td className="p-4">
-                    <RemoveButton itemId={item.id} itemName={item.name} />
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={6} className="text-center p-4 text-gray-500">
-                  Your cart is empty.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border">
+          <Image src={imageSrc || "/placeholder.svg"} alt={item.name} fill className="object-cover" sizes="80px" />
+        </div>
 
-      <div className="flex justify-between items-center mt-6 space-x-4">
-        <Button 
-          variant="outline" 
-          className="px-6 py-3 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition"
-          onClick={() => router.push('/shop')}
-        >
-          Return to shop
-        </Button>
-        <div className="flex space-x-4">
-          <Button 
-            variant="outline" 
-            className="px-6 py-3 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition"
-            onClick={() => {
-              if (window.confirm("Are you sure you want to clear the entire cart?")) {
-                clearCart();
-              }
-            }}
-          >
-            Clear Cart
-          </Button>
-          <Button 
-            variant="destructive" 
-            className="px-6 py-3 text-white bg-red-600 rounded-md hover:bg-red-700 transition"
-            onClick={handleBulkRemove}
-            disabled={selectedItems.length === 0}
-          >
-            Remove Selected
-          </Button>
-          <Button 
-            variant="outline" 
-            className="px-6 py-3 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition"
-            onClick={() => resetCart()}
-          >
-            Reset Cart
-          </Button>
+        <div className="flex flex-1 flex-col">
+          <div className="flex justify-between">
+            <div>
+              <h3 className="text-sm font-medium">{item.name}</h3>
+              {item.description && (
+                <p className="mt-1 text-xs text-muted-foreground line-clamp-1">{item.description}</p>
+              )}
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-medium">
+                {item.price.unit.startsWith("$") ? "" : "$"}
+                {itemTotal.toFixed(2)}
+              </p>
+              {item.discount && item.discount > 0 && (
+                <div className="flex items-center gap-1">
+                  <span className="text-xs line-through text-muted-foreground">
+                    ${(item.price.amount * item.quantity).toFixed(2)}
+                  </span>
+                  <Badge variant="destructive" className="text-[10px] h-4">
+                    -{item.discount}%
+                  </Badge>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {item.farmer && (
+            <div className="mt-1 flex items-center text-xs text-muted-foreground">
+              <span>Seller: </span>
+              <div className="flex items-center ml-1">
+                <span>{item.farmer.farmName}</span>
+              </div>
+            </div>
+          )}
+
+          {item.certifications && item.certifications.length > 0 && (
+            <div className="flex flex-wrap gap-1 mt-1">
+              {item.certifications.map((cert) => (
+                <Badge key={cert} variant="outline" className="text-[10px] h-4">
+                  {cert}
+                </Badge>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-2 flex items-center justify-between">
+            <div className="flex items-center border rounded-md">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-none"
+                onClick={handleDecrement}
+                disabled={item.quantity <= 1}
+              >
+                <Minus className="h-3 w-3" />
+                <span className="sr-only">Decrease quantity</span>
+              </Button>
+              <span className="w-8 text-center text-sm">{item.quantity}</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-none"
+                onClick={handleIncrement}
+                disabled={item.stockQuantity ? item.quantity >= item.stockQuantity : false}
+              >
+                <Plus className="h-3 w-3" />
+                <span className="sr-only">Increase quantity</span>
+              </Button>
+            </div>
+
+            <div className="flex gap-2">
+              {onSaveForLater && (
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onSaveForLater(item.id)}>
+                  <Heart className="h-4 w-4" />
+                  <span className="sr-only">Save for later</span>
+                </Button>
+              )}
+              <RemoveButton itemId={item.id} itemName={item.name} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
 
-export default CartItem;
+      {showUndoNotification && <UndoNotification itemName={item.name} onUndo={handleUndo} />}
+    </>
+  )
+}
+

@@ -4,6 +4,7 @@ import Bounded from '@/components/Bounded';
 import { useTranslations } from 'next-intl';
 import AboutUs from '@/components/sections/about-us/AboutUs';
 import HowItWorks from '@/components/sections/how-it-works/HowItWorks';
+import CtaSection from '@/components/cta/CtaSection';
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -24,6 +25,7 @@ export default function Home() {
         </div>
         <AboutUs />
         <HowItWorks />
+        <CtaSection />
       </div>
     </Bounded>
   );

@@ -4,6 +4,7 @@
     "subtitle": "Farmers",
     "description": "Fideicomisos especializados para el sector agrícola, cuyo objetivo principal es beneficiar tanto a los agricultores como a los compradores de los productos cultivados."
   },
+
   "AboutUs": {
     "title": "¿Qué es Revolutionary Farmers?",
     "description": "Revolutionary Farmers es una plataforma descentralizada que proporciona confianza y transparencia en las transacciones agrícolas mediante tecnología blockchain. Conectamos a los agricultores con los compradores, garantizando comercio justo, transacciones seguras y trazabilidad de los productos.",
@@ -57,6 +58,13 @@
       }
     }
   },
+
+  "cta": {
+      "ready": "¿Listo para Empezar?",
+      "startSelling": "Empezar a Vender",
+      "exploreProducts": "Explorar Productos"
+    },
+
   "ItemsHeader": {
     "initializeEscrow": "Crear Escrow",
     "claimEarnings": "Reclamar Ganancias de Escrow"
@@ -103,17 +111,16 @@
       }
     },
     "submitButtonText": "Financiar fideicomiso"
-  
   },
-    "cart": {
-      "title": "Carrito de Compras",
-      "subtotal": "Subtotal",
-      "shipping": "Envío",
-      "total": "Total",
-      "clear": "Vaciar Carrito",
-      "remove": "Eliminar Artículo",
-      "checkout": "Proceder al Pago"
-    },
+  "cart": {
+    "title": "Carrito de Compras",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "total": "Total",
+    "clear": "Vaciar Carrito",
+    "remove": "Eliminar Artículo",
+    "checkout": "Proceder al Pago"
+  },
   "Products": {
     "title": "Productos",
     "description": "Explora nuestra amplia gama de productos, cuidadosamente seleccionados para satisfacer tus necesidades y preferencias.",
@@ -162,7 +169,6 @@
       "buyNow": "Comprar Ahora",
       "addToCart": "Agregar al Carrito"
     },
-
     "delivery": {
       "free": "Envío Gratis",
       "checkPostalCode": "Ingresa tu código postal para verificar disponibilidad de envío"
@@ -179,7 +185,9 @@
   "Marketplace": {
     "navigation": {
       "home": "Inicio",
-      "products": "Productos"
+      "products": "Productos",
+      "farm": "Granja",
+      "farms": "Granjas"
     },
     "search": {
       "placeholder": "Buscar productos..."
@@ -357,69 +365,209 @@
       "title": "Editar Tu Perfil"
     }
   },
-    "OrderHistory": {
-      "title": "Historial de Pedidos",
-      "filters": {
-        "search": "Buscar Pedidos",
-        "dateRange": "Rango de Fechas",
-        "status": "Estado del Pedido",
-        "sortBy": "Ordenar Por",
-        "amountRange": "Rango de Monto",
-        "minAmount": "Monto Mínimo",
-        "maxAmount": "Monto Máximo",
-        "present": "Presente"
+  "farm": {
+    "detail": {
+      "firstSection": {
+        "totalAcreage": "Total de Hectáreas",
+        "unit": "Hectáreas",
+        "acresActive": "Hectáreas Activas"
       },
-      "status": {
-        "all": "Todos los Estados",
-        "pending": "Pendiente",
-        "processing": "Procesando",
-        "delivered": "Entregado",
-        "cancelled": "Cancelado"
+      "secondSection": {
+        "laborForce": "Fuerza Laboral",
+        "unit": "Trabajadores",
+        "activeWorkers": "Trabajadores Activos"
       },
-      "sortBy": {
-        "dateDesc": "Más Recientes Primero",
-        "dateAsc": "Más Antiguos Primero",
-        "totalDesc": "Monto Más Alto",
-        "totalAsc": "Monto Más Bajo"
-      },
-      "table": {
-        "orderId": "ID del Pedido",
-        "date": "Fecha",
-        "total": "Total",
-        "status": "Estado",
-        "seller": "Vendedor",
-        "actions": "Acciones"
-      },
-      "details": {
-        "title": "Detalles del Pedido",
-        "orderInfo": {
-          "title": "Información del Pedido",
-          "status": "Estado",
-          "date": "Fecha",
-          "total": "Total"
+      "thirdSection": {
+        "climate": "Clima y Condiciones",
+        "subtitle": "Métricas actuales del entorno",
+        "temperature": {
+          "title": "Temperatura",
+          "unit": "°C"
         },
-        "sellerInfo": {
-          "title": "Información del Vendedor",
-          "name": "Nombre",
-          "rating": "Calificación"
+        "rainfall": {
+          "title": "Precipitación",
+          "unit": "mm"
         },
-        "items": {
-          "title": "Artículos",
-          "quantity": "Cantidad",
-          "price": "Precio"
-        },
-        "shipping": {
-          "title": "Envío",
-          "address": "Dirección de Entrega",
-          "trackingNumber": "Número de Seguimiento",
-          "estimatedDelivery": "Fecha Estimada de Entrega"
-        },
-        "payment": {
-          "title": "Detalles de Pago",
-          "method": "Método de Pago",
-          "status": "Estado del Pago",
-          "total": "Monto Total"
+        "growingSeason": {  
+          "title": "Temporada de Crecimiento",
+          "unit": "días"
         }
       }
+    },
+    "weather": {
+      "title": "Clima",
+      "loading": "Cargando información del clima...",
+      "error": "Error al cargar la información del clima",
+      "humidity": "{value}% humedad",
+      "windSpeed": "{value}km/h viento",
+      "forecast": {
+        "title": "Pronóstico",
+        "dayDetails": "{day}: {condition}, mín: {min}°C, máx: {max}°C",
+        "temperature": "{min}°C - {max}°C"
+      },
+      "condition": {
+        "sunny": "Soleado",
+        "partly cloudy": "Parcialmente nublado",
+        "cloudy": "Nublado",
+        "light rain": "Lluvia ligera",
+        "rain": "Lluvia"
+      }
+    },
+    "metrics": {
+      "carbonFootprint": {
+        "title": "Huella de Carbono",
+        "subtitle": "Seguimiento de emisiones anuales",
+        "description": "CO₂ equivalente por año"
+      },
+      "waterUsage": {
+        "title": "Uso de Agua",
+        "subtitle": "Consumo de recursos",
+        "description": "Kilolitros por hectárea"
+      },
+      "biodiversity": {
+        "title": "Índice de Biodiversidad",
+        "subtitle": "Índice de salud del ecosistema",
+        "description": "Basado en diversidad de especies"
+      }
+    },
+    "activity": {
+      "title": "Actividad Reciente",
+      "irrigation": {
+        "title": "Sistema de Riego Activado",
+        "description": "El sistema de riego automático completó su ciclo programado",
+        "time": "Hace 2 horas"
+      },
+      "fertilizer": {
+        "title": "Fertilizante Aplicado",
+        "description": "Aplicación programada de fertilizantes orgánicos",
+        "time": "Hace 4 horas"
+      },
+      "harvest": {
+        "title": "Cosecha Completada",
+        "description": "Cosecha de tomates completada en el Campo Norte",
+        "time": "Hace 6 horas"
+      }
+    },
+    "crop": {
+      "activeCrops": {
+        "title": "Cultivos Activos",
+        "subtitle": "Cultivos actuales en producción",
+        "state": {
+          "good": "Bueno",
+          "fair": "Regular",
+          "poor": "Malo"
+        },
+        "acres": "Hectáreas"
+      },
+      "equipment": {
+        "title": "Estado de Equipos",
+        "subtitle": "Equipos desplegados actualmente",
+        "status": {
+          "active": "Activo",
+          "maintenance": "En Mantenimiento",
+          "inactive": "Inactivo"
+        }
+      },
+      "certifications": {
+        "title": "Certificaciones",
+        "subtitle": "Certificaciones de la granja",
+        "status": {
+          "active": "Activo",
+          "pending": "Pendiente",
+          "expired": "Expirado"
+        }
+      }
+    },
+    "tasks": {
+      "title": "Tareas Pendientes",
+      "checkIrrigation": "Revisar Sistema de Riego",
+      "harvestTomatoes": "Cosechar Tomates",
+      "applyFertilizer": "Aplicar Fertilizante",
+      "aria": {
+        "taskStatus": "Estado de la tarea: {status}",
+        "taskComplete": "Marcar tarea como completada",
+        "priorityHigh": "Prioridad alta",
+        "priorityMedium": "Prioridad media",
+        "priorityLow": "Prioridad baja"
+      }
+    },
+    "stats": {
+      "title": "Estadísticas de la Granja",
+      "totalCrops": "Total de Cultivos",
+      "activeFields": "Campos Activos",
+      "harvestReady": "Listos para Cosechar"
+    },
+    "breadcrumb": {
+      "home": "Inicio",
+      "dashboard": "Panel de Control"
+    },
+    "title": "Mi Granja",
+    "description": "Gestión y monitoreo de operaciones agrícolas"
+  },
+  "OrderHistory": {
+    "title": "Historial de Pedidos",
+    "filters": {
+      "search": "Buscar Pedidos",
+      "dateRange": "Rango de Fechas",
+      "status": "Estado del Pedido",
+      "sortBy": "Ordenar Por",
+      "amountRange": "Rango de Monto",
+      "minAmount": "Monto Mínimo",
+      "maxAmount": "Monto Máximo",
+      "present": "Presente"
+    },
+    "status": {
+      "all": "Todos los Estados",
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "delivered": "Entregado",
+      "cancelled": "Cancelado"
+    },
+    "sortBy": {
+      "dateDesc": "Más Recientes Primero",
+      "dateAsc": "Más Antiguos Primero",
+      "totalDesc": "Monto Más Alto",
+      "totalAsc": "Monto Más Bajo"
+    },
+    "table": {
+      "orderId": "ID del Pedido",
+      "date": "Fecha",
+      "total": "Total",
+      "status": "Estado",
+      "seller": "Vendedor",
+      "actions": "Acciones"
+    },
+    "details": {
+      "title": "Detalles del Pedido",
+      "orderInfo": {
+        "title": "Información del Pedido",
+        "status": "Estado",
+        "date": "Fecha",
+        "total": "Total"
+      },
+      "sellerInfo": {
+        "title": "Información del Vendedor",
+        "name": "Nombre",
+        "rating": "Calificación"
+      },
+      "items": {
+        "title": "Artículos",
+        "quantity": "Cantidad",
+        "price": "Precio"
+      },
+      "shipping": {
+        "title": "Envío",
+        "address": "Dirección de Entrega",
+        "trackingNumber": "Número de Seguimiento",
+        "estimatedDelivery": "Fecha Estimada de Entrega"
+      },
+      "payment": {
+        "title": "Detalles de Pago",
+        "method": "Método de Pago",
+        "status": "Estado del Pago",
+        "total": "Monto Total"
+      }
     }
+  },
+  "locale": "es-ES"
 }
