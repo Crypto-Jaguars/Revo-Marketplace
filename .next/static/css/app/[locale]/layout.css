@@ -829,6 +829,9 @@ video {
 .mr-4 {
   margin-right: 1rem;
 }
+.mt-0 {
+  margin-top: 0px;
+}
 .mt-0\.5 {
   margin-top: 0.125rem;
 }
@@ -864,6 +867,9 @@ video {
 }
 .mt-8 {
   margin-top: 2rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 .line-clamp-1 {
   overflow: hidden;
@@ -1032,6 +1038,9 @@ video {
 }
 .h-px {
   height: 1px;
+}
+.h-screen {
+  height: 100vh;
 }
 .max-h-\[300px\] {
   max-height: 300px;
@@ -1677,6 +1686,10 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(187 247 208 / var(--tw-border-opacity, 1));
 }
+.border-green-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(21 128 61 / var(--tw-border-opacity, 1));
+}
 .border-input {
   border-color: hsl(var(--input));
 }
@@ -1697,9 +1710,6 @@ video {
 .border-white\/10 {
   border-color: rgb(255 255 255 / 0.1);
 }
-.border-white\/20 {
-  border-color: rgb(255 255 255 / 0.2);
-}
 .border-opacity-5 {
   --tw-border-opacity: 0.05;
 }
@@ -1718,6 +1728,10 @@ video {
 .bg-\[\#3b5d42\] {
   --tw-bg-opacity: 1;
   background-color: rgb(59 93 66 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#CFE7E7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(207 231 231 / var(--tw-bg-opacity, 1));
 }
 .bg-\[\#F5F5F5\] {
   --tw-bg-opacity: 1;
@@ -1790,6 +1804,11 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
 }
+
+.bg-green-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));
+
 .bg-green-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(74 222 128 / var(--tw-bg-opacity, 1));
@@ -1805,6 +1824,7 @@ video {
 .bg-green-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
+
 }
 .bg-green-800 {
   --tw-bg-opacity: 1;
@@ -1876,9 +1896,6 @@ video {
 .bg-yellow-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
-}
-.bg-\[\] {
-  background-color: ;
 }
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
@@ -2381,6 +2398,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(22 101 52 / var(--tw-text-opacity, 1));
 }
+.text-green-900 {
+  --tw-text-opacity: 1;
+  color: rgb(20 83 45 / var(--tw-text-opacity, 1));
+}
 .text-muted-foreground {
   color: hsl(var(--muted-foreground));
 }
@@ -2452,15 +2473,6 @@ video {
 .text-yellow-800 {
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity, 1));
-}
-.text-\[375B42\] {
-  color: 375B42;
-}
-.text-\[primary\] {
-  color: primary;
-}
-.text-\[\#\] {
-  color: #;
 }
 .text-opacity-95 {
   --tw-text-opacity: 0.95;
@@ -2863,6 +2875,11 @@ video {
 
 
 
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
@@ -2882,6 +2899,11 @@ video {
 }
 
 
+
+.hover\:bg-green-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 101 52 / var(--tw-bg-opacity, 1));
+}
 
 .hover\:bg-muted:hover {
   background-color: hsl(var(--muted));
@@ -2955,8 +2977,6 @@ video {
 .hover\:bg-yellow-500\/80:hover {
   background-color: rgb(234 179 8 / 0.8);
 }
-
-
 
 .hover\:text-accent-foreground:hover {
   color: hsl(var(--accent-foreground));
@@ -4070,6 +4090,10 @@ video {
     margin: 0px;
   }
 
+  .md\:mt-20 {
+    margin-top: 5rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -4602,6 +4626,10 @@ video {
   border-bottom-width: 1px;
 }
   
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[3].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[14].oneOf[3].use[2]!./node_modules/next/font/local/target.css?{"path":"src/app/[locale]/layout.tsx","import":"","arguments":[{"src":"./fonts/GeistVF.woff","variable":"--font-geist-sans","weight":"100 900"}],"variableName":"geistSans"} ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[3].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[14].oneOf[3].use[2]!./node_modules/next/font/local/target.css?{"path":"src/app/[locale]/layout.tsx","import":"","arguments":[{"src":"./fonts/GeistVF.woff","variable":"--font-geist-sans","weight":"100 900"}],"variableName":"geistSans"} ***!
