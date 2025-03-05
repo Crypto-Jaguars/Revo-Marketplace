@@ -34,7 +34,7 @@ export default function ReviewStats({ stats }: ReviewStatsProps) {
                   key={star}
                   className={`w-5 h-5 ${
                     star <= Math.round(averageRating)
-                      ? 'fill-primary text-primary'
+                      ? 'fill-[#375B42] text-[#375B42]'
                       : 'text-muted-foreground'
                   }`}
                 />
@@ -49,11 +49,11 @@ export default function ReviewStats({ stats }: ReviewStatsProps) {
               <div key={rating} className="flex items-center gap-2">
                 <div className="flex items-center w-16">
                   <span className="text-sm">{rating}</span>
-                  <Star className="w-4 h-4 ml-1 fill-primary text-primary" />
+                  <Star className="w-4 h-4 ml-1 fill-[#375B42] text-[#375B42]" />
                 </div>
                 <Progress
                   value={calculatePercentage(getCountForRating(rating))}
-                  className="h-2 flex-1"
+                  className="h-2 flex-1 [&>div]:bg-[#375B42]"
                 />
                 <div className="w-12 text-right text-sm">
                   {calculatePercentage(getCountForRating(rating))}%
@@ -75,7 +75,7 @@ export default function ReviewStats({ stats }: ReviewStatsProps) {
                     key={star}
                     className={`w-4 h-4 ${
                       star <= Math.round(value)
-                        ? 'fill-primary text-primary'
+                        ? 'fill-[#375B42] text-[#375B42]'
                         : 'text-muted-foreground'
                     }`}
                   />

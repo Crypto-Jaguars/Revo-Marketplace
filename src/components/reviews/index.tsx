@@ -88,6 +88,7 @@ export default function FarmReviews({
         <h2 className="text-2xl font-bold">Farm Reviews</h2>
         {hasCompletedEscrow && !showReviewForm && (
           <Button
+            className="bg-[#375B42] hover:bg-[#375B42]/90"
             onClick={() => {
               setShowReviewForm(true);
               setEditingReview(null);

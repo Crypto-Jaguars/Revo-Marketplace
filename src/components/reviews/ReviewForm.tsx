@@ -144,7 +144,7 @@ export default function ReviewForm({
           <Star
             key={star}
             className={`w-6 h-6 cursor-pointer ${
-              star <= value ? 'fill-primary text-primary' : 'text-muted-foreground'
+              star <= value ? 'fill-[#375B42] text-[#375B42]' : 'text-muted-foreground'
             }`}
             onClick={() => onChange(star)}
           />
@@ -316,7 +316,11 @@ export default function ReviewForm({
                 Cancel
               </Button>
             )}
-            <Button type="submit" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-[#375B42] hover:bg-[#375B42]/90"
+            >
               {isSubmitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
               {isEdit ? 'Update Review' : 'Submit Review'}
             </Button>

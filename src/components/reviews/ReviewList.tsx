@@ -78,25 +78,25 @@ export default function ReviewList({ farmId, initialReviews = [], initialStats }
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const loadReviews = async () => {
-      setIsLoading(true);
-      try {
-        const data = await fetchReviews(farmId, filterOptions);
-        setReviews(data.reviews);
-        setStats(data.stats);
-      } catch (error) {
-        console.error('Error loading reviews:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const loadReviews = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const data = await fetchReviews(farmId, filterOptions);
+  //       setReviews(data.reviews);
+  //       setStats(data.stats);
+  //     } catch (error) {
+  //       console.error('Error loading reviews:', error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-    // Only fetch if we don't have initial data or if filter options change
-    if (initialReviews.length === 0 || Object.keys(filterOptions).length > 0) {
-      loadReviews();
-    }
-  }, [farmId, filterOptions, initialReviews.length]);
+  //   // Only fetch if we don't have initial data or if filter options change
+  //   if (initialReviews.length === 0 || Object.keys(filterOptions).length > 0) {
+  //     loadReviews();
+  //   }
+  // }, [farmId, filterOptions, initialReviews.length]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,7 +141,7 @@ export default function ReviewList({ farmId, initialReviews = [], initialStats }
     console.log('Marking review as unhelpful:', reviewId);
   };
 
-  // Filter reviews based on search term
+  // Filter reveiws based on search term
   const filteredReviews = reviews.filter((review) =>
     review.review.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -159,7 +159,7 @@ export default function ReviewList({ farmId, initialReviews = [], initialStats }
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full sm:w-80"
           />
-          <Button type="submit" className="ml-2 ">
+          <Button type="submit" className="ml-2 bg-[#375B42] hover:bg-[#375B42]/90">
             <Search className="w-4 h-4 mr-2" />
             Search
           </Button>
@@ -201,7 +201,7 @@ export default function ReviewList({ farmId, initialReviews = [], initialStats }
                         variant={filterOptions.filterByRating === rating ? 'default' : 'outline'}
                         size="sm"
                         onClick={() => handleRatingFilter(rating)}
-                        className="mr-2"
+                        className={`mr-2 ${filterOptions.filterByRating === rating && 'bg-[#375B42] text-white !important hover:bg-[#375B42]/90'}`}
                       >
                         {rating} Star{rating !== 1 ? 's' : ''}
                       </Button>

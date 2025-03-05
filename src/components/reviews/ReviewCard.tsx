@@ -65,7 +65,7 @@ export default function ReviewCard({
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`w-4 h-4 ${i < rating ? 'fill-primary text-primary' : 'text-muted-foreground'}`}
+            className={`w-4 h-4 ${i < rating ? 'fill-[#375B42] text-[#375B42] outline-[#375B42]' : 'text-muted-foreground'}`}
           />
         ))}
       </div>
