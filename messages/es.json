@@ -10,7 +10,8 @@
     "subtitle": "De la Granja a la Mesa",
     "description": "Empoderando a los agricultores mediante confianza y transparencia impulsadas por blockchain.",
     "exploreMarketplace": "Explorar el Mercado",
-    "joinAsFarmer": "Unirse como Agricultor"
+    "joinAsFarmer": "Unirse como Agricultor",
+    "investNow": "Invertir Ahora"
   },
 
   "AboutUs": {
@@ -661,6 +662,45 @@
       "updated": "Dirección actualizada con éxito",
       "deleted": "Dirección eliminada con éxito",
       "defaultSet": "Dirección predeterminada actualizada"
+    }
+  },
+  "Invest": {
+    "title": "Oportunidades de Inversión para Agricultores",
+    "subtitle": "Apoya la agricultura sostenible mientras obtienes rendimientos. Invierte directamente en proyectos agrícolas que marcan la diferencia.",
+    "features": {
+      "returns": {
+        "title": "Rendimientos Competitivos",
+        "description": "Gana entre 8-18% anual en tu inversión"
+      },
+      "impact": {
+        "title": "Impacto Social",
+        "description": "Impacto positivo directo en comunidades locales"
+      },
+      "transparency": {
+        "title": "Proceso Transparente",
+        "description": "Rastrea tu inversión con tecnología blockchain"
+      }
+    },
+    "opportunities": {
+      "title": "Oportunidades Actuales",
+      "invest": "Invertir Ahora",
+      "smallFarm": {
+        "title": "Expansión de Pequeñas Granjas",
+        "description": "Ayuda a pequeños agricultores a expandir sus operaciones con nuevo equipo y semillas."
+      },
+      "organic": {
+        "title": "Certificación Orgánica",
+        "description": "Financia el proceso de certificación para agricultores que buscan transicionar a métodos orgánicos."
+      },
+      "irrigation": {
+        "title": "Riego Sostenible",
+        "description": "Invierte en sistemas avanzados de riego que reducen el consumo de agua y aumentan el rendimiento."
+      }
+    },
+    "cta": {
+      "title": "¿Listo para Hacer la Diferencia?",
+      "subtitle": "Únete a nuestra creciente comunidad de inversores que apoyan la agricultura sostenible y obtienen rendimientos competitivos.",
+      "button": "Comienza a Invertir Hoy"
     }
   }
 }

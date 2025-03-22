@@ -10,7 +10,8 @@
     "subtitle": "Farm to Table Trust",
     "description": "Empowering farmers through blockchain-powered trust and transparency.",
     "exploreMarketplace": "Explore the Marketplace",
-    "joinAsFarmer": "Join as a Farmer"
+    "joinAsFarmer": "Join as a Farmer",
+    "investNow": "Invest Now"
   },
 
   "AboutUs": {
@@ -681,6 +682,45 @@
       "updated": "Address updated successfully",
       "deleted": "Address deleted successfully",
       "defaultSet": "Default address updated"
+    }
+  },
+  "Invest": {
+    "title": "Investment Opportunities for Farmers",
+    "subtitle": "Support sustainable agriculture while earning returns. Invest directly in farming projects that make a difference.",
+    "features": {
+      "returns": {
+        "title": "Competitive Returns",
+        "description": "Earn 8-18% annually on your investment"
+      },
+      "impact": {
+        "title": "Social Impact",
+        "description": "Direct positive impact on local communities"
+      },
+      "transparency": {
+        "title": "Transparent Process",
+        "description": "Track your investment with blockchain technology"
+      }
+    },
+    "opportunities": {
+      "title": "Current Opportunities",
+      "invest": "Invest Now",
+      "smallFarm": {
+        "title": "Small Farm Expansion",
+        "description": "Help small-scale farmers expand their operations with new equipment and seeds."
+      },
+      "organic": {
+        "title": "Organic Certification",
+        "description": "Fund the certification process for farmers looking to transition to organic methods."
+      },
+      "irrigation": {
+        "title": "Sustainable Irrigation",
+        "description": "Invest in advanced irrigation systems that reduce water consumption and increase yields."
+      }
+    },
+    "cta": {
+      "title": "Ready to Make a Difference?",
+      "subtitle": "Join our growing community of investors supporting sustainable agriculture and earning competitive returns.",
+      "button": "Start Investing Today"
     }
   }
 }
