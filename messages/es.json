@@ -569,5 +569,91 @@
       }
     }
   },
-  "locale": "es-ES"
+  "OrderDetail": {
+    "orderDetails": "Detalles del Pedido",
+    "summary": "Resumen del Pedido",
+    "orderId": "ID del Pedido",
+    "orderDate": "Fecha del Pedido",
+    "paymentMethod": "Método de Pago",
+    "items": "Artículos",
+    "image": "IMG",
+    "quantity": "Cant",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "tax": "Impuestos",
+    "total": "Total",
+    "shippingInfo": "Información de Envío",
+    "address": "Dirección de Entrega",
+    "cancelOrder": "Cancelar Pedido",
+    "cancelling": "Cancelando...",
+    "cancelConfirmation": "¿Estás seguro de que quieres cancelar este pedido?",
+    "cancelSuccess": "Pedido cancelado con éxito",
+    "cancelError": "Error al cancelar el pedido. Por favor, inténtalo de nuevo más tarde.",
+    "cancellationPolicy": "Los pedidos solo pueden cancelarse si aún no han sido enviados.",
+    "backToOrders": "Volver a Pedidos",
+    "orderTimeline": "Línea de Tiempo del Pedido",
+    "orderPlaced": "Pedido Realizado",
+    "orderConfirmed": "Tu pedido ha sido confirmado y está siendo preparado.",
+    "processing": "En Proceso",
+    "processingDescription": "Tu pedido está siendo procesado y será enviado pronto.",
+    "delivered": "Entregado",
+    "deliveredDescription": "Tu pedido ha sido entregado con éxito.",
+    "deliveryPending": "Tu pedido será entregado pronto.",
+    "estimated": "Estimado: {date}",
+    "pending": "Pendiente",
+    "completed": "Completado",
+    "cancelled": "Cancelado"
+  },
+  "OrderSuccess": {
+    "title": "¡Pedido Completado con Éxito!",
+    "subtitle": "Gracias por tu compra",
+    "orderNumber": "Número de Pedido",
+    "orderDate": "Fecha del Pedido",
+    "paymentMethod": "Método de Pago",
+    "shippingInfo": "Tu pedido será enviado pronto",
+    "emailConfirmation": "Se ha enviado un correo de confirmación a tu dirección de email",
+    "continueShopping": "Continuar Comprando",
+    "viewOrders": "Ver Mis Pedidos",
+    "contactSupport": "Si tienes alguna pregunta, ponte en contacto con nuestro equipo de soporte.",
+    "thankYou": "¡Gracias por elegir Revolutionary Farmers!"
+  },
+  "locale": "es-ES",
+  "AddressBook": {
+    "title": "Libreta de Direcciones",
+    "subtitle": "Administra tus direcciones guardadas",
+    "defaultAddress": "Dirección Predeterminada",
+    "additionalAddresses": "Direcciones Adicionales",
+    "editAddress": "Editar Dirección",
+    "deleteAddress": "Eliminar Dirección",
+    "setAsDefault": "Establecer como Predeterminada",
+    "noAddresses": "Aún no tienes direcciones guardadas",
+    "addNewAddress": "Añadir Nueva Dirección",
+    "form": {
+      "title": "Añadir Nueva Dirección",
+      "name": "Nombre Completo",
+      "phoneNumber": "Número de Teléfono",
+      "streetAddress": "Dirección",
+      "apartment": "Apartamento, suite, etc. (opcional)",
+      "city": "Ciudad",
+      "state": "Estado/Provincia",
+      "postalCode": "Código Postal",
+      "country": "País",
+      "isDefault": "Establecer como dirección predeterminada",
+      "saveAddress": "Guardar Dirección",
+      "cancel": "Cancelar"
+    },
+    "deleteConfirmation": {
+      "title": "Eliminar Dirección",
+      "message": "¿Estás seguro de que quieres eliminar esta dirección?",
+      "cancel": "Cancelar",
+      "confirm": "Sí, Eliminar"
+    },
+    "notifications": {
+      "added": "Dirección añadida con éxito",
+      "updated": "Dirección actualizada con éxito",
+      "deleted": "Dirección eliminada con éxito",
+      "defaultSet": "Dirección predeterminada actualizada"
+    }
+  }
 }
+

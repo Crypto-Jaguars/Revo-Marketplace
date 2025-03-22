@@ -39,6 +39,8 @@ export default function CheckoutPage() {
   const [orderError, setOrderError] = useState<string | null>(null)
   const { Items, subtotal, shipping, total, clearCart, loading, error } = useCartStore()
   const router = useRouter()
+  const [paymentMethod, setPaymentMethod] = useState("moonpay")
+  const locale = useTranslations("Locale")
 
   const {
     register,
@@ -90,8 +92,12 @@ export default function CheckoutPage() {
 
       // Redirect to success page after a delay
       setTimeout(() => {
-        //Order-Success page will be implemented in future
-        router.push("/order-success")
+        //Order confirmation page
+        if (typeof window !== 'undefined' && window.redirectToOrderSuccess) {
+          window.redirectToOrderSuccess();
+        } else {
+          router.push(`/${locale}/order-confirmation`);
+        }
       }, 3000)
     } catch (err) {
       console.error("Error processing order:", err)
@@ -281,24 +287,44 @@ export default function CheckoutPage() {
                     </div>
                   </div>
                   <div className="mt-8">
-                    <RadioGroup defaultValue="wallet2" className="gap-8">
+                    <RadioGroup 
+                      defaultValue="moonpay" 
+                      className="gap-8" 
+                      onValueChange={(value) => setPaymentMethod(value)}
+                    >
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="default" id="r1" />
-                        <Label htmlFor="r1" className="text-base tracking-[0.32px]">
-                          Stellar Wallet 1
+                        <RadioGroupItem value="moonpay" id="r1" />
+                        <Label htmlFor="r1" className="text-base tracking-[0.32px] flex items-center">
+                          Pay with USDC via MoonPay
+                          <Image src="/images/moonpay-logo.png" alt="MoonPay" width={24} height={24} className="ml-2" />
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="wallet2" id="r2" />
-                        <Label htmlFor="r2" className="text-base tracking-[0.32px]">
-                          Stellar Wallet 2
+                        <RadioGroupItem value="stellar" id="r2" />
+                        <Label htmlFor="r2" className="text-base tracking-[0.32px] flex items-center">
+                          Connect Stellar Wallet for USDC payment
+                          <Image src="/images/stellar-logo.png" alt="Stellar" width={24} height={24} className="ml-2" />
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="qr" id="r3" />
+                        <Label htmlFor="r3" className="text-base tracking-[0.32px]">
+                          Pay with QR Code
                         </Label>
                       </div>
                     </RadioGroup>
                   </div>
-                  <div className="">
-                    <Image src={"/images/qr-code.png"} alt={"QR Code"} width={76} height={76} />
-                  </div>
+                  {paymentMethod === "qr" && (
+                    <div className="mt-4">
+                      <Image 
+                        src={"/images/qr-code.png"} 
+                        alt={"QR Code"} 
+                        width={120} 
+                        height={120} 
+                        className="my-2"
+                      />
+                    </div>
+                  )}
                   <div className="">
                     <Button
                       type="submit"

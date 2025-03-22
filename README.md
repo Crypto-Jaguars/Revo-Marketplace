@@ -97,3 +97,21 @@ We welcome contributions to make this platform even better. If you'd like to con
 ```
 
 4. Open a pull request and provide a detailed description of your changes.
+
+## Development
+
+This project uses pnpm as the package manager. Make sure to have pnpm installed before proceeding.
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Run production build
+pnpm start
+```

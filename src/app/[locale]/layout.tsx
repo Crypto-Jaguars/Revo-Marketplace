@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import localFont from 'next/font/local';
 import { Toaster } from '@/components/ui/toaster';
-// import Header from '@/components/header/Header';
-import Header from '@/components/marketplace/header/MarketplaceHeader';
+import { Toaster as SonnerToaster } from 'sonner';
+import MarketplaceHeader from '@/components/marketplace/header/MarketplaceHeader';
 import './globals.css';
 import Footer from '@/components/footer/footer';
 
@@ -15,21 +15,24 @@ const geistSans = localFont({
   variable: '--font-geist-sans',
   weight: '100 900',
 });
+
 const geistMono = localFont({
   src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
   weight: '100 900',
 });
 
+interface RootLayoutProps {
+  children: React.ReactNode;
+  params: { locale: string };
+}
+
 export default function RootLayout({
   children,
   params: { locale },
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
+}: RootLayoutProps) {
   const [currentLocale, setCurrentLocale] = useState(locale);
-  const [messages, setMessages] = useState<Record<string, string> | null>(null);
+  const [messages, setMessages] = useState<Record<string, any> | undefined>(undefined);
   const router = useRouter();
 
   useEffect(() => {
@@ -55,21 +58,35 @@ export default function RootLayout({
     loadMessages();
   }, [currentLocale]);
 
+  if (!messages) {
+    return (
+      <html lang={currentLocale}>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}>
+          <div className="flex items-center justify-center h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+          </div>
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang={currentLocale}>
+      <head>
+        <script src="/js/checkout-redirect.js" async></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}
       >
-        {messages ? (
-          <NextIntlClientProvider locale={currentLocale} messages={messages}>
-            <Header />
-            {children}
+        <NextIntlClientProvider locale={currentLocale} messages={messages}>
+          <div className="h-screen flex flex-col">
+            <MarketplaceHeader />
+            <main className="flex-1 w-full">{children}</main>
             <Footer />
             <Toaster />
-          </NextIntlClientProvider>
-        ) : (
-          <div>Loading...</div>
-        )}
+            <SonnerToaster position="top-right" />
+          </div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

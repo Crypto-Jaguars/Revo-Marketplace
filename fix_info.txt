@@ -1,0 +1,1 @@
+Fixed the issue by replacing useLanguageStore with usePathname
