@@ -27,7 +27,7 @@ export default function CartDropdown({ className }: CartDropdownProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className={cn("relative", className)}>
-          <ShoppingCart className="h-6 w-6 text-[#375B42] dark:bg-background-dark" />
+          <ShoppingCart className="h-6 w-6 text-primary_green dark:text-white" />
           {cartCount > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               {cartCount}
@@ -48,7 +48,7 @@ export default function CartDropdown({ className }: CartDropdownProps) {
 
         {loading && (
           <div className="flex justify-center py-4">
-            <Loader2 className="h-6 w-6 animate-spin text-[#375B42]" />
+            <Loader2 className="h-6 w-6 animate-spin text-primary_green" />
           </div>
         )}
 
@@ -86,11 +86,11 @@ export default function CartDropdown({ className }: CartDropdownProps) {
               <div className="flex flex-col gap-2">
                 <Button
                   asChild
-                  className="w-full bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42]/90 dark:hover:bg-[#2C4733]"
+                  className="w-full bg-primary_green text-white hover:bg-primary_green/90 dark:hover:bg-primary_green/80"
                 >
                   <Link href="/en/cart">View Cart</Link>
                 </Button>
-                <Button asChild variant="outline" className="w-full border-[#375B42] text-[#375B42]">
+                <Button asChild variant="outline" className="w-full border-primary_green text-primary_green">
                   <Link href="/en/checkout">Checkout</Link>
                 </Button>
               </div>

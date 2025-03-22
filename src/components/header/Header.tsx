@@ -10,7 +10,7 @@ import ItemsHeader from './ItemsHeader';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle'; // I did import the component ThemeToggle, it switches between light and dark
 import { usePathname, useRouter } from 'next/navigation';
-import { useLanguageStore } from '@/store/languageStore';
+import { useLanguageStore } from '@/store/languageStore/store';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

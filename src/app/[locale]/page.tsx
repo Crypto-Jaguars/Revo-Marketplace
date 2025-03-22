@@ -11,35 +11,26 @@ export default function Home() {
   const t = useTranslations('HomePage');
 
   return (
-
-    <>
+    <main className="flex flex-col w-full">
       <HeroSection />
-      <Bounded center={true}>
-        <div className="flex flex-col justify-center items-center w-full h-full mt-0 md:mt-20 gap-4">
-
-          <Bounded center={true}>
-            <div className="flex flex-col items-center w-full space-y-16">
-              <div className="flex flex-col justify-center items-center w-full text-center">
-
-                <h1 className="flex flex-col items-center">
-                  <span className="text-[40px] md:text-[80px] font-bold text-primary_green">
-                    {t('title')}
-                  </span>
-                  <span className="text-[40px] md:text-[80px] text-white">{t('subtitle')}</span>
-                </h1>
-                <p className="text-[16px] md:text-[20px] w-full md:max-w-[60%] text-white text-center">
-                  {t('description')}
-                </p>
-              </div>
-            </div>
-          </Bounded>
-
+      <Bounded>
+        <div className="container mx-auto px-4 py-12 md:py-24">
+          <div className="flex flex-col items-center w-full space-y-8">
+            <h1 className="text-3xl md:text-5xl font-bold text-primary_green">
+              {t('title')}
+              <span className="block text-3xl md:text-5xl text-gray-800 mt-2">
+                {t('subtitle')}
+              </span>
+            </h1>
+            <p className="text-base md:text-lg max-w-2xl text-gray-600 text-center">
+              {t('description')}
+            </p>
+          </div>
         </div>
       </Bounded>
       <AboutUs />
       <HowItWorks />
       <CtaSection />
-    </>
-
-  )
+    </main>
+  );
 }

@@ -3,7 +3,7 @@ import { Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSearchStore } from '@/store/searchStore';
-import { useLanguageStore } from '@/store/languageStore';
+import { useLanguageStore } from '@/store/languageStore/store';
 
 interface SearchBarProps {
   className?: string;

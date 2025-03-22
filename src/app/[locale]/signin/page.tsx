@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/hooks/use-toast'
-import { useLanguageStore } from '@/store/languageStore';
+import { useLanguageStore } from '@/store/languageStore/store';
 
 
 export default function SignInPage() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useLanguageStore } from '@/store/languageStore';
+import { useLanguageStore } from '@/store/languageStore/store';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 

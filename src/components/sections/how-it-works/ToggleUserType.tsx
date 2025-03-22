@@ -13,19 +13,19 @@ const ToggleUserType: React.FC<ToggleUserTypeProps> = ({ activeType, onChange })
     <div
       role="group"
       aria-label={t("switchUserType")}
-      className="relative flex items-center bg-white rounded-full p-1 shadow-md border border-gray-300"
+      className="relative flex items-center bg-white rounded-full p-1 shadow-sm border border-gray-200 w-full max-w-xs"
     >
       <div
         className="absolute top-1 left-1 h-[85%] bg-primary_green rounded-full transition-transform duration-300"
         style={{
-          width: `calc(50% - 5px)`, 
-          transform: activeType === "buyer" ? "translate3d(100%, 0, 0)" : "translate3d(0, 0, 0)",
+          width: `calc(50% - 4px)`, 
+          transform: activeType === "buyer" ? "translateX(100%)" : "translateX(0)",
         }}
         aria-hidden="true"
       />
       <button
         onClick={() => onChange("farmer")}
-        className="relative z-10 flex-1 text-lg font-semibold transition-colors duration-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary_green"
+        className="relative z-10 flex-1 text-base font-medium transition-colors duration-300 px-4 py-2 focus:outline-none"
         style={{ color: activeType === "farmer" ? "white" : "#4B5563" }}
         aria-pressed={activeType === "farmer"}
       >
@@ -33,7 +33,7 @@ const ToggleUserType: React.FC<ToggleUserTypeProps> = ({ activeType, onChange })
       </button>
       <button
         onClick={() => onChange("buyer")}
-        className="relative z-10 flex-1 text-lg font-semibold transition-colors duration-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary_green"
+        className="relative z-10 flex-1 text-base font-medium transition-colors duration-300 px-4 py-2 focus:outline-none"
         style={{ color: activeType === "buyer" ? "white" : "#4B5563" }}
         aria-pressed={activeType === "buyer"}
       >

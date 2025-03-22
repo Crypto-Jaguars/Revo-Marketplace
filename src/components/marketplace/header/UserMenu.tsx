@@ -12,7 +12,7 @@ import { useTranslations } from 'next-intl';
 import { useWallet } from '@/wallet/hooks/useWallet.hook';
 import { useWalletStore } from '@/store/walletStore';
 import { useRouter } from 'next/navigation';
-import { useLanguageStore } from '@/store/languageStore';
+import { useLanguageStore } from '@/store/languageStore/store';
 
 interface UserMenuProps {
   className?: string;
@@ -48,7 +48,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="p-2 hover:opacity-80 transition-opacity">
-          <UserCircle className="w-6 h-6 text-[#375B42] dark:bg-background-dark" />
+          <UserCircle className="w-6 h-6 text-primary_green dark:bg-background-dark" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" 

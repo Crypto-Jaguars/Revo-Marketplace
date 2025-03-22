@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useLanguageStore } from '@/store/languageStore';
+import { useLanguageStore } from '@/store/languageStore/store';
 import SearchBar from './SearchBar';
 import NavMenu from './NavMenu';
 import CartWidget from './CartWidget';

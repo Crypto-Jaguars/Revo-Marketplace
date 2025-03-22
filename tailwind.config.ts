@@ -42,7 +42,7 @@ const config: Config = {
           foreground: '#FFFFFF',
         },
         primary_green: {
-          DEFAULT: '#8CD72B',
+          DEFAULT: '#375B42',
           foreground: '#FFFFFF',
         },
         revolutionary_green: {

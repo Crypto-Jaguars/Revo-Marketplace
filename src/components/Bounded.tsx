@@ -1,19 +1,20 @@
-import { ReactNode } from 'react';
+import React from 'react';
 
-type BoundedProps = {
-  children: ReactNode;
+interface BoundedProps {
+  children: React.ReactNode;
   center?: boolean;
-};
+  className?: string;
+}
 
-const Bounded = ({ children, center }: BoundedProps) => {
+const Bounded: React.FC<BoundedProps> = ({ children, center, className = '' }) => {
   return (
-    <main
-      className={`flex px-0 justify-center mt-20 font-[family-name:var(--font-geist-sans)] ${
-        center && 'justify-center'
-      }`}
+    <section
+      className={`w-full px-4 md:px-6 ${
+        center ? 'flex justify-center items-center' : ''
+      } ${className}`}
     >
       {children}
-    </main>
+    </section>
   );
 };
 

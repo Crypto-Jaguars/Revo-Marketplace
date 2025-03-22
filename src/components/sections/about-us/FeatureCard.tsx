@@ -1,21 +1,19 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 interface FeatureCardProps {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   description: string;
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => {
   return (
-    <div className="w-full max-w-[400px] h-[260px] p-6 bg-white shadow-xl rounded-lg text-center border border-gray-200 transition-transform duration-300 hover:scale-105 flex flex-col justify-center">
-      <div className="flex justify-center mb-4">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-          {icon}
-        </div>
+    <div className="flex flex-col items-center p-6 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+      <div className="mb-4">
+        {icon}
       </div>
-      <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-      <p className="mt-2 text-gray-600 text-base">{description}</p>
+      <h3 className="text-xl font-semibold text-gray-800 mb-3">{title}</h3>
+      <p className="text-gray-600 text-center">{description}</p>
     </div>
   );
 };
