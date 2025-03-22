@@ -1,117 +1,137 @@
-# Revolutionary Farmers Web
+# Revolutionary Farmers Marketplace
 
-**Revolutionary Farmers** is a Next.js project focused on advancing agriculture by providing a platform with escrow services. This project aims to bring innovative solutions to farmers, suppliers, and buyers in the agriculture sector by ensuring secure transactions through escrow as a service.
+**Revolutionary Farmers** is a Next.js-powered marketplace platform designed to revolutionize agricultural transactions using Stellar blockchain technology. Our platform connects farmers directly with buyers, ensuring secure, transparent, and efficient transactions through USDC payments and escrow services.
 
-## ✨ Features
+![Revolutionary Farmers](public/images/logo-dark.svg)
 
-- **Escrow Service:** Secure, blockchain-based transactions for agriculture.
-- **User Authentication:** Secure user accounts with form validation and protected routes.
-- **Product Listings:** Farmers, suppliers, and buyers can list, browse, and manage agricultural products.
-- **Transaction History:** Comprehensive record-keeping for past transactions.
-- **Responsive Design:** Optimized for mobile, tablet, and desktop use.
+## ✨ Key Features
+
+- **Blockchain-Powered Marketplace:** Secure transactions using Stellar blockchain and USDC stablecoin
+- **Multi-Payment Options:** Pay with USDC via MoonPay, Stellar wallet connection, or QR code
+- **Address Book Management:** Save and manage multiple shipping addresses
+- **Order Management:** Complete tracking from placement to delivery
+- **Multi-language Support:** Fully localized for English and Spanish users
+- **Responsive Design:** Optimized for all devices from mobile to desktop
 
 ## 📝 Prerequisites
 
-Ensure you have **Node.js** installed (version 18.x or higher).  
-To verify the installed version, use the following command:
+- **Node.js** 18.x or higher
+- **pnpm** 8.x or higher (preferred package manager)
 
+Verify your Node.js version:
 ```bash
-  node -v
+node -v
 ```
 
-If Node.js is not installed, download it from the official [Node.js website](https://nodejs.org).
+Install pnpm if not already installed:
+```bash
+npm install -g pnpm
+```
 
 ## 🚀 Getting Started
 
-1. Clone the Repository:
-
+1. **Clone the Repository:**
 ```bash
-  git clone https://github.com/your-username/Revo-Frontend.git
-  cd Revo-Frontend
+git clone https://github.com/your-username/Revo-Marketplace.git
+cd Revo-Marketplace
 ```
 
-2. Install dependencies:
-
+2. **Install Dependencies:**
 ```bash
-  npm install
-```
-
-3. Run development server:
-
-```bash
-  npm run dev
-```
-
-4. Open the Application:
-Navigate to [http://localhost:3001](http://localhost:3001) in your browser to view the application.
-
-Available Commands:
-
-- `npm run dev` - Start the development server on [http://localhost:3001](http://localhost:3001) with live reload enabled.
-- `npm run build` - Create production build
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint to lint code.
-- `npm run format` - Format code with Prettier
-
-## 🛠 Tech Stack
-
-- [Next.js](https://nextjs.org) (v14.2.14) - React framework
-- [React](https://reactjs.org) (v18) - JavaScript library for building user interfaces
-- [React Hook Form](https://react-hook-form.com) (v7.53.0) - Form handling library
-- [Radix UI](https://www.radix-ui.com) - Headless UI components
-- [TailwindCSS](https://tailwindcss.com) (v3.4.1) - Utility-first CSS framework
-- [TypeScript](https://www.typescriptlang.org) (v5.6.3) - Type-safe JavaScript
-- [Styled Components](https://styled-components.com) (v6.1.13) - CSS-in-JS solution
-- [Zod](https://zod.dev) (v3.23.8) - Type-safe schema validation
-- [Zustand](https://zustand-demo.pmnd.rs) (v5.0.0-rc.2) - Small, fast, and scalable state management
-- [Axios](https://axios-http.com) (v1.7.7) - Promise-based HTTP client
-- [Lucide React](https://lucide.dev) (v0.447.0) - React icons library
-- [clsx](https://github.com/lukeed/clsx) (v2.1.1) - Utility for constructing `className` strings conditionally
-- [Prettier](https://prettier.io) (v3.3.3) - Code formatter
-- [ESLint](https://eslint.org) (v8.57.1) - Linting tool for JavaScript/TypeScript
-- [PostCSS](https://postcss.org) (v8) - CSS tool for transforming styles
-- [Freighter API](https://github.com/stellar/freighter) - API for interacting with Stellar blockchain wallets
-- [Stellar SDK](https://stellar.github.io/js-stellar-sdk) (v12.3.0) - JavaScript library for Stellar blockchain
-
-## 🌱 Migration from Mono Repository
-
-This repository represents the frontend codebase for the Revolutionary Farmers platform, following its separation from the original [Revolutionary_Farmers](https://github.com/Crypto-Jaguars/Revolutionary_Farmers) mono repository. This migration enables streamlined development, focused improvements, and better maintainability for the user interface and client-side features.
-
-## 👥 Contributors
-
-We welcome contributions to make this platform even better. If you'd like to contribute:
-
-1. Fork the repository.
-
-2. Create a feature branch:
-
-```bash
-  git checkout -b feature/your-feature-name
-```
-
-3. Commit your changes and push to your branch:
-
-```bash
-  git commit -m "Add your message here"
-  git push origin feature/your-feature-name
-```
-
-4. Open a pull request and provide a detailed description of your changes.
-
-## Development
-
-This project uses pnpm as the package manager. Make sure to have pnpm installed before proceeding.
-
-```bash
-# Install dependencies
 pnpm install
-
-# Start development server
-pnpm dev
-
-# Build for production
-pnpm build
-
-# Run production build
-pnpm start
 ```
+
+3. **Run Development Server:**
+```bash
+pnpm dev
+```
+
+4. **Access the Application:**
+   Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## 📋 Available Commands
+
+- `pnpm dev` - Start development server with hot reloading
+- `pnpm build` - Build production-ready application
+- `pnpm start` - Run production build
+- `pnpm lint` - Run ESLint to check code quality
+- `pnpm format` - Format code with Prettier
+
+## 🛠️ Technology Stack
+
+### Core Framework
+- **Next.js 14+** - React framework with App Router and Server Components
+- **TypeScript** - Type-safe JavaScript development
+- **React 18** - UI library with hooks and concurrent rendering
+
+### UI Components & Styling
+- **TailwindCSS** - Utility-first CSS framework
+- **Radix UI** - Accessible, unstyled components
+- **Lucide React** - Modern icon library
+- **Framer Motion** - Animation library
+- **Styled Components** - CSS-in-JS solution
+
+### State Management & Form Handling
+- **Zustand** - Lightweight state management
+- **React Hook Form** - Form validation and handling
+- **Zod** - TypeScript-first schema validation
+
+### Internationalization & Localization
+- **next-intl** - Complete i18n solution for Next.js
+
+### Blockchain Integration
+- **Stellar SDK** - JavaScript SDK for Stellar blockchain
+- **Freighter API** - API for Stellar wallet integration
+
+### API & Utilities
+- **Axios** - Promise-based HTTP client
+- **Sonner** - Toast notification library
+- **clsx/tw-merge** - Utility for conditional class names
+
+## 🌐 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── [locale]/           # Locale-specific routes
+│   │   ├── address-book/   # Address management
+│   │   ├── checkout/       # Checkout flow
+│   │   ├── orders/         # Order history and details
+│   │   └── products/       # Product listings and details
+├── components/             # Reusable UI components
+├── contexts/               # React contexts
+├── lib/                    # Utility functions
+├── store/                  # Zustand store definitions
+└── types/                  # TypeScript type definitions
+```
+
+## 🌱 Blockchain Integration
+
+Revolutionary Farmers leverages the Stellar blockchain for secure payments and escrow services:
+
+- **USDC Payments** - Accept payments in USDC stablecoin
+- **Smart Contracts** - Automated escrow and payment release
+- **Wallet Integration** - Connect with Stellar wallets (Freighter, Albedo)
+
+## 👥 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Commit your changes: `git commit -m "Add your descriptive message"`
+4. Push to your branch: `git push origin feature/your-feature-name`
+5. Open a pull request with detailed description
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgements
+
+- The Stellar Development Foundation for blockchain infrastructure
+- All contributors who have helped shape this platform
+
+---
+
+© 2024 Revolutionary Farmers. All rights reserved.
