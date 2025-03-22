@@ -9,7 +9,7 @@ import { ContractHistory } from "./ContractHistory";
 import { EnvironmentalMetrics } from "./EnvironmentalMetrics";
 import { ProductionForecast } from "./ProductionForecast";
 import { Users, ThermometerSun, Droplet, Trees } from "lucide-react";
-import { useTranslations } from "use-intl";
+import { useTranslations } from "next-intl";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 
 interface FarmDetailViewProps {

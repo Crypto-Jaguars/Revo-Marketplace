@@ -41,8 +41,8 @@ export const useCartStore = create<CartState>()(
           }))
 
           get().calculateSummary()
-        } catch (err: any) {
-          set({ error: err.message || "Failed to update quantity" })
+        } catch (err: unknown) {
+          set({ error: err instanceof Error ? err.message : "Failed to update quantity" })
         } finally {
           set({ loading: false })
         }

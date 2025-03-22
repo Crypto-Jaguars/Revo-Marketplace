@@ -107,7 +107,7 @@ export default function CartPage() {
         <div className="bg-muted/30 rounded-lg p-12 text-center">
           <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
           <p className="text-muted-foreground mb-6">
-            Looks like you haven't added any agricultural products to your cart yet.
+            Looks like you haven&apos;t added any agricultural products to your cart yet.
           </p>
           <Button asChild className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
             <a href="/en/products">Browse Products</a>
@@ -123,7 +123,7 @@ export default function CartPage() {
         <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
         <div className="bg-muted/30 rounded-lg p-12 text-center">
           <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
-          <p className="text-muted-foreground mb-6">You've removed all items from your cart.</p>
+          <p className="text-muted-foreground mb-6">You&apos;ve removed all items from your cart.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={undoRemove} className="flex items-center gap-2">
               <Undo2 className="h-4 w-4" />

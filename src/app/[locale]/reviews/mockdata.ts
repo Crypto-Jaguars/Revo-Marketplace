@@ -1,4 +1,4 @@
-import type { FarmReview, ReviewStats } from '@/components/reviews/types';
+import type { FarmReview, ReviewStat } from '@/types/review';
 
 // Current user ID for testing edit functionality
 export const CURRENT_USER_ID = 'user123';
@@ -363,9 +363,9 @@ export const mockReviews: FarmReview[] = [
 ];
 
 // Calculate mock stats based on the reviews
-export const calculateMockStats = (reviews: FarmReview[]): ReviewStats => {
+export const calculateMockStats = (reviews: FarmReview[]): ReviewStat => {
   // Initialize distribution and category totals
-  const ratingDistribution: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  const ratingCounts: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   const categoryTotals = {
     quality: 0,
     communication: 0,
@@ -378,16 +378,16 @@ export const calculateMockStats = (reviews: FarmReview[]): ReviewStats => {
 
   reviews.forEach((review) => {
     // Add to rating distribution
-    ratingDistribution[review.rating] = (ratingDistribution[review.rating] || 0) + 1;
+    ratingCounts[review.rating] = (ratingCounts[review.rating] || 0) + 1;
 
     // Add to rating total
     ratingTotal += review.rating;
 
     // Add to category totals
-    categoryTotals.quality += review.categories.quality;
-    categoryTotals.communication += review.categories.communication;
-    categoryTotals.delivery += review.categories.delivery;
-    categoryTotals.fulfillment += review.categories.fulfillment;
+    categoryTotals.quality += review.categories?.quality || 0;
+    categoryTotals.communication += review.categories?.communication || 0;
+    categoryTotals.delivery += review.categories?.delivery || 0;
+    categoryTotals.fulfillment += review.categories?.fulfillment || 0;
   });
 
   const totalReviews = reviews.length;
@@ -405,7 +405,7 @@ export const calculateMockStats = (reviews: FarmReview[]): ReviewStats => {
   return {
     averageRating,
     totalReviews,
-    ratingDistribution,
+    ratingDistribution: ratingCounts,
     categoryAverages,
   };
 };

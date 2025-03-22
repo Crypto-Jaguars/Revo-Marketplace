@@ -111,7 +111,7 @@ export default function ReviewList({ farmId, initialReviews = [], initialStats }
     });
   };
 
-  const handleFilterChange = (key: keyof ReviewFilterSortOptions, value: any) => {
+  const handleFilterChange = (key: keyof ReviewFilterSortOptions, value: string | number | boolean | null) => {
     setFilterOptions({
       ...filterOptions,
       [key]: value,

@@ -69,18 +69,18 @@ export function ProductFilters({ onFilterChange, categories, farmingMethods }: P
     });
   }, [maxPrice]);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     isDragging.current = null;
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
-  };
+  }, [handleMouseMove]);
 
   useEffect(() => {
+    window.addEventListener('mouseup', handleMouseUp);
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [handleMouseMove]);
+  }, [handleMouseUp]);
 
   const handleClearFilters = () => {
     setActiveFilters(false);

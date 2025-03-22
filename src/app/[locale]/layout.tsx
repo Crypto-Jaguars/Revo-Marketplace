@@ -32,7 +32,7 @@ export default function RootLayout({
   params: { locale },
 }: RootLayoutProps) {
   const [currentLocale, setCurrentLocale] = useState(locale);
-  const [messages, setMessages] = useState<Record<string, any> | undefined>(undefined);
+  const [messages, setMessages] = useState<Record<string, Record<string, string>> | undefined>(undefined);
   const router = useRouter();
 
   useEffect(() => {

@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
 
-const API_KEY = process.env.WEATHER_API_KEY;
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY || 'demo_key';
 const BASE_URL = 'https://api.weatherapi.com/v1';
 const CACHE_DURATION = 1800000; // 30 minutes
 
-if (!API_KEY) {
-  throw new Error('WEATHER_API_KEY is not configured');
-}
-
-const weatherCache = new Map<string, { data: any; timestamp: number }>();
+const weatherCache = new Map<string, { data: Record<string, unknown>; timestamp: number }>();
 
 // Cleanup function to remove expired cache entries
 function cleanupCache() {
@@ -50,7 +46,7 @@ export async function GET(request: Request) {
     
     const response = await fetch(url, {
       headers: new Headers({
-        'key': API_KEY || ''
+        'key': WEATHER_API_KEY
       })
     });
 

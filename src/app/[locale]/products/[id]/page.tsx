@@ -85,7 +85,7 @@ const ProductPage = () => {
         <Breadcrumb items={breadcrumbItems} />
         <div className="text-center py-16">
           <h1 className="text-2xl font-medium mb-4">Product Not Found</h1>
-          <p className="text-gray-500">The product you're looking for doesn't exist or has been removed.</p>
+          <p className="text-gray-500">The product you&apos;re looking for doesn&apos;t exist or has been removed.</p>
         </div>
       </div>
     )

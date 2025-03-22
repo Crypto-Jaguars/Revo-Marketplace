@@ -28,5 +28,5 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/named': 'off',
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'src/types/product.d.ts'],
 };

@@ -10,11 +10,10 @@ export default function WithAuthProtect(Component: any) {
     const isDevelopment = process.env.NODE_ENV === 'development';
 
     useEffect(() => {
-  
       if (!address && !isDevelopment) {
         redirect('/');
       }
-    }, [address]);
+    }, [address, isDevelopment]);
 
     if (!address && !isDevelopment) {
       return null;

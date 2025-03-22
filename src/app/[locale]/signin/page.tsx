@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -78,10 +79,12 @@ export default function SignInPage() {
       <div className="w-full md:w-1/2 p-4 flex items-center md:items-start justify-center pt-8 md:pt-20 md:pr-20">
         <div className="bg-slate-100 p-6 md:p-8 lg:p-16 rounded-2xl">
           <div className="w-40 h-40 md:w-48 md:h-48 lg:w-80 lg:h-80">
-            <img 
+            <Image 
               src="/logo.svg" 
               alt="Revolutionary Farmers Logo" 
               className="w-full h-full object-contain"
+              width={320}
+              height={320}
             />
           </div>
         </div>

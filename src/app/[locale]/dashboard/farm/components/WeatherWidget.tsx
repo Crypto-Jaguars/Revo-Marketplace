@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cloud, Droplets, Wind } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
+import Image from 'next/image';
 
 interface WeatherData {
   temperature: number;
@@ -98,12 +99,11 @@ export default function WeatherWidget({ latitude, longitude }: Props) {
           <>
             <div className="mb-4 flex items-center gap-2">
               {weather.icon && (
-                <img
+                <Image
                   src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
                   alt={weather.condition}
                   width={50}
                   height={50}
-                  className="h-12 w-12"
                 />
               )}
               <div>

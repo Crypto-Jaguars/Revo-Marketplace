@@ -164,7 +164,7 @@ export default function AddressBookPage() {
     // Set form values
     Object.entries(address).forEach(([key, value]) => {
       if (key !== 'id') {
-        // @ts-ignore
+        // @ts-expect-error - Address fields might not match exactly with form field names
         setValue(key, value)
       }
     })
