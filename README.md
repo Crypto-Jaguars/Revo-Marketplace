@@ -125,7 +125,7 @@ We welcome contributions! Please follow these steps:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/license/mit) file for details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). 
 
 ## 🙏 Acknowledgements
 
