@@ -105,6 +105,21 @@ src/
 └── types/                  # TypeScript type definitions
 ```
 
+## 📊 Architecture & Functionality Diagrams
+
+Comprehensive visual documentation of the Revolutionary Farmers Marketplace functionality and architecture is available in the [`diagramas/`](./diagramas/) folder:
+
+- 🎯 **[System Overview](./diagramas/01-funcionalidades-generales.md)** - Complete system functionality map
+- 🛒 **[Buyer Journey](./diagramas/02-flujo-usuario-comprador.md)** - Complete buyer user flow
+- 👨‍🌾 **[Farmer Journey](./diagramas/03-flujo-usuario-agricultor.md)** - Farmer onboarding and management
+- 🏗️ **[Technical Architecture](./diagramas/04-arquitectura-tecnica.md)** - Technology stack and system design
+- 🔒 **[Blockchain & Escrow](./diagramas/05-sistema-escrow-transacciones.md)** - Payment and transaction flows
+- 🧩 **[Component Structure](./diagramas/06-estructura-componentes.md)** - Code organization and modularity
+- 📦 **[Product Management](./diagramas/07-gestion-productos-inventario.md)** - Product and inventory system
+- 👤 **[User & Authentication](./diagramas/08-sistema-usuarios-autenticacion.md)** - User management and security
+
+These interactive Mermaid diagrams provide detailed insights into system flows, component relationships, and technical implementation details. Perfect for developers, product managers, and stakeholders to understand the platform architecture.
+
 ## 🌱 Blockchain Integration
 
 Revolutionary Farmers leverages the Stellar blockchain for secure payments and escrow services:
