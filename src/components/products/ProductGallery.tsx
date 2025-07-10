@@ -9,7 +9,7 @@ interface ProductGalleryProps {
   images: string[]
 }
 
-const ProductGallery = ({ images = ["/images/placeholder.jpg"] }: ProductGalleryProps) => {
+const ProductGallery = ({ images = ["/images/placeholder.svg"] }: ProductGalleryProps) => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [isChanging, setIsChanging] = useState(false)
   const [isZoomed, setIsZoomed] = useState(false)
@@ -71,10 +71,10 @@ const ProductGallery = ({ images = ["/images/placeholder.jpg"] }: ProductGallery
                 sizes="(max-width: 768px) 100vw, 173px"
                 className="object-cover"
                 onError={(e) => {
-                  e.currentTarget.src = "/images/placeholder.jpg"
+                  e.currentTarget.src = "/images/placeholder.svg"
                 }}
                 placeholder="blur"
-                blurDataURL="/images/placeholder.jpg"
+                blurDataURL="/images/placeholder.svg"
               />
             </div>
           </button>
@@ -106,10 +106,10 @@ const ProductGallery = ({ images = ["/images/placeholder.jpg"] }: ProductGallery
             fill
             sizes="(max-width: 768px) 100vw, 173px"
             onError={(e) => {
-              e.currentTarget.src = "/images/placeholder.jpg"
+              e.currentTarget.src = "/images/placeholder.svg"
             }}
             placeholder="blur"
-            blurDataURL="/images/placeholder.jpg"
+            blurDataURL="/images/placeholder.svg"
             className={`
               object-contain transition-transform duration-200
               ${isZoomed ? "scale-150" : "scale-100"}

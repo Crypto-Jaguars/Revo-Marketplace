@@ -38,14 +38,14 @@ export default async function OrderDetailPage({ params }: Props) {
         name: "Wireless Headphones",
         price: 99.99,
         quantity: 1,
-        image: "/images/placeholder.jpg"
+        image: "/images/placeholder.svg"
       },
       {
         id: "PROD-002",
         name: "Smart Watch",
         price: 149.99,
         quantity: 1,
-        image: "/images/placeholder.jpg"
+        image: "/images/placeholder.svg"
       }
     ]
   }

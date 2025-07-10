@@ -21,7 +21,8 @@ setInterval(cleanupCache, CACHE_DURATION);
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const requestUrl = new URL(request.url);
+    const { searchParams } = requestUrl;
     const latitude = searchParams.get('latitude');
     const longitude = searchParams.get('longitude');
 
@@ -39,12 +40,12 @@ export async function GET(request: Request) {
       return NextResponse.json(cachedData.data);
     }
 
-    const url = new URL(`${BASE_URL}/forecast.json`);
-    url.searchParams.append('q', `${latitude},${longitude}`);
-    url.searchParams.append('days', '7');
-    url.searchParams.append('aqi', 'no');
+    const apiUrl = new URL(`${BASE_URL}/forecast.json`);
+    apiUrl.searchParams.append('q', `${latitude},${longitude}`);
+    apiUrl.searchParams.append('days', '7');
+    apiUrl.searchParams.append('aqi', 'no');
     
-    const response = await fetch(url, {
+    const response = await fetch(apiUrl, {
       headers: new Headers({
         'key': WEATHER_API_KEY
       })
