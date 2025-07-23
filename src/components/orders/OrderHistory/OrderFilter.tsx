@@ -1,14 +1,20 @@
-"use client";
+'use client';
 
-import { CalendarIcon } from "lucide-react";
-import { useCallback } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CalendarIcon } from 'lucide-react';
+import { useCallback } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useTranslations } from 'next-intl';
-import type { OrderFilters, OrderStatus } from "./types";
+import type { OrderFilters, OrderStatus } from './types';
 
 interface OrderFilterProps {
   filters: OrderFilters;
@@ -27,7 +33,7 @@ export function OrderFilter({ filters, onFilterChange }: OrderFilterProps) {
 
   const handleStatusChange = useCallback(
     (value: string) => {
-      onFilterChange({ ...filters, status: value as OrderStatus | "all" });
+      onFilterChange({ ...filters, status: value as OrderStatus | 'all' });
     },
     [filters, onFilterChange]
   );
@@ -39,22 +45,19 @@ export function OrderFilter({ filters, onFilterChange }: OrderFilterProps) {
     [filters, onFilterChange]
   );
 
-
   const handleAmountChange = useCallback(
-    (type: "min" | "max", value: string) => {
-      const amount = value.trim() === "" ? null : Number.parseFloat(value);
+    (type: 'min' | 'max', value: string) => {
+      const amount = value.trim() === '' ? null : Number.parseFloat(value);
       if (amount !== null && (isNaN(amount) || amount < 0)) {
-        return; 
+        return;
       }
       onFilterChange({
         ...filters,
-        [type === "min" ? "minAmount" : "maxAmount"]: amount,
+        [type === 'min' ? 'minAmount' : 'maxAmount']: amount,
       });
     },
     [filters, onFilterChange]
   );
-
-  
 
   const handleDateRangeChange = useCallback(
     (range: { from?: Date; to?: Date } | undefined) => {
@@ -71,7 +74,6 @@ export function OrderFilter({ filters, onFilterChange }: OrderFilterProps) {
 
   return (
     <div className="space-y-6">
-
       <div>
         <h2 className="text-sm font-medium mb-2">{t('filters.search')}</h2>
         <Input
@@ -147,15 +149,15 @@ export function OrderFilter({ filters, onFilterChange }: OrderFilterProps) {
             type="number"
             placeholder={t('filters.minAmount')}
             max={filters.maxAmount || undefined}
-            value={filters.minAmount || ""}
-            onChange={(e) => handleAmountChange("min", e.target.value)}
+            value={filters.minAmount || ''}
+            onChange={(e) => handleAmountChange('min', e.target.value)}
           />
           <Input
             type="number"
             placeholder={t('filters.maxAmount')}
             max={filters.maxAmount || undefined}
-            value={filters.maxAmount || ""}
-            onChange={(e) => handleAmountChange("max", e.target.value)}
+            value={filters.maxAmount || ''}
+            onChange={(e) => handleAmountChange('max', e.target.value)}
           />
         </div>
       </div>

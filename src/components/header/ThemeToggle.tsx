@@ -13,13 +13,13 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     const root = window.document.documentElement;
-  
+
     // Main purpose of this useEffect is to set the theme on initial render
-    
+
     if (theme === 'dark') {
       root.classList.add('dark');
       try {
-        localStorage?.setItem('theme', 'dark'); 
+        localStorage?.setItem('theme', 'dark');
       } catch (error) {
         console.warn('Failed to save theme preference:', error);
       }
@@ -31,7 +31,7 @@ export default function ThemeToggle() {
         console.warn('Failed to save theme preference:', error);
       }
     }
-    
+
     return () => {
       // Cleanup if component unmounts during theme transition
       root.classList.remove('dark');

@@ -18,9 +18,9 @@ const NavMenu = ({ className }: NavMenuProps) => {
     { key: 'home', label: 'Home', href: `/${language}` },
     { key: 'products', label: 'Products', href: `/${language}/products` },
     { key: 'farm', label: 'Farm', href: `/${language}/dashboard/farm` },
-  ].map(item => ({
+  ].map((item) => ({
     ...item,
-    label: t(item.key)
+    label: t(item.key),
   }));
 
   const isActive = (href: string) => pathname === href;
@@ -37,7 +37,7 @@ const NavMenu = ({ className }: NavMenuProps) => {
           )}
         >
           {item.label}
-        
+
           <span
             className={cn(
               'absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 transition-transform duration-200',

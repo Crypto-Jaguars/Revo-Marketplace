@@ -47,7 +47,7 @@ export default function WeatherWidget({ latitude, longitude }: Props) {
         }
 
         const data = await response.json();
-        
+
         setWeather({
           temperature: Math.round(data.main.temp),
           condition: data.weather[0].main,
@@ -107,9 +107,7 @@ export default function WeatherWidget({ latitude, longitude }: Props) {
                 />
               )}
               <div>
-                <p className="text-2xl font-bold">
-                  {weather.temperature}°C
-                </p>
+                <p className="text-2xl font-bold">{weather.temperature}°C</p>
                 <p className="text-muted-foreground">
                   {t(`conditions.${weather.condition.toLowerCase()}`)}
                 </p>
@@ -118,15 +116,11 @@ export default function WeatherWidget({ latitude, longitude }: Props) {
             <div className="grid grid-cols-2 gap-4">
               <div className="flex items-center gap-2">
                 <Droplets className="h-4 w-4 text-muted-foreground" />
-                <span>
-                  {t('humidity', { value: weather.humidity })}
-                </span>
+                <span>{t('humidity', { value: weather.humidity })}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Wind className="h-4 w-4 text-muted-foreground" />
-                <span>
-                  {t('windSpeed', { value: weather.windSpeed })}
-                </span>
+                <span>{t('windSpeed', { value: weather.windSpeed })}</span>
               </div>
             </div>
           </>
@@ -134,4 +128,4 @@ export default function WeatherWidget({ latitude, longitude }: Props) {
       </CardContent>
     </Card>
   );
-} 
+}

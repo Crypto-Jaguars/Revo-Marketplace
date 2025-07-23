@@ -1,12 +1,15 @@
 # Farm Components Documentation
 
 ## Overview
+
 The farm components provide a comprehensive UI for displaying and managing farm information in the Revolutionary Farmers platform. Built with Next.js 14, TypeScript, and Zustand for state management.
 
 ## Components
 
 ### FarmProfile
+
 Displays basic farm information including:
+
 - Farm name and establishment date
 - Location details
 - Contact information
@@ -16,7 +19,7 @@ Displays basic farm information including:
 ```tsx
 import FarmProfile from '@/components/farm/FarmProfile';
 
-<FarmProfile 
+<FarmProfile
   id="farm-1"
   name="Green Valley Farm"
   establishedDate="2024-01-01"
@@ -24,44 +27,56 @@ import FarmProfile from '@/components/farm/FarmProfile';
   totalArea={{ value: 100, unit: 'hectares' }}
   contactInfo={contactData}
   images={imageData}
-/>
+/>;
 ```
 
 ### FarmDetails
+
 Shows detailed information about:
+
 - Farming methods with sustainability scores
 - Equipment inventory
 - Storage facilities
 - Processing capabilities
 
 ### FarmGallery
+
 Image gallery component with:
+
 - Grid layout display
 - Modal view for larger images
 - Navigation controls
 - Lazy loading support
 
 ### FarmMetrics
+
 Displays farm performance metrics:
+
 - Active crops tracking
 - Sustainability metrics
 - Resource usage statistics
 - Environmental impact data
 
 ### FarmCertifications
+
 Manages farm certifications:
+
 - Certification status display
 - Document verification
 - Expiry tracking
 
 ### WeatherWidget
+
 Real-time weather information:
+
 - Current conditions
 - 7-day forecast
 - Location-based updates
 
 ### MapView
+
 Interactive map component:
+
 - Farm location display
 - Navigation controls
 - Location marker with popup info
@@ -90,11 +105,13 @@ farmStore.updateCrop(cropId, updates);
 ## API Integration
 
 ### Weather API
+
 - Uses WeatherAPI.com
 - Requires `NEXT_PUBLIC_WEATHER_API_KEY`
 - Fetches current conditions and forecast
 
 ### Mapbox Integration
+
 - Uses Mapbox GL JS
 - Requires `NEXT_PUBLIC_MAPBOX_TOKEN`
 - Interactive map display
@@ -131,6 +148,7 @@ npm run test:watch
 ## Internationalization
 
 Supports multiple languages through next-intl:
+
 - Date formatting
 - Number formatting
 - RTL layout support
@@ -139,6 +157,7 @@ Supports multiple languages through next-intl:
 ## Environment Variables
 
 Required environment variables:
+
 ```env
 # API Keys (store securely and never commit to repository)
 NEXT_PUBLIC_WEATHER_API_KEY=your_weather_api_key  # Restrict to specific domains
@@ -149,4 +168,4 @@ NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token       # Set usage limits
 # 2. Rotate keys periodically
 # 3. Monitor API usage
 # 4. Implement rate limiting
-``` 
+```

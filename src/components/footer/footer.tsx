@@ -109,26 +109,28 @@ const Footer = () => {
                   <li key={index}>
                     {!isFooterLinkItem(item) && title === 'Support' ? (
                       <span className="text-white-dark">{item}</span>
-                    ) : isFooterLinkItem(item) && (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white-dark hover:underline"
-                      >
-                        {item.img ? (
-                          <Image
-                            src={item.img}
-                            alt={t(item.label)}
-                            width={120}
-                            height={40}
-                            quality={75}
-                            className="w-full h-full object-contain"
-                          />
-                        ) : (
-                          t(item.label)
-                        )}
-                      </a>
+                    ) : (
+                      isFooterLinkItem(item) && (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white-dark hover:underline"
+                        >
+                          {item.img ? (
+                            <Image
+                              src={item.img}
+                              alt={t(item.label)}
+                              width={120}
+                              height={40}
+                              quality={75}
+                              className="w-full h-full object-contain"
+                            />
+                          ) : (
+                            t(item.label)
+                          )}
+                        </a>
+                      )
                     )}
                   </li>
                 ))}

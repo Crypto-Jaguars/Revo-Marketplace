@@ -1,8 +1,8 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { useTranslations } from "next-intl";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { useTranslations } from 'next-intl';
 
 interface HarvestData {
   month: string;
@@ -39,10 +39,13 @@ export default function ProductionForecast({ crops }: ProductionForecastProps) {
                         <span>{t('month', { month: harvestData.month })}</span>
                         <span>{t('forecast.progress', { value: harvestData.progress })}</span>
                       </div>
-                      <Progress 
-                        value={harvestData.progress} 
-                        className="h-4" 
-                        aria-label={t('forecast.progressLabel', { crop: crop.name, month: harvestData.month })}
+                      <Progress
+                        value={harvestData.progress}
+                        className="h-4"
+                        aria-label={t('forecast.progressLabel', {
+                          crop: crop.name,
+                          month: harvestData.month,
+                        })}
                         aria-valuemin={0}
                         aria-valuemax={100}
                         aria-valuenow={harvestData.progress}
@@ -50,7 +53,7 @@ export default function ProductionForecast({ crops }: ProductionForecastProps) {
                           crop: crop.name,
                           month: harvestData.month,
                           progress: harvestData.progress,
-                          forecast: harvestData.forecast
+                          forecast: harvestData.forecast,
                         })}
                       />
                     </div>

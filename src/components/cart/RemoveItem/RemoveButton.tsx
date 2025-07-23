@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
-import { useCartStore } from "@/store/cartStore/store";
-import ConfirmDialog from "@/components/cart/RemoveItem/ConfirmDialog";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Trash } from 'lucide-react';
+import { useCartStore } from '@/store/cartStore/store';
+import ConfirmDialog from '@/components/cart/RemoveItem/ConfirmDialog';
 
 interface RemoveButtonProps {
   itemId: number;
@@ -14,21 +14,21 @@ interface RemoveButtonProps {
 const RemoveButton = ({ itemId, itemName }: RemoveButtonProps) => {
   const { removeItem } = useCartStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleRemove = async () => {
     try {
       await removeItem(itemId);
       setIsDialogOpen(false);
     } catch (err) {
-      setError("Error removing item");
+      setError('Error removing item');
     }
   };
 
   return (
     <>
-      <Button 
-        variant="destructive" 
+      <Button
+        variant="destructive"
         className="flex items-center space-x-2 hover:bg-red-600 transition"
         onClick={() => setIsDialogOpen(true)}
       >
@@ -36,7 +36,7 @@ const RemoveButton = ({ itemId, itemName }: RemoveButtonProps) => {
         <span>Remove</span>
       </Button>
 
-      <ConfirmDialog 
+      <ConfirmDialog
         open={isDialogOpen}
         onConfirm={handleRemove}
         onCancel={() => setIsDialogOpen(false)}

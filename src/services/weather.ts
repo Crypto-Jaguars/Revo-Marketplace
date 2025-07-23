@@ -31,10 +31,7 @@ const BASE_URL = 'https://api.weatherapi.com/v1';
 const CACHE_DURATION = 1800000; // 30 minutes
 const weatherCache = new Map();
 
-export async function getWeatherData(
-  latitude: number,
-  longitude: number
-): Promise<WeatherData> {
+export async function getWeatherData(latitude: number, longitude: number): Promise<WeatherData> {
   if (!API_KEY) {
     throw new Error('Weather API key is not configured');
   }
@@ -42,7 +39,7 @@ export async function getWeatherData(
   try {
     const cacheKey = `${latitude},${longitude}`;
     const cachedData = weatherCache.get(cacheKey);
-    
+
     if (cachedData && Date.now() - cachedData.timestamp < CACHE_DURATION) {
       return cachedData.data;
     }
@@ -56,11 +53,11 @@ export async function getWeatherData(
     }
 
     const data = await response.json();
-    
+
     // Cache the new data
     weatherCache.set(cacheKey, {
       data,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     return {
@@ -82,4 +79,4 @@ export async function getWeatherData(
     console.error('Error fetching weather data:', error);
     throw error;
   }
-} 
+}

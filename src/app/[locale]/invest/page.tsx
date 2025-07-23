@@ -18,7 +18,7 @@ export default function InvestPage() {
       duration: '12 months',
       impact: 'Support 5 local farmers',
       description: t('opportunities.smallFarm.description'),
-      icon: <TrendingUp size={24} style={{ color: '#375B42' }} />
+      icon: <TrendingUp size={24} style={{ color: '#375B42' }} />,
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export default function InvestPage() {
       duration: '18 months',
       impact: 'Enable transition to organic farming',
       description: t('opportunities.organic.description'),
-      icon: <CheckCircle size={24} style={{ color: '#375B42' }} />
+      icon: <CheckCircle size={24} style={{ color: '#375B42' }} />,
     },
     {
       id: 3,
@@ -38,8 +38,8 @@ export default function InvestPage() {
       duration: '24 months',
       impact: 'Reduce water usage by 40%',
       description: t('opportunities.irrigation.description'),
-      icon: <DollarSign size={24} style={{ color: '#375B42' }} />
-    }
+      icon: <DollarSign size={24} style={{ color: '#375B42' }} />,
+    },
   ];
 
   return (
@@ -55,11 +55,9 @@ export default function InvestPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="text-primary_green">{t('title')}</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-              {t('subtitle')}
-            </p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">{t('subtitle')}</p>
           </motion.div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 text-center">
             <div className="bg-white/80 p-6 rounded-lg shadow-sm">
               <Percent size={32} className="mx-auto mb-4" style={{ color: '#375B42' }} />
@@ -84,10 +82,10 @@ export default function InvestPage() {
       <section className="py-16 px-4 bg-white/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-12 text-center">{t('opportunities.title')}</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {investmentOpportunities.map((opportunity) => (
-              <motion.div 
+              <motion.div
                 key={opportunity.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
                 initial={{ opacity: 0, y: 20 }}
@@ -101,7 +99,7 @@ export default function InvestPage() {
                     <h3 className="text-xl font-semibold ml-2">{opportunity.title}</h3>
                   </div>
                   <p className="text-gray-600 mb-6">{opportunity.description}</p>
-                  
+
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div>
                       <p className="text-sm text-gray-500">Investment</p>
@@ -120,9 +118,9 @@ export default function InvestPage() {
                       <p className="font-semibold">{opportunity.impact}</p>
                     </div>
                   </div>
-                  
-                  <Button 
-                    className="w-full" 
+
+                  <Button
+                    className="w-full"
                     style={{ backgroundColor: '#375B42', color: '#FFFFFF' }}
                   >
                     {t('opportunities.invest')}
@@ -138,11 +136,9 @@ export default function InvestPage() {
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-6">{t('cta.title')}</h2>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-            {t('cta.subtitle')}
-          </p>
-          <Button 
-            size="lg" 
+          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">{t('cta.subtitle')}</p>
+          <Button
+            size="lg"
             className="px-8 py-6 text-lg"
             style={{ backgroundColor: '#375B42', color: '#FFFFFF' }}
           >
@@ -152,4 +148,4 @@ export default function InvestPage() {
       </section>
     </main>
   );
-} 
+}

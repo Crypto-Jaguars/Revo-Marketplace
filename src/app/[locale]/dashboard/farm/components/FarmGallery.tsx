@@ -12,7 +12,7 @@ import { FarmGalleryProps, FarmImage } from './types';
 
 // Lazy load the dialog content
 const DialogContent = dynamic(
-  () => import('@/components/ui/dialog').then(mod => mod.DialogContent),
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogContent),
   { ssr: false }
 );
 
@@ -82,7 +82,7 @@ export default function FarmGallery({ images, onImageClick }: FarmGalleryProps) 
 
   // Memoize the virtualized items
   const virtualItems = useMemo(() => {
-    return rowVirtualizer.getVirtualItems().map(virtualRow => {
+    return rowVirtualizer.getVirtualItems().map((virtualRow) => {
       const startIndex = virtualRow.index * columnCount;
       const rowImages = images.slice(startIndex, startIndex + columnCount);
       return { virtualRow, rowImages };
@@ -150,11 +150,8 @@ export default function FarmGallery({ images, onImageClick }: FarmGalleryProps) 
         ))}
       </div>
 
-      <Dialog 
-        open={!!selectedImage} 
-        onOpenChange={() => setSelectedImage(null)}
-      >
-        <DialogContent 
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent
           className="max-w-4xl"
           onKeyDown={handleKeyDown}
           role="dialog"
@@ -205,10 +202,7 @@ export default function FarmGallery({ images, onImageClick }: FarmGalleryProps) 
             </div>
           </div>
           {selectedImage?.caption && (
-            <p 
-              className="mt-2 text-center text-sm text-muted-foreground"
-              role="complementary"
-            >
+            <p className="mt-2 text-center text-sm text-muted-foreground" role="complementary">
               {selectedImage.caption}
             </p>
           )}
@@ -216,4 +210,4 @@ export default function FarmGallery({ images, onImageClick }: FarmGalleryProps) 
       </Dialog>
     </>
   );
-} 
+}

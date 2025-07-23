@@ -48,4 +48,4 @@ export interface ReviewStats {
     delivery: number;
     fulfillment: number;
   };
-} 
+}

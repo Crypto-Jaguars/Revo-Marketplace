@@ -25,7 +25,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import type { FarmReview, ReviewFilterSortOptions, ReviewListProps, ReviewStat, ReviewStatsProps } from '../../types/review';
+import type {
+  FarmReview,
+  ReviewFilterSortOptions,
+  ReviewListProps,
+  ReviewStat,
+  ReviewStatsProps,
+} from '../../types/review';
 import ReviewCard from './ReviewCard';
 import ReviewStats from './ReviewStats';
 
@@ -111,7 +117,10 @@ export default function ReviewList({ farmId, initialReviews = [], initialStats }
     });
   };
 
-  const handleFilterChange = (key: keyof ReviewFilterSortOptions, value: string | number | boolean | null) => {
+  const handleFilterChange = (
+    key: keyof ReviewFilterSortOptions,
+    value: string | number | boolean | null
+  ) => {
     setFilterOptions({
       ...filterOptions,
       [key]: value,

@@ -1,14 +1,14 @@
-"use client"
+'use client';
 
-import ProductGallery from "@/components/products/ProductGallery";
-import ProductInfo from "@/components/products/ProductInfo";
-import RelatedProducts from "@/components/products/RelatedProducts";
-import Breadcrumb from "@/components/shared/Breadcrumb";
-import { productsMock } from "@/mocks/products";
-import { Product } from "@/types/product";
-import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import ProductGallery from '@/components/products/ProductGallery';
+import ProductInfo from '@/components/products/ProductInfo';
+import RelatedProducts from '@/components/products/RelatedProducts';
+import Breadcrumb from '@/components/shared/Breadcrumb';
+import { productsMock } from '@/mocks/products';
+import { Product } from '@/types/product';
+import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface ProductData {
   price: number;
@@ -20,45 +20,45 @@ interface ProductData {
 // TODO(#56): Replace with actual data fetching from API
 const mockProductData: ProductData = {
   price: 299.99,
-  description: "High-quality product with premium features",
+  description: 'High-quality product with premium features',
   rating: 4.5,
-  reviews: 128
+  reviews: 128,
 };
 
 const ProductPage = () => {
-  const t = useTranslations("Products")
-  const params = useParams()
-  const [product, setProduct] = useState<Product | null>(null)
-  const [loading, setLoading] = useState(true)
+  const t = useTranslations('Products');
+  const params = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // In a real app, this would be an API call
     const fetchProduct = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
         // Simulate API delay
-        await new Promise((resolve) => setTimeout(resolve, 500))
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         // Find product by ID
-        const foundProduct = productsMock.find((p) => p.id === params.id)
-        setProduct(foundProduct || null)
+        const foundProduct = productsMock.find((p) => p.id === params.id);
+        setProduct(foundProduct || null);
       } catch (error) {
-        console.error("Error fetching product:", error)
+        console.error('Error fetching product:', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
     if (params.id) {
-      fetchProduct()
+      fetchProduct();
     }
-  }, [params.id])
+  }, [params.id]);
 
   const breadcrumbItems = [
-    { label: t("breadcrumb.home"), href: "/" },
-    { label: t("title"), href: "/products" },
-    { label: product?.name || t("productName"), href: "", isCurrent: true },
-  ]
+    { label: t('breadcrumb.home'), href: '/' },
+    { label: t('title'), href: '/products' },
+    { label: product?.name || t('productName'), href: '', isCurrent: true },
+  ];
 
   if (loading) {
     return (
@@ -76,7 +76,7 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (!product) {
@@ -85,10 +85,12 @@ const ProductPage = () => {
         <Breadcrumb items={breadcrumbItems} />
         <div className="text-center py-16">
           <h1 className="text-2xl font-medium mb-4">Product Not Found</h1>
-          <p className="text-gray-500">The product you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+          <p className="text-gray-500">
+            The product you&apos;re looking for doesn&apos;t exist or has been removed.
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -111,8 +113,7 @@ const ProductPage = () => {
         <RelatedProducts />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductPage
-
+export default ProductPage;

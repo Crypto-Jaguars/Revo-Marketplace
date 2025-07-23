@@ -19,12 +19,12 @@ describe('RemoveButton Component', () => {
 
   it('debe renderizar el botón de eliminar', () => {
     render(<RemoveButton itemId={1} itemName="Cafe Orgánico" />);
-    expect(screen.getByText("Remove")).toBeInTheDocument();
+    expect(screen.getByText('Remove')).toBeInTheDocument();
   });
 
   it('debe llamar a removeItem al hacer clic en el botón de eliminar', () => {
     render(<RemoveButton itemId={1} itemName="Cafe Orgánico" />);
-    const removeButton = screen.getByText("Remove");
+    const removeButton = screen.getByText('Remove');
     fireEvent.click(removeButton);
     expect(useCartStore().removeItem).toHaveBeenCalledWith(1);
   });

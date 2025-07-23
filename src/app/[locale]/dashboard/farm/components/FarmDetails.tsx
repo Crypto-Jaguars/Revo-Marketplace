@@ -1,13 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -20,27 +14,22 @@ import { Progress } from '@/components/ui/progress';
 import { FarmDetailsProps } from './types';
 import { Badge } from '@/components/ui/badge';
 
-export default function FarmDetails({
-  farmingMethods,
-  infrastructure,
-}: FarmDetailsProps) {
+export default function FarmDetails({ farmingMethods, infrastructure }: FarmDetailsProps) {
   const t = useTranslations('Farm.details');
-  
+
   return (
     <div className="space-y-6">
       {/* Farming Methods */}
       <Card>
         <CardHeader>
           <CardTitle>{t('farmingMethods.title')}</CardTitle>
-          <CardDescription>
-            {t('farmingMethods.description')}
-          </CardDescription>
+          <CardDescription>{t('farmingMethods.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {farmingMethods.map((method) => (
-              <div 
-                key={method.type} 
+              <div
+                key={method.type}
                 role="region"
                 aria-labelledby={`method-${method.type}`}
                 className="space-y-2"
@@ -56,7 +45,7 @@ export default function FarmDetails({
                 <p className="text-sm text-muted-foreground">
                   {t(`farmingMethods.descriptions.${method.type}`)}
                 </p>
-                <Progress 
+                <Progress
                   value={method.sustainabilityScore * 10}
                   aria-label={t('farmingMethods.sustainabilityAriaLabel', { type: method.type })}
                   aria-valuemin={0}
@@ -88,14 +77,14 @@ export default function FarmDetails({
               </TableHeader>
               <TableBody>
                 {infrastructure.equipment.map((item) => (
-                  <TableRow 
+                  <TableRow
                     key={item.name}
                     role="row"
                     tabIndex={0}
                     aria-label={t('equipment.itemAriaLabel', {
                       name: item.name,
                       quantity: item.quantity,
-                      status: item.status
+                      status: item.status,
                     })}
                   >
                     <TableCell>{t(`equipment.items.${item.name}`)}</TableCell>
@@ -106,8 +95,8 @@ export default function FarmDetails({
                           item.status === 'operational'
                             ? 'success'
                             : item.status === 'maintenance'
-                            ? 'warning'
-                            : 'destructive'
+                              ? 'warning'
+                              : 'destructive'
                         }
                         role="status"
                         aria-label={t('equipment.statusAriaLabel', { status: item.status })}
@@ -139,7 +128,7 @@ export default function FarmDetails({
               </TableHeader>
               <TableBody>
                 {infrastructure.storage.map((facility) => (
-                  <TableRow 
+                  <TableRow
                     key={facility.type}
                     role="row"
                     tabIndex={0}
@@ -147,7 +136,7 @@ export default function FarmDetails({
                       type: facility.type,
                       capacity: facility.capacity,
                       unit: facility.unit,
-                      utilization: facility.currentUtilization
+                      utilization: facility.currentUtilization,
                     })}
                   >
                     <TableCell>{t(`storage.types.${facility.type}`)}</TableCell>
@@ -156,7 +145,7 @@ export default function FarmDetails({
                     </TableCell>
                     <TableCell>
                       <div className="space-y-1">
-                        <Progress 
+                        <Progress
                           value={facility.currentUtilization}
                           aria-label={t('storage.utilizationAriaLabel', { type: facility.type })}
                           aria-valuemin={0}
@@ -180,9 +169,7 @@ export default function FarmDetails({
       <Card>
         <CardHeader>
           <CardTitle>{t('processing.title')}</CardTitle>
-          <CardDescription>
-            {t('processing.description')}
-          </CardDescription>
+          <CardDescription>{t('processing.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -206,4 +193,4 @@ export default function FarmDetails({
       </Card>
     </div>
   );
-} 
+}

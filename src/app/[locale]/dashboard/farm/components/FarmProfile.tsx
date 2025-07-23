@@ -9,7 +9,11 @@ import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 import { useLocale } from 'next-intl';
 
-const ContactLink = ({ href, icon: Icon, children }: {
+const ContactLink = ({
+  href,
+  icon: Icon,
+  children,
+}: {
   href: string;
   icon: typeof Phone;
   children: React.ReactNode;
@@ -36,7 +40,10 @@ export default function FarmProfile({
   images,
 }: FarmProfileProps) {
   const locale = useLocale();
-  const formattedDate = useMemo(() => formatDate(establishedDate, locale), [establishedDate, locale]);
+  const formattedDate = useMemo(
+    () => formatDate(establishedDate, locale),
+    [establishedDate, locale]
+  );
 
   // Memoize formatted address
   const formattedAddress = useMemo(() => {
@@ -116,4 +123,4 @@ export default function FarmProfile({
       </Card>
     </div>
   );
-} 
+}

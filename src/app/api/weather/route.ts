@@ -27,15 +27,12 @@ export async function GET(request: Request) {
     const longitude = searchParams.get('longitude');
 
     if (!latitude || !longitude) {
-      return NextResponse.json(
-        { error: 'Latitude and longitude are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Latitude and longitude are required' }, { status: 400 });
     }
 
     const cacheKey = `${latitude},${longitude}`;
     const cachedData = weatherCache.get(cacheKey);
-    
+
     if (cachedData && Date.now() - cachedData.timestamp < CACHE_DURATION) {
       return NextResponse.json(cachedData.data);
     }
@@ -44,11 +41,11 @@ export async function GET(request: Request) {
     apiUrl.searchParams.append('q', `${latitude},${longitude}`);
     apiUrl.searchParams.append('days', '7');
     apiUrl.searchParams.append('aqi', 'no');
-    
+
     const response = await fetch(apiUrl, {
       headers: new Headers({
-        'key': WEATHER_API_KEY
-      })
+        key: WEATHER_API_KEY,
+      }),
     });
 
     if (!response.ok) {
@@ -59,18 +56,15 @@ export async function GET(request: Request) {
     }
 
     const data = await response.json();
-    
+
     weatherCache.set(cacheKey, {
       data,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     return NextResponse.json(data);
   } catch (error) {
     console.error('Weather API error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
-} 
+}

@@ -83,4 +83,3 @@ export interface ReviewFilterSortOptions {
   filterByVerified?: boolean;
   filterByMedia?: boolean;
 }
-

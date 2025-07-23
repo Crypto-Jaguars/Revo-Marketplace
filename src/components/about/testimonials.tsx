@@ -1,25 +1,28 @@
-import Image from "next/image"
+import Image from 'next/image';
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    role: "Organic Farmer",
-    quote: "Revolutionary Farmers has transformed how I sell my products. The platform is easy to use and I get fair prices for my produce.",
-    image: "/placeholder.svg"
+    name: 'Sarah Johnson',
+    role: 'Organic Farmer',
+    quote:
+      'Revolutionary Farmers has transformed how I sell my products. The platform is easy to use and I get fair prices for my produce.',
+    image: '/placeholder.svg',
   },
   {
-    name: "Michael Chen",
-    role: "Small-Scale Farmer",
-    quote: "Revolutionary Farmers has transformed how I sell my products. The platform is easy to use and I get fair prices for my produce.",
-    image: "/placeholder.svg"
+    name: 'Michael Chen',
+    role: 'Small-Scale Farmer',
+    quote:
+      'Revolutionary Farmers has transformed how I sell my products. The platform is easy to use and I get fair prices for my produce.',
+    image: '/placeholder.svg',
   },
   {
-    name: "Emma Rodriguez",
-    role: "Family Farm Owner",
-    quote: "Revolutionary Farmers has transformed how I sell my products. The platform is easy to use and I get fair prices for my produce.",
-    image: "/placeholder.svg"
-  }
-]
+    name: 'Emma Rodriguez',
+    role: 'Family Farm Owner',
+    quote:
+      'Revolutionary Farmers has transformed how I sell my products. The platform is easy to use and I get fair prices for my produce.',
+    image: '/placeholder.svg',
+  },
+];
 
 export default function Testimonials() {
   return (
@@ -31,7 +34,10 @@ export default function Testimonials() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.name} className="flex flex-col space-y-4 p-6 bg-background rounded-lg">
+              <div
+                key={testimonial.name}
+                className="flex flex-col space-y-4 p-6 bg-background rounded-lg"
+              >
                 <div className="flex items-center gap-4">
                   <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-100">
                     <Image
@@ -55,5 +61,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }

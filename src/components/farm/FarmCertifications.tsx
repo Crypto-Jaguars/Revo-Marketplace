@@ -1,55 +1,42 @@
 'use client';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FarmCertificationsProps } from './types';
 import { formatDate } from '@/lib/utils';
 import { FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-export default function FarmCertifications({
-  certifications,
-}: FarmCertificationsProps) {
+export default function FarmCertifications({ certifications }: FarmCertificationsProps) {
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle>Certifications & Compliance</CardTitle>
-          <CardDescription>
-            Our quality standards and certifications
-          </CardDescription>
+          <CardDescription>Our quality standards and certifications</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-6 md:grid-cols-2">
             {certifications.map((cert) => (
-              <Card 
-                key={cert.id} 
+              <Card
+                key={cert.id}
                 className="overflow-hidden"
                 role="article"
                 aria-labelledby={`cert-${cert.id}-name`}
               >
                 <div className="border-b bg-muted/50 p-4">
                   <div className="flex items-center justify-between">
-                    <h3 id={`cert-${cert.id}-name`} className="font-semibold">{cert.name}</h3>
+                    <h3 id={`cert-${cert.id}-name`} className="font-semibold">
+                      {cert.name}
+                    </h3>
                     <Badge
                       variant={
                         cert.status === 'active'
                           ? 'success'
                           : cert.status === 'pending'
-                          ? 'warning'
-                          : 'destructive'
+                            ? 'warning'
+                            : 'destructive'
                       }
                       role="status"
                       aria-label={`Certification status: ${cert.status}`}
@@ -57,9 +44,7 @@ export default function FarmCertifications({
                       {cert.status}
                     </Badge>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Issued by {cert.issuer}
-                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">Issued by {cert.issuer}</p>
                 </div>
                 <CardContent className="grid gap-4 p-4">
                   <div className="grid grid-cols-2 gap-4 text-sm">
@@ -109,4 +94,4 @@ export default function FarmCertifications({
       </Card>
     </div>
   );
-} 
+}

@@ -73,9 +73,9 @@ const Header = () => {
 
       <div className="hidden md:flex items-center justify-center gap-5">
         <LanguageSwitcher />
-      
-      {/* // This button has been added and allows the user to change themes */}
-      <ThemeToggle />
+
+        {/* // This button has been added and allows the user to change themes */}
+        <ThemeToggle />
 
         {address ? (
           <>

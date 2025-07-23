@@ -135,4 +135,4 @@ export interface FarmCertificationsProps {
   certifications: FarmCertification[];
   ariaLabel: string;
   role: string;
-} 
+}

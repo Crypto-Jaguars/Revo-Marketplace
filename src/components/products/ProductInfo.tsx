@@ -1,35 +1,35 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Rating } from "../ui/rating"
-import { HeartIcon, UpdateIcon } from "@radix-ui/react-icons"
-import { TruckIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { AddToCartButton } from "../cart/AddToCartButton"
-import type { Product } from "@/types/product"
-import { calculateDiscountedPrice } from "@/constants/helpers/CalculateDiscountedPrice"
+import { useState } from 'react';
+import { Rating } from '../ui/rating';
+import { HeartIcon, UpdateIcon } from '@radix-ui/react-icons';
+import { TruckIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { AddToCartButton } from '../cart/AddToCartButton';
+import type { Product } from '@/types/product';
+import { calculateDiscountedPrice } from '@/constants/helpers/CalculateDiscountedPrice';
 
 interface ProductInfoProps {
-  product: Product
+  product: Product;
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
-  const t = useTranslations("Products")
-  const [quantity, setQuantity] = useState(1)
-  const [isWishlist, setIsWishlist] = useState(false)
-  const [isHover, setIsHover] = useState(false)
+  const t = useTranslations('Products');
+  const [quantity, setQuantity] = useState(1);
+  const [isWishlist, setIsWishlist] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
-  const formattedPrice = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(product.price.amount)
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(product.price.amount);
 
   const formattedDiscountedPrice = product.discount
-    ? new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
+    ? new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
       }).format(calculateDiscountedPrice(product.price.amount, product.discount))
-    : formattedPrice
+    : formattedPrice;
 
   return (
     <div className="space-y-4">
@@ -40,21 +40,25 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       <div className="flex items-center gap-3 text-sm">
         <div className="flex items-center gap-2">
           <Rating
-            value={product.rating as number & { __brand: "ValidRating" }}
+            value={product.rating as number & { __brand: 'ValidRating' }}
             max={5}
             readOnly
-            aria-label={t("rating.aria")}
+            aria-label={t('rating.aria')}
           />
-          <span className="text-gray-500">{t("rating.reviews", { count: 150 })}</span>
+          <span className="text-gray-500">{t('rating.reviews', { count: 150 })}</span>
         </div>
         <span className="text-gray-300">|</span>
-        <span className="text-gray-500">{product.stockQuantity > 0 ? t("stock.inStock") : t("stock.outOfStock")}</span>
+        <span className="text-gray-500">
+          {product.stockQuantity > 0 ? t('stock.inStock') : t('stock.outOfStock')}
+        </span>
       </div>
 
       {/* Price */}
       <div className="flex items-center gap-2">
         <span className="text-2xl font-medium text-black">{formattedDiscountedPrice}</span>
-        {product.discount > 0 && <span className="text-lg line-through text-gray-400">{formattedPrice}</span>}
+        {product.discount > 0 && (
+          <span className="text-lg line-through text-gray-400">{formattedPrice}</span>
+        )}
       </div>
 
       {/* Description */}
@@ -70,7 +74,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
             className={`
               w-10 h-10 flex items-center justify-center border border-r-0 border-gray-300 rounded-l hover:bg-gray-50
-              ${quantity === 1 ? "opacity-50 cursor-not-allowed" : ""}
+              ${quantity === 1 ? 'opacity-50 cursor-not-allowed' : ''}
             `}
             disabled={quantity === 1}
           >
@@ -81,9 +85,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             type="text"
             value={quantity}
             onChange={(e) => {
-              const val = Number.parseInt(e.target.value)
+              const val = Number.parseInt(e.target.value);
               if (!isNaN(val)) {
-                setQuantity(Math.max(1, Math.min(val, product.stockQuantity)))
+                setQuantity(Math.max(1, Math.min(val, product.stockQuantity)));
               }
             }}
             className="w-12 h-10 border border-gray-300 text-center [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
@@ -117,8 +121,8 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             transition-all duration-300
             ${
               isWishlist
-                ? "bg-[#375B42] border-[#375B42] hover:bg-white hover:border-[#375B42] border"
-                : "bg-white border-gray-300 hover:bg-[#375B42] hover:border-[#375B42] border"
+                ? 'bg-[#375B42] border-[#375B42] hover:bg-white hover:border-[#375B42] border'
+                : 'bg-white border-gray-300 hover:bg-[#375B42] hover:border-[#375B42] border'
             }
           `}
         >
@@ -128,11 +132,11 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
               ${
                 isWishlist
                   ? isHover
-                    ? "text-[#375B42]" // Wishlist activo + hover
-                    : "text-white-dark" // Wishlist activo sin hover
+                    ? 'text-[#375B42]' // Wishlist activo + hover
+                    : 'text-white-dark' // Wishlist activo sin hover
                   : isHover
-                    ? "text-white-dark" // No activo + hover
-                    : "text-[#000000]" // No activo sin hover
+                    ? 'text-white-dark' // No activo + hover
+                    : 'text-[#000000]' // No activo sin hover
               }
             `}
           />
@@ -145,9 +149,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         <div className="flex gap-4 items-center border border-gray-200 rounded-lg p-4">
           <TruckIcon className="w-11 h-11" />
           <div>
-            <h3 className="font-medium text-black">{t("delivery.free")}</h3>
+            <h3 className="font-medium text-black">{t('delivery.free')}</h3>
             <button className="text-black text-left underline hover:no-underline text-xs">
-              {t("delivery.checkPostalCode")}
+              {t('delivery.checkPostalCode')}
             </button>
           </div>
         </div>
@@ -156,18 +160,19 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         <div className="flex gap-4 items-center border border-gray-200 rounded-lg p-4">
           <UpdateIcon className="w-11 h-11" />
           <div>
-            <h3 className="font-medium text-black">{t("returns.title")}</h3>
+            <h3 className="font-medium text-black">{t('returns.title')}</h3>
             <div className="text-sm">
-              <span className="text-gray-500">{t("returns.description")} </span>
+              <span className="text-gray-500">{t('returns.description')} </span>
 
-              <button className="text-black underline hover:no-underline text-xs">{t("returns.details")}</button>
+              <button className="text-black underline hover:no-underline text-xs">
+                {t('returns.details')}
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductInfo
-
+export default ProductInfo;

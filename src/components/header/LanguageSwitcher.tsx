@@ -42,9 +42,7 @@ const LanguageSwitcher = () => {
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className="flex items-center gap-2 text-white hover:text-white/90 transition-colors"
       >
-        <span className="text-[#FFFFFF]">
-          {language === 'en' ? 'English' : 'Español'}
-        </span>
+        <span className="text-[#FFFFFF]">{language === 'en' ? 'English' : 'Español'}</span>
         <ChevronDown className="w-4 h-4 text-[#FFFFFF]" />
       </button>
 

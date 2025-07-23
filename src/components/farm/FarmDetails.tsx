@@ -1,13 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -20,41 +14,36 @@ import { Progress } from '@/components/ui/progress';
 import { FarmDetailsProps } from './types';
 import { Badge } from '@/components/ui/badge';
 
-export default function FarmDetails({
-  farmingMethods,
-  infrastructure,
-}: FarmDetailsProps) {
+export default function FarmDetails({ farmingMethods, infrastructure }: FarmDetailsProps) {
   const t = useTranslations('FarmDetails');
-  
+
   return (
     <div className="space-y-6">
       {/* Farming Methods */}
       <Card>
         <CardHeader>
           <CardTitle>{t('farmingMethods')}</CardTitle>
-          <CardDescription>
-            {t('farmingMethodsDescription')}
-          </CardDescription>
+          <CardDescription>{t('farmingMethodsDescription')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {farmingMethods.map((method) => (
-              <div 
-                key={method.type} 
+              <div
+                key={method.type}
                 role="region"
                 aria-labelledby={`method-${method.type}`}
                 className="space-y-2"
               >
                 <div className="flex items-center justify-between">
-                  <h4 id={`method-${method.type}`} className="font-medium">{method.type}</h4>
+                  <h4 id={`method-${method.type}`} className="font-medium">
+                    {method.type}
+                  </h4>
                   <Badge variant="outline">
                     {t('sustainabilityScore', { score: method.sustainabilityScore })}
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {method.description}
-                </p>
-                <Progress 
+                <p className="text-sm text-muted-foreground">{method.description}</p>
+                <Progress
                   value={method.sustainabilityScore * 10}
                   aria-label={`Sustainability score for ${method.type}`}
                   aria-valuemin={0}
@@ -86,7 +75,7 @@ export default function FarmDetails({
               </TableHeader>
               <TableBody>
                 {infrastructure.equipment.map((item) => (
-                  <TableRow 
+                  <TableRow
                     key={item.name}
                     role="row"
                     tabIndex={0}
@@ -100,8 +89,8 @@ export default function FarmDetails({
                           item.status === 'operational'
                             ? 'success'
                             : item.status === 'maintenance'
-                            ? 'warning'
-                            : 'destructive'
+                              ? 'warning'
+                              : 'destructive'
                         }
                         role="status"
                         aria-label={`Status: ${item.status}`}
@@ -133,7 +122,7 @@ export default function FarmDetails({
               </TableHeader>
               <TableBody>
                 {infrastructure.storage.map((facility) => (
-                  <TableRow 
+                  <TableRow
                     key={facility.type}
                     role="row"
                     tabIndex={0}
@@ -145,7 +134,7 @@ export default function FarmDetails({
                     </TableCell>
                     <TableCell>
                       <div className="space-y-1">
-                        <Progress 
+                        <Progress
                           value={facility.currentUtilization}
                           aria-label={`${facility.type} utilization`}
                           aria-valuemin={0}
@@ -169,18 +158,14 @@ export default function FarmDetails({
       <Card>
         <CardHeader>
           <CardTitle>Processing Facilities</CardTitle>
-          <CardDescription>
-            Our processing and production capabilities
-          </CardDescription>
+          <CardDescription>Our processing and production capabilities</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {infrastructure.processing.map((facility) => (
               <div key={facility.facility} className="space-y-2">
                 <h4 className="font-medium">{facility.facility}</h4>
-                <p className="text-sm text-muted-foreground">
-                  Capacity: {facility.capacity} units
-                </p>
+                <p className="text-sm text-muted-foreground">Capacity: {facility.capacity} units</p>
                 <div className="flex flex-wrap gap-2">
                   {facility.capabilities.map((capability) => (
                     <Badge key={capability} variant="outline">
@@ -195,4 +180,4 @@ export default function FarmDetails({
       </Card>
     </div>
   );
-} 
+}

@@ -26,75 +26,87 @@ export default function FAQPage() {
     {
       id: '1',
       question: 'How do I create an account?',
-      answer: 'You can create an account by clicking the "Sign Up" button and filling out the registration form. You\'ll need to provide your email, create a password, and verify your email address.',
-      category: 'account'
+      answer:
+        'You can create an account by clicking the "Sign Up" button and filling out the registration form. You\'ll need to provide your email, create a password, and verify your email address.',
+      category: 'account',
     },
     {
       id: '2',
       question: 'What payment methods do you accept?',
-      answer: 'We accept USDC cryptocurrency payments through the Stellar blockchain. You can pay using MoonPay, connect your Stellar wallet, or use QR codes for quick payments.',
-      category: 'payment'
+      answer:
+        'We accept USDC cryptocurrency payments through the Stellar blockchain. You can pay using MoonPay, connect your Stellar wallet, or use QR codes for quick payments.',
+      category: 'payment',
     },
     {
       id: '3',
       question: 'How does the escrow system work?',
-      answer: 'Our escrow system holds payments securely until you confirm receipt of your order. This protects both buyers and sellers, ensuring fair transactions for everyone.',
-      category: 'payment'
+      answer:
+        'Our escrow system holds payments securely until you confirm receipt of your order. This protects both buyers and sellers, ensuring fair transactions for everyone.',
+      category: 'payment',
     },
     {
       id: '4',
       question: 'Can I track my order?',
-      answer: 'Yes! Once your order is confirmed, you\'ll receive tracking information and can monitor your order status in real-time through your account dashboard.',
-      category: 'orders'
+      answer:
+        "Yes! Once your order is confirmed, you'll receive tracking information and can monitor your order status in real-time through your account dashboard.",
+      category: 'orders',
     },
     {
       id: '5',
       question: 'What if I receive damaged products?',
-      answer: 'If you receive damaged products, please contact us within 24 hours with photos. We\'ll work with the farmer to resolve the issue and may offer a refund or replacement.',
-      category: 'orders'
+      answer:
+        "If you receive damaged products, please contact us within 24 hours with photos. We'll work with the farmer to resolve the issue and may offer a refund or replacement.",
+      category: 'orders',
     },
     {
       id: '6',
       question: 'How do I become a farmer on the platform?',
-      answer: 'To become a farmer, visit our "Join as Farmer" page and complete the application form. We\'ll review your application and contact you with next steps.',
-      category: 'selling'
+      answer:
+        'To become a farmer, visit our "Join as Farmer" page and complete the application form. We\'ll review your application and contact you with next steps.',
+      category: 'selling',
     },
     {
       id: '7',
       question: 'What commission do you charge farmers?',
-      answer: 'We charge a small commission on each sale to maintain the platform. The exact percentage depends on your seller plan. Check our pricing page for details.',
-      category: 'selling'
+      answer:
+        'We charge a small commission on each sale to maintain the platform. The exact percentage depends on your seller plan. Check our pricing page for details.',
+      category: 'selling',
     },
     {
       id: '8',
       question: 'How long does delivery take?',
-      answer: 'Delivery times vary by location and farmer. Most orders are delivered within 1-3 business days. You\'ll see estimated delivery times before completing your purchase.',
-      category: 'delivery'
+      answer:
+        "Delivery times vary by location and farmer. Most orders are delivered within 1-3 business days. You'll see estimated delivery times before completing your purchase.",
+      category: 'delivery',
     },
     {
       id: '9',
       question: 'Do you offer pickup options?',
-      answer: 'Yes! Many farmers offer pickup options. You can filter for pickup-available products when browsing and select pickup during checkout.',
-      category: 'delivery'
+      answer:
+        'Yes! Many farmers offer pickup options. You can filter for pickup-available products when browsing and select pickup during checkout.',
+      category: 'delivery',
     },
     {
       id: '10',
       question: 'Is my personal information secure?',
-      answer: 'Yes, we take security seriously. We use encryption for all data transmission and follow industry best practices for data protection. We never share your personal information with third parties.',
-      category: 'security'
+      answer:
+        'Yes, we take security seriously. We use encryption for all data transmission and follow industry best practices for data protection. We never share your personal information with third parties.',
+      category: 'security',
     },
     {
       id: '11',
       question: 'How do I reset my password?',
-      answer: 'Click "Forgot Password" on the login page, enter your email address, and we\'ll send you a password reset link. Follow the instructions in the email to create a new password.',
-      category: 'account'
+      answer:
+        'Click "Forgot Password" on the login page, enter your email address, and we\'ll send you a password reset link. Follow the instructions in the email to create a new password.',
+      category: 'account',
     },
     {
       id: '12',
       question: 'Can I cancel my order?',
-      answer: 'You can cancel your order within 1 hour of placing it, provided the farmer hasn\'t started preparing it. After that, you\'ll need to contact the farmer directly.',
-      category: 'orders'
-    }
+      answer:
+        "You can cancel your order within 1 hour of placing it, provided the farmer hasn't started preparing it. After that, you'll need to contact the farmer directly.",
+      category: 'orders',
+    },
   ];
 
   const categories = [
@@ -104,12 +116,13 @@ export default function FAQPage() {
     { id: 'orders', label: 'Orders' },
     { id: 'selling', label: 'Selling' },
     { id: 'delivery', label: 'Delivery' },
-    { id: 'security', label: 'Security' }
+    { id: 'security', label: 'Security' },
   ];
 
-  const filteredFAQs = faqItems.filter(item => {
-    const matchesSearch = item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.answer.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredFAQs = faqItems.filter((item) => {
+    const matchesSearch =
+      item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.answer.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -150,7 +163,7 @@ export default function FAQPage() {
             {categories.map((category) => (
               <Badge
                 key={category.id}
-                variant={selectedCategory === category.id ? "default" : "outline"}
+                variant={selectedCategory === category.id ? 'default' : 'outline'}
                 className={`cursor-pointer transition-colors ${
                   selectedCategory === category.id
                     ? 'bg-green-600 text-white hover:bg-green-700'
@@ -198,7 +211,7 @@ export default function FAQPage() {
                 <p className="text-gray-300 mb-6">
                   Try adjusting your search terms or category filter
                 </p>
-                <Button 
+                <Button
                   onClick={() => {
                     setSearchTerm('');
                     setSelectedCategory('all');
@@ -220,16 +233,16 @@ export default function FAQPage() {
               Can&apos;t find what you&apos;re looking for? Our support team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
+              <Button
                 className="bg-green-600 hover:bg-green-700 text-white"
-                onClick={() => window.location.href = '/contact'}
+                onClick={() => (window.location.href = '/contact')}
               >
                 Contact Support
               </Button>
-              <Button 
+              <Button
                 variant="outline"
                 className="border-white text-white hover:bg-white/10"
-                onClick={() => window.location.href = 'mailto:support@revolutionaryfarmers.com'}
+                onClick={() => (window.location.href = 'mailto:support@revolutionaryfarmers.com')}
               >
                 Email Us
               </Button>

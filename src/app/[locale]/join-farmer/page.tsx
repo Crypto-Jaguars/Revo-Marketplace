@@ -34,7 +34,7 @@ export default function JoinFarmerPage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,7 +47,7 @@ export default function JoinFarmerPage() {
     setIsSubmitting(true);
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       toast.success('Application submitted successfully! We will contact you soon.');
       router.push('/');
     } catch (error) {
@@ -61,23 +61,23 @@ export default function JoinFarmerPage() {
     {
       icon: <Leaf className="h-8 w-8 text-green-500" />,
       title: 'Direct Sales',
-      description: 'Sell directly to consumers without intermediaries'
+      description: 'Sell directly to consumers without intermediaries',
     },
     {
       icon: <Users className="h-8 w-8 text-blue-500" />,
       title: 'Growing Community',
-      description: 'Join a network of sustainable farmers'
+      description: 'Join a network of sustainable farmers',
     },
     {
       icon: <Shield className="h-8 w-8 text-purple-500" />,
       title: 'Secure Payments',
-      description: 'Guaranteed payments through blockchain technology'
+      description: 'Guaranteed payments through blockchain technology',
     },
     {
       icon: <Zap className="h-8 w-8 text-yellow-500" />,
       title: 'Easy Management',
-      description: 'Simple tools to manage your listings and orders'
-    }
+      description: 'Simple tools to manage your listings and orders',
+    },
   ];
 
   return (
@@ -86,7 +86,8 @@ export default function JoinFarmerPage() {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">Join Revolutionary Farmers</h1>
           <p className="text-gray-300 text-lg">
-            Become part of the future of agriculture. Connect directly with consumers and grow your business.
+            Become part of the future of agriculture. Connect directly with consumers and grow your
+            business.
           </p>
         </div>
 
@@ -95,9 +96,7 @@ export default function JoinFarmerPage() {
             <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardContent className="p-6">
                 <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    {benefit.icon}
-                  </div>
+                  <div className="flex-shrink-0">{benefit.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">{benefit.title}</h3>
                     <p className="text-gray-300">{benefit.description}</p>
@@ -119,7 +118,9 @@ export default function JoinFarmerPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="firstName" className="text-white">First Name *</Label>
+                  <Label htmlFor="firstName" className="text-white">
+                    First Name *
+                  </Label>
                   <Input
                     id="firstName"
                     name="firstName"
@@ -130,7 +131,9 @@ export default function JoinFarmerPage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="lastName" className="text-white">Last Name *</Label>
+                  <Label htmlFor="lastName" className="text-white">
+                    Last Name *
+                  </Label>
                   <Input
                     id="lastName"
                     name="lastName"
@@ -144,7 +147,9 @@ export default function JoinFarmerPage() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="email" className="text-white">Email *</Label>
+                  <Label htmlFor="email" className="text-white">
+                    Email *
+                  </Label>
                   <Input
                     id="email"
                     name="email"
@@ -156,7 +161,9 @@ export default function JoinFarmerPage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="phone" className="text-white">Phone Number *</Label>
+                  <Label htmlFor="phone" className="text-white">
+                    Phone Number *
+                  </Label>
                   <Input
                     id="phone"
                     name="phone"
@@ -170,7 +177,9 @@ export default function JoinFarmerPage() {
               </div>
 
               <div>
-                <Label htmlFor="farmName" className="text-white">Farm Name *</Label>
+                <Label htmlFor="farmName" className="text-white">
+                  Farm Name *
+                </Label>
                 <Input
                   id="farmName"
                   name="farmName"
@@ -182,7 +191,9 @@ export default function JoinFarmerPage() {
               </div>
 
               <div>
-                <Label htmlFor="farmAddress" className="text-white">Farm Address *</Label>
+                <Label htmlFor="farmAddress" className="text-white">
+                  Farm Address *
+                </Label>
                 <Input
                   id="farmAddress"
                   name="farmAddress"
@@ -195,7 +206,9 @@ export default function JoinFarmerPage() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="farmSize" className="text-white">Farm Size (acres)</Label>
+                  <Label htmlFor="farmSize" className="text-white">
+                    Farm Size (acres)
+                  </Label>
                   <Input
                     id="farmSize"
                     name="farmSize"
@@ -206,7 +219,9 @@ export default function JoinFarmerPage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="farmingMethod" className="text-white">Farming Method</Label>
+                  <Label htmlFor="farmingMethod" className="text-white">
+                    Farming Method
+                  </Label>
                   <Input
                     id="farmingMethod"
                     name="farmingMethod"
@@ -219,7 +234,9 @@ export default function JoinFarmerPage() {
               </div>
 
               <div>
-                <Label htmlFor="mainCrops" className="text-white">Main Crops</Label>
+                <Label htmlFor="mainCrops" className="text-white">
+                  Main Crops
+                </Label>
                 <Input
                   id="mainCrops"
                   name="mainCrops"
@@ -231,7 +248,9 @@ export default function JoinFarmerPage() {
               </div>
 
               <div>
-                <Label htmlFor="description" className="text-white">Tell us about your farm</Label>
+                <Label htmlFor="description" className="text-white">
+                  Tell us about your farm
+                </Label>
                 <Textarea
                   id="description"
                   name="description"
@@ -247,16 +266,16 @@ export default function JoinFarmerPage() {
                 <Checkbox
                   id="agreedToTerms"
                   checked={formData.agreedToTerms}
-                  onCheckedChange={(checked) => 
-                    setFormData(prev => ({ ...prev, agreedToTerms: checked as boolean }))
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({ ...prev, agreedToTerms: checked as boolean }))
                   }
                 />
                 <Label htmlFor="agreedToTerms" className="text-white text-sm">
                   I agree to the{' '}
                   <a href="/terms-of-use" className="text-blue-400 hover:underline">
                     Terms of Service
-                  </a>
-                  {' '}and{' '}
+                  </a>{' '}
+                  and{' '}
                   <a href="/privacy-policy" className="text-blue-400 hover:underline">
                     Privacy Policy
                   </a>

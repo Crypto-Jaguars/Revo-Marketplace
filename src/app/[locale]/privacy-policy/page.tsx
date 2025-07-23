@@ -21,8 +21,8 @@ export default function PrivacyPolicyPage() {
         'Farm information for sellers (farm name, location, certifications)',
         'Order history and transaction records',
         'Communication preferences and settings',
-        'Technical information about your device and browsing behavior'
-      ]
+        'Technical information about your device and browsing behavior',
+      ],
     },
     {
       title: 'How We Use Your Information',
@@ -34,8 +34,8 @@ export default function PrivacyPolicyPage() {
         'To provide customer support and respond to inquiries',
         'To ensure platform security and prevent fraud',
         'To analyze usage patterns and improve user experience',
-        'To comply with legal obligations and regulatory requirements'
-      ]
+        'To comply with legal obligations and regulatory requirements',
+      ],
     },
     {
       title: 'Information Sharing',
@@ -46,8 +46,8 @@ export default function PrivacyPolicyPage() {
         'We may share data with service providers who help us operate the platform',
         'We may disclose information if required by law or to protect our rights',
         'We may share aggregated, anonymous data for research and analytics',
-        'In case of business transfer, your information may be transferred to new owners'
-      ]
+        'In case of business transfer, your information may be transferred to new owners',
+      ],
     },
     {
       title: 'Data Security',
@@ -58,9 +58,9 @@ export default function PrivacyPolicyPage() {
         'We implement regular security audits and monitoring',
         'Access to personal information is restricted to authorized personnel',
         'We use secure servers and follow best practices for data protection',
-        'We regularly update our security measures to address new threats'
-      ]
-    }
+        'We regularly update our security measures to address new threats',
+      ],
+    },
   ];
 
   return (
@@ -71,9 +71,7 @@ export default function PrivacyPolicyPage() {
           <p className="text-gray-300 text-lg mb-2">
             Revolutionary Farmers is committed to protecting your privacy
           </p>
-          <p className="text-gray-400 text-sm">
-            Last updated: {lastUpdated}
-          </p>
+          <p className="text-gray-400 text-sm">Last updated: {lastUpdated}</p>
         </div>
 
         <Card className="bg-white/10 backdrop-blur-sm border-white/20 mb-8">
@@ -83,8 +81,9 @@ export default function PrivacyPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-white mb-2">Our Commitment</h2>
                 <p className="text-gray-300 leading-relaxed">
-                  At Revolutionary Farmers, we respect your privacy and are committed to protecting your personal information. 
-                  This Privacy Policy explains how we collect, use, and safeguard your data when you use our marketplace platform.
+                  At Revolutionary Farmers, we respect your privacy and are committed to protecting
+                  your personal information. This Privacy Policy explains how we collect, use, and
+                  safeguard your data when you use our marketplace platform.
                 </p>
               </div>
             </div>
@@ -120,9 +119,7 @@ export default function PrivacyPolicyPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <p className="text-gray-300">
-                You have the right to:
-              </p>
+              <p className="text-gray-300">You have the right to:</p>
               <ul className="space-y-2">
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -130,7 +127,9 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-300">Request corrections to inaccurate information</span>
+                  <span className="text-gray-300">
+                    Request corrections to inaccurate information
+                  </span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -183,20 +182,27 @@ export default function PrivacyPolicyPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-300 mb-4">
-              We retain your personal information for as long as necessary to provide our services and comply with legal obligations:
+              We retain your personal information for as long as necessary to provide our services
+              and comply with legal obligations:
             </p>
             <ul className="space-y-2">
               <li className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-gray-300">Account information: Until you delete your account</span>
+                <span className="text-gray-300">
+                  Account information: Until you delete your account
+                </span>
               </li>
               <li className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-gray-300">Transaction records: 7 years for tax and legal purposes</span>
+                <span className="text-gray-300">
+                  Transaction records: 7 years for tax and legal purposes
+                </span>
               </li>
               <li className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-gray-300">Communications: 3 years for support and legal purposes</span>
+                <span className="text-gray-300">
+                  Communications: 3 years for support and legal purposes
+                </span>
               </li>
             </ul>
           </CardContent>
@@ -208,7 +214,8 @@ export default function PrivacyPolicyPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-300 mb-4">
-              If you have questions about this Privacy Policy or want to exercise your rights, please contact us:
+              If you have questions about this Privacy Policy or want to exercise your rights,
+              please contact us:
             </p>
             <div className="space-y-2">
               <p className="text-gray-300">
@@ -247,22 +254,23 @@ export default function PrivacyPolicyPage() {
               </li>
             </ul>
             <p className="text-gray-300 text-sm">
-              Your continued use of our platform after changes are posted constitutes acceptance of the updated policy.
+              Your continued use of our platform after changes are posted constitutes acceptance of
+              the updated policy.
             </p>
           </CardContent>
         </Card>
 
         <div className="mt-8 text-center">
-          <Button 
+          <Button
             className="bg-green-600 hover:bg-green-700 text-white mr-4"
-            onClick={() => window.location.href = '/contact'}
+            onClick={() => (window.location.href = '/contact')}
           >
             Contact Us
           </Button>
-          <Button 
+          <Button
             variant="outline"
             className="border-white text-white hover:bg-white/10"
-            onClick={() => window.location.href = '/terms-of-use'}
+            onClick={() => (window.location.href = '/terms-of-use')}
           >
             View Terms of Use
           </Button>

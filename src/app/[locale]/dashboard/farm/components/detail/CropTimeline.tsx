@@ -1,17 +1,17 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Crop, Equipment } from "./types";
-import { Award, Tractor } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
-import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Crop, Equipment } from './types';
+import { Award, Tractor } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import { useTranslations } from 'next-intl';
+import { cn } from '@/lib/utils';
 
 interface CropTimelineProps {
   totalAcreage: number;
   crops: Crop[];
   equipment: Equipment[];
-  certifications: { name: string; status: string; }[];
+  certifications: { name: string; status: string }[];
 }
 
 const CROP_STATE = {
@@ -20,21 +20,26 @@ const CROP_STATE = {
   POOR: 'POOR',
 } as const;
 
-type CropState = typeof CROP_STATE[keyof typeof CROP_STATE];
+type CropState = (typeof CROP_STATE)[keyof typeof CROP_STATE];
 
 const EQUIPMENT_STATE = {
   ACTIVE: 'active',
   MAINTENANCE: 'maintenance',
-  INACTIVE: 'inactive'
+  INACTIVE: 'inactive',
 };
 
 const CERTIFICATION_STATE = {
   ACTIVE: 'active',
   PENDING: 'pending',
-  EXPIRED: 'expired'
+  EXPIRED: 'expired',
 };
 
-export function CropTimeline({ totalAcreage, crops, equipment, certifications }: CropTimelineProps) {
+export function CropTimeline({
+  totalAcreage,
+  crops,
+  equipment,
+  certifications,
+}: CropTimelineProps) {
   const t = useTranslations('Farm.crops');
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -125,7 +130,7 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="font-medium">{crop.name}</h3>
-                    <p className={cn("text-sm", getStatusCropColor(crop.status as CropState))}>
+                    <p className={cn('text-sm', getStatusCropColor(crop.status as CropState))}>
                       {t(`status.${crop.status.toLowerCase()}`)}
                     </p>
                   </div>
@@ -144,7 +149,7 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
                     crop: crop.name,
                     value: crop.acreage,
                     total: totalAcreage,
-                    percentage: Math.round((crop.acreage / totalAcreage) * 100)
+                    percentage: Math.round((crop.acreage / totalAcreage) * 100),
                   })}
                 />
               </div>
@@ -161,7 +166,10 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
         <CardContent>
           <div className="space-y-4">
             {equipment.map((item) => (
-              <div key={item.name} className="flex flex-wrap items-center justify-between gap-2 py-1">
+              <div
+                key={item.name}
+                className="flex flex-wrap items-center justify-between gap-2 py-1"
+              >
                 <div className="flex items-center gap-2 min-w-[150px]">
                   <Tractor className="h-4 w-4 text-gray-500 flex-shrink-0" />
                   <span className="text-sm">{item.name}</span>
@@ -183,12 +191,17 @@ export function CropTimeline({ totalAcreage, crops, equipment, certifications }:
         <CardContent>
           <div className="space-y-4">
             {certifications.map((cert) => (
-              <div key={cert.name} className="flex flex-wrap items-center justify-between gap-2 py-1">
+              <div
+                key={cert.name}
+                className="flex flex-wrap items-center justify-between gap-2 py-1"
+              >
                 <div className="flex items-center gap-2 min-w-[150px]">
                   <Award className="h-4 w-4 text-gray-500 flex-shrink-0" />
                   <span className="text-sm">{cert.name}</span>
                 </div>
-                <span className={`text-sm ${getStatusCertificationColor(cert.status)} flex-shrink-0`}>
+                <span
+                  className={`text-sm ${getStatusCertificationColor(cert.status)} flex-shrink-0`}
+                >
                   {getStatusCertificationLabel(cert.status)}
                 </span>
               </div>

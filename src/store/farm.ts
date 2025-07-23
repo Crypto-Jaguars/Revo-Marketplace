@@ -108,17 +108,14 @@ export const useFarmStore = create<FarmState & FarmActions>()(
 
       setFarmData: (data) => set((state) => ({ ...state, ...data })),
 
-      updateLocation: (location) =>
-        set((state) => ({ ...state, location })),
+      updateLocation: (location) => set((state) => ({ ...state, location })),
 
       addCertification: (certification) =>
         set((state) => ({
           ...state,
-          certifications: state.certifications.some(cert => cert.id === certification.id)
-            ? (
-                set({ error: `Certification with ID ${certification.id} already exists` }),
-                state.certifications
-              )
+          certifications: state.certifications.some((cert) => cert.id === certification.id)
+            ? (set({ error: `Certification with ID ${certification.id} already exists` }),
+              state.certifications)
             : [...state.certifications, certification],
         })),
 
@@ -131,14 +128,9 @@ export const useFarmStore = create<FarmState & FarmActions>()(
       updateCrop: (id, updates) =>
         set((state) => ({
           ...state,
-          activeCrops: state.activeCrops.some(crop => crop.id === id)
-            ? state.activeCrops.map((crop) =>
-                crop.id === id ? { ...crop, ...updates } : crop
-              )
-            : (
-                set({ error: `Crop with ID ${id} not found` }),
-                state.activeCrops
-              ),
+          activeCrops: state.activeCrops.some((crop) => crop.id === id)
+            ? state.activeCrops.map((crop) => (crop.id === id ? { ...crop, ...updates } : crop))
+            : (set({ error: `Crop with ID ${id} not found` }), state.activeCrops),
         })),
 
       setLoading: (isLoading) => set({ isLoading }),
@@ -151,10 +143,8 @@ export const useFarmStore = create<FarmState & FarmActions>()(
       name: 'farm-storage',
       partialize: (state) =>
         Object.fromEntries(
-          Object.entries(state).filter(
-            ([key]) => !['isLoading', 'error'].includes(key)
-          )
+          Object.entries(state).filter(([key]) => !['isLoading', 'error'].includes(key))
         ),
     }
   )
-); 
+);

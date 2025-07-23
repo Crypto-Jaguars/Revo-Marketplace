@@ -1,7 +1,7 @@
-import React from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Button } from '@/components/ui/button';
 
 interface UndoNotificationProps {
   itemName: string;
@@ -14,19 +14,24 @@ const UndoNotification: React.FC<UndoNotificationProps> = ({ itemName, onUndo })
       toast(
         <div>
           <p>Removed {itemName}</p>
-          <Button variant="link" onClick={() => {
-            onUndo();
-            toast.dismiss();
-          }}>Undo</Button>
+          <Button
+            variant="link"
+            onClick={() => {
+              onUndo();
+              toast.dismiss();
+            }}
+          >
+            Undo
+          </Button>
         </div>,
         {
-          autoClose: 15000, 
+          autoClose: 15000,
           closeButton: true,
-          position: "bottom-left"
+          position: 'bottom-left',
         }
       );
     };
-    
+
     notify();
   }, [itemName, onUndo]);
 

@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
-import type { CartState } from "./types"
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { CartState } from './types';
 
 export const useCartStore = create<CartState>()(
   persist(
@@ -24,52 +24,52 @@ export const useCartStore = create<CartState>()(
       updateQuantity: async (id: number, quantity: number) => {
         try {
           if (quantity <= 0) {
-            throw new Error("Quantity must be greater than zero")
+            throw new Error('Quantity must be greater than zero');
           }
 
-          set({ loading: true, error: null })
+          set({ loading: true, error: null });
 
-          const item = get().Items.find((item) => item.id === id)
+          const item = get().Items.find((item) => item.id === id);
           if (item?.stockQuantity && quantity > item.stockQuantity) {
-            throw new Error(`Only ${item.stockQuantity} items available in stock`)
+            throw new Error(`Only ${item.stockQuantity} items available in stock`);
           }
 
-          await new Promise((resolve) => setTimeout(resolve, 300))
+          await new Promise((resolve) => setTimeout(resolve, 300));
 
           set((state) => ({
             Items: state.Items.map((item) => (item.id === id ? { ...item, quantity } : item)),
-          }))
+          }));
 
-          get().calculateSummary()
+          get().calculateSummary();
         } catch (err: unknown) {
-          set({ error: err instanceof Error ? err.message : "Failed to update quantity" })
+          set({ error: err instanceof Error ? err.message : 'Failed to update quantity' });
         } finally {
-          set({ loading: false })
+          set({ loading: false });
         }
       },
 
       calculateSummary: () => {
-        const Items = get().Items
+        const Items = get().Items;
         const subtotal = Items.reduce((acc, item) => {
-          const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1
-          return acc + item.price.amount * discountMultiplier * item.quantity
-        }, 0)
-        const shipping = get().shipping
-        set({ subtotal, total: subtotal + shipping })
+          const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1;
+          return acc + item.price.amount * discountMultiplier * item.quantity;
+        }, 0);
+        const shipping = get().shipping;
+        set({ subtotal, total: subtotal + shipping });
       },
 
       addItem: async (newItem) => {
         try {
-          set({ loading: true, error: null })
+          set({ loading: true, error: null });
 
-          await new Promise((resolve) => setTimeout(resolve, 300))
+          await new Promise((resolve) => setTimeout(resolve, 300));
 
           set((state) => {
-            const existingItem = state.Items.find((item) => item.id === newItem.id)
+            const existingItem = state.Items.find((item) => item.id === newItem.id);
 
             if (existingItem) {
-              const newQuantity = existingItem.quantity + newItem.quantity
-              const maxQuantity = existingItem.stockQuantity || Number.MAX_SAFE_INTEGER
+              const newQuantity = existingItem.quantity + newItem.quantity;
+              const maxQuantity = existingItem.stockQuantity || Number.MAX_SAFE_INTEGER;
 
               return {
                 Items: state.Items.map((item) =>
@@ -78,63 +78,65 @@ export const useCartStore = create<CartState>()(
                         ...item,
                         quantity: Math.min(newQuantity, maxQuantity),
                       }
-                    : item,
+                    : item
                 ),
-              }
+              };
             } else {
-              return { Items: [...state.Items, newItem] }
+              return { Items: [...state.Items, newItem] };
             }
-          })
+          });
 
-          get().calculateSummary()
+          get().calculateSummary();
         } catch (err) {
-          set({ error: "Failed to add item" })
+          set({ error: 'Failed to add item' });
         } finally {
-          set({ loading: false })
+          set({ loading: false });
         }
       },
 
       removeItem: async (id) => {
         try {
-          set({ loading: true, error: null })
+          set({ loading: true, error: null });
 
-          await new Promise((resolve) => setTimeout(resolve, 300))
+          await new Promise((resolve) => setTimeout(resolve, 300));
 
           set((state) => {
-            const itemToRemove = state.Items.find((item) => item.id === id)
+            const itemToRemove = state.Items.find((item) => item.id === id);
             return {
               Items: state.Items.filter((item) => item.id !== id),
-              lastRemovedItems: itemToRemove ? [itemToRemove, ...state.lastRemovedItems] : state.lastRemovedItems,
-            }
-          })
+              lastRemovedItems: itemToRemove
+                ? [itemToRemove, ...state.lastRemovedItems]
+                : state.lastRemovedItems,
+            };
+          });
 
-          get().calculateSummary()
+          get().calculateSummary();
         } catch (err) {
-          set({ error: "Failed to remove item" })
+          set({ error: 'Failed to remove item' });
         } finally {
-          set({ loading: false })
+          set({ loading: false });
         }
       },
 
       bulkRemove: async (ids) => {
         try {
-          set({ loading: true, error: null })
+          set({ loading: true, error: null });
 
-          await new Promise((resolve) => setTimeout(resolve, 300))
+          await new Promise((resolve) => setTimeout(resolve, 300));
 
           set((state) => {
-            const removedItems = state.Items.filter((item) => ids.includes(item.id))
+            const removedItems = state.Items.filter((item) => ids.includes(item.id));
             return {
               Items: state.Items.filter((item) => !ids.includes(item.id)),
               lastRemovedItems: [...removedItems, ...state.lastRemovedItems],
-            }
-          })
+            };
+          });
 
-          get().calculateSummary()
+          get().calculateSummary();
         } catch (err) {
-          set({ error: "Failed to remove items" })
+          set({ error: 'Failed to remove items' });
         } finally {
-          set({ loading: false })
+          set({ loading: false });
         }
       },
 
@@ -142,33 +144,33 @@ export const useCartStore = create<CartState>()(
         set((state) => ({
           Items: [...state.lastRemovedItems, ...state.Items],
           lastRemovedItems: [],
-        }))
+        }));
 
-        get().calculateSummary()
+        get().calculateSummary();
       },
 
       resetCart: () => {
-        set({ Items: [], lastRemovedItems: [] })
-        get().calculateSummary()
+        set({ Items: [], lastRemovedItems: [] });
+        get().calculateSummary();
       },
 
       clearCart: async () => {
         try {
-          set({ loading: true, error: null })
+          set({ loading: true, error: null });
 
-          await new Promise((resolve) => setTimeout(resolve, 300))
+          await new Promise((resolve) => setTimeout(resolve, 300));
 
-          set({ Items: [] })
-          get().calculateSummary()
+          set({ Items: [] });
+          get().calculateSummary();
         } catch (err) {
-          set({ error: "Failed to clear cart" })
+          set({ error: 'Failed to clear cart' });
         } finally {
-          set({ loading: false })
+          set({ loading: false });
         }
       },
     }),
     {
-      name: "cart-storage",
+      name: 'cart-storage',
       partialize: (state) => ({
         Items: state.Items,
         subtotal: state.subtotal,
@@ -176,6 +178,6 @@ export const useCartStore = create<CartState>()(
         total: state.total,
         isOpen: state.isOpen,
       }),
-    },
-  ),
-)
+    }
+  )
+);
