@@ -8,7 +8,12 @@ interface RatingProps {
   onChange?: (value: number) => void;
 }
 
-function isValidRating(value: number, max: number = 5): value is number & { __brand: 'ValidRating' } { return value >= 0 && value <= max; }
+function isValidRating(
+  value: number,
+  max: number = 5
+): value is number & { __brand: 'ValidRating' } {
+  return value >= 0 && value <= max;
+}
 
 export function Rating({ value, max = 5, readOnly = false, onChange }: RatingProps) {
   if (max <= 0) {
@@ -17,7 +22,7 @@ export function Rating({ value, max = 5, readOnly = false, onChange }: RatingPro
   if (value < 0 || value > max) {
     throw new Error(`Rating: value must be between 0 and ${max}`);
   }
- 
+
   const [hoveredValue, setHoveredValue] = React.useState<number | null>(null);
   const stars = Array.from({ length: max }, (_, i) => {
     const filled = value >= i + 1;
@@ -65,4 +70,4 @@ export function Rating({ value, max = 5, readOnly = false, onChange }: RatingPro
       {stars}
     </div>
   );
-} 
+}

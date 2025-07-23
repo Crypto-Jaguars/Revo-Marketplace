@@ -19,9 +19,7 @@ function AccountPage() {
           <span className="text-gray-500">/</span>
           <span>{t('page.breadcrumb.account')}</span>
         </div>
-        <div className="text-sm">
-          {t('page.welcome', { name: 'Diego' })}
-        </div>
+        <div className="text-sm">{t('page.welcome', { name: 'Diego' })}</div>
       </div>
 
       <div className="flex flex-col md:flex-row gap-12">
@@ -29,9 +27,7 @@ function AccountPage() {
         <aside className="w-64">
           <div className="space-y-8">
             <div>
-              <h2 className="font-semibold mb-4">
-                {t('page.navigation.manageAccount.title')}
-              </h2>
+              <h2 className="font-semibold mb-4">{t('page.navigation.manageAccount.title')}</h2>
               <div className="space-y-2">
                 <Link href="#" className="block text-gray-600 text-sm hover:text-black">
                   {t('page.navigation.manageAccount.profile')}
@@ -41,11 +37,9 @@ function AccountPage() {
                 </Link>
               </div>
             </div>
-            
+
             <div>
-              <h2 className="font-semibold mb-4">
-                {t('page.navigation.orders.title')}
-              </h2>
+              <h2 className="font-semibold mb-4">{t('page.navigation.orders.title')}</h2>
               <div className="space-y-2">
                 <Link href="#" className="block text-gray-600 text-sm hover:text-black">
                   {t('page.navigation.orders.returns')}
@@ -60,9 +54,7 @@ function AccountPage() {
 
         {/* Main Content Area */}
         <main className="flex-1">
-          <h1 className="text-xl font-medium text-[#375B42] mb-6">
-            {t('page.title')}
-          </h1>
+          <h1 className="text-xl font-medium text-[#375B42] mb-6">{t('page.title')}</h1>
           <ProfileForm />
         </main>
       </div>

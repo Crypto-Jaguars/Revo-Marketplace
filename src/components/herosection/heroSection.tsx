@@ -18,7 +18,7 @@ export default function HeroSection() {
         <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-primary_green/5"></div>
         <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-primary_green/10"></div>
       </div>
-      
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -29,17 +29,15 @@ export default function HeroSection() {
           <span className="text-primary_green block mb-2">{t('title')}</span>
           <span className="text-gray-800">{t('subtitle')}</span>
         </h1>
-        <p className="text-lg mb-8 text-gray-600 max-w-2xl mx-auto">
-          {t('description')}
-        </p>
+        <p className="text-lg mb-8 text-gray-600 max-w-2xl mx-auto">{t('description')}</p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            asChild 
+          <Button
+            asChild
             className="bg-primary_green hover:bg-primary_green/90 px-6 py-6 text-base font-medium"
             style={{ color: '#FFFFFF' }}
           >
-            <Link 
+            <Link
               href={`/${language}/marketplace`}
               style={{ color: '#FFFFFF' }}
               className="!text-[#FFFFFF]"
@@ -54,12 +52,12 @@ export default function HeroSection() {
           >
             <Link href={`/${language}/join-farmer`}>{t('joinAsFarmer')}</Link>
           </Button>
-          <Button 
-            asChild 
+          <Button
+            asChild
             className="bg-[#264534] hover:bg-[#264534]/90 px-6 py-6 text-base font-medium"
             style={{ color: '#FFFFFF' }}
           >
-            <Link 
+            <Link
               href={`/${language}/invest`}
               style={{ color: '#FFFFFF' }}
               className="!text-[#FFFFFF]"

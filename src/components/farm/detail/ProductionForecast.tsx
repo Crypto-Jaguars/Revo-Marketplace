@@ -1,9 +1,9 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Farm } from "./types";
-import { useTranslations } from "next-intl";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Farm } from './types';
+import { useTranslations } from 'next-intl';
 
 interface ProductionForecastProps {
   farm: Farm;
@@ -15,17 +15,30 @@ interface CropHarvestData {
 
 export function ProductionForecast({ farm }: ProductionForecastProps) {
   const t = useTranslations('farm.forecast');
-  const months = [t('months.january'), t('months.february'), t('months.march'), t('months.april'), t('months.may'), t('months.june'), t('months.july'), t('months.august'), t('months.september'), t('months.october'), t('months.november'), t('months.december')];
-  
+  const months = [
+    t('months.january'),
+    t('months.february'),
+    t('months.march'),
+    t('months.april'),
+    t('months.may'),
+    t('months.june'),
+    t('months.july'),
+    t('months.august'),
+    t('months.september'),
+    t('months.october'),
+    t('months.november'),
+    t('months.december'),
+  ];
+
   const cropHarvestData: CropHarvestData = {};
   const mockMonths = ['Jul', 'Aug', 'Sep'];
   const mockProgress = [58, 66, 75];
-  
+
   farm.activeCrops.forEach((crop, idx) => {
     const index = idx % 3;
     cropHarvestData[crop.name] = {
       harvestMonth: mockMonths[index],
-      progress: mockProgress[index]
+      progress: mockProgress[index],
     };
   });
 
@@ -46,13 +59,18 @@ export function ProductionForecast({ farm }: ProductionForecastProps) {
 
           <div className="space-y-6">
             {farm.activeCrops.map((crop) => {
-              const harvestData = cropHarvestData[crop.name as keyof typeof cropHarvestData] || { harvestMonth: 'N/A', progress: 0 };
-              
+              const harvestData = cropHarvestData[crop.name as keyof typeof cropHarvestData] || {
+                harvestMonth: 'N/A',
+                progress: 0,
+              };
+
               return (
                 <div key={crop.name} className="space-y-2">
                   <div className="flex justify-between items-center px-1">
                     <span className="font-medium text-sm md:text-base">{crop.name}</span>
-                    <span className="text-xs md:text-sm text-muted-foreground">{harvestData?.harvestMonth}</span>
+                    <span className="text-xs md:text-sm text-muted-foreground">
+                      {harvestData?.harvestMonth}
+                    </span>
                   </div>
                   <Progress value={harvestData?.progress} className="h-4" />
                 </div>

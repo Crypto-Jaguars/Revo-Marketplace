@@ -54,11 +54,11 @@ describe('WeatherWidget', () => {
   it('shows loading state initially', async () => {
     const promise = new Promise<WeatherData>(() => {});
     mockedGetWeatherData.mockImplementation(() => promise);
-    
+
     await act(async () => {
       render(<WeatherWidget location={mockLocation} />);
     });
-    
+
     const loadingElement = screen.getByRole('status');
     expect(loadingElement).toBeInTheDocument();
     expect(loadingElement).toHaveAttribute('aria-label', 'Loading weather data');
@@ -66,7 +66,7 @@ describe('WeatherWidget', () => {
 
   it('displays weather data when loaded successfully', async () => {
     mockedGetWeatherData.mockResolvedValue(mockWeatherData);
-    
+
     await act(async () => {
       render(<WeatherWidget location={mockLocation} />);
     });
@@ -81,7 +81,7 @@ describe('WeatherWidget', () => {
 
   it('shows error message when weather data fails to load', async () => {
     mockedGetWeatherData.mockRejectedValue(new Error('Failed to fetch'));
-    
+
     await act(async () => {
       render(<WeatherWidget location={mockLocation} />);
     });
@@ -93,7 +93,7 @@ describe('WeatherWidget', () => {
 
   it('displays forecast information', async () => {
     mockedGetWeatherData.mockResolvedValue(mockWeatherData);
-    
+
     await act(async () => {
       render(<WeatherWidget location={mockLocation} />);
     });
@@ -109,10 +109,7 @@ describe('WeatherWidget', () => {
     await act(async () => {
       render(<WeatherWidget location={mockLocation} />);
     });
-    
-    expect(getWeatherData).toHaveBeenCalledWith(
-      mockLocation.latitude,
-      mockLocation.longitude
-    );
+
+    expect(getWeatherData).toHaveBeenCalledWith(mockLocation.latitude, mockLocation.longitude);
   });
-}); 
+});

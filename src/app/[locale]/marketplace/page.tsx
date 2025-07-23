@@ -24,13 +24,13 @@ export default function MarketplacePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFilterLoading, setIsFilterLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12; 
+  const itemsPerPage = 12;
 
   const priceRange = useMemo(() => {
-    const prices = productsMock.map(p => p.price.amount);
+    const prices = productsMock.map((p) => p.price.amount);
     return {
       min: Math.min(...prices),
-      max: Math.max(...prices)
+      max: Math.max(...prices),
     };
   }, []);
 
@@ -44,9 +44,9 @@ export default function MarketplacePage() {
   });
 
   useEffect(() => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      search: searchTerm
+      search: searchTerm,
     }));
   }, [searchTerm]);
 
@@ -56,28 +56,27 @@ export default function MarketplacePage() {
 
   const filteredProducts = useMemo(() => {
     return productsMock.filter((product) => {
-      const searchMatch = !filters.search || 
-        product.name.toLowerCase().includes(filters.search.toLowerCase());
-      
-      const categoryMatch = !filters.category || 
-        product.category === filters.category;
-      
-      const methodMatch = !filters.farmingMethod || 
-        product.farmingMethod === filters.farmingMethod;
-      
-      const deliveryMatch = !filters.deliveryOnly || 
-        product.availableForDelivery;
-      
-      const pickupMatch = !filters.pickupOnly || 
-        product.pickupAvailable;
-      
-      const priceMatch = !filters.priceRange || (
-        calculateDiscountedPrice(product.price.amount, product.discount) >= filters.priceRange[0] && 
-        calculateDiscountedPrice(product.price.amount, product.discount) <= filters.priceRange[1]
+      const searchMatch =
+        !filters.search || product.name.toLowerCase().includes(filters.search.toLowerCase());
+
+      const categoryMatch = !filters.category || product.category === filters.category;
+
+      const methodMatch = !filters.farmingMethod || product.farmingMethod === filters.farmingMethod;
+
+      const deliveryMatch = !filters.deliveryOnly || product.availableForDelivery;
+
+      const pickupMatch = !filters.pickupOnly || product.pickupAvailable;
+
+      const priceMatch =
+        !filters.priceRange ||
+        (calculateDiscountedPrice(product.price.amount, product.discount) >=
+          filters.priceRange[0] &&
+          calculateDiscountedPrice(product.price.amount, product.discount) <=
+            filters.priceRange[1]);
+
+      return (
+        searchMatch && categoryMatch && methodMatch && deliveryMatch && pickupMatch && priceMatch
       );
-      
-      return searchMatch && categoryMatch && methodMatch && 
-             deliveryMatch && pickupMatch && priceMatch;
     });
   }, [filters]);
 
@@ -85,7 +84,10 @@ export default function MarketplacePage() {
     return [...filteredProducts].sort((a, b) => {
       switch (sortBy) {
         case 'price':
-          return calculateDiscountedPrice(a.price.amount, a.discount) - calculateDiscountedPrice(b.price.amount, b.discount);
+          return (
+            calculateDiscountedPrice(a.price.amount, a.discount) -
+            calculateDiscountedPrice(b.price.amount, b.discount)
+          );
         case 'date':
           return b.harvestDate.getTime() - a.harvestDate.getTime();
         case 'stock':
@@ -96,20 +98,17 @@ export default function MarketplacePage() {
     });
   }, [filteredProducts, sortBy]);
 
-  const categories = useMemo(() => 
-    Array.from(new Set(productsMock.map((p) => p.category))),
-    []
-  );
+  const categories = useMemo(() => Array.from(new Set(productsMock.map((p) => p.category))), []);
 
-  const farmingMethods = useMemo(() => 
-    Array.from(new Set(productsMock.map((p) => p.farmingMethod))),
+  const farmingMethods = useMemo(
+    () => Array.from(new Set(productsMock.map((p) => p.farmingMethod))),
     []
   );
 
   const handleFilterChange = useCallback(async (newFilters: Partial<ProductFilters>) => {
     setIsFilterLoading(true);
-    setFilters(prev => ({ ...prev, ...newFilters }));
-    await new Promise(resolve => setTimeout(resolve, 500));
+    setFilters((prev) => ({ ...prev, ...newFilters }));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     setIsFilterLoading(false);
   }, []);
 
@@ -130,7 +129,7 @@ export default function MarketplacePage() {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsLoading(false);
     };
     loadInitialData();
@@ -164,7 +163,8 @@ export default function MarketplacePage() {
                 <div className="flex items-center">
                   <div className="text-black/50 text-sm mr-4">
                     Showing {(currentPage - 1) * itemsPerPage + 1}-
-                    {Math.min(currentPage * itemsPerPage, sortedProducts.length)} of {sortedProducts.length} products
+                    {Math.min(currentPage * itemsPerPage, sortedProducts.length)} of{' '}
+                    {sortedProducts.length} products
                   </div>
                   <span className="text-black/50 text-sm font-medium mr-2">Sort by:</span>
                   <Select value={sortBy} onValueChange={handleSortChange}>

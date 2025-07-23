@@ -8,7 +8,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { toast } from 'sonner';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 
@@ -25,17 +31,17 @@ export default function ContactPage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      toast.success('Your message has been sent successfully! We\'ll get back to you soon.');
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      toast.success("Your message has been sent successfully! We'll get back to you soon.");
       setFormData({
         name: '',
         email: '',
@@ -55,26 +61,26 @@ export default function ContactPage() {
       icon: <Mail className="h-6 w-6 text-green-500" />,
       title: 'Email',
       content: 'support@revolutionaryfarmers.com',
-      description: 'Send us an email anytime'
+      description: 'Send us an email anytime',
     },
     {
       icon: <Phone className="h-6 w-6 text-blue-500" />,
       title: 'Phone',
       content: '+1 (555) 123-4567',
-      description: 'Mon-Fri from 8am to 6pm EST'
+      description: 'Mon-Fri from 8am to 6pm EST',
     },
     {
       icon: <MapPin className="h-6 w-6 text-purple-500" />,
       title: 'Address',
       content: '123 Farm Street, Agriculture City, AC 12345',
-      description: 'Our headquarters location'
+      description: 'Our headquarters location',
     },
     {
       icon: <Clock className="h-6 w-6 text-yellow-500" />,
       title: 'Support Hours',
       content: 'Monday - Friday: 8am - 6pm EST',
-      description: 'We aim to respond within 24 hours'
-    }
+      description: 'We aim to respond within 24 hours',
+    },
   ];
 
   const categories = [
@@ -83,7 +89,7 @@ export default function ContactPage() {
     { value: 'billing', label: 'Billing & Payments' },
     { value: 'farmer', label: 'Farmer Application' },
     { value: 'partnership', label: 'Partnership' },
-    { value: 'feedback', label: 'Feedback' }
+    { value: 'feedback', label: 'Feedback' },
   ];
 
   return (
@@ -92,8 +98,8 @@ export default function ContactPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">Get in Touch</h1>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Have questions about Revolutionary Farmers? We&apos;re here to help. 
-            Reach out to us and we&apos;ll get back to you as soon as possible.
+            Have questions about Revolutionary Farmers? We&apos;re here to help. Reach out to us and
+            we&apos;ll get back to you as soon as possible.
           </p>
         </div>
 
@@ -110,9 +116,7 @@ export default function ContactPage() {
               <CardContent className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 mt-1">
-                      {info.icon}
-                    </div>
+                    <div className="flex-shrink-0 mt-1">{info.icon}</div>
                     <div>
                       <h3 className="text-lg font-semibold text-white">{info.title}</h3>
                       <p className="text-green-400 font-medium">{info.content}</p>
@@ -133,28 +137,28 @@ export default function ContactPage() {
                   <Button
                     variant="ghost"
                     className="justify-start text-white hover:bg-white/10"
-                    onClick={() => window.location.href = '/faq'}
+                    onClick={() => (window.location.href = '/faq')}
                   >
                     Frequently Asked Questions
                   </Button>
                   <Button
                     variant="ghost"
                     className="justify-start text-white hover:bg-white/10"
-                    onClick={() => window.location.href = '/join-farmer'}
+                    onClick={() => (window.location.href = '/join-farmer')}
                   >
                     Become a Farmer
                   </Button>
                   <Button
                     variant="ghost"
                     className="justify-start text-white hover:bg-white/10"
-                    onClick={() => window.location.href = '/privacy-policy'}
+                    onClick={() => (window.location.href = '/privacy-policy')}
                   >
                     Privacy Policy
                   </Button>
                   <Button
                     variant="ghost"
                     className="justify-start text-white hover:bg-white/10"
-                    onClick={() => window.location.href = '/terms-of-use'}
+                    onClick={() => (window.location.href = '/terms-of-use')}
                   >
                     Terms of Service
                   </Button>
@@ -175,7 +179,9 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="name" className="text-white">Name *</Label>
+                    <Label htmlFor="name" className="text-white">
+                      Name *
+                    </Label>
                     <Input
                       id="name"
                       name="name"
@@ -187,7 +193,9 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="email" className="text-white">Email *</Label>
+                    <Label htmlFor="email" className="text-white">
+                      Email *
+                    </Label>
                     <Input
                       id="email"
                       name="email"
@@ -203,8 +211,15 @@ export default function ContactPage() {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="category" className="text-white">Category</Label>
-                    <Select value={formData.category} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
+                    <Label htmlFor="category" className="text-white">
+                      Category
+                    </Label>
+                    <Select
+                      value={formData.category}
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({ ...prev, category: value }))
+                      }
+                    >
                       <SelectTrigger className="bg-white/20 border-white/30 text-white">
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
@@ -218,7 +233,9 @@ export default function ContactPage() {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="subject" className="text-white">Subject *</Label>
+                    <Label htmlFor="subject" className="text-white">
+                      Subject *
+                    </Label>
                     <Input
                       id="subject"
                       name="subject"
@@ -232,7 +249,9 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="message" className="text-white">Message *</Label>
+                  <Label htmlFor="message" className="text-white">
+                    Message *
+                  </Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -272,20 +291,20 @@ export default function ContactPage() {
           <CardContent className="p-8 text-center">
             <h2 className="text-2xl font-bold text-white mb-4">Need Immediate Help?</h2>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              For urgent technical issues or account problems, check our FAQ section first. 
-              Most common questions are answered there with immediate solutions.
+              For urgent technical issues or account problems, check our FAQ section first. Most
+              common questions are answered there with immediate solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
+              <Button
                 className="bg-green-600 hover:bg-green-700 text-white"
-                onClick={() => window.location.href = '/faq'}
+                onClick={() => (window.location.href = '/faq')}
               >
                 View FAQ
               </Button>
-              <Button 
+              <Button
                 variant="outline"
                 className="border-white text-white hover:bg-white/10"
-                onClick={() => window.location.href = 'mailto:support@revolutionaryfarmers.com'}
+                onClick={() => (window.location.href = 'mailto:support@revolutionaryfarmers.com')}
               >
                 Email Support
               </Button>

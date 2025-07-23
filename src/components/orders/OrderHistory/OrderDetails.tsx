@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { ArrowLeft, Package, Truck } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import type { Order } from "./types";
-import { OrderStatus } from "./OrderStatus";
+import { ArrowLeft, Package, Truck } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import type { Order } from './types';
+import { OrderStatus } from './OrderStatus';
 import { useTranslations } from 'next-intl';
 
 interface OrderDetailsProps {
@@ -26,7 +26,6 @@ export function OrderDetails({ order, onBack }: OrderDetailsProps) {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-
         <Card>
           <CardHeader>
             <CardTitle>{t('details.orderInfo.title')}</CardTitle>
@@ -97,18 +96,24 @@ export function OrderDetails({ order, onBack }: OrderDetailsProps) {
               <Truck className="h-5 w-5 text-muted-foreground mt-0.5" />
               <div className="flex-1">
                 <p className="font-medium">{t('details.shipping.address')}</p>
-                <p className="text-sm text-muted-foreground whitespace-pre-line">{order.shipping.address}</p>
+                <p className="text-sm text-muted-foreground whitespace-pre-line">
+                  {order.shipping.address}
+                </p>
               </div>
             </div>
             {order.shipping.trackingNumber && (
               <div className="flex justify-between">
-                <span className="text-muted-foreground">{t('details.shipping.trackingNumber')}</span>
+                <span className="text-muted-foreground">
+                  {t('details.shipping.trackingNumber')}
+                </span>
                 <span>{order.shipping.trackingNumber}</span>
               </div>
             )}
             {order.shipping.estimatedDelivery && (
               <div className="flex justify-between">
-                <span className="text-muted-foreground">{t('details.shipping.estimatedDelivery')}</span>
+                <span className="text-muted-foreground">
+                  {t('details.shipping.estimatedDelivery')}
+                </span>
                 <span>{order.shipping.estimatedDelivery.toLocaleDateString()}</span>
               </div>
             )}

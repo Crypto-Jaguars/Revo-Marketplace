@@ -93,22 +93,28 @@ export default function MapView({ location, className }: MapViewProps) {
         onKeyDown={(e) => {
           if (!map.current) return;
           const MOVE_AMOUNT = 100;
-          switch(e.key) {
+          switch (e.key) {
             case 'ArrowUp':
-              map.current.panBy([0, -MOVE_AMOUNT]); break;
+              map.current.panBy([0, -MOVE_AMOUNT]);
+              break;
             case 'ArrowDown':
-              map.current.panBy([0, MOVE_AMOUNT]); break;
+              map.current.panBy([0, MOVE_AMOUNT]);
+              break;
             case 'ArrowLeft':
-              map.current.panBy([-MOVE_AMOUNT, 0]); break;
+              map.current.panBy([-MOVE_AMOUNT, 0]);
+              break;
             case 'ArrowRight':
-              map.current.panBy([MOVE_AMOUNT, 0]); break;
+              map.current.panBy([MOVE_AMOUNT, 0]);
+              break;
             case '+':
-              map.current.zoomIn(); break;
+              map.current.zoomIn();
+              break;
             case '-':
-              map.current.zoomOut(); break;
+              map.current.zoomOut();
+              break;
           }
         }}
       />
     </Card>
   );
-} 
+}

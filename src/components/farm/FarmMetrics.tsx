@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -20,10 +14,7 @@ import { Progress } from '@/components/ui/progress';
 import { FarmMetricsProps } from './types';
 import { formatDate } from '@/lib/utils';
 
-export default function FarmMetrics({
-  crops,
-  sustainabilityMetrics,
-}: FarmMetricsProps) {
+export default function FarmMetrics({ crops, sustainabilityMetrics }: FarmMetricsProps) {
   return (
     <div className="space-y-6">
       {/* Active Crops */}
@@ -53,8 +44,8 @@ export default function FarmMetrics({
                         crop.status === 'active'
                           ? 'success'
                           : crop.status === 'planned'
-                          ? 'secondary'
-                          : 'default'
+                            ? 'secondary'
+                            : 'default'
                       }
                     >
                       {crop.status}
@@ -86,12 +77,11 @@ export default function FarmMetrics({
               <div className="flex items-center justify-between">
                 <h4 className="font-medium">Water Usage</h4>
                 <span className="text-sm text-muted-foreground">
-                  {sustainabilityMetrics.waterUsage.amount}{' '}
-                  {sustainabilityMetrics.waterUsage.unit}/
+                  {sustainabilityMetrics.waterUsage.amount} {sustainabilityMetrics.waterUsage.unit}/
                   {sustainabilityMetrics.waterUsage.period}
                 </span>
               </div>
-              <Progress 
+              <Progress
                 value={50}
                 aria-label="Water usage progress"
                 aria-valuemin={0}
@@ -105,8 +95,7 @@ export default function FarmMetrics({
               <div className="flex items-center justify-between">
                 <h4 className="font-medium">Renewable Energy</h4>
                 <span className="text-sm text-muted-foreground">
-                  {sustainabilityMetrics.renewableEnergy.percentage}% of total
-                  usage
+                  {sustainabilityMetrics.renewableEnergy.percentage}% of total usage
                 </span>
               </div>
               <Progress
@@ -144,7 +133,7 @@ export default function FarmMetrics({
                   {sustainabilityMetrics.carbonFootprint.period}
                 </span>
               </div>
-              <Progress 
+              <Progress
                 value={50}
                 aria-label="Carbon footprint progress"
                 aria-valuemin={0}
@@ -201,4 +190,4 @@ export default function FarmMetrics({
       </div>
     </div>
   );
-} 
+}

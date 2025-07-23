@@ -7,8 +7,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
@@ -25,23 +25,19 @@ interface CartItem {
 
 const CartWidget = ({ className }: CartWidgetProps) => {
   const t = useTranslations('Marketplace');
-  
+
   const cartItems: CartItem[] = [
     { id: 1, name: 'Organic Tomatoes', price: 4.99, quantity: 2 },
     { id: 2, name: 'Fresh Apples', price: 3.99, quantity: 1 },
   ];
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button 
-          variant="ghost" 
-          size="icon"
-          className={cn("relative", className)}
-        >
+        <Button variant="ghost" size="icon" className={cn('relative', className)}>
           <ShoppingCart className="h-6 w-6 text-[#375B42] dark:bg-background-dark" />
           {cartCount > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-500 text-white-dark text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -54,9 +50,7 @@ const CartWidget = ({ className }: CartWidgetProps) => {
         <DropdownMenuLabel>{t('cart.title')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {cartItems.length === 0 ? (
-          <DropdownMenuItem disabled>
-            {t('cart.empty')}
-          </DropdownMenuItem>
+          <DropdownMenuItem disabled>{t('cart.empty')}</DropdownMenuItem>
         ) : (
           <>
             {cartItems.map((item) => (
@@ -67,9 +61,7 @@ const CartWidget = ({ className }: CartWidgetProps) => {
                     {t('cart.quantity', { count: item.quantity })}
                   </span>
                 </div>
-                <span className="font-medium">
-                  ${(item.price * item.quantity).toFixed(2)}
-                </span>
+                <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />

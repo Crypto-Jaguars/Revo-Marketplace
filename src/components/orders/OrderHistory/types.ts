@@ -1,4 +1,4 @@
-export type OrderStatus = "pending" | "processing" | "delivered" | "cancelled";
+export type OrderStatus = 'pending' | 'processing' | 'delivered' | 'cancelled';
 
 export interface OrderItem {
   id: string;
@@ -55,7 +55,7 @@ export interface OrderFilters {
     start: Date | null;
     end: Date | null;
   };
-  status: OrderStatus | "all";
+  status: OrderStatus | 'all';
   sortBy: string;
   minAmount: number;
   maxAmount: number;

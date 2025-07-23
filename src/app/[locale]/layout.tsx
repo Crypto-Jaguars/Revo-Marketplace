@@ -27,12 +27,11 @@ interface RootLayoutProps {
   params: { locale: string };
 }
 
-export default function RootLayout({
-  children,
-  params: { locale },
-}: RootLayoutProps) {
+export default function RootLayout({ children, params: { locale } }: RootLayoutProps) {
   const [currentLocale, setCurrentLocale] = useState(locale);
-  const [messages, setMessages] = useState<Record<string, Record<string, string>> | undefined>(undefined);
+  const [messages, setMessages] = useState<Record<string, Record<string, string>> | undefined>(
+    undefined
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -61,7 +60,9 @@ export default function RootLayout({
   if (!messages) {
     return (
       <html lang={currentLocale}>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}
+        >
           <div className="flex items-center justify-center h-screen">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
           </div>

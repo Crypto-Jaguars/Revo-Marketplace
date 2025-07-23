@@ -18,7 +18,6 @@ const MarketplaceHeader = () => {
 
   return (
     <header className="w-full bg-white">
-
       <div className="w-full bg-filter_active">
         <div className="max-w-7xl mx-auto px-4 py-2 flex justify-end">
           <LanguageSwitcher />
@@ -29,17 +28,12 @@ const MarketplaceHeader = () => {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-   
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden p-2 text-gray-600 hover:text-gray-900"
                 aria-label="Toggle menu"
               >
-                {isMobileMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
 
               <Link href={`/${language}`}>
@@ -74,19 +68,19 @@ const MarketplaceHeader = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t">
             <div className="p-4 space-y-4">
-              <Link 
+              <Link
                 href={`/${language}`}
                 className="block px-4 py-2 text-gray-600 hover:text-gray-900"
               >
                 {t('home')}
               </Link>
-              <Link 
+              <Link
                 href={`/${language}/products`}
                 className="block px-4 py-2 text-gray-600 hover:text-gray-900"
               >
                 {t('products')}
               </Link>
-              <Link 
+              <Link
                 href={`/${language}/farm`}
                 className="block px-4 py-2 text-gray-600 hover:text-gray-900"
               >

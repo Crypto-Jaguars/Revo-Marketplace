@@ -1,14 +1,14 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { useCartStore } from "@/store/cartStore/store"
-import CartItemComponent from "./cartItem"
-import CartSummary from "./cartSummary"
-import { Button } from "@/components/ui/button"
-import { Loader2, AlertCircle, Truck, Store, Undo2, Trash2 } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
+import { useState, useEffect } from 'react';
+import { useCartStore } from '@/store/cartStore/store';
+import CartItemComponent from './cartItem';
+import CartSummary from './cartSummary';
+import { Button } from '@/components/ui/button';
+import { Loader2, AlertCircle, Truck, Store, Undo2, Trash2 } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CartPage() {
   const {
@@ -25,80 +25,82 @@ export default function CartPage() {
     undoRemove,
     lastRemovedItems,
     resetCart,
-  } = useCartStore()
+  } = useCartStore();
 
-  const [isCheckingOut, setIsCheckingOut] = useState(false)
-  const [selectedItems, setSelectedItems] = useState<number[]>([])
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
   // Reset selected items when cart items change
   useEffect(() => {
-    setSelectedItems([])
-  }, [])
+    setSelectedItems([]);
+  }, []);
 
   // Toggle item selection for bulk actions
   const toggleItemSelection = (id: number) => {
-    setSelectedItems((prev) => (prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]))
-  }
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
+    );
+  };
 
   // Select all items
   const selectAllItems = () => {
     if (selectedItems.length === Items.length) {
-      setSelectedItems([])
+      setSelectedItems([]);
     } else {
-      setSelectedItems(Items.map((item) => item.id))
+      setSelectedItems(Items.map((item) => item.id));
     }
-  }
+  };
 
   // Handle bulk remove
   const handleBulkRemove = async () => {
     if (selectedItems.length > 0) {
-      await bulkRemove(selectedItems)
-      setSelectedItems([])
+      await bulkRemove(selectedItems);
+      setSelectedItems([]);
     }
-  }
+  };
 
   // Group items by farmer
   const itemsByFarmer = Items.reduce(
     (acc, item) => {
       if (item.farmer) {
-        const farmerId = item.farmer.id
+        const farmerId = item.farmer.id;
         if (!acc[farmerId]) {
-          acc[farmerId] = []
+          acc[farmerId] = [];
         }
-        acc[farmerId].push(item)
+        acc[farmerId].push(item);
       } else {
         // For items without farmer info, group under "other"
-        if (!acc["other"]) {
-          acc["other"] = []
+        if (!acc['other']) {
+          acc['other'] = [];
         }
-        acc["other"].push(item)
+        acc['other'].push(item);
       }
-      return acc
+      return acc;
     },
-    {} as Record<string, typeof Items>,
-  )
+    {} as Record<string, typeof Items>
+  );
 
   // Calculate subtotal by farmer
   const subtotalByFarmer = Object.entries(itemsByFarmer).reduce(
     (acc, [farmerId, items]) => {
       acc[farmerId] = items.reduce((total, item) => {
-        const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1
-        return total + item.price.amount * discountMultiplier * item.quantity
-      }, 0)
-      return acc
+        const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1;
+        return total + item.price.amount * discountMultiplier * item.quantity;
+      }, 0);
+      return acc;
     },
-    {} as Record<string, number>,
-  )
+    {} as Record<string, number>
+  );
 
   const handleCheckout = () => {
-    setIsCheckingOut(true)
+    setIsCheckingOut(true);
     // Simulate checkout process
     setTimeout(() => {
-      setIsCheckingOut(false)
+      setIsCheckingOut(false);
       // Navigate to checkout or show success
-      alert("Proceeding to checkout!")
-    }, 1500)
-  }
+      alert('Proceeding to checkout!');
+    }, 1500);
+  };
 
   if (Items.length === 0 && lastRemovedItems.length === 0) {
     return (
@@ -109,12 +111,15 @@ export default function CartPage() {
           <p className="text-muted-foreground mb-6">
             Looks like you haven&apos;t added any agricultural products to your cart yet.
           </p>
-          <Button asChild className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
+          <Button
+            asChild
+            className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]"
+          >
             <a href="/en/products">Browse Products</a>
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
   if (Items.length === 0 && lastRemovedItems.length > 0) {
@@ -123,20 +128,25 @@ export default function CartPage() {
         <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
         <div className="bg-muted/30 rounded-lg p-12 text-center">
           <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
-          <p className="text-muted-foreground mb-6">You&apos;ve removed all items from your cart.</p>
+          <p className="text-muted-foreground mb-6">
+            You&apos;ve removed all items from your cart.
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={undoRemove} className="flex items-center gap-2">
               <Undo2 className="h-4 w-4" />
               Restore Removed Items
             </Button>
-            <Button asChild className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
+            <Button
+              asChild
+              className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]"
+            >
               <a href="/en/products">Browse Products</a>
             </Button>
           </div>
         </div>
         <ToastContainer />
       </div>
-    )
+    );
   }
 
   return (
@@ -154,9 +164,15 @@ export default function CartPage() {
         <Alert className="mb-6 bg-muted/30 border-muted">
           <div className="flex justify-between items-center w-full">
             <AlertDescription>
-              {lastRemovedItems.length} {lastRemovedItems.length === 1 ? "item" : "items"} removed from cart
+              {lastRemovedItems.length} {lastRemovedItems.length === 1 ? 'item' : 'items'} removed
+              from cart
             </AlertDescription>
-            <Button variant="outline" size="sm" onClick={undoRemove} className="flex items-center gap-1">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={undoRemove}
+              className="flex items-center gap-1"
+            >
               <Undo2 className="h-3 w-3" />
               Undo
             </Button>
@@ -176,11 +192,11 @@ export default function CartPage() {
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-4">
                 <h2 className="text-lg font-medium">
-                  {Items.length} {Items.length === 1 ? "Item" : "Items"}
+                  {Items.length} {Items.length === 1 ? 'Item' : 'Items'}
                 </h2>
                 {Items.length > 1 && (
                   <Button variant="outline" size="sm" onClick={selectAllItems} className="text-xs">
-                    {selectedItems.length === Items.length ? "Deselect All" : "Select All"}
+                    {selectedItems.length === Items.length ? 'Deselect All' : 'Select All'}
                   </Button>
                 )}
               </div>
@@ -208,17 +224,19 @@ export default function CartPage() {
             {/* Group items by farmer */}
             {Object.entries(itemsByFarmer).map(([farmerId, farmerItems]) => {
               // Skip rendering if no items
-              if (farmerItems.length === 0) return null
+              if (farmerItems.length === 0) return null;
 
               // Get farmer info from first item if available
-              const farmer = farmerItems[0].farmer
+              const farmer = farmerItems[0].farmer;
 
               return (
                 <div key={farmerId} className="mb-8">
                   {farmer && (
                     <div className="flex items-center gap-2 mb-4 p-2 bg-muted/30 rounded">
                       <span className="font-medium">{farmer.farmName}</span>
-                      <span className="text-xs text-muted-foreground">({farmer.location.address})</span>
+                      <span className="text-xs text-muted-foreground">
+                        ({farmer.location.address})
+                      </span>
                     </div>
                   )}
 
@@ -241,7 +259,9 @@ export default function CartPage() {
                     <div className="bg-muted/20 p-4">
                       <div className="flex justify-between mb-2">
                         <span>Subtotal ({farmerItems.length} items)</span>
-                        <span className="font-medium">${subtotalByFarmer[farmerId].toFixed(2)}</span>
+                        <span className="font-medium">
+                          ${subtotalByFarmer[farmerId].toFixed(2)}
+                        </span>
                       </div>
 
                       {farmer && (
@@ -264,12 +284,17 @@ export default function CartPage() {
                     </div>
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
 
           <div>
-            <CartSummary subtotal={subtotal} shipping={shipping} total={total} onCheckout={handleCheckout} />
+            <CartSummary
+              subtotal={subtotal}
+              shipping={shipping}
+              total={total}
+              onCheckout={handleCheckout}
+            />
 
             {isCheckingOut && (
               <div className="mt-4 p-4 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -281,8 +306,9 @@ export default function CartPage() {
             <div className="mt-6 p-4 border rounded-lg">
               <h3 className="font-medium mb-2">Escrow Protection</h3>
               <p className="text-sm text-muted-foreground">
-                Revolutionary Farmers uses an escrow system to protect both buyers and sellers. Your payment will be
-                held securely until you confirm receipt of your agricultural products.
+                Revolutionary Farmers uses an escrow system to protect both buyers and sellers. Your
+                payment will be held securely until you confirm receipt of your agricultural
+                products.
               </p>
             </div>
           </div>
@@ -291,6 +317,5 @@ export default function CartPage() {
 
       <ToastContainer />
     </div>
-  )
+  );
 }
-

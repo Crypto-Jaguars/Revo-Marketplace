@@ -7,7 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import { useTranslations } from 'next-intl';
 import { useWallet } from '@/wallet/hooks/useWallet.hook';
 import { useWalletStore } from '@/store/walletStore';
@@ -51,10 +51,12 @@ const UserMenu = ({ className }: UserMenuProps) => {
           <UserCircle className="w-6 h-6 text-primary_green dark:bg-background-dark" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" 
-        className="w-40 p-1">
+      <DropdownMenuContent align="end" className="w-40 p-1">
         {!address ? (
-          <DropdownMenuItem onClick={handleConnect} className="cursor-pointer text-center justify-center font-medium">
+          <DropdownMenuItem
+            onClick={handleConnect}
+            className="cursor-pointer text-center justify-center font-medium"
+          >
             {t('connect')}
           </DropdownMenuItem>
         ) : (
@@ -75,9 +77,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
               {t('orders')}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleDisconnect}>
-              {t('disconnect')}
-            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDisconnect}>{t('disconnect')}</DropdownMenuItem>
           </>
         )}
       </DropdownMenuContent>

@@ -79,69 +79,71 @@ export function TestClaimEscrowEarningsForm() {
 
   describe('ClaimEscrowEarningsForm Tests', () => {
     it('renders all form fields with proper labels and placeholders', () => {
-        fields.forEach((field) => {
-          expect(typeof field.label).equal('string');
-          expect(field.label.length).greaterThan(0);
-      
-          expect(typeof field.placeholder).equal('string');
-          expect(field.placeholder.length).greaterThan(0);
-          
-          if (field.description) {
-            expect(typeof field.description).equal('string');
-            expect(field.description.length).greaterThan(0);
-          }
-        });
+      fields.forEach((field) => {
+        expect(typeof field.label).equal('string');
+        expect(field.label.length).greaterThan(0);
+
+        expect(typeof field.placeholder).equal('string');
+        expect(field.placeholder.length).greaterThan(0);
+
+        if (field.description) {
+          expect(typeof field.description).equal('string');
+          expect(field.description.length).greaterThan(0);
+        }
+      });
     });
 
     it('validates required fields', () => {
-        form.formState.errors = {
-            contractId: { type: 'required', message: t('validation.contractId.required') },
-            engagementId: { type: 'required', message: t('validation.engagementId.required') },
-        };
+      form.formState.errors = {
+        contractId: { type: 'required', message: t('validation.contractId.required') },
+        engagementId: { type: 'required', message: t('validation.engagementId.required') },
+      };
 
-        if (form.formState.errors.contractId) {
-            expect(form.formState.errors.contractId.message).equal(t('validation.contractId.required'));
-        }
-        if (form.formState.errors.engagementId) {
-            expect(form.formState.errors.engagementId.message).equal(t('validation.engagementId.required'));
-        }
+      if (form.formState.errors.contractId) {
+        expect(form.formState.errors.contractId.message).equal(t('validation.contractId.required'));
+      }
+      if (form.formState.errors.engagementId) {
+        expect(form.formState.errors.engagementId.message).equal(
+          t('validation.engagementId.required')
+        );
+      }
 
-        const buttonText = t('submitButtonText');
-        expect(typeof buttonText).equal('string');
-        expect(buttonText.length).greaterThan(0);
+      const buttonText = t('submitButtonText');
+      expect(typeof buttonText).equal('string');
+      expect(buttonText.length).greaterThan(0);
     });
 
     it('handles valid form submission', () => {
-        const validData: EscrowFormData = {
-          contractId: 'CON-123',
-          engagementId: 'ENG-456',
-        };
-      
-        let submittedData: EscrowFormData | null = null;
-        const mockOnSubmit = (data: EscrowFormData) => {
-          submittedData = data;
-        };
-      
-        mockOnSubmit(validData);
-      
-        expect(submittedData).equal(validData);
+      const validData: EscrowFormData = {
+        contractId: 'CON-123',
+        engagementId: 'ENG-456',
+      };
+
+      let submittedData: EscrowFormData | null = null;
+      const mockOnSubmit = (data: EscrowFormData) => {
+        submittedData = data;
+      };
+
+      mockOnSubmit(validData);
+
+      expect(submittedData).equal(validData);
     });
 
     it('handles invalid form submission', () => {
-        const invalidData: EscrowFormData = {
-          contractId: '',
-          engagementId: '',
-        };
+      const invalidData: EscrowFormData = {
+        contractId: '',
+        engagementId: '',
+      };
 
-        let submissionOccurred = false;
-      
-        const mockOnSubmit = (data: EscrowFormData) => {
-          submissionOccurred = true;
-        };
-      
-        mockOnSubmit(invalidData);
-      
-        expect(submissionOccurred).equal(false);
+      let submissionOccurred = false;
+
+      const mockOnSubmit = (data: EscrowFormData) => {
+        submissionOccurred = true;
+      };
+
+      mockOnSubmit(invalidData);
+
+      expect(submissionOccurred).equal(false);
     });
 
     it('renders proper translations for all elements', () => {
@@ -159,7 +161,7 @@ export function TestClaimEscrowEarningsForm() {
 
       translationKeys.forEach((key) => {
         const translatedText = t(key);
-      
+
         expect(typeof translatedText).equal('string');
         expect(translatedText.length).greaterThan(0);
       });

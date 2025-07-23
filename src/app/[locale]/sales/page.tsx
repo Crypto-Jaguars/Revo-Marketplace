@@ -8,15 +8,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  TrendingUp, 
-  DollarSign, 
-  Users, 
-  ShoppingCart, 
+import {
+  TrendingUp,
+  DollarSign,
+  Users,
+  ShoppingCart,
   BarChart3,
   Wallet,
   Shield,
-  Zap
+  Zap,
 } from 'lucide-react';
 
 export default function SalesPage() {
@@ -27,30 +27,30 @@ export default function SalesPage() {
     {
       icon: <DollarSign className="h-8 w-8 text-green-500" />,
       title: 'Higher Profit Margins',
-      description: 'Sell directly to consumers and keep more of your earnings'
+      description: 'Sell directly to consumers and keep more of your earnings',
     },
     {
       icon: <Users className="h-8 w-8 text-blue-500" />,
       title: 'Direct Customer Relationships',
-      description: 'Build lasting relationships with your customers'
+      description: 'Build lasting relationships with your customers',
     },
     {
       icon: <Shield className="h-8 w-8 text-purple-500" />,
       title: 'Secure Blockchain Payments',
-      description: 'Get paid instantly with USDC cryptocurrency'
+      description: 'Get paid instantly with USDC cryptocurrency',
     },
     {
       icon: <Zap className="h-8 w-8 text-yellow-500" />,
       title: 'Easy to Use Platform',
-      description: 'Simple dashboard to manage your products and orders'
-    }
+      description: 'Simple dashboard to manage your products and orders',
+    },
   ];
 
   const stats = [
     { label: 'Average Revenue Increase', value: '40%', icon: <TrendingUp className="h-5 w-5" /> },
     { label: 'Active Farmers', value: '500+', icon: <Users className="h-5 w-5" /> },
     { label: 'Monthly Orders', value: '10K+', icon: <ShoppingCart className="h-5 w-5" /> },
-    { label: 'Customer Satisfaction', value: '98%', icon: <BarChart3 className="h-5 w-5" /> }
+    { label: 'Customer Satisfaction', value: '98%', icon: <BarChart3 className="h-5 w-5" /> },
   ];
 
   const pricingPlans = [
@@ -62,9 +62,9 @@ export default function SalesPage() {
         'Up to 10 product listings',
         'Basic analytics',
         'Email support',
-        'Standard payment processing'
+        'Standard payment processing',
       ],
-      popular: false
+      popular: false,
     },
     {
       name: 'Professional',
@@ -75,9 +75,9 @@ export default function SalesPage() {
         'Advanced analytics',
         'Priority support',
         'Custom branding',
-        'Bulk upload tools'
+        'Bulk upload tools',
       ],
-      popular: true
+      popular: true,
     },
     {
       name: 'Enterprise',
@@ -88,10 +88,10 @@ export default function SalesPage() {
         'Custom integrations',
         'Dedicated account manager',
         'White-label solution',
-        'API access'
+        'API access',
       ],
-      popular: false
-    }
+      popular: false,
+    },
   ];
 
   const handleGetStarted = () => {
@@ -103,21 +103,19 @@ export default function SalesPage() {
       <div className="max-w-6xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-white mb-6">
-            Start Selling Your Farm Products
-          </h1>
+          <h1 className="text-5xl font-bold text-white mb-6">Start Selling Your Farm Products</h1>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Join Revolutionary Farmers and transform your agricultural business with blockchain technology. 
-            Sell directly to consumers and maximize your profits.
+            Join Revolutionary Farmers and transform your agricultural business with blockchain
+            technology. Sell directly to consumers and maximize your profits.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <Button
               onClick={handleGetStarted}
               className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 text-lg"
             >
               Get Started Free
             </Button>
-            <Button 
+            <Button
               variant="outline"
               onClick={() => router.push('/marketplace')}
               className="border-white text-white hover:bg-white/10 font-semibold py-3 px-8 text-lg"
@@ -144,15 +142,15 @@ export default function SalesPage() {
 
         {/* Features Section */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-white text-center mb-8">Why Choose Revolutionary Farmers?</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-8">
+            Why Choose Revolutionary Farmers?
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
               <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20">
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center space-y-4">
-                    <div className="flex-shrink-0">
-                      {feature.icon}
-                    </div>
+                    <div className="flex-shrink-0">{feature.icon}</div>
                     <div>
                       <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
                       <p className="text-gray-300">{feature.description}</p>
@@ -169,9 +167,12 @@ export default function SalesPage() {
           <h2 className="text-3xl font-bold text-white text-center mb-8">Choose Your Plan</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {pricingPlans.map((plan, index) => (
-              <Card key={index} className={`bg-white/10 backdrop-blur-sm border-white/20 relative ${
-                plan.popular ? 'ring-2 ring-green-500' : ''
-              }`}>
+              <Card
+                key={index}
+                className={`bg-white/10 backdrop-blur-sm border-white/20 relative ${
+                  plan.popular ? 'ring-2 ring-green-500' : ''
+                }`}
+              >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <Badge className="bg-green-600 text-white">Most Popular</Badge>
@@ -191,11 +192,11 @@ export default function SalesPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button 
+                  <Button
                     onClick={handleGetStarted}
                     className={`w-full font-semibold py-2 ${
-                      plan.popular 
-                        ? 'bg-green-600 hover:bg-green-700 text-white' 
+                      plan.popular
+                        ? 'bg-green-600 hover:bg-green-700 text-white'
                         : 'bg-white/20 hover:bg-white/30 text-white'
                     }`}
                   >
@@ -212,10 +213,18 @@ export default function SalesPage() {
           <h2 className="text-3xl font-bold text-white text-center mb-8">How It Works</h2>
           <Tabs defaultValue="step1" className="w-full">
             <TabsList className="grid w-full grid-cols-4 bg-white/10 backdrop-blur-sm">
-              <TabsTrigger value="step1" className="text-white">Sign Up</TabsTrigger>
-              <TabsTrigger value="step2" className="text-white">List Products</TabsTrigger>
-              <TabsTrigger value="step3" className="text-white">Receive Orders</TabsTrigger>
-              <TabsTrigger value="step4" className="text-white">Get Paid</TabsTrigger>
+              <TabsTrigger value="step1" className="text-white">
+                Sign Up
+              </TabsTrigger>
+              <TabsTrigger value="step2" className="text-white">
+                List Products
+              </TabsTrigger>
+              <TabsTrigger value="step3" className="text-white">
+                Receive Orders
+              </TabsTrigger>
+              <TabsTrigger value="step4" className="text-white">
+                Get Paid
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="step1" className="mt-6">
               <Card className="bg-white/10 backdrop-blur-sm border-white/20">
@@ -227,7 +236,8 @@ export default function SalesPage() {
                     <div>
                       <h3 className="text-xl font-semibold text-white mb-2">Create Your Account</h3>
                       <p className="text-gray-300">
-                        Sign up as a farmer and complete your profile. It takes just a few minutes to get started.
+                        Sign up as a farmer and complete your profile. It takes just a few minutes
+                        to get started.
                       </p>
                     </div>
                   </div>
@@ -244,7 +254,8 @@ export default function SalesPage() {
                     <div>
                       <h3 className="text-xl font-semibold text-white mb-2">Add Your Products</h3>
                       <p className="text-gray-300">
-                        Upload photos, set prices, and describe your fresh produce. Our tools make it easy to manage your inventory.
+                        Upload photos, set prices, and describe your fresh produce. Our tools make
+                        it easy to manage your inventory.
                       </p>
                     </div>
                   </div>
@@ -261,7 +272,8 @@ export default function SalesPage() {
                     <div>
                       <h3 className="text-xl font-semibold text-white mb-2">Manage Orders</h3>
                       <p className="text-gray-300">
-                        Receive orders from customers and manage them through our intuitive dashboard. Track everything in real-time.
+                        Receive orders from customers and manage them through our intuitive
+                        dashboard. Track everything in real-time.
                       </p>
                     </div>
                   </div>
@@ -278,7 +290,8 @@ export default function SalesPage() {
                     <div>
                       <h3 className="text-xl font-semibold text-white mb-2">Secure Payments</h3>
                       <p className="text-gray-300">
-                        Get paid instantly in USDC cryptocurrency through our secure blockchain payment system.
+                        Get paid instantly in USDC cryptocurrency through our secure blockchain
+                        payment system.
                       </p>
                     </div>
                   </div>
@@ -294,10 +307,10 @@ export default function SalesPage() {
             <CardContent className="p-8">
               <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Selling?</h2>
               <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                Join thousands of farmers who are already earning more by selling directly to consumers. 
-                Start your journey today with our free plan.
+                Join thousands of farmers who are already earning more by selling directly to
+                consumers. Start your journey today with our free plan.
               </p>
-              <Button 
+              <Button
                 onClick={handleGetStarted}
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 text-lg"
               >

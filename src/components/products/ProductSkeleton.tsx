@@ -14,4 +14,4 @@ export function ProductSkeleton() {
       </div>
     </div>
   );
-} 
+}

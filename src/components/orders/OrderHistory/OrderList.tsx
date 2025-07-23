@@ -1,9 +1,16 @@
-"use client";
+'use client';
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import type { Order } from "./types";
-import { OrderStatus } from "./OrderStatus";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+import type { Order } from './types';
+import { OrderStatus } from './OrderStatus';
 import { useTranslations } from 'next-intl';
 
 interface OrderListProps {

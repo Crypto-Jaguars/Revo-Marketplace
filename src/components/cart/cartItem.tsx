@@ -1,25 +1,25 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import Image from "next/image"
-import { Minus, Plus, Heart } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import type { CartItem } from "@/store/cartStore/types"
-import RemoveButton from "@/components/cart/RemoveItem/RemoveButton"
-import UndoNotification from "@/components/cart/RemoveItem/UndoNotification"
+import { useState } from 'react';
+import Image from 'next/image';
+import { Minus, Plus, Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import type { CartItem } from '@/store/cartStore/types';
+import RemoveButton from '@/components/cart/RemoveItem/RemoveButton';
+import UndoNotification from '@/components/cart/RemoveItem/UndoNotification';
 
 interface CartItemProps {
-  item: CartItem
-  onRemove: (id: number) => Promise<void>
-  onUpdateQuantity: (id: number, quantity: number) => Promise<void>
-  onSaveForLater?: (id: number) => void
-  onBulkRemove?: (ids: number[]) => Promise<void>
-  onUndoRemove?: () => void
-  hasRemovedItems?: boolean
-  onResetCart?: () => void
-  selectedItems?: number[]
-  onToggleSelect?: (id: number) => void
+  item: CartItem;
+  onRemove: (id: number) => Promise<void>;
+  onUpdateQuantity: (id: number, quantity: number) => Promise<void>;
+  onSaveForLater?: (id: number) => void;
+  onBulkRemove?: (ids: number[]) => Promise<void>;
+  onUndoRemove?: () => void;
+  hasRemovedItems?: boolean;
+  onResetCart?: () => void;
+  selectedItems?: number[];
+  onToggleSelect?: (id: number) => void;
 }
 
 export default function CartItemComponent({
@@ -34,62 +34,62 @@ export default function CartItemComponent({
   selectedItems = [],
   onToggleSelect,
 }: CartItemProps) {
-  const [showUndoNotification, setShowUndoNotification] = useState(false)
+  const [showUndoNotification, setShowUndoNotification] = useState(false);
 
   const handleIncrement = async () => {
     if (!item.stockQuantity || item.quantity < item.stockQuantity) {
-      await onUpdateQuantity(item.id, item.quantity + 1)
+      await onUpdateQuantity(item.id, item.quantity + 1);
     }
-  }
+  };
 
   const handleDecrement = async () => {
     if (item.quantity > 1) {
-      await onUpdateQuantity(item.id, item.quantity - 1)
+      await onUpdateQuantity(item.id, item.quantity - 1);
     }
-  }
+  };
 
   const handleItemRemoved = async () => {
-    setShowUndoNotification(true)
+    setShowUndoNotification(true);
     // The actual removal is handled by the RemoveButton component
-  }
+  };
 
   const handleUndo = () => {
     if (onUndoRemove) {
-      onUndoRemove()
+      onUndoRemove();
     }
-    setShowUndoNotification(false)
-  }
+    setShowUndoNotification(false);
+  };
 
   // Calculate discounted price if discount exists
-  const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1
-  const discountedPrice = item.price.amount * discountMultiplier
-  const itemTotal = discountedPrice * item.quantity
+  const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1;
+  const discountedPrice = item.price.amount * discountMultiplier;
+  const itemTotal = discountedPrice * item.quantity;
 
   // Handle image source
   const imageSrc = (() => {
-    if (typeof item.images === "string") {
+    if (typeof item.images === 'string') {
       // If it's a string, ensure it has a leading slash or is an absolute URL
-      if (item.images.startsWith("http") || item.images.startsWith("/")) {
-        return item.images
+      if (item.images.startsWith('http') || item.images.startsWith('/')) {
+        return item.images;
       } else {
         // Add leading slash to relative paths
-        return `/images/${item.images}`
+        return `/images/${item.images}`;
       }
     } else if (Array.isArray(item.images) && item.images.length > 0) {
       // If it's an array, ensure the first item has a leading slash or is an absolute URL
-      const firstImage = item.images[0]
-      if (firstImage.startsWith("http") || firstImage.startsWith("/")) {
-        return firstImage
+      const firstImage = item.images[0];
+      if (firstImage.startsWith('http') || firstImage.startsWith('/')) {
+        return firstImage;
       } else {
         // Add leading slash to relative paths
-        return `/images/${firstImage}`
+        return `/images/${firstImage}`;
       }
     }
     // Default fallback
-    return "/placeholder.svg"
-  })()
+    return '/placeholder.svg';
+  })();
 
-  const isSelected = selectedItems.includes(item.id)
+  const isSelected = selectedItems.includes(item.id);
 
   return (
     <>
@@ -106,7 +106,13 @@ export default function CartItemComponent({
         )}
 
         <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border">
-          <Image src={imageSrc || "/placeholder.svg"} alt={item.name} fill className="object-cover" sizes="80px" />
+          <Image
+            src={imageSrc || '/placeholder.svg'}
+            alt={item.name}
+            fill
+            className="object-cover"
+            sizes="80px"
+          />
         </div>
 
         <div className="flex flex-1 flex-col">
@@ -114,12 +120,14 @@ export default function CartItemComponent({
             <div>
               <h3 className="text-sm font-medium">{item.name}</h3>
               {item.description && (
-                <p className="mt-1 text-xs text-muted-foreground line-clamp-1">{item.description}</p>
+                <p className="mt-1 text-xs text-muted-foreground line-clamp-1">
+                  {item.description}
+                </p>
               )}
             </div>
             <div className="text-right">
               <p className="text-sm font-medium">
-                {item.price.unit.startsWith("$") ? "" : "$"}
+                {item.price.unit.startsWith('$') ? '' : '$'}
                 {itemTotal.toFixed(2)}
               </p>
               {item.discount && item.discount > 0 && (
@@ -181,7 +189,12 @@ export default function CartItemComponent({
 
             <div className="flex gap-2">
               {onSaveForLater && (
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onSaveForLater(item.id)}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => onSaveForLater(item.id)}
+                >
                   <Heart className="h-4 w-4" />
                   <span className="sr-only">Save for later</span>
                 </Button>
@@ -194,6 +207,5 @@ export default function CartItemComponent({
 
       {showUndoNotification && <UndoNotification itemName={item.name} onUndo={handleUndo} />}
     </>
-  )
+  );
 }
-

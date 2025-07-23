@@ -1,24 +1,27 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface CartSummaryProps {
-  subtotal: number
-  shipping: number
-  total: number
-  onCheckout: () => void
+  subtotal: number;
+  shipping: number;
+  total: number;
+  onCheckout: () => void;
 }
 
 export default function CartSummary({ subtotal, shipping, total }: CartSummaryProps) {
   // Calculate escrow fee (2% of subtotal)
-  const escrowFee = subtotal * 0.02
+  const escrowFee = subtotal * 0.02;
 
   // Calculate tax (if not included in total)
-  const tax = total - subtotal - shipping - escrowFee > 0 ? total - subtotal - shipping - escrowFee : subtotal * 0.07 // Default 7% tax if not included
+  const tax =
+    total - subtotal - shipping - escrowFee > 0
+      ? total - subtotal - shipping - escrowFee
+      : subtotal * 0.07; // Default 7% tax if not included
 
   // Recalculate total if needed
-  const calculatedTotal = subtotal + shipping + tax + escrowFee
+  const calculatedTotal = subtotal + shipping + tax + escrowFee;
 
   return (
     <div className="rounded-lg bg-muted/50 p-6">
@@ -54,7 +57,10 @@ export default function CartSummary({ subtotal, shipping, total }: CartSummaryPr
       </div>
 
       <Link href="/en/checkout">
-        <Button className="w-full mt-6 bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]" size="lg" >
+        <Button
+          className="w-full mt-6 bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]"
+          size="lg"
+        >
           Proceed to Escrow Checkout
         </Button>
       </Link>
@@ -63,5 +69,5 @@ export default function CartSummary({ subtotal, shipping, total }: CartSummaryPr
         Your payment will be held in escrow until you confirm receipt of goods
       </p>
     </div>
-  )
+  );
 }

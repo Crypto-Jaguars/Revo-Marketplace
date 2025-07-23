@@ -64,7 +64,7 @@ const mockFarmData = {
 describe('FarmProfile', () => {
   it('renders farm name and basic information', () => {
     render(<FarmProfile {...mockFarmData} />);
-    
+
     expect(screen.getByText('Green Valley Farm')).toBeInTheDocument();
     expect(screen.getByText(/123 Farm Road/)).toBeInTheDocument();
     expect(screen.getByText(/London, England, UK/)).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe('FarmProfile', () => {
 
   it('displays contact information correctly', () => {
     render(<FarmProfile {...mockFarmData} />);
-    
+
     expect(screen.getByText('+44 123 456 7890')).toBeInTheDocument();
     expect(screen.getByText('contact@greenvalleyfarm.com')).toBeInTheDocument();
     expect(screen.getByText('Visit Website')).toBeInTheDocument();
@@ -80,13 +80,13 @@ describe('FarmProfile', () => {
 
   it('shows total area with correct unit', () => {
     render(<FarmProfile {...mockFarmData} />);
-    
+
     expect(screen.getByText('100 hectares')).toBeInTheDocument();
   });
 
   it('renders establishment date in correct format', () => {
     render(<FarmProfile {...mockFarmData} />);
-    
+
     expect(screen.getByText(/Established January 1, 2020/)).toBeInTheDocument();
   });
 
@@ -95,16 +95,19 @@ describe('FarmProfile', () => {
       ...mockFarmData,
       images: [],
     };
-    
+
     render(<FarmProfile {...dataWithoutImages} />);
     expect(screen.getByText('Green Valley Farm')).toBeInTheDocument();
   });
 
   it('has proper accessibility attributes', () => {
     render(<FarmProfile {...mockFarmData} />);
-    
+
     expect(screen.getByRole('heading', { name: 'Green Valley Farm' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Visit Website' })).toHaveAttribute('aria-label', 'Visit Green Valley Farm website');
+    expect(screen.getByRole('link', { name: 'Visit Website' })).toHaveAttribute(
+      'aria-label',
+      'Visit Green Valley Farm website'
+    );
   });
 
   it('renders with RTL support', () => {
@@ -113,8 +116,8 @@ describe('FarmProfile', () => {
         <FarmProfile {...mockFarmData} />
       </div>
     );
-    
+
     const container = screen.getByRole('article');
     expect(container).toHaveStyle({ direction: 'rtl' });
   });
-}); 
+});

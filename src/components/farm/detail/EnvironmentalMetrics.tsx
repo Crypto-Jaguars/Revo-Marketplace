@@ -1,9 +1,9 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { EnvironmentalMetrics as Metrics } from "./types";
-import { Leaf } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { EnvironmentalMetrics as Metrics } from './types';
+import { Leaf } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 interface MetricCardProps {
@@ -14,12 +14,12 @@ interface MetricCardProps {
   className?: string;
 }
 
-function MetricCard({ 
+function MetricCard({
   translationKey,
-  value, 
-  unit = "", 
+  value,
+  unit = '',
   progress,
-  className = "" 
+  className = '',
 }: MetricCardProps) {
   const t = useTranslations('farm.metrics');
 
@@ -30,13 +30,12 @@ function MetricCard({
         <Leaf className="h-4 w-4 text-gray-500 flex-shrink-0" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold mb-2">{value}{unit}</div>
-        {progress !== undefined && (
-          <Progress value={progress} className="h-4" />
-        )}
-        <p className="text-sm text-muted-foreground mt-3">
-          {t(`${translationKey}.description`)}
-        </p>
+        <div className="text-2xl font-bold mb-2">
+          {value}
+          {unit}
+        </div>
+        {progress !== undefined && <Progress value={progress} className="h-4" />}
+        <p className="text-sm text-muted-foreground mt-3">{t(`${translationKey}.description`)}</p>
       </CardContent>
     </Card>
   );
@@ -50,12 +49,12 @@ interface EnvironmentalMetricsProps {
   };
 }
 
-export function EnvironmentalMetrics({ 
-  metrics, 
-  targets = { 
-    carbonFootprint: 100, 
-    waterUsage: 1000 
-  } 
+export function EnvironmentalMetrics({
+  metrics,
+  targets = {
+    carbonFootprint: 100,
+    waterUsage: 1000,
+  },
 }: EnvironmentalMetricsProps) {
   const calculateProgress = (value: number, target: number) => {
     return Math.max(0, Math.min(100, (1 - value / target) * 100));

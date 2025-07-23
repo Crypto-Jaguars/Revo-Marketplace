@@ -1,38 +1,39 @@
-"use client"
+'use client';
 
-import type { Product } from "@/types/product"
-import { EyeOpenIcon, HeartIcon } from "@radix-ui/react-icons"
-import Image from "next/image"
-import { useState } from "react"
-import { Rating } from "../ui/rating"
-import { useTranslations } from "next-intl"
-import { products } from "@/mocks/relatedProducts"
-import { AddToCartButton } from "../cart/AddToCartButton"
-import Link from "next/link"
+import type { Product } from '@/types/product';
+import { EyeOpenIcon, HeartIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Rating } from '../ui/rating';
+import { useTranslations } from 'next-intl';
+import { products } from '@/mocks/relatedProducts';
+import { AddToCartButton } from '../cart/AddToCartButton';
+import Link from 'next/link';
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const [isHovered, setIsHovered] = useState(false)
-  const [isLiked, setIsLiked] = useState(false)
-  const [isViewed, setIsViewed] = useState(false)
-  const [isHoveredHeart, setIsHoveredHeart] = useState(false)
-  const [isHoveredEye, setIsHoveredEye] = useState(false)
-  const t = useTranslations("Products")
+  const [isHovered, setIsHovered] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isViewed, setIsViewed] = useState(false);
+  const [isHoveredHeart, setIsHoveredHeart] = useState(false);
+  const [isHoveredEye, setIsHoveredEye] = useState(false);
+  const t = useTranslations('Products');
 
   const ICONS = [
     {
-      id: "like",
+      id: 'like',
       icon: (
         <HeartIcon
           className={`
         w-[16px] h-[16px] transition-colors duration-300
-        ${isLiked
-              ? isHoveredHeart
-                ? "text-[#375B42]" // Activo + hover
-                : "text-white-dark" // Activo sin hover
-              : isHoveredHeart
-                ? "text-white-dark" // No activo + hover
-                : "text-black" // No activo sin hover
-            }
+        ${
+          isLiked
+            ? isHoveredHeart
+              ? 'text-[#375B42]' // Activo + hover
+              : 'text-white-dark' // Activo sin hover
+            : isHoveredHeart
+              ? 'text-white-dark' // No activo + hover
+              : 'text-black' // No activo sin hover
+        }
       `}
         />
       ),
@@ -41,22 +42,23 @@ const ProductCard = ({ product }: { product: Product }) => {
       onClick: () => setIsLiked(!isLiked),
       onMouseEnter: () => setIsHoveredHeart(true),
       onMouseLeave: () => setIsHoveredHeart(false),
-      ariaLabel: isLiked ? "Remove from favorites" : "Add to favorites",
+      ariaLabel: isLiked ? 'Remove from favorites' : 'Add to favorites',
     },
     {
-      id: "view",
+      id: 'view',
       icon: (
         <EyeOpenIcon
           className={`
         w-[16px] h-[16px] transition-colors duration-300
-        ${isViewed
-              ? isHoveredEye
-                ? "text-[#375B42]" // Activo + hover
-                : "text-white-dark" // Activo sin hover
-              : isHoveredEye
-                ? "text-white-dark" // No activo + hover
-                : "text-black" // No activo sin hover
-            }
+        ${
+          isViewed
+            ? isHoveredEye
+              ? 'text-[#375B42]' // Activo + hover
+              : 'text-white-dark' // Activo sin hover
+            : isHoveredEye
+              ? 'text-white-dark' // No activo + hover
+              : 'text-black' // No activo sin hover
+        }
       `}
         />
       ),
@@ -65,15 +67,21 @@ const ProductCard = ({ product }: { product: Product }) => {
       onClick: () => setIsViewed(!isViewed),
       onMouseEnter: () => setIsHoveredEye(true),
       onMouseLeave: () => setIsHoveredEye(false),
-      ariaLabel: isViewed ? "Hide product details" : "View product details",
+      ariaLabel: isViewed ? 'Hide product details' : 'View product details',
     },
-  ]
+  ];
 
   return (
-    <div className="relative w-full" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div
+      className="relative w-full"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {product.discount > 0 && (
         <div className="absolute top-3 left-3 z-10 w-[56px] h-[26px] bg-[#375B42] flex justify-center items-center rounded">
-          <p className="text-white-dark text-xs font-normal px-2 py-1 rounded">-{product.discount}%</p>
+          <p className="text-white-dark text-xs font-normal px-2 py-1 rounded">
+            -{product.discount}%
+          </p>
         </div>
       )}
 
@@ -82,9 +90,9 @@ const ProductCard = ({ product }: { product: Product }) => {
           <button
             key={icon.id}
             onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              icon.onClick()
+              e.preventDefault();
+              e.stopPropagation();
+              icon.onClick();
             }}
             onMouseEnter={icon.onMouseEnter}
             onMouseLeave={icon.onMouseLeave}
@@ -92,9 +100,10 @@ const ProductCard = ({ product }: { product: Product }) => {
             className={`
               flex justify-center items-center rounded-full shadow-md
               w-[34px] h-[34px] transition-all duration-300
-              ${icon.isActive
-                ? "bg-[#375B42] border-[#375B42] hover:bg-white hover:border-[#375B42] border"
-                : "bg-white border-gray-300 hover:bg-[#375B42] hover:border-[#375B42] border"
+              ${
+                icon.isActive
+                  ? 'bg-[#375B42] border-[#375B42] hover:bg-white hover:border-[#375B42] border'
+                  : 'bg-white border-gray-300 hover:bg-[#375B42] hover:border-[#375B42] border'
               }
             `}
           >
@@ -112,10 +121,10 @@ const ProductCard = ({ product }: { product: Product }) => {
           <Image
             src={
               product.images && product.images.length > 0
-                ? (product.images[0].startsWith("/") || product.images[0].startsWith("http")
+                ? product.images[0].startsWith('/') || product.images[0].startsWith('http')
                   ? product.images[0]
-                  : `/images/${product.images[0]}`)
-                : "/images/cart-small.png"
+                  : `/images/${product.images[0]}`
+                : '/images/cart-small.png'
             }
             alt={product.name}
             fill
@@ -127,7 +136,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           className={`
           absolute bottom-0 left-0 right-0
           transform transition-all duration-300 ease-in-out
-          ${isHovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}
+          ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}
         `}
         >
           <AddToCartButton
@@ -153,7 +162,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <div className="flex items-center gap-1 mt-2">
           <div className="flex text-yellow-400">
             <Rating
-              value={product.rating as number & { __brand: "ValidRating" }}
+              value={product.rating as number & { __brand: 'ValidRating' }}
               max={5}
               readOnly
               aria-label={`Product rated ${product.rating} out of 5 stars`}
@@ -163,16 +172,16 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const RelatedProducts = () => {
-  const t = useTranslations("Products")
+  const t = useTranslations('Products');
   return (
     <>
       <div className="flex justify-start items-center gap-4 mb-8 lg:mb-[4rem]">
         <div className="w-[12px] lg:w-[20px] h-[30px] lg:h-[40px] rounded bg-[#375B42]"></div>
-        <h2 className="text-base font-semibold text-[#375B42]">{t("buttons.relatedItems")}</h2>
+        <h2 className="text-base font-semibold text-[#375B42]">{t('buttons.relatedItems')}</h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
         {products.map((product) => (
@@ -180,8 +189,7 @@ const RelatedProducts = () => {
         ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default RelatedProducts
-
+export default RelatedProducts;

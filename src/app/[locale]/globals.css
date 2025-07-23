@@ -91,19 +91,18 @@
     :root:not(.dark) .text-white {
       color: theme('textColor.white-light'); /* Makes text black in light mode */
     }
-  
+
     .dark .text-white {
       color: theme('textColor.white-dark'); /* Makes text white in dark mode mode */
     }
-    
+
     .languageIcon {
-      color: rgb(255 255 255) !important; /* It keeps languageIcon in whithe in both modes using !important */
+      color: rgb(
+        255 255 255
+      ) !important; /* It keeps languageIcon in whithe in both modes using !important */
     }
   }
-    
-  }
-
-
+}
 
 @layer base {
   * {
@@ -113,4 +112,3 @@
     @apply bg-background text-foreground;
   }
 }
-  

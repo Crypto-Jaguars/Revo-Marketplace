@@ -1,46 +1,46 @@
-"use client"
+'use client';
 
-import Bounded from "@/components/Bounded"
-import { Input } from "@/components/ui/input"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import Image from "next/image"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { useTranslations } from "next-intl"
-import { Checkbox } from "@/components/ui/checkbox"
-import { useState } from "react"
-import { useCartStore } from "@/store/cartStore/store"
-import { useRouter } from "next/navigation"
-import { Loader2 } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { AlertCircle } from "lucide-react"
+import Bounded from '@/components/Bounded';
+import { Input } from '@/components/ui/input';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
+import { Checkbox } from '@/components/ui/checkbox';
+import { useState } from 'react';
+import { useCartStore } from '@/store/cartStore/store';
+import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react';
 
 const createBillingSchema = (t: (key: string) => string) =>
   z.object({
-    firstName: z.string().min(1, t("form.errors.firstName")),
+    firstName: z.string().min(1, t('form.errors.firstName')),
     companyName: z.string().optional(),
-    streetAddress: z.string().min(1, t("form.errors.streetAddress")),
+    streetAddress: z.string().min(1, t('form.errors.streetAddress')),
     apartment: z.string().optional(),
-    town: z.string().min(1, t("form.errors.town")),
-    phoneNumber: z.string().regex(/^\+?[1-9]\d{1,14}$/, t("form.errors.phoneNumberFormat")),
-    email: z.string().email(t("form.errors.email")),
+    town: z.string().min(1, t('form.errors.town')),
+    phoneNumber: z.string().regex(/^\+?[1-9]\d{1,14}$/, t('form.errors.phoneNumberFormat')),
+    email: z.string().email(t('form.errors.email')),
     saveInfo: z.boolean().optional(),
-  })
+  });
 
-type BillingDetails = z.infer<ReturnType<typeof createBillingSchema>>
+type BillingDetails = z.infer<ReturnType<typeof createBillingSchema>>;
 
 export default function CheckoutPage() {
-  const t = useTranslations("Checkout")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [orderSuccess, setOrderSuccess] = useState(false)
-  const [orderError, setOrderError] = useState<string | null>(null)
-  const { Items, subtotal, shipping, total, clearCart, loading, error } = useCartStore()
-  const router = useRouter()
-  const [paymentMethod, setPaymentMethod] = useState("moonpay")
-  const locale = useTranslations("Locale")
+  const t = useTranslations('Checkout');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [orderError, setOrderError] = useState<string | null>(null);
+  const { Items, subtotal, shipping, total, clearCart, loading, error } = useCartStore();
+  const router = useRouter();
+  const [paymentMethod, setPaymentMethod] = useState('moonpay');
+  const locale = useTranslations('Locale');
 
   const {
     register,
@@ -51,44 +51,44 @@ export default function CheckoutPage() {
     defaultValues: {
       saveInfo: false,
     },
-  })
+  });
 
   // If cart is empty, redirect to products page
   if (Items.length === 0 && !loading && !orderSuccess) {
     // Use setTimeout to avoid hydration issues
     setTimeout(() => {
-      router.push("/products")
-    }, 0)
+      router.push('/products');
+    }, 0);
     return (
       <Bounded>
         <div className="flex flex-col items-center justify-center py-12">
-          <h1 className="text-2xl font-medium mb-4">{t("emptyCart")}</h1>
-          <p className="text-gray-500 mb-6">{t("redirecting")}</p>
+          <h1 className="text-2xl font-medium mb-4">{t('emptyCart')}</h1>
+          <p className="text-gray-500 mb-6">{t('redirecting')}</p>
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       </Bounded>
-    )
+    );
   }
 
   const onSubmit = async (data: BillingDetails) => {
     try {
-      setIsSubmitting(true)
-      setOrderError(null)
+      setIsSubmitting(true);
+      setOrderError(null);
 
       // Simulate API call to process order
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Save billing info if requested
       if (data.saveInfo) {
         // Will be stored in secure server-side session or an encrypted storage strategy in future implementation
-        localStorage.setItem("billingInfo", JSON.stringify(data))
+        localStorage.setItem('billingInfo', JSON.stringify(data));
       }
 
       // Clear cart after successful order
-      await clearCart()
+      await clearCart();
 
       // Show success message
-      setOrderSuccess(true)
+      setOrderSuccess(true);
 
       // Redirect to success page after a delay
       setTimeout(() => {
@@ -98,14 +98,16 @@ export default function CheckoutPage() {
         } else {
           router.push(`/${locale}/order-confirmation`);
         }
-      }, 3000)
+      }, 3000);
     } catch (err) {
-      console.error("Error processing order:", err)
-      setOrderError(err instanceof Error ? err.message : "An error occurred while processing your order")
+      console.error('Error processing order:', err);
+      setOrderError(
+        err instanceof Error ? err.message : 'An error occurred while processing your order'
+      );
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   // Show success message
   if (orderSuccess) {
@@ -120,15 +122,20 @@ export default function CheckoutPage() {
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
-          <h1 className="text-2xl font-medium mb-4">{t("orderSuccess")}</h1>
-          <p className="text-gray-500 mb-6">{t("redirecting")}</p>
+          <h1 className="text-2xl font-medium mb-4">{t('orderSuccess')}</h1>
+          <p className="text-gray-500 mb-6">{t('redirecting')}</p>
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       </Bounded>
-    )
+    );
   }
 
   return (
@@ -170,69 +177,100 @@ export default function CheckoutPage() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-10">
               <div className="flex flex-col w-full max-w-[470px]">
-                <h1 className="text-[36px]/[30px] font-medium tracking-[4%]">{t("billingDetails")}</h1>
+                <h1 className="text-[36px]/[30px] font-medium tracking-[4%]">
+                  {t('billingDetails')}
+                </h1>
                 <div className="space-y-8 mt-6 w-full">
                   <div className="space-y-2 w-full">
                     <label className="text-sm font-medium text-black">
-                      {t("form.firstName")}
+                      {t('form.firstName')}
                       <span className="text-[#DB4444]/40">*</span>
                     </label>
-                    <Input {...register("firstName")} className="w-full bg-[#F5F5F5] border rounded h-[50px]" />
-                    {errors.firstName && <p className="text-red-500 text-xs">{errors.firstName.message}</p>}
-                  </div>
-
-                  <div className="space-y-2 w-full">
-                    <label className="text-sm font-medium text-black">{t("form.companyName")}</label>
-                    <Input {...register("companyName")} className="w-full bg-[#F5F5F5] border rounded h-[50px]" />
+                    <Input
+                      {...register('firstName')}
+                      className="w-full bg-[#F5F5F5] border rounded h-[50px]"
+                    />
+                    {errors.firstName && (
+                      <p className="text-red-500 text-xs">{errors.firstName.message}</p>
+                    )}
                   </div>
 
                   <div className="space-y-2 w-full">
                     <label className="text-sm font-medium text-black">
-                      {t("form.streetAddress")}
-                      <span className="text-[#DB4444]/40">*</span>
+                      {t('form.companyName')}
                     </label>
-                    <Input {...register("streetAddress")} className="w-full bg-[#F5F5F5] border rounded h-[50px]" />
-                    {errors.streetAddress && <p className="text-red-500 text-xs">{errors.streetAddress.message}</p>}
-                  </div>
-
-                  <div className="space-y-2 w-full">
-                    <label className="text-sm font-medium text-black">{t("form.apartment")}</label>
-                    <Input {...register("apartment")} className="w-full bg-[#F5F5F5] border rounded h-[50px]" />
+                    <Input
+                      {...register('companyName')}
+                      className="w-full bg-[#F5F5F5] border rounded h-[50px]"
+                    />
                   </div>
 
                   <div className="space-y-2 w-full">
                     <label className="text-sm font-medium text-black">
-                      {t("form.town")}
+                      {t('form.streetAddress')}
                       <span className="text-[#DB4444]/40">*</span>
                     </label>
-                    <Input {...register("town")} className="w-full bg-[#F5F5F5] border rounded h-[50px]" />
+                    <Input
+                      {...register('streetAddress')}
+                      className="w-full bg-[#F5F5F5] border rounded h-[50px]"
+                    />
+                    {errors.streetAddress && (
+                      <p className="text-red-500 text-xs">{errors.streetAddress.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2 w-full">
+                    <label className="text-sm font-medium text-black">{t('form.apartment')}</label>
+                    <Input
+                      {...register('apartment')}
+                      className="w-full bg-[#F5F5F5] border rounded h-[50px]"
+                    />
+                  </div>
+
+                  <div className="space-y-2 w-full">
+                    <label className="text-sm font-medium text-black">
+                      {t('form.town')}
+                      <span className="text-[#DB4444]/40">*</span>
+                    </label>
+                    <Input
+                      {...register('town')}
+                      className="w-full bg-[#F5F5F5] border rounded h-[50px]"
+                    />
                     {errors.town && <p className="text-red-500 text-xs">{errors.town.message}</p>}
                   </div>
 
                   <div className="space-y-2 w-full">
                     <label className="text-sm font-medium text-black">
-                      {t("form.phoneNumber")}
+                      {t('form.phoneNumber')}
                       <span className="text-[#DB4444]/40">*</span>
                     </label>
-                    <Input {...register("phoneNumber")} className="w-full bg-[#F5F5F5] border rounded h-[50px]" />
-                    {errors.phoneNumber && <p className="text-red-500 text-xs">{errors.phoneNumber.message}</p>}
+                    <Input
+                      {...register('phoneNumber')}
+                      className="w-full bg-[#F5F5F5] border rounded h-[50px]"
+                    />
+                    {errors.phoneNumber && (
+                      <p className="text-red-500 text-xs">{errors.phoneNumber.message}</p>
+                    )}
                   </div>
 
                   <div className="space-y-2 w-full">
                     <label className="text-sm font-medium text-black">
-                      {t("form.email")}
+                      {t('form.email')}
                       <span className="text-[#DB4444]/40">*</span>
                     </label>
-                    <Input {...register("email")} className="w-full bg-[#F5F5F5] border rounded h-[50px]" />
+                    <Input
+                      {...register('email')}
+                      className="w-full bg-[#F5F5F5] border rounded h-[50px]"
+                    />
                     {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="saveInfo" {...register("saveInfo")} />
+                    <Checkbox id="saveInfo" {...register('saveInfo')} />
                     <label
                       htmlFor="saveInfo"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      {t("saveInfo")}
+                      {t('saveInfo')}
                     </label>
                   </div>
                 </div>
@@ -241,9 +279,9 @@ export default function CheckoutPage() {
                 <div className="flex flex-col gap-8">
                   {Items.map((item) => {
                     // Calculate discounted price if discount exists
-                    const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1
-                    const discountedPrice = item.price.amount * discountMultiplier
-                    const itemTotal = discountedPrice * item.quantity
+                    const discountMultiplier = item.discount ? (100 - item.discount) / 100 : 1;
+                    const discountedPrice = item.price.amount * discountMultiplier;
+                    const itemTotal = discountedPrice * item.quantity;
 
                     return (
                       <div key={item.id} className="flex items-center justify-between pr-[60px]">
@@ -251,11 +289,11 @@ export default function CheckoutPage() {
                           <div className="relative h-[54px] w-[54px] overflow-hidden rounded">
                             <Image
                               src={
-                                typeof item.images === "string"
-                                  ? item.images.startsWith("http") || item.images.startsWith("/")
+                                typeof item.images === 'string'
+                                  ? item.images.startsWith('http') || item.images.startsWith('/')
                                     ? item.images
                                     : `/images/${item.images}`
-                                  : "/cart-small.png"
+                                  : '/cart-small.png'
                               }
                               alt={item.name}
                               fill
@@ -270,40 +308,60 @@ export default function CheckoutPage() {
                         </div>
                         <span className="tracking-[0.32px]">${itemTotal.toFixed(2)}</span>
                       </div>
-                    )
+                    );
                   })}
                   <div className="mt-8 flex flex-col gap-4">
                     <div className="w-full flex justify-between pb-4 border-b border-black/40">
-                      <span className="tracking-[0.32px]">{t("subTotal")}</span>
+                      <span className="tracking-[0.32px]">{t('subTotal')}</span>
                       <span className="tracking-[0.32px]">${subtotal.toFixed(2)}</span>
                     </div>
                     <div className="w-full flex justify-between pb-4 border-b border-black/40">
-                      <span className="tracking-[0.32px]">{t("shipping")}</span>
-                      <span className="tracking-[0.32px]">{shipping > 0 ? `$${shipping.toFixed(2)}` : t("free")}</span>
+                      <span className="tracking-[0.32px]">{t('shipping')}</span>
+                      <span className="tracking-[0.32px]">
+                        {shipping > 0 ? `$${shipping.toFixed(2)}` : t('free')}
+                      </span>
                     </div>
                     <div className="w-full flex justify-between pb-4">
-                      <span className="tracking-[0.32px]">{t("total")}</span>
+                      <span className="tracking-[0.32px]">{t('total')}</span>
                       <span className="tracking-[0.32px]">${total.toFixed(2)}</span>
                     </div>
                   </div>
                   <div className="mt-8">
-                    <RadioGroup 
-                      defaultValue="moonpay" 
-                      className="gap-8" 
+                    <RadioGroup
+                      defaultValue="moonpay"
+                      className="gap-8"
                       onValueChange={(value) => setPaymentMethod(value)}
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="moonpay" id="r1" />
-                        <Label htmlFor="r1" className="text-base tracking-[0.32px] flex items-center">
+                        <Label
+                          htmlFor="r1"
+                          className="text-base tracking-[0.32px] flex items-center"
+                        >
                           Pay with USDC via MoonPay
-                          <Image src="/images/moonpay-logo.png" alt="MoonPay" width={24} height={24} className="ml-2" />
+                          <Image
+                            src="/images/moonpay-logo.png"
+                            alt="MoonPay"
+                            width={24}
+                            height={24}
+                            className="ml-2"
+                          />
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="stellar" id="r2" />
-                        <Label htmlFor="r2" className="text-base tracking-[0.32px] flex items-center">
+                        <Label
+                          htmlFor="r2"
+                          className="text-base tracking-[0.32px] flex items-center"
+                        >
                           Connect Stellar Wallet for USDC payment
-                          <Image src="/images/stellar-logo.png" alt="Stellar" width={24} height={24} className="ml-2" />
+                          <Image
+                            src="/images/stellar-logo.png"
+                            alt="Stellar"
+                            width={24}
+                            height={24}
+                            className="ml-2"
+                          />
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -314,13 +372,13 @@ export default function CheckoutPage() {
                       </div>
                     </RadioGroup>
                   </div>
-                  {paymentMethod === "qr" && (
+                  {paymentMethod === 'qr' && (
                     <div className="mt-4">
-                      <Image 
-                        src={"/images/qr-code.png"} 
-                        alt={"QR Code"} 
-                        width={120} 
-                        height={120} 
+                      <Image
+                        src={'/images/qr-code.png'}
+                        alt={'QR Code'}
+                        width={120}
+                        height={120}
                         className="my-2"
                       />
                     </div>
@@ -334,10 +392,10 @@ export default function CheckoutPage() {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          {t("processing")}
+                          {t('processing')}
                         </>
                       ) : (
-                        t("placeOrder")
+                        t('placeOrder')
                       )}
                     </Button>
                   </div>
@@ -348,6 +406,5 @@ export default function CheckoutPage() {
         )}
       </div>
     </Bounded>
-  )
+  );
 }
-

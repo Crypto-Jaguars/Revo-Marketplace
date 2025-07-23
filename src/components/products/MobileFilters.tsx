@@ -1,9 +1,9 @@
 'use client';
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Filter } from "lucide-react";
-import { ProductFilters } from "./ProductFilters";
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { Filter } from 'lucide-react';
+import { ProductFilters } from './ProductFilters';
 
 interface MobileFiltersProps {
   categories: string[];
@@ -29,4 +29,4 @@ export function MobileFilters({ categories, farmingMethods, onFilterChange }: Mo
       </SheetContent>
     </Sheet>
   );
-} 
+}

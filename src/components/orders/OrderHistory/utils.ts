@@ -1,4 +1,4 @@
-import { Order, OrderFilters, OrderStatus } from "./types";
+import { Order, OrderFilters, OrderStatus } from './types';
 
 export const filterOrders = (orders: Order[], filters: OrderFilters): Order[] => {
   return orders
@@ -20,7 +20,7 @@ export const filterOrders = (orders: Order[], filters: OrderFilters): Order[] =>
       return true;
     })
     .filter((order) => {
-      if (filters.status !== "all") return order.status === filters.status;
+      if (filters.status !== 'all') return order.status === filters.status;
       return true;
     })
     .filter((order) => {
@@ -32,10 +32,10 @@ export const filterOrders = (orders: Order[], filters: OrderFilters): Order[] =>
 
 export const sortOrders = (orders: Order[], sortBy: string): Order[] => {
   const sortFunctions = {
-    "date-desc": (a: Order, b: Order) => b.date.getTime() - a.date.getTime(),
-    "date-asc": (a: Order, b: Order) => a.date.getTime() - b.date.getTime(),
-    "total-desc": (a: Order, b: Order) => b.total - a.total,
-    "total-asc": (a: Order, b: Order) => a.total - b.total,
+    'date-desc': (a: Order, b: Order) => b.date.getTime() - a.date.getTime(),
+    'date-asc': (a: Order, b: Order) => a.date.getTime() - b.date.getTime(),
+    'total-desc': (a: Order, b: Order) => b.total - a.total,
+    'total-asc': (a: Order, b: Order) => a.total - b.total,
   };
   return [...orders].sort(sortFunctions[sortBy as keyof typeof sortFunctions]);
 };

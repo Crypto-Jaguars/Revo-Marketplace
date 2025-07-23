@@ -134,4 +134,4 @@ export interface FarmMetricsProps {
 export interface FarmCertificationsProps {
   certifications: FarmCertification[];
   ariaLabel?: string;
-} 
+}

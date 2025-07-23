@@ -1,8 +1,8 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Leaf } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Leaf } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 interface MetricCardProps {
@@ -13,12 +13,12 @@ interface MetricCardProps {
   className?: string;
 }
 
-function MetricCard({ 
+function MetricCard({
   translationKey,
-  value, 
-  unit = "", 
+  value,
+  unit = '',
   progress,
-  className = "" 
+  className = '',
 }: MetricCardProps) {
   const t = useTranslations('farm.metrics');
 
@@ -29,11 +29,14 @@ function MetricCard({
         <Leaf className="h-4 w-4 text-gray-500 flex-shrink-0" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold mb-2">{value}{unit}</div>
+        <div className="text-2xl font-bold mb-2">
+          {value}
+          {unit}
+        </div>
         {progress !== undefined && (
-          <Progress 
-            value={progress} 
-            className="h-4" 
+          <Progress
+            value={progress}
+            className="h-4"
             aria-label={t(`${translationKey}.progressLabel`)}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -41,9 +44,7 @@ function MetricCard({
             aria-valuetext={`${progress}%`}
           />
         )}
-        <p className="text-sm text-muted-foreground mt-3">
-          {t(`${translationKey}.description`)}
-        </p>
+        <p className="text-sm text-muted-foreground mt-3">{t(`${translationKey}.description`)}</p>
       </CardContent>
     </Card>
   );
@@ -74,12 +75,7 @@ export default function EnvironmentalMetrics({ metrics }: EnvironmentalMetricsPr
     return Math.max(0, Math.min(100, (1 - value / target) * 100));
   };
 
-  const renderMetric = (
-    translationKey: string,
-    current: number,
-    target: number,
-    unit: string
-  ) => {
+  const renderMetric = (translationKey: string, current: number, target: number, unit: string) => {
     const progress = calculateProgress(current, target);
 
     return (
@@ -91,9 +87,9 @@ export default function EnvironmentalMetrics({ metrics }: EnvironmentalMetricsPr
           </span>
         </div>
         {progress !== undefined && (
-          <Progress 
-            value={progress} 
-            className="h-4" 
+          <Progress
+            value={progress}
+            className="h-4"
             aria-label={t(`${translationKey}.progressLabel`)}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -101,9 +97,7 @@ export default function EnvironmentalMetrics({ metrics }: EnvironmentalMetricsPr
             aria-valuetext={`${progress}%`}
           />
         )}
-        <p className="text-sm text-muted-foreground">
-          {t(`${translationKey}.description`)}
-        </p>
+        <p className="text-sm text-muted-foreground">{t(`${translationKey}.description`)}</p>
       </div>
     );
   };

@@ -8,7 +8,11 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 
-const ContactLink = ({ href, icon: Icon, children }: {
+const ContactLink = ({
+  href,
+  icon: Icon,
+  children,
+}: {
   href: string;
   icon: typeof Phone;
   children: React.ReactNode;
@@ -111,4 +115,4 @@ export default function FarmProfile({
       </Card>
     </div>
   );
-} 
+}

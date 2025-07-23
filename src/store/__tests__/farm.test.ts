@@ -195,4 +195,4 @@ describe('Farm Store', () => {
     expect(state.isLoading).toBe(false);
     expect(state.error).toBeNull();
   });
-}); 
+});

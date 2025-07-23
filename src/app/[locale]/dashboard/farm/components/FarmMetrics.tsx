@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -21,10 +15,7 @@ import { FarmMetricsProps } from './types';
 import { formatDate } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
-export default function FarmMetrics({
-  crops,
-  sustainabilityMetrics,
-}: FarmMetricsProps) {
+export default function FarmMetrics({ crops, sustainabilityMetrics }: FarmMetricsProps) {
   const t = useTranslations('Farm.metrics');
 
   return (
@@ -56,8 +47,8 @@ export default function FarmMetrics({
                         crop.status === 'active'
                           ? 'success'
                           : crop.status === 'planned'
-                          ? 'secondary'
-                          : 'default'
+                            ? 'secondary'
+                            : 'default'
                       }
                     >
                       {t(`crop.status.${crop.status}`)}
@@ -88,9 +79,7 @@ export default function FarmMetrics({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                  <p className="text-sm font-medium">
-                    {t('resource.waterUsage.title')}
-                  </p>
+                  <p className="text-sm font-medium">{t('resource.waterUsage.title')}</p>
                   <p className="text-sm text-muted-foreground">
                     {t('resource.waterUsage.description')}
                   </p>
@@ -99,7 +88,7 @@ export default function FarmMetrics({
                   {t('resource.percentage', { value: sustainabilityMetrics.waterUsage.percentage })}
                 </span>
               </div>
-              <Progress 
+              <Progress
                 value={sustainabilityMetrics.waterUsage.percentage || 0}
                 aria-label={t('resource.waterUsage.ariaLabel')}
                 aria-valuemin={0}
@@ -113,8 +102,8 @@ export default function FarmMetrics({
               <div className="flex items-center justify-between">
                 <h4 className="font-medium">{t('resource.renewableEnergy.title')}</h4>
                 <span className="text-sm text-muted-foreground">
-                  {t('resource.renewableEnergy.usage', { 
-                    percentage: sustainabilityMetrics.renewableEnergy.percentage 
+                  {t('resource.renewableEnergy.usage', {
+                    percentage: sustainabilityMetrics.renewableEnergy.percentage,
                   })}
                 </span>
               </div>
@@ -147,18 +136,18 @@ export default function FarmMetrics({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                  <p className="text-sm font-medium">
-                    {t('environmental.carbonFootprint.title')}
-                  </p>
+                  <p className="text-sm font-medium">{t('environmental.carbonFootprint.title')}</p>
                   <p className="text-sm text-muted-foreground">
                     {t('environmental.carbonFootprint.description')}
                   </p>
                 </div>
                 <span className="text-sm font-medium">
-                  {t('environmental.percentage', { value: sustainabilityMetrics.carbonFootprint.percentage })}
+                  {t('environmental.percentage', {
+                    value: sustainabilityMetrics.carbonFootprint.percentage,
+                  })}
                 </span>
               </div>
-              <Progress 
+              <Progress
                 value={sustainabilityMetrics.carbonFootprint.percentage || 0}
                 aria-label={t('environmental.carbonFootprint.ariaLabel')}
                 aria-valuemin={0}
@@ -173,9 +162,13 @@ export default function FarmMetrics({
               <div className="grid gap-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">{t('environmental.wasteManagement.recycling.title')}</span>
+                    <span className="text-sm">
+                      {t('environmental.wasteManagement.recycling.title')}
+                    </span>
                     <span className="text-sm text-muted-foreground">
-                      {t('environmental.percentage', { value: sustainabilityMetrics.wasteManagement.recyclingRate })}
+                      {t('environmental.percentage', {
+                        value: sustainabilityMetrics.wasteManagement.recyclingRate,
+                      })}
                     </span>
                   </div>
                   <Progress
@@ -188,9 +181,13 @@ export default function FarmMetrics({
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">{t('environmental.wasteManagement.composting.title')}</span>
+                    <span className="text-sm">
+                      {t('environmental.wasteManagement.composting.title')}
+                    </span>
                     <span className="text-sm text-muted-foreground">
-                      {t('environmental.percentage', { value: sustainabilityMetrics.wasteManagement.compostingRate })}
+                      {t('environmental.percentage', {
+                        value: sustainabilityMetrics.wasteManagement.compostingRate,
+                      })}
                     </span>
                   </div>
                   <Progress
@@ -215,4 +212,4 @@ export default function FarmMetrics({
       </div>
     </div>
   );
-} 
+}

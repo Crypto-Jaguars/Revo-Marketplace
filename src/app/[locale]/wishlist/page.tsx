@@ -32,8 +32,8 @@ export default function WishlistPage() {
   useEffect(() => {
     // Simulate loading wishlist items
     const loadWishlist = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Mock data - in real app, this would come from API or local storage
       const mockWishlist: WishlistItem[] = [
         {
@@ -45,17 +45,17 @@ export default function WishlistPage() {
           farmName: 'Green Valley Farm',
           rating: 4.8,
           inStock: true,
-          discount: 15
+          discount: 15,
         },
         {
           id: '2',
           name: 'Fresh Eggs',
-          price: 6.50,
+          price: 6.5,
           image: '/images/eggs.jpg',
           category: 'Dairy & Eggs',
           farmName: 'Sunrise Poultry',
           rating: 4.9,
-          inStock: true
+          inStock: true,
         },
         {
           id: '3',
@@ -65,10 +65,10 @@ export default function WishlistPage() {
           category: 'Vegetables',
           farmName: 'Organic Harvest',
           rating: 4.6,
-          inStock: false
-        }
+          inStock: false,
+        },
       ];
-      
+
       setWishlistItems(mockWishlist);
       setIsLoading(false);
     };
@@ -77,7 +77,7 @@ export default function WishlistPage() {
   }, []);
 
   const removeFromWishlist = (itemId: string) => {
-    setWishlistItems(prev => prev.filter(item => item.id !== itemId));
+    setWishlistItems((prev) => prev.filter((item) => item.id !== itemId));
     toast.success('Item removed from wishlist');
   };
 
@@ -86,7 +86,7 @@ export default function WishlistPage() {
       toast.error('This item is currently out of stock');
       return;
     }
-    
+
     // In real app, this would add to cart store
     toast.success(`${item.name} added to cart`);
   };
@@ -119,10 +119,9 @@ export default function WishlistPage() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">My Wishlist</h1>
           <p className="text-gray-300">
-            {wishlistItems.length > 0 
+            {wishlistItems.length > 0
               ? `You have ${wishlistItems.length} item${wishlistItems.length === 1 ? '' : 's'} in your wishlist`
-              : 'Your wishlist is empty'
-            }
+              : 'Your wishlist is empty'}
           </p>
         </div>
 
@@ -134,7 +133,7 @@ export default function WishlistPage() {
               <p className="text-gray-300 mb-6">
                 Start adding products to your wishlist to save them for later
               </p>
-              <Button 
+              <Button
                 onClick={() => router.push('/marketplace')}
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold"
               >
@@ -145,7 +144,10 @@ export default function WishlistPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {wishlistItems.map((item) => (
-              <Card key={item.id} className="bg-white/10 backdrop-blur-sm border-white/20 group hover:bg-white/20 transition-all duration-300">
+              <Card
+                key={item.id}
+                className="bg-white/10 backdrop-blur-sm border-white/20 group hover:bg-white/20 transition-all duration-300"
+              >
                 <CardContent className="p-6">
                   <div className="relative mb-4">
                     <Image
@@ -189,7 +191,7 @@ export default function WishlistPage() {
                       </div>
                     </div>
 
-                    <h3 
+                    <h3
                       className="text-lg font-semibold text-white cursor-pointer hover:text-green-400 transition-colors"
                       onClick={() => goToProduct(item.id)}
                     >
@@ -241,7 +243,7 @@ export default function WishlistPage() {
 
         {wishlistItems.length > 0 && (
           <div className="mt-8 text-center">
-            <Button 
+            <Button
               onClick={() => router.push('/marketplace')}
               variant="outline"
               className="border-white text-white hover:bg-white/10"

@@ -1,27 +1,27 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Github } from "lucide-react"
+import Image from 'next/image';
+import Link from 'next/link';
+import { Github } from 'lucide-react';
 
 const teamMembers = [
   {
-    name: "Team Member 1",
-    position: "Position",
-    github: "https://github.com/member1",
-    image: "/placeholder.svg"
+    name: 'Team Member 1',
+    position: 'Position',
+    github: 'https://github.com/member1',
+    image: '/placeholder.svg',
   },
   {
-    name: "Team Member 2",
-    position: "Position",
-    github: "https://github.com/member2",
-    image: "/placeholder.svg"
+    name: 'Team Member 2',
+    position: 'Position',
+    github: 'https://github.com/member2',
+    image: '/placeholder.svg',
   },
   {
-    name: "Team Member 3",
-    position: "Position",
-    github: "https://github.com/member3",
-    image: "/placeholder.svg"
-  }
-]
+    name: 'Team Member 3',
+    position: 'Position',
+    github: 'https://github.com/member3',
+    image: '/placeholder.svg',
+  },
+];
 
 export default function Team() {
   return (
@@ -35,12 +35,7 @@ export default function Team() {
             {teamMembers.map((member) => (
               <div key={member.name} className="flex flex-col items-center space-y-4">
                 <div className="relative w-40 h-40 rounded-full overflow-hidden bg-gray-100">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    className="object-cover"
-                    fill
-                  />
+                  <Image src={member.image} alt={member.name} className="object-cover" fill />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">{member.name}</h3>
@@ -59,5 +54,5 @@ export default function Team() {
         </div>
       </div>
     </section>
-  )
+  );
 }

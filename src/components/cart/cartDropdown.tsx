@@ -1,5 +1,5 @@
-"use client"
-import { ShoppingCart, Loader2 } from "lucide-react"
+'use client';
+import { ShoppingCart, Loader2 } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,26 +7,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { useCartStore } from "@/store/cartStore/store"
-import { cn } from "@/lib/utils"
-import Link from "next/link"
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { useCartStore } from '@/store/cartStore/store';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 interface CartDropdownProps {
-  className?: string
+  className?: string;
 }
 
 export default function CartDropdown({ className }: CartDropdownProps) {
-  const { Items, subtotal, loading, clearCart } = useCartStore()
+  const { Items, subtotal, loading, clearCart } = useCartStore();
 
   // Calculate total items in cart
-  const cartCount = Items.reduce((acc, item) => acc + item.quantity, 0)
+  const cartCount = Items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className={cn("relative", className)}>
+        <Button variant="ghost" size="icon" className={cn('relative', className)}>
           <ShoppingCart className="h-6 w-6 text-primary_green dark:text-white" />
           {cartCount > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -38,11 +38,11 @@ export default function CartDropdown({ className }: CartDropdownProps) {
       <DropdownMenuContent align="end" className="w-80">
         <div className="flex items-center justify-between">
           <DropdownMenuLabel>Your Cart</DropdownMenuLabel>
-          {cartCount > 0 &&
+          {cartCount > 0 && (
             <Button variant="outline" size="sm" onClick={clearCart}>
               Clear Cart
             </Button>
-          }
+          )}
         </div>
         <DropdownMenuSeparator />
 
@@ -75,7 +75,7 @@ export default function CartDropdown({ className }: CartDropdownProps) {
                     </div>
                     <span className="font-medium">${itemTotal.toFixed(2)}</span>
                   </DropdownMenuItem>
-                )
+                );
               })}
             <DropdownMenuSeparator />
             <div className="p-4">
@@ -90,7 +90,11 @@ export default function CartDropdown({ className }: CartDropdownProps) {
                 >
                   <Link href="/en/cart">View Cart</Link>
                 </Button>
-                <Button asChild variant="outline" className="w-full border-primary_green text-primary_green">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full border-primary_green text-primary_green"
+                >
                   <Link href="/en/checkout">Checkout</Link>
                 </Button>
               </div>
@@ -99,5 +103,5 @@ export default function CartDropdown({ className }: CartDropdownProps) {
         )}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

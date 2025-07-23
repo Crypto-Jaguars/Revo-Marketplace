@@ -9,14 +9,13 @@ import { useTranslations } from 'next-intl';
 function VisionPage() {
   const t = useTranslations('Account');
 
-    return (
-      <>
-          <VisionMission />
-          <Team />
-          <Testimonials />
-    
-      </>
-    )
-  }
+  return (
+    <>
+      <VisionMission />
+      <Team />
+      <Testimonials />
+    </>
+  );
+}
 
 export default WithAuthProtect(VisionPage);

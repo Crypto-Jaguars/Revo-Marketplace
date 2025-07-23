@@ -1,16 +1,16 @@
 'use client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Farm } from "./types";
-import { CropTimeline } from "./CropTimeline";
-import { ContractHistory } from "./ContractHistory";
-import EnvironmentalMetrics from "./EnvironmentalMetrics";
-import ProductionForecast from "./ProductionForecast";
-import { Users, ThermometerSun, Droplet, Trees } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Farm } from './types';
+import { CropTimeline } from './CropTimeline';
+import { ContractHistory } from './ContractHistory';
+import EnvironmentalMetrics from './EnvironmentalMetrics';
+import ProductionForecast from './ProductionForecast';
+import { Users, ThermometerSun, Droplet, Trees } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Breadcrumb from "@/components/shared/Breadcrumb";
+import Breadcrumb from '@/components/shared/Breadcrumb';
 
 interface FarmDetailViewProps {
   farm: Farm;
@@ -22,28 +22,28 @@ export function FarmDetailView({ farm }: FarmDetailViewProps) {
   const breadcrumbItems = [
     { label: t('breadcrumb.home'), href: '/' },
     { label: t('breadcrumb.farms'), href: '/farms' },
-    { label: farm.name, href: '', isCurrent: true }
+    { label: farm.name, href: '', isCurrent: true },
   ];
 
   // Transform the metrics data to match the new interface
   const environmentalMetrics = {
     carbonFootprint: {
       current: farm.environmentalMetrics.carbonFootprint,
-      target: 100 // Set appropriate target values
+      target: 100, // Set appropriate target values
     },
     waterUsage: {
       current: farm.environmentalMetrics.waterUsage,
-      target: 1000 // Set appropriate target values
+      target: 1000, // Set appropriate target values
     },
     biodiversity: {
       current: farm.environmentalMetrics.biodiversityScore,
-      target: 100 // Set appropriate target values
-    }
+      target: 100, // Set appropriate target values
+    },
   };
 
   // Transform the farm data for production forecast
   const productionData = {
-    crops: farm.activeCrops.map(crop => ({
+    crops: farm.activeCrops.map((crop) => ({
       id: crop.id,
       name: crop.name,
       harvest: [
@@ -51,16 +51,16 @@ export function FarmDetailView({ farm }: FarmDetailViewProps) {
         {
           month: new Date(crop.expectedHarvestDate).toLocaleString('default', { month: 'short' }),
           progress: 75, // Calculate appropriate progress
-          forecast: 100 // Set appropriate forecast
-        }
-      ]
-    }))
+          forecast: 100, // Set appropriate forecast
+        },
+      ],
+    })),
   };
 
   return (
     <div className="w-full min-h-screen bg-background pt-16 pb-48">
       <div className="container mx-auto p-4 space-y-6">
-      <Breadcrumb items={breadcrumbItems} />
+        <Breadcrumb items={breadcrumbItems} />
       </div>
       <div className="container mx-auto p-4 space-y-6">
         {/* Header */}
@@ -81,19 +81,19 @@ export function FarmDetailView({ farm }: FarmDetailViewProps) {
                       <span className="text-sm text-muted-foreground">
                         {tDetail('firstSection.acreageValue', {
                           active: farm.activeAcreage,
-                          total: farm.totalAcreage
+                          total: farm.totalAcreage,
                         })}
                       </span>
                     </div>
-                    <Progress 
-                      value={(farm.activeAcreage / farm.totalAcreage) * 100} 
+                    <Progress
+                      value={(farm.activeAcreage / farm.totalAcreage) * 100}
                       className="h-4"
                       aria-label={tDetail('firstSection.activeProgress')}
                       aria-valuemin={0}
                       aria-valuemax={100}
                       aria-valuenow={(farm.activeAcreage / farm.totalAcreage) * 100}
                       aria-valuetext={tDetail('firstSection.activeProgressText', {
-                        percentage: Math.round((farm.activeAcreage / farm.totalAcreage) * 100)
+                        percentage: Math.round((farm.activeAcreage / farm.totalAcreage) * 100),
                       })}
                     />
                   </div>
@@ -109,10 +109,14 @@ export function FarmDetailView({ farm }: FarmDetailViewProps) {
               <CardContent className="pt-6">
                 <div className="flex flex-col gap-2">
                   <h3 className="text-xl font-bold">{tDetail('secondSection.laborForce')}</h3>
-                  <span className="text-2xl font-bold">{farm.laborForce} {tDetail('secondSection.unit')}</span>
+                  <span className="text-2xl font-bold">
+                    {farm.laborForce} {tDetail('secondSection.unit')}
+                  </span>
                   <div className="flex items-center space-x-2">
                     <Users className="h-4 w-4 text-muted-foreground" />
-                    <p className="text-sm text-muted-foreground">{tDetail('secondSection.activeWorkers')}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {tDetail('secondSection.activeWorkers')}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -122,30 +126,34 @@ export function FarmDetailView({ farm }: FarmDetailViewProps) {
             <Card className="w-full sm:col-span-2 lg:col-span-1">
               <CardContent className="pt-6">
                 <h3 className="text-xl font-bold">{tDetail('thirdSection.climate')}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {tDetail('thirdSection.subtitle')}
-                </p>
+                <p className="text-sm text-muted-foreground">{tDetail('thirdSection.subtitle')}</p>
                 <div className="space-y-3 my-8">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <ThermometerSun className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm">{tDetail('thirdSection.temperature.title')}</span>
                     </div>
-                    <span className="font-medium">{farm.climate.averageTemperature} {tDetail('thirdSection.temperature.unit')}</span>
+                    <span className="font-medium">
+                      {farm.climate.averageTemperature} {tDetail('thirdSection.temperature.unit')}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <Droplet className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm">{tDetail('thirdSection.rainfall.title')}</span>
                     </div>
-                    <span className="font-medium">{farm.climate.annualRainfall} {tDetail('thirdSection.rainfall.unit')}</span>
+                    <span className="font-medium">
+                      {farm.climate.annualRainfall} {tDetail('thirdSection.rainfall.unit')}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <Trees className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm">{tDetail('thirdSection.growingSeason.title')}</span>
                     </div>
-                    <span className="font-medium">{farm.climate.growingSeason} {tDetail('thirdSection.growingSeason.unit')}</span>
+                    <span className="font-medium">
+                      {farm.climate.growingSeason} {tDetail('thirdSection.growingSeason.unit')}
+                    </span>
                   </div>
                 </div>
               </CardContent>

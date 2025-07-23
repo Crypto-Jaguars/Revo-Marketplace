@@ -36,7 +36,7 @@ const mockWeatherData: WeatherData = {
         min: 15,
         max: 25,
       },
-      condition: 'Sunny'
+      condition: 'Sunny',
     },
     {
       date: '2024-02-25',
@@ -44,9 +44,9 @@ const mockWeatherData: WeatherData = {
         min: 14,
         max: 23,
       },
-      condition: 'Cloudy'
-    }
-  ]
+      condition: 'Cloudy',
+    },
+  ],
 };
 
 const mockedGetWeatherData = getWeatherData as MockedFunction<typeof getWeatherData>;
@@ -58,7 +58,7 @@ describe('WeatherWidget', () => {
 
   it('renders weather information correctly', () => {
     render(<WeatherWidget latitude={51.5074} longitude={-0.1278} />);
-    
+
     // More resilient to formatting changes
     expect(screen.getByText(/20.*C/)).toBeInTheDocument();
     expect(screen.getByText(/Sunny/i)).toBeInTheDocument();
@@ -80,11 +80,11 @@ describe('WeatherWidget', () => {
   it('shows loading state initially', async () => {
     const promise = new Promise<WeatherData>(() => {});
     mockedGetWeatherData.mockImplementation(() => promise);
-    
+
     await act(async () => {
       render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
-    
+
     const loadingElement = screen.getByRole('status');
     expect(loadingElement).toBeInTheDocument();
     expect(loadingElement).toHaveAttribute('aria-label', 'Loading weather data');
@@ -92,7 +92,7 @@ describe('WeatherWidget', () => {
 
   it('displays weather data when loaded successfully', async () => {
     mockedGetWeatherData.mockResolvedValue(mockWeatherData);
-    
+
     await act(async () => {
       render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
@@ -107,7 +107,7 @@ describe('WeatherWidget', () => {
 
   it('shows error message when weather data fails to load', async () => {
     mockedGetWeatherData.mockRejectedValue(new Error('Failed to fetch'));
-    
+
     await act(async () => {
       render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
@@ -119,7 +119,7 @@ describe('WeatherWidget', () => {
 
   it('displays forecast information', async () => {
     mockedGetWeatherData.mockResolvedValue(mockWeatherData);
-    
+
     await act(async () => {
       render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
@@ -135,10 +135,7 @@ describe('WeatherWidget', () => {
     await act(async () => {
       render(<WeatherWidget latitude={mockLocation.latitude} longitude={mockLocation.longitude} />);
     });
-    
-    expect(getWeatherData).toHaveBeenCalledWith(
-      mockLocation.latitude,
-      mockLocation.longitude
-    );
+
+    expect(getWeatherData).toHaveBeenCalledWith(mockLocation.latitude, mockLocation.longitude);
   });
-}); 
+});
