@@ -120,4 +120,3 @@ Estos diagramas deben actualizarse cuando:
 
 **🌱 Revolutionary Farmers** - Transformando la agricultura con blockchain technology
 
-*Última actualización: Diciembre 2024* 
