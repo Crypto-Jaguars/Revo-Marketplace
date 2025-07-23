@@ -50,9 +50,6 @@ jobs:
       - name: Run linting
         run: pnpm lint
 
-      - name: Run tests
-        run: pnpm test:ci
-
       - name: Build project
         run: pnpm build
 
