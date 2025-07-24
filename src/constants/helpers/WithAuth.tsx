@@ -2,7 +2,7 @@
 'use client';
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
-import { useWalletStore } from '@/store/walletStore';
+import { useWalletStore } from '@/store';
 
 export default function WithAuthProtect(Component: any) {
   return function WithAuthProtect(props: any) {

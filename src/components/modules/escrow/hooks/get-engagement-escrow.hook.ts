@@ -1,5 +1,5 @@
 import { getEngagement } from '@/services/escrow/getEngagement';
-import { useWalletStore } from '@/store/walletStore';
+import { useWalletStore } from '@/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';

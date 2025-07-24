@@ -2,12 +2,13 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from './Header';
-import { useWalletStore } from '@/store/walletStore';
+import { useWalletStore } from '@/store';
 import { useWallet } from '@/wallet/hooks/useWallet.hook';
 import { useRouter } from 'next/navigation';
+import { mockZustandStore } from '@/utils/test-helpers';
 
 // Mock dependencies for wallet and router
-jest.mock('@/store/walletStore', () => ({
+jest.mock('@/store', () => ({
   useWalletStore: jest.fn(),
 }));
 jest.mock('@/wallet/hooks/useWallet.hook', () => ({
@@ -27,16 +28,16 @@ describe('Header Component', () => {
     disconnectWallet = jest.fn();
     push = jest.fn();
 
-    (useWallet as jest.Mock).mockReturnValue({
+    (useWallet as unknown as jest.Mock).mockReturnValue({
       connectWallet,
       disconnectWallet,
     });
 
-    (useWalletStore as jest.Mock).mockReturnValue({
-      address: null,
+    mockZustandStore(useWalletStore, {
+      address: undefined,
     });
 
-    (useRouter as jest.Mock).mockReturnValue({
+    (useRouter as unknown as jest.Mock).mockReturnValue({
       push,
     });
   });
@@ -85,7 +86,7 @@ describe('Header Component', () => {
     expect(connectWallet).toHaveBeenCalledTimes(1);
 
     // Simulate connected wallet
-    (useWalletStore as jest.Mock).mockReturnValue({
+    mockZustandStore(useWalletStore, {
       address: '0x1234',
     });
 
@@ -116,7 +117,7 @@ describe('Header Component', () => {
 
   // Test for wallet disconnect and menu closure on mobile
   it('disconnects wallet and closes mobile menu on disconnect', () => {
-    (useWalletStore as jest.Mock).mockReturnValue({
+    mockZustandStore(useWalletStore, {
       address: '0x1234',
     });
 

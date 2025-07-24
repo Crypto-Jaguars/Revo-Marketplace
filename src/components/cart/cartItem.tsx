@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Minus, Plus, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import type { CartItem } from '@/store/cartStore/types';
+import type { CartItem } from '@/store';
 import RemoveButton from '@/components/cart/RemoveItem/RemoveButton';
 import UndoNotification from '@/components/cart/RemoveItem/UndoNotification';
 

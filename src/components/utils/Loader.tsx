@@ -4,7 +4,7 @@ interface LoaderProps {
   isLoading: boolean;
 }
 
-const Loader: React.FC<LoaderProps> = ({ isLoading }) => {
+export function Loader({ isLoading }: LoaderProps) {
   if (isLoading) {
     return (
       <div className="w-full h-full flex justify-center items-center flex-col gap-10 my-10">
@@ -24,5 +24,3 @@ const Loader: React.FC<LoaderProps> = ({ isLoading }) => {
   }
   return null; // Ensure it returns null if not loading
 };
-
-export default Loader;

@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useState } from 'react';
-import { useCartStore } from '@/store/cartStore/store';
+import { useCartStore } from '@/store';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';

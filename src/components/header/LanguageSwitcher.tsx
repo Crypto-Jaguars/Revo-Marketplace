@@ -1,9 +1,9 @@
-import { useLanguageStore } from '@/store/languageStore/store';
+import { useLanguageStore } from '@/store';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const LanguageSwitcher = () => {
+export function LanguageSwitcher() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { language, setLanguage } = useLanguageStore();
@@ -70,5 +70,3 @@ const LanguageSwitcher = () => {
     </div>
   );
 };
-
-export default LanguageSwitcher;

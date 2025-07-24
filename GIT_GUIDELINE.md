@@ -1,4 +1,4 @@
-# Commit Guidelines | TRUSTLESS WORK
+# Commit Guidelines | Revolutionary Farmers
 
 This guideline aims to establish a clear set of conventions for commit messages in this project. Following these conventions helps maintain a clear and consistent commit history.
 

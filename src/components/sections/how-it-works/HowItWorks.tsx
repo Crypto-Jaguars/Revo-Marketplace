@@ -4,7 +4,7 @@ import ToggleUserType from './ToggleUserType';
 import { useTranslations } from 'next-intl';
 import { ShoppingCart, CreditCard, Truck, Store, Package, ThumbsUp } from 'lucide-react';
 
-const HowItWorks = () => {
+export function HowItWorks() {
   const t = useTranslations('HowItWorks');
   const [activeType, setActiveType] = useState<'farmer' | 'buyer'>('farmer');
 
@@ -67,5 +67,3 @@ const HowItWorks = () => {
     </section>
   );
 };
-
-export default HowItWorks;

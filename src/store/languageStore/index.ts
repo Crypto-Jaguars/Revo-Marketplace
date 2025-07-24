@@ -1,1 +1,4 @@
-export * from './store';
+/**
+ * @deprecated Import from '@/store' instead
+ */
+export * from '../slices/language';

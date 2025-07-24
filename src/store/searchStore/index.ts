@@ -1,1 +1,4 @@
-export { useSearchStore } from './store';
+/**
+ * @deprecated Import from '@/store' instead
+ */
+export * from '../slices/search';

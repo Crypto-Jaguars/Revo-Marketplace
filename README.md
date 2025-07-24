@@ -2,7 +2,7 @@
 
 **Revolutionary Farmers** is a Next.js-powered marketplace platform designed to revolutionize agricultural transactions using Stellar blockchain technology. Our platform connects farmers directly with buyers, ensuring secure, transparent, and efficient transactions through USDC payments and escrow services.
 
-![Revolutionary Farmers](public/images/logo-dark.svg)
+![Revolutionary Farmers](public/favicon.ico)
 
 ## ✨ Key Features
 
@@ -149,4 +149,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-© 2024 Revolutionary Farmers. All rights reserved.
+With love from Revolutionary Farmers!

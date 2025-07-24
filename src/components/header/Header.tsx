@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { useWalletStore } from '@/store/walletStore';
+import { useWalletStore } from '@/store';
 import { useWallet } from '@/wallet/hooks/useWallet.hook';
 import { FaUserCircle } from 'react-icons/fa';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import ItemsHeader from './ItemsHeader';
-import LanguageSwitcher from './LanguageSwitcher';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle'; // I did import the component ThemeToggle, it switches between light and dark
 import { usePathname, useRouter } from 'next/navigation';
-import { useLanguageStore } from '@/store/languageStore/store';
+import { useLanguageStore } from '@/store';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
