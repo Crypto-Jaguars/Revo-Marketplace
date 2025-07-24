@@ -3,7 +3,7 @@ import FeatureCard from './FeatureCard';
 import { useTranslations } from 'next-intl';
 import { ShieldCheck, Users, Leaf } from 'lucide-react';
 
-const AboutUs = () => {
+export function AboutUs() {
   const t = useTranslations('AboutUs');
 
   // Usar una función para crear los iconos con color blanco forzado
@@ -54,5 +54,3 @@ const AboutUs = () => {
     </section>
   );
 };
-
-export default AboutUs;

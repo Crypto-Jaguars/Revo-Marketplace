@@ -10,15 +10,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useTranslations } from 'next-intl';
 import { useWallet } from '@/wallet/hooks/useWallet.hook';
-import { useWalletStore } from '@/store/walletStore';
+import { useWalletStore } from '@/store';
 import { useRouter } from 'next/navigation';
-import { useLanguageStore } from '@/store/languageStore/store';
+import { useLanguageStore } from '@/store';
 
 interface UserMenuProps {
   className?: string;
 }
 
-const UserMenu = ({ className }: UserMenuProps) => {
+export function UserMenu({ className }: UserMenuProps) {
   const t = useTranslations('Marketplace.user');
   const { connectWallet, disconnectWallet } = useWallet();
   const { address } = useWalletStore();
@@ -84,5 +84,3 @@ const UserMenu = ({ className }: UserMenuProps) => {
     </DropdownMenu>
   );
 };
-
-export default UserMenu;

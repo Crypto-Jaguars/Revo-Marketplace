@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/select';
 import { ProductFilters } from '@/components/products/ProductFilters';
 import { calculateDiscountedPrice } from '@/constants/helpers/CalculateDiscountedPrice';
-import { useSearchStore } from '@/store/searchStore';
+import { useSearchStore } from '@/store';
 
 export default function ProductsPage() {
   const t = useTranslations('Products');

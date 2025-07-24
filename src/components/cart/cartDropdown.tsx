@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { useCartStore } from '@/store/cartStore/store';
+import { useCartStore } from '@/store';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 

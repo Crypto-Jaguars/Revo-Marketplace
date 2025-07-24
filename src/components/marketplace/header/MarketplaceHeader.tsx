@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useLanguageStore } from '@/store/languageStore/store';
-import SearchBar from './SearchBar';
-import NavMenu from './NavMenu';
+import { useLanguageStore } from '@/store';
+import { SearchBar } from './SearchBar';
+import { NavMenu } from './NavMenu';
 import CartWidget from './CartWidget';
-import UserMenu from './UserMenu';
-import LanguageSwitcher from '@/components/header/LanguageSwitcher';
+import { UserMenu } from './UserMenu';
+import { LanguageSwitcher } from '@/components/header/LanguageSwitcher';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import CartDropdown from '@/components/cart/cartDropdown';

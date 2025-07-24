@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useCartStore } from '@/store/cartStore/store';
+import { useCartStore } from '@/store';
 import CartItemComponent from './cartItem';
 import CartSummary from './cartSummary';
 import { Button } from '@/components/ui/button';

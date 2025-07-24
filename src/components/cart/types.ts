@@ -1,4 +1,4 @@
-import type { CartItem as StoreCartItem } from '@/store/cartStore/types';
+import type { CartItem as StoreCartItem } from '@/store';
 
 export type CartItemProps = {
   item: StoreCartItem;

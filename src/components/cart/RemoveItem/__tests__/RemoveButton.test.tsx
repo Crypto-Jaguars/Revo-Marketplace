@@ -4,15 +4,16 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RemoveButton from '../RemoveButton';
-import { useCartStore } from '@/store/cartStore/store';
+import { useCartStore } from '@/store';
+import { mockZustandStore } from '@/utils/test-helpers';
 
-jest.mock('@/store/cartStore/store', () => ({
+jest.mock('@/store', () => ({
   useCartStore: jest.fn(),
 }));
 
 describe('RemoveButton Component', () => {
   beforeEach(() => {
-    (useCartStore as jest.Mock).mockReturnValue({
+    mockZustandStore(useCartStore, {
       removeItem: jest.fn(),
     });
   });

@@ -120,15 +120,16 @@ export interface FarmGalleryProps {
 export interface FarmDetailsProps {
   farmingMethods: FarmingMethod[];
   infrastructure: Infrastructure;
-  ariaLabel: string;
-  role: string;
+  ariaLabel?: string;
+  ariaLive?: 'polite' | 'assertive' | 'off';
+  role?: string;
 }
 
 export interface FarmMetricsProps {
   crops: Crop[];
   sustainabilityMetrics: SustainabilityMetrics;
-  ariaLabel: string;
-  ariaLive: 'polite' | 'assertive' | 'off';
+  ariaLabel?: string;
+  ariaLive?: 'polite' | 'assertive' | 'off';
 }
 
 export interface FarmCertificationsProps {

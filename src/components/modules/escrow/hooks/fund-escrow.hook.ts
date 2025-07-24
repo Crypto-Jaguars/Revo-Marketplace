@@ -1,7 +1,7 @@
 import { useToast } from '@/hooks/use-toast';
 import { fundEscrow } from '@/services/escrow/fundEscrow';
-import { useLoaderStore } from '@/store/utilsStore';
-import { useWalletStore } from '@/store/walletStore';
+import { useLoaderStore } from '@/store';
+import { useWalletStore } from '@/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';

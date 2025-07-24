@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
-import { useLanguageStore } from '@/store/languageStore/store';
+import { useLanguageStore } from '@/store';
 
 export default function SignInPage() {
   const t = useTranslations('SignIn');

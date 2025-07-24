@@ -1,11 +1,12 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { AddToCartButton } from '../AddToCartButton';
-import * as cartStore from '@/store/cartStore/store';
+import * as cartStore from '@/store';
 import type { Product } from '@/types/product';
-import type { CartItem, CartState } from '@/store/cartStore/types';
+import type { CartItem, CartState } from '@/store';
+import { mockZustandStore } from '@/utils/test-helpers';
 
-jest.mock('@/store/cartStore/store', () => ({
+jest.mock('@/store', () => ({
   useCartStore: jest.fn(),
 }));
 
@@ -100,10 +101,7 @@ describe('AddToCartButton', () => {
 
   beforeEach(() => {
     mockAddItem = jest.fn().mockResolvedValue(undefined);
-    const mockUseCartStore = cartStore.useCartStore as jest.MockedFunction<
-      typeof cartStore.useCartStore
-    >;
-    mockUseCartStore.mockImplementation(() => createMockStore({ addItem: mockAddItem }));
+    mockZustandStore(cartStore.useCartStore, createMockStore({ addItem: mockAddItem }));
   });
 
   afterEach(() => {
@@ -130,7 +128,7 @@ describe('AddToCartButton', () => {
 
     render(<AddToCartButton product={mockProduct} />);
     const button = screen.getByRole('button');
-    expect(button).toHaveTextContent(/Add Again/i);
+    expect(button).toHaveTextContent('Add Again');
   });
 
   it('handles add to cart action', async () => {

@@ -2,14 +2,14 @@ import React, { useState, useCallback } from 'react';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useSearchStore } from '@/store/searchStore';
-import { useLanguageStore } from '@/store/languageStore/store';
+import { useSearchStore } from '@/store';
+import { useLanguageStore } from '@/store';
 
 interface SearchBarProps {
   className?: string;
 }
 
-const SearchBar = ({ className }: SearchBarProps) => {
+export function SearchBar({ className }: SearchBarProps) {
   const [inputValue, setInputValue] = useState('');
   const [showLink, setShowLink] = useState(false);
   const { setSearchTerm } = useSearchStore();
@@ -52,5 +52,3 @@ const SearchBar = ({ className }: SearchBarProps) => {
     </form>
   );
 };
-
-export default SearchBar;

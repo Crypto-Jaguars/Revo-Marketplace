@@ -16,7 +16,7 @@ import {
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useWallet } from '@/wallet/hooks/useWallet.hook';
-import { useWalletStore } from '@/store/walletStore';
+import { useWalletStore } from '@/store';
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 

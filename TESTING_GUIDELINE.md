@@ -1,6 +1,6 @@
 # Testing Guide
 
-This document provides instructions on how to run unit tests (using Jest) and end-to-end tests (using Cypress) in the `revolutionary_farmers/web` project. It also includes prerequisites and tips to ensure the tests run successfully.
+This document provides instructions on how to run unit tests (using Jest) and end-to-end tests (using Cypress) in the `Revo-Marketplace` project. It also includes prerequisites and tips to ensure the tests run successfully.
 
 ## Prerequisites
 

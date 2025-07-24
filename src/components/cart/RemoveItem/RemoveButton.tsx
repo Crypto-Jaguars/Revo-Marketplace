@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';
-import { useCartStore } from '@/store/cartStore/store';
+import { useCartStore } from '@/store';
 import ConfirmDialog from '@/components/cart/RemoveItem/ConfirmDialog';
 
 interface RemoveButtonProps {

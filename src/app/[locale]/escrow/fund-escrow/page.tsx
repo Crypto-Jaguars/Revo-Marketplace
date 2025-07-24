@@ -2,9 +2,9 @@
 
 import Bounded from '@/components/Bounded';
 import { FundEscrowForm } from '@/components/modules/escrow/FundEscrowForm';
-import Loader from '@/components/utils/Loader';
+import { Loader } from '@/components/utils/Loader';
 import WithAuthProtect from '@/constants/helpers/WithAuth';
-import { useLoaderStore } from '@/store/utilsStore';
+import { useLoaderStore } from '@/store';
 
 const FundEscrow = () => {
   const isLoading = useLoaderStore((state) => state.isLoading);

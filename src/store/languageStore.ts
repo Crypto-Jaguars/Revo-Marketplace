@@ -1,2 +1,4 @@
-// Re-export from the store module
-export * from './languageStore/store';
+/**
+ * @deprecated Import from '@/store' instead
+ */
+export * from './slices/language';
