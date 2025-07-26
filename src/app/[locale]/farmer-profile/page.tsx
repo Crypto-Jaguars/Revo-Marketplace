@@ -8,8 +8,46 @@ import CertificationCards from '@/components/farmer-profile/CertificationCards';
 import SeasonalProducts from '@/components/farmer-profile/SeasonalProducts';
 import ContactInfo from '@/components/farmer-profile/ContactInfo';
 
-const FarmerProfile = () => {
-  const [isOwner] = useState(false); // Cambiar a true para ver botones de edición
+interface FarmerProfileProps {
+  params: {
+    locale: string;
+  };
+}
+
+// Default data for seasonal products
+const defaultProducts = [
+  {
+    id: 1,
+    name: "Brócoli Tierno",
+    season: "Todo el año",
+    availability: "Disponible",
+    image: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=150&h=150&fit=crop"
+  },
+  {
+    id: 2,
+    name: "Lechugas Orgánicas",
+    season: "Noviembre - Mayo",
+    availability: "Disponible",
+    image: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=150&h=150&fit=crop"
+  },
+  {
+    id: 3,
+    name: "Zanahorias",
+    season: "Diciembre - Abril",
+    availability: "Temporada Alta",
+    image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=150&h=150&fit=crop"
+  },
+  {
+    id: 4,
+    name: "Brócoli",
+    season: "Enero - Marzo",
+    availability: "Próximamente",
+    image: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=150&h=150&fit=crop"
+  }
+];
+
+const FarmerProfile = ({ params }: FarmerProfileProps) => {
+  const [isOwner] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -28,7 +66,7 @@ const FarmerProfile = () => {
           <div className="lg:w-1/3 space-y-6">
             <div className="lg:sticky lg:top-8">
               <ContactInfo isOwner={isOwner} />
-              <SeasonalProducts isOwner={isOwner} />
+              <SeasonalProducts isOwner={isOwner} products={defaultProducts} />
             </div>
           </div>
         </div>
