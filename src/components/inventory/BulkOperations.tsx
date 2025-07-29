@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useInventoryStore } from '@/store';
+import { generateId } from '@/lib/utils';
 import {
   Upload,
   Download,
@@ -86,7 +87,9 @@ export function BulkOperations() {
   const handleImport = () => {
     if (!selectedFile) return;
 
+    const operationId = generateId();
     const operation = {
+      id: operationId,
       type: 'import' as const,
       status: 'pending' as const,
       fileName: selectedFile.name,
@@ -97,17 +100,16 @@ export function BulkOperations() {
       createdBy: 'current-user',
     };
 
-    // Assume startBulkOperation returns the operation with an id
-    const startedOperation = startBulkOperation(operation);
+    startBulkOperation(operation);
     setSelectedFile(null);
 
     // Simulate processing
     setTimeout(() => {
-      updateBulkOperation(startedOperation.id, { status: 'processing' });
+      updateBulkOperation(operationId, { status: 'processing' });
     }, 1000);
 
     setTimeout(() => {
-      updateBulkOperation(startedOperation.id, {
+      updateBulkOperation(operationId, {
         status: 'completed',
         totalRecords: 150,
         processedRecords: 145,
@@ -118,7 +120,9 @@ export function BulkOperations() {
   };
 
   const handleExport = () => {
+    const operationId = generateId();
     const operation = {
+      id: operationId,
       type: 'export' as const,
       status: 'pending' as const,
       fileName: `inventory_export_${new Date().toISOString().split('T')[0]}.csv`,
@@ -133,11 +137,11 @@ export function BulkOperations() {
 
     // Simulate processing
     setTimeout(() => {
-      updateBulkOperation(operation.id, { status: 'processing' });
+      updateBulkOperation(operationId, { status: 'processing' });
     }, 1000);
 
     setTimeout(() => {
-      updateBulkOperation(operation.id, {
+      updateBulkOperation(operationId, {
         status: 'completed',
         totalRecords: 200,
         processedRecords: 200,
@@ -165,22 +169,28 @@ export function BulkOperations() {
             <CardDescription>{t('bulk.importDescription')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-              <input
-                type="file"
-                accept=".csv,.xlsx,.xls"
-                onChange={handleFileUpload}
-                className="hidden"
-                id="file-upload"
-              />
-              <label htmlFor="file-upload" className="cursor-pointer">
-                <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                <p className="text-sm text-muted-foreground">
-                  {selectedFile ? selectedFile.name : t('bulk.dragAndDrop')}
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">{t('bulk.supportedFormats')}</p>
-              </label>
-            </div>
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">  
+              <input  
+                type="file"  
+                accept=".csv,.xlsx,.xls"  
+                onChange={handleFileUpload}  
+                className="hidden"  
+                id="file-upload"  
+                aria-describedby="file-upload-description"  
+              />  
+              <label htmlFor="file-upload" className="cursor-pointer">  
+                <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />  
+                <p className="text-sm text-muted-foreground">  
+                  {selectedFile ? selectedFile.name : t('bulk.dragAndDrop')}  
+                </p>  
+                <p  
+                  id="file-upload-description"  
+                  className="text-xs text-muted-foreground mt-1"  
+                >  
+                  {t('bulk.supportedFormats')}  
+                </p>  
+              </label>  
+            </div> 
             <Button onClick={handleImport} disabled={!selectedFile} className="w-full">
               {t('bulk.startImport')}
             </Button>

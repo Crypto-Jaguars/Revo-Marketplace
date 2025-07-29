@@ -3,13 +3,17 @@
 import { useTranslations } from 'next-intl';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import { InventoryDashboard } from '@/components/inventory/InventoryDashboard';
+import { useParams } from 'next/navigation';
 
 export default function InventoryDashboardPage() {
   const t = useTranslations('inventory');
+  const { locale } = useParams();  
 
   const breadcrumbItems = [
     { label: t('breadcrumb.home'), href: '/' },
     { label: t('breadcrumb.dashboard'), href: '/dashboard' },
+    { label: t('breadcrumb.home'), href: `/${locale}` },  
+    { label: t('breadcrumb.dashboard'), href: `/${locale}/dashboard` },  
     { label: t('breadcrumb.inventory'), href: '', isCurrent: true },
   ];
 
