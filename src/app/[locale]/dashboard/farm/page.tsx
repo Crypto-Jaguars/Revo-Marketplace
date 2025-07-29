@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { WiDaySunny, WiCloudy, WiRain, WiHumidity, WiStrongWind } from 'react-icons/wi';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import { FarmLocation } from './components/types';
+import { formatDate } from '@/lib/utils';
 
 // Use FarmLocation or create an alias if needed
 type Location = FarmLocation;
@@ -198,6 +199,7 @@ const WeatherWidget = ({ location }: WeatherWidgetProps) => {
 
 export default function FarmDashboardPage() {
   const t = useTranslations('farm');
+  const locale = useLocale();
 
   const breadcrumbItems = [
     { label: t('breadcrumb.home'), href: '/' },
@@ -294,6 +296,36 @@ export default function FarmDashboardPage() {
             </li>
           </ul>
         </section>
+
+        {/* Inventory Management */}
+        <section
+          className="col-span-1 bg-white rounded-lg shadow-md p-6"
+          aria-labelledby="inventory-title"
+        >
+          <h2 id="inventory-title" className="text-xl font-semibold mb-4">
+            Inventory Management
+          </h2>
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600">Total Products</span>
+              <span className="font-semibold">4</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600">Low Stock Items</span>
+              <span className="font-semibold text-yellow-600">1</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600">Out of Stock</span>
+              <span className="font-semibold text-red-600">1</span>
+            </div>
+            <a
+              href={`/${locale}/dashboard/inventory`}
+              className="block w-full mt-4 px-4 py-2 bg-green-600 text-white text-center rounded-md hover:bg-green-700 transition-colors"
+            >
+              Manage Inventory
+            </a>
+          </div>
+        </section>
       </div>
 
       {/* Recent Activity */}
@@ -301,29 +333,33 @@ export default function FarmDashboardPage() {
         <h2 id="activity-title" className="text-xl font-semibold mb-4">
           {t('activity.title')}
         </h2>
-        <ul className="space-y-4" role="list">
-          <li className="flex items-center justify-between border-b pb-4" role="listitem">
-            <div>
-              <p className="font-medium">{t('activity.irrigation.title')}</p>
-              <p className="text-sm text-gray-500">{t('activity.irrigation.description')}</p>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-3 h-3 bg-green-400 rounded-full mr-3" aria-hidden="true"></div>
+              <span className="text-gray-600">{t('activity.irrigation')}</span>
             </div>
-            <time className="text-sm text-gray-500">{t('activity.irrigation.time')}</time>
-          </li>
-          <li className="flex items-center justify-between border-b pb-4" role="listitem">
-            <div>
-              <p className="font-medium">{t('activity.fertilizer.title')}</p>
-              <p className="text-sm text-gray-500">{t('activity.fertilizer.description')}</p>
+            <span className="text-sm text-gray-500">{formatDate(new Date().toISOString())}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-3 h-3 bg-blue-400 rounded-full mr-3" aria-hidden="true"></div>
+              <span className="text-gray-600">{t('activity.fertilizer')}</span>
             </div>
-            <time className="text-sm text-gray-500">{t('activity.fertilizer.time')}</time>
-          </li>
-          <li className="flex items-center justify-between" role="listitem">
-            <div>
-              <p className="font-medium">{t('activity.harvest.title')}</p>
-              <p className="text-sm text-gray-500">{t('activity.harvest.description')}</p>
+            <span className="text-sm text-gray-500">
+              {formatDate(new Date(Date.now() - 86400000).toISOString())}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3" aria-hidden="true"></div>
+              <span className="text-gray-600">{t('activity.harvest')}</span>
             </div>
-            <time className="text-sm text-gray-500">{t('activity.harvest.time')}</time>
-          </li>
-        </ul>
+            <span className="text-sm text-gray-500">
+              {formatDate(new Date(Date.now() - 2 * 86400000).toISOString())}
+            </span>
+          </div>
+        </div>
       </section>
     </div>
   );

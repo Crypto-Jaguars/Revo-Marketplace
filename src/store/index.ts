@@ -25,6 +25,20 @@ export type { WalletState } from './slices/wallet/types';
 export { useFarmStore } from './slices/farm/index';
 export type { FarmState, FarmActions } from './slices/farm/types';
 
+// Inventory store
+export { useInventoryStore } from './slices/inventory/index';
+export type {
+  InventoryState,
+  InventoryActions,
+  InventoryProduct,
+  StockMovement,
+  InventoryAdjustment,
+  ProductCategory,
+  InventoryMetrics,
+  BulkOperation,
+  InventoryFilters,
+} from './slices/inventory/types';
+
 // Utils store
 export { useLoaderStore } from './slices/utils/index';
 export type { LoaderState } from './slices/utils/types';
