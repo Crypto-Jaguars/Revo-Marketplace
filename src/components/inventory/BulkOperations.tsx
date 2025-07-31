@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/table';
 import { useInventoryStore } from '@/store';
 import { generateId } from '@/lib/utils';
+import type { BulkOperation } from '@/types/inventory';
 import {
   Upload,
   Download,
@@ -150,7 +151,7 @@ export function BulkOperations() {
     }, 2000);
   };
 
-  const calculateProgress = (operation: any) => {
+  const calculateProgress = (operation: BulkOperation) => {
     if (operation.totalRecords === 0) return 0;
     return (operation.processedRecords / operation.totalRecords) * 100;
   };
@@ -169,28 +170,25 @@ export function BulkOperations() {
             <CardDescription>{t('bulk.importDescription')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">  
-              <input  
-                type="file"  
-                accept=".csv,.xlsx,.xls"  
-                onChange={handleFileUpload}  
-                className="hidden"  
-                id="file-upload"  
-                aria-describedby="file-upload-description"  
-              />  
-              <label htmlFor="file-upload" className="cursor-pointer">  
-                <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />  
-                <p className="text-sm text-muted-foreground">  
-                  {selectedFile ? selectedFile.name : t('bulk.dragAndDrop')}  
-                </p>  
-                <p  
-                  id="file-upload-description"  
-                  className="text-xs text-muted-foreground mt-1"  
-                >  
-                  {t('bulk.supportedFormats')}  
-                </p>  
-              </label>  
-            </div> 
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+              <input
+                type="file"
+                accept=".csv,.xlsx,.xls"
+                onChange={handleFileUpload}
+                className="hidden"
+                id="file-upload"
+                aria-describedby="file-upload-description"
+              />
+              <label htmlFor="file-upload" className="cursor-pointer">
+                <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                <p className="text-sm text-muted-foreground">
+                  {selectedFile ? selectedFile.name : t('bulk.dragAndDrop')}
+                </p>
+                <p id="file-upload-description" className="text-xs text-muted-foreground mt-1">
+                  {t('bulk.supportedFormats')}
+                </p>
+              </label>
+            </div>
             <Button onClick={handleImport} disabled={!selectedFile} className="w-full">
               {t('bulk.startImport')}
             </Button>

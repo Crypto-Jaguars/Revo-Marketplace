@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -182,10 +183,12 @@ export function ProductList() {
                       <TableCell>
                         <div className="flex items-center gap-3">
                           {product.images.length > 0 && (
-                            <img
+                            <Image
                               src={product.images[0]}
                               alt={product.name}
-                              className="w-10 h-10 rounded object-cover"
+                              width={40}
+                              height={40}
+                              className="rounded object-cover"
                             />
                           )}
                           <div>
