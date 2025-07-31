@@ -13,6 +13,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'openweathermap.org',
         pathname: '/img/wn/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
       }
     ],
     formats: ['image/avif', 'image/webp'],
@@ -20,4 +25,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withNextIntl(nextConfig); 
+module.exports = withNextIntl(nextConfig);
