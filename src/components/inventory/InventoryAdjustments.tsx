@@ -103,6 +103,8 @@ export function InventoryAdjustments() {
     if (reason) {
       rejectAdjustment(adjustmentId, reason);
     }
+    // TODO: Implement proper modal dialog for rejection reason  
+   // setShowRejectModal({ adjustmentId, isOpen: true });  
   };
 
   return (
