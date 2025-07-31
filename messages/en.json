@@ -68,10 +68,10 @@
     }
   },
   "cta": {
-      "ready": "Ready to Get Started?",
-      "startSelling": "Start Selling",
-      "exploreProducts": "Explore Products"
-    },
+    "ready": "Ready to Get Started?",
+    "startSelling": "Start Selling",
+    "exploreProducts": "Explore Products"
+  },
 
   "ItemsHeader": {
     "initializeEscrow": "Create Escrow",
@@ -188,6 +188,195 @@
     },
     "quantity": {
       "label": "Quantity"
+    }
+  },
+
+  "inventory": {
+    "title": "Inventory Management",
+    "description": "Comprehensive inventory management dashboard for farmers to control their product stock, track availability, and manage harvest schedules.",
+    "breadcrumb": {
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "inventory": "Inventory"
+    },
+    "actions": {
+      "addProduct": "Add Product",
+      "import": "Import",
+      "export": "Export",
+      "settings": "Settings"
+    },
+    "metrics": {
+      "totalProducts": "Total Products",
+      "totalValue": "Total Value",
+      "lowStock": "Low Stock",
+      "outOfStock": "Out of Stock",
+      "activeProducts": "Active products",
+      "inventoryValue": "Inventory value",
+      "needsAttention": "Needs attention",
+      "requiresRestocking": "Requires restocking",
+      "stockUtilization": "Stock Utilization",
+      "stockUtilizationDescription": "Current utilization of your inventory capacity",
+      "utilization": "Utilization",
+      "totalItems": "Total items",
+      "avgStock": "Avg stock",
+      "turnoverRate": "Turnover rate",
+      "topProducts": "Top Products",
+      "topProductsDescription": "Products with highest stock levels",
+      "recentMovements": "Recent Movements",
+      "recentMovementsDescription": "Latest stock movements and transactions",
+      "alerts": "Alerts & Notifications",
+      "alertsDescription": "Important notifications about your inventory",
+      "lowStockAlert": "Low Stock Alert",
+      "itemsNeedAttention": "items need attention",
+      "outOfStockAlert": "Out of Stock Alert",
+      "itemsOutOfStock": "items out of stock",
+      "allGood": "All Good",
+      "noAlerts": "No alerts at this time"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "products": "Products",
+      "movements": "Movements",
+      "adjustments": "Adjustments",
+      "bulkOperations": "Bulk Operations"
+    },
+    "products": {
+      "title": "Product Inventory",
+      "description": "Manage your product inventory with {count} products",
+      "filters": "Filters",
+      "filtersDescription": "Filter and search your products",
+      "searchPlaceholder": "Search products by name or SKU...",
+      "selectCategory": "Select Category",
+      "allCategories": "All Categories",
+      "selectStatus": "Select Status",
+      "allStatuses": "All Statuses",
+      "addProduct": "Add Product",
+      "noProducts": "No products found",
+      "deleteConfirmation": "Are you sure you want to delete this product?",
+      "available": "Available: {count}",
+      "value": "Value: ${value}",
+      "columns": {
+        "product": "Product",
+        "sku": "SKU",
+        "category": "Category",
+        "stock": "Stock",
+        "price": "Price",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": {
+        "in_stock": "In Stock",
+        "low_stock": "Low Stock",
+        "out_of_stock": "Out of Stock",
+        "discontinued": "Discontinued"
+      }
+    },
+    "movements": {
+      "title": "Stock Movements",
+      "description": "Track all stock movements with {count} records",
+      "filters": "Filters",
+      "filtersDescription": "Filter stock movements",
+      "searchPlaceholder": "Search movements...",
+      "selectType": "Select Type",
+      "allTypes": "All Types",
+      "selectProduct": "Select Product",
+      "allProducts": "All Products",
+      "noMovements": "No movements found",
+      "from": "From: {quantity}",
+      "newBalance": "New balance",
+      "columns": {
+        "date": "Date",
+        "product": "Product",
+        "type": "Type",
+        "quantity": "Quantity",
+        "reason": "Reason",
+        "user": "User",
+        "balance": "Balance"
+      },
+      "type": {
+        "in": "Stock In",
+        "out": "Stock Out",
+        "adjustment": "Adjustment",
+        "reservation": "Reservation",
+        "return": "Return"
+      }
+    },
+    "adjustments": {
+      "title": "Inventory Adjustments",
+      "description": "Manage stock adjustments with {count} records",
+      "filters": "Filters",
+      "filtersDescription": "Filter adjustments",
+      "searchPlaceholder": "Search adjustments...",
+      "selectStatus": "Select Status",
+      "allStatuses": "All Statuses",
+      "selectType": "Select Type",
+      "allTypes": "All Types",
+      "createAdjustment": "Create Adjustment",
+      "noAdjustments": "No adjustments found",
+      "rejectReason": "Please provide a reason for rejection:",
+      "approvedBy": "Approved by {user}",
+      "rejected": "Rejected",
+      "columns": {
+        "date": "Date",
+        "product": "Product",
+        "type": "Type",
+        "quantity": "Quantity",
+        "reason": "Reason",
+        "status": "Status",
+        "user": "User",
+        "actions": "Actions"
+      },
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      },
+      "type": {
+        "correction": "Correction",
+        "damage": "Damage",
+        "loss": "Loss",
+        "theft": "Theft",
+        "quality_control": "Quality Control"
+      }
+    },
+    "bulk": {
+      "import": "Import Products",
+      "importDescription": "Import products from CSV or Excel files",
+      "export": "Export Products",
+      "exportDescription": "Export your inventory data",
+      "dragAndDrop": "Drag and drop files here, or click to select",
+      "supportedFormats": "Supported formats: CSV, XLSX, XLS",
+      "startImport": "Start Import",
+      "startExport": "Start Export",
+      "exportOptions": "Export Options",
+      "includeProductDetails": "Include product details",
+      "includeStockMovements": "Include stock movements",
+      "includeAdjustments": "Include adjustments",
+      "operationsHistory": "Operations History",
+      "operationsDescription": "Track all import/export operations",
+      "noOperations": "No operations found",
+      "processed": "Processed: {count}",
+      "failed": "Failed: {count}",
+      "columns": {
+        "date": "Date",
+        "type": "Type",
+        "file": "File",
+        "status": "Status",
+        "progress": "Progress",
+        "results": "Results",
+        "actions": "Actions"
+      },
+      "type": {
+        "import": "Import",
+        "export": "Export",
+        "update": "Update"
+      },
+      "status": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "completed": "Completed",
+        "failed": "Failed"
+      }
     }
   },
   "Marketplace": {
@@ -506,70 +695,70 @@
     "description": "Farm operations management and monitoring"
   },
   "OrderHistory": {
-      "title": "Order History",
-      "filters": {
-        "search": "Search Orders",
-        "dateRange": "Date Range",
-        "status": "Order Status",
-        "sortBy": "Sort By",
-        "amountRange": "Amount Range",
-        "minAmount": "Min Amount",
-        "maxAmount": "Max Amount",
-        "present": "Present"
-      },
-      "status": {
-        "all": "All Statuses",
-        "pending": "Pending",
-        "processing": "Processing",
-        "delivered": "Delivered",
-        "cancelled": "Cancelled"
-      },
-      "sortBy": {
-        "dateDesc": "Newest First",
-        "dateAsc": "Oldest First",
-        "totalDesc": "Highest Amount",
-        "totalAsc": "Lowest Amount"
-      },
-      "table": {
-        "orderId": "Order ID",
-        "date": "Date",
-        "total": "Total",
-        "status": "Status",
-        "seller": "Seller",
-        "actions": "Actions"
-      },
-      "details": {
-        "title": "Order Details",
-        "orderInfo": {
-          "title": "Order Information",
-          "status": "Status",
-          "date": "Date",
-          "total": "Total"
-        },
-        "sellerInfo": {
-          "title": "Seller Information",
-          "name": "Name",
-          "rating": "Rating"
-        },
-        "items": {
-          "title": "Items",
-          "quantity": "Quantity",
-          "price": "Price"
-        },
-        "shipping": {
-          "title": "Shipping",
-          "address": "Delivery Address",
-          "trackingNumber": "Tracking Number",
-          "estimatedDelivery": "Estimated Delivery"
-        },
-        "payment": {
-          "title": "Payment Details",
-          "method": "Payment Method",
-          "status": "Payment Status",
-          "total": "Total Amount"
-        }
-      }
+    "title": "Order History",
+    "filters": {
+      "search": "Search Orders",
+      "dateRange": "Date Range",
+      "status": "Order Status",
+      "sortBy": "Sort By",
+      "amountRange": "Amount Range",
+      "minAmount": "Min Amount",
+      "maxAmount": "Max Amount",
+      "present": "Present"
     },
+    "status": {
+      "all": "All Statuses",
+      "pending": "Pending",
+      "processing": "Processing",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "sortBy": {
+      "dateDesc": "Newest First",
+      "dateAsc": "Oldest First",
+      "totalDesc": "Highest Amount",
+      "totalAsc": "Lowest Amount"
+    },
+    "table": {
+      "orderId": "Order ID",
+      "date": "Date",
+      "total": "Total",
+      "status": "Status",
+      "seller": "Seller",
+      "actions": "Actions"
+    },
+    "details": {
+      "title": "Order Details",
+      "orderInfo": {
+        "title": "Order Information",
+        "status": "Status",
+        "date": "Date",
+        "total": "Total"
+      },
+      "sellerInfo": {
+        "title": "Seller Information",
+        "name": "Name",
+        "rating": "Rating"
+      },
+      "items": {
+        "title": "Items",
+        "quantity": "Quantity",
+        "price": "Price"
+      },
+      "shipping": {
+        "title": "Shipping",
+        "address": "Delivery Address",
+        "trackingNumber": "Tracking Number",
+        "estimatedDelivery": "Estimated Delivery"
+      },
+      "payment": {
+        "title": "Payment Details",
+        "method": "Payment Method",
+        "status": "Payment Status",
+        "total": "Total Amount"
+      }
+    }
+  },
   "FarmDetails": {
     "farmingMethods": "Farming Methods",
     "farmingMethodsDescription": "Our sustainable farming practices and techniques",
