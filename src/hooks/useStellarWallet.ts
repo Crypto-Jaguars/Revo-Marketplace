@@ -35,6 +35,8 @@ export function useStellarWallet(address: string | null) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [network, setNetwork] = useState<"PUBLIC" | "TESTNET">("PUBLIC")
+  const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
+  const [totalXlmUsdValue, setTotalXlmUsdValue] = useState("0.00")
 
   const getServer = useCallback(() => {
     return network === "PUBLIC"
@@ -46,9 +48,26 @@ export function useStellarWallet(address: string | null) {
     return network === "PUBLIC" ? Networks.PUBLIC : Networks.TESTNET
   }, [network])
 
+  const fetchExchangeRates = useCallback(async () => {
+    try {
+      // In a real application, you would fetch this from a reliable API like CoinGecko
+      // For demonstration, we'll use mock data.
+      const mockRates = {
+        XLM: 0.12, // 1 XLM = 0.12 USD
+        USDT: 1.0, // 1 USDT = 1.00 USD
+        USDC: 1.0, // 1 USDC = 1.00 USD
+      }
+      setExchangeRates(mockRates)
+    } catch (err) {
+      console.error("Failed to fetch exchange rates:", err)
+      // Optionally set an error state for exchange rates
+    }
+  }, [])
+
   const fetchBalances = useCallback(async () => {
     if (!address) {
       setBalances([])
+      setTotalXlmUsdValue("0.00")
       return
     }
 
@@ -70,6 +89,14 @@ export function useStellarWallet(address: string | null) {
       }))
 
       setBalances(stellarBalances)
+
+      // Calculate total XLM equivalent in USD
+      const xlmBalance = stellarBalances.find((b) => b.asset_type === "native")?.balance || "0"
+      if (exchangeRates.XLM) {
+        setTotalXlmUsdValue((Number.parseFloat(xlmBalance) * exchangeRates.XLM).toFixed(2))
+      } else {
+        setTotalXlmUsdValue("0.00")
+      }
     } catch (err: any) {
       console.error("Failed to fetch balances:", err)
       if (err.response?.status === 404) {
@@ -78,10 +105,11 @@ export function useStellarWallet(address: string | null) {
         setError(err.message || "Failed to fetch balances")
       }
       setBalances([])
+      setTotalXlmUsdValue("0.00")
     } finally {
       setIsLoading(false)
     }
-  }, [address, getServer])
+  }, [address, getServer, exchangeRates.XLM]) // Depend on exchangeRates.XLM
 
   const fetchTransactions = useCallback(async () => {
     if (!address) {
@@ -197,59 +225,76 @@ export function useStellarWallet(address: string | null) {
     }
   }, [address, getServer])
 
-  const sendPayment = useCallback(
+  const preparePaymentTransaction = useCallback(
     async (destination: string, amount: string, assetCode?: string, assetIssuer?: string, memo?: string) => {
       if (!address) {
         throw new Error("Wallet not connected")
       }
 
       try {
-        // Validate destination address
-        try {
-          Keypair.fromPublicKey(destination)
-        } catch {
-          throw new Error("Invalid destination address")
-        }
+        Keypair.fromPublicKey(destination) // Validate destination address
+      } catch {
+        throw new Error("Invalid destination address")
+      }
 
+      const server = getServer()
+      const networkPassphrase = getNetworkPassphrase()
+      const sourceAccount = await server.loadAccount(address)
+
+      let asset: Asset
+      if (!assetCode || assetCode === "XLM") {
+        asset = Asset.native()
+      } else {
+        if (!assetIssuer) {
+          throw new Error("Asset issuer is required for non-native assets")
+        }
+        asset = new Asset(assetCode, assetIssuer)
+      }
+
+      const operation = Operation.payment({
+        destination,
+        asset,
+        amount,
+      })
+
+      let transactionBuilder = new TransactionBuilder(sourceAccount, {
+        fee: BASE_FEE,
+        networkPassphrase,
+      }).addOperation(operation)
+
+      if (memo) {
+        transactionBuilder = transactionBuilder.addMemo(Memo.text(memo))
+      }
+
+      const transaction = transactionBuilder.setTimeout(300).build()
+      const estimatedFee = (Number.parseInt(transaction.fee) / 10000000).toString()
+
+      return {
+        xdr: transaction.toXDR(),
+        estimatedFee,
+        sourceAccount: address,
+        destination,
+        amount,
+        assetCode: assetCode || "XLM",
+        assetIssuer: assetIssuer || "",
+        memo: memo || "",
+      }
+    },
+    [address, getServer, getNetworkPassphrase],
+  )
+
+  const sendPayment = useCallback(
+    async (xdr: string) => {
+      if (!address) {
+        throw new Error("Wallet not connected")
+      }
+
+      try {
         const server = getServer()
         const networkPassphrase = getNetworkPassphrase()
 
-        // Load the source account
-        const sourceAccount = await server.loadAccount(address)
-
-        // Create the asset
-        let asset: Asset
-        if (!assetCode || assetCode === "XLM") {
-          asset = Asset.native()
-        } else {
-          if (!assetIssuer) {
-            throw new Error("Asset issuer is required for non-native assets")
-          }
-          asset = new Asset(assetCode, assetIssuer)
-        }
-
-        // Create the payment operation
-        const operation = Operation.payment({
-          destination,
-          asset,
-          amount,
-        })
-
-        // Build the transaction
-        let transactionBuilder = new TransactionBuilder(sourceAccount, {
-          fee: BASE_FEE,
-          networkPassphrase,
-        }).addOperation(operation)
-
-        // Add memo if provided
-        if (memo) {
-          transactionBuilder = transactionBuilder.addMemo(Memo.text(memo))
-        }
-
-        const transaction = transactionBuilder.setTimeout(300).build()
-
         // Sign the transaction using the wallet kit
-        const signResponse = await kit.signTransaction(transaction.toXDR(), {
+        const signResponse = await kit.signTransaction(xdr, {
           address: address,
           networkPassphrase: networkPassphrase,
         })
@@ -344,7 +389,12 @@ export function useStellarWallet(address: string | null) {
     setError(null)
   }, [])
 
-  // Auto-refresh balances and transactions when address changes
+  // Fetch exchange rates on component mount
+  useEffect(() => {
+    fetchExchangeRates()
+  }, [fetchExchangeRates])
+
+  // Auto-refresh balances and transactions when address or network changes
   useEffect(() => {
     if (address) {
       fetchBalances()
@@ -354,7 +404,7 @@ export function useStellarWallet(address: string | null) {
       setTransactions([])
       setError(null)
     }
-  }, [address, fetchBalances, fetchTransactions])
+  }, [address, network, fetchBalances, fetchTransactions]) // Added network to dependency array
 
   // Set up periodic refresh for balances (every 30 seconds)
   useEffect(() => {
@@ -373,8 +423,11 @@ export function useStellarWallet(address: string | null) {
     isLoading,
     error,
     network,
+    exchangeRates,
+    totalXlmUsdValue,
     fetchBalances,
     fetchTransactions,
+    preparePaymentTransaction, // New function to prepare transaction for confirmation
     sendPayment,
     createTrustline,
     switchNetwork,
