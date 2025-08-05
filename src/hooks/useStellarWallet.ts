@@ -112,52 +112,40 @@ export function useStellarWallet(address: string | null) {
 
             if (operations.records.length > 0) {
               const firstOp = operations.records[0]
+              const opType = firstOp.type as string
 
-              // Fix the type assignment issue
-              switch (firstOp.type) {
-                case "payment":
-                  type = "payment"
-                  amount = (firstOp as any).amount || "0"
-                  asset = (firstOp as any).asset_type === "native" ? "XLM" : (firstOp as any).asset_code || "XLM"
-                  from = (firstOp as any).from || address
-                  to = (firstOp as any).to || address
-                  break
-                case "create_account":
-                  type = "create_account"
-                  amount = (firstOp as any).starting_balance || "0"
-                  asset = "XLM"
-                  from = (firstOp as any).funder || address
-                  to = (firstOp as any).account || address
-                  break
-                case "path_payment_strict_receive":
-                case "path_payment_strict_send":
-                  type = "path_payment"
-                  amount = (firstOp as any).amount || (firstOp as any).source_amount || "0"
-                  asset = (firstOp as any).asset_type === "native" ? "XLM" : (firstOp as any).asset_code || "XLM"
-                  from = (firstOp as any).from || address
-                  to = (firstOp as any).to || address
-                  break
-                case "manage_sell_offer":
-                case "manage_buy_offer":
-                case "create_passive_sell_offer":
-                  type = "manage_offer"
-                  amount = (firstOp as any).amount || "0"
-                  asset =
-                    (firstOp as any).selling_asset_type === "native"
-                      ? "XLM"
-                      : (firstOp as any).selling_asset_code || "XLM"
-                  break
-                case "change_trust":
-                  type = "change_trust"
-                  amount = (firstOp as any).limit || "0"
-                  asset = (firstOp as any).asset_code || "UNKNOWN"
-                  break
-                case "manage_data":
-                  type = "manage_data"
-                  break
-                default:
-                  // For other operations, we'll show minimal info
-                  break
+              // Handle all possible operation types with string comparison
+              if (opType === "payment") {
+                type = "payment"
+                amount = (firstOp as any).amount || "0"
+                asset = (firstOp as any).asset_type === "native" ? "XLM" : (firstOp as any).asset_code || "XLM"
+                from = (firstOp as any).from || address
+                to = (firstOp as any).to || address
+              } else if (opType === "create_account") {
+                type = "create_account"
+                amount = (firstOp as any).starting_balance || "0"
+                asset = "XLM"
+                from = (firstOp as any).funder || address
+                to = (firstOp as any).account || address
+              } else if (opType.includes("path_payment")) {
+                type = "path_payment"
+                amount = (firstOp as any).amount || (firstOp as any).source_amount || "0"
+                asset = (firstOp as any).asset_type === "native" ? "XLM" : (firstOp as any).asset_code || "XLM"
+                from = (firstOp as any).from || address
+                to = (firstOp as any).to || address
+              } else if (opType.includes("offer")) {
+                type = "manage_offer"
+                amount = (firstOp as any).amount || "0"
+                asset =
+                  (firstOp as any).selling_asset_type === "native"
+                    ? "XLM"
+                    : (firstOp as any).selling_asset_code || "XLM"
+              } else if (opType === "change_trust") {
+                type = "change_trust"
+                amount = (firstOp as any).limit || "0"
+                asset = (firstOp as any).asset_code || "UNKNOWN"
+              } else if (opType === "manage_data") {
+                type = "manage_data"
               }
             }
 
@@ -261,15 +249,13 @@ export function useStellarWallet(address: string | null) {
         const transaction = transactionBuilder.setTimeout(300).build()
 
         // Sign the transaction using the wallet kit
-        // const signedXdr = await kit.signTransaction({
-        //   xdr: transaction.toXDR(),
-        //   publicKeys: [address],
-        //   network: networkPassphrase,
-        // })
-        const signedXdr = await kit.signTransaction({
-            networkPassphrase: networkPassphrase,
-            address: [address]
+        const signResponse = await kit.signTransaction(transaction.toXDR(), {
+          address: address,
+          networkPassphrase: networkPassphrase,
         })
+
+        // Extract the signed XDR from the response
+        const signedXdr = signResponse.signedTxXdr
 
         // Submit the transaction
         const transactionResult = await server.submitTransaction(
@@ -323,11 +309,13 @@ export function useStellarWallet(address: string | null) {
           .build()
 
         // Sign the transaction using the wallet kit
-        const signedXdr = await kit.signTransaction({
-          xdr: transaction.toXDR(),
-          publicKeys: [address],
-          network: networkPassphrase,
+        const signResponse = await kit.signTransaction(transaction.toXDR(), {
+          address: address,
+          networkPassphrase: networkPassphrase,
         })
+
+        // Extract the signed XDR from the response
+        const signedXdr = signResponse.signedTxXdr
 
         // Submit the transaction
         const transactionResult = await server.submitTransaction(
