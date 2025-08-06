@@ -4,6 +4,98 @@ import { useState, useCallback, useEffect } from "react"
 import { Horizon, Networks, Asset, Operation, TransactionBuilder, BASE_FEE, Keypair, Memo } from "@stellar/stellar-sdk"
 import { kit } from "@/wallet/walletKit"
 
+// Custom types for Horizon responses
+interface CustomBalanceLine {
+  asset_type: string
+  asset_code?: string
+  asset_issuer?: string
+  balance: string
+  limit?: string
+  buying_liabilities?: string
+  selling_liabilities?: string
+}
+
+interface CustomAccountResponse {
+  id: string
+  paging_token: string
+  account_id: string
+  sequence: string
+  subentry_count: number
+  balances: CustomBalanceLine[]
+  // Add other fields if needed, e.g., signers, data, flags
+}
+
+interface CustomOperationResponse {
+  id: string
+  paging_token: string
+  type: string
+  created_at: string
+  transaction_hash: string
+  source_account: string
+  // Common fields for all operations
+}
+
+interface CustomPaymentOperationResponse extends CustomOperationResponse {
+  type: "payment"
+  asset_type: string
+  asset_code?: string
+  asset_issuer?: string
+  amount: string
+  from: string
+  to: string
+}
+
+interface CustomCreateAccountOperationResponse extends CustomOperationResponse {
+  type: "create_account"
+  starting_balance: string
+  funder: string
+  account: string
+}
+
+interface CustomPathPaymentOperationResponse extends CustomOperationResponse {
+  type: "path_payment_strict_receive" | "path_payment_strict_send"
+  asset_type: string
+  asset_code?: string
+  asset_issuer?: string
+  amount: string
+  from: string
+  to: string
+  source_asset_type?: string
+  source_asset_code?: string
+  source_asset_issuer?: string
+  source_amount?: string
+}
+
+interface CustomManageOfferOperationResponse extends CustomOperationResponse {
+  type: "manage_sell_offer" | "manage_buy_offer"
+  asset_type: string
+  asset_code?: string
+  asset_issuer?: string
+  amount: string
+  price: string
+  offer_id: string
+  selling_asset_type: string
+  selling_asset_code?: string
+  selling_asset_issuer?: string
+  buying_asset_type: string
+  buying_asset_code?: string
+  buying_asset_issuer?: string
+}
+
+interface CustomChangeTrustOperationResponse extends CustomOperationResponse {
+  type: "change_trust"
+  asset_type: string
+  asset_code?: string
+  asset_issuer?: string
+  limit: string
+}
+
+interface CustomManageDataOperationResponse extends CustomOperationResponse {
+  type: "manage_data"
+  name: string
+  value?: string
+}
+
 interface StellarBalance {
   asset_type: string
   asset_code?: string
@@ -27,6 +119,27 @@ interface Transaction {
   memo?: string
   fee: string
   operation_count: number
+}
+
+// Type for Horizon error responses
+interface HorizonErrorResponse {
+  response?: {
+    status: number
+    data?: unknown
+  }
+  message?: string
+}
+
+// Type guard to check if error is a Horizon error with response
+function isHorizonError(error: unknown): error is HorizonErrorResponse {
+  return (
+    typeof error === "object" && 
+    error !== null && 
+    "response" in error &&
+    typeof (error as HorizonErrorResponse).response === "object" &&
+    (error as HorizonErrorResponse).response !== null &&
+    "status" in (error as HorizonErrorResponse).response!
+  )
 }
 
 export function useStellarWallet(address: string | null) {
@@ -58,7 +171,7 @@ export function useStellarWallet(address: string | null) {
         USDC: 1.0, // 1 USDC = 1.00 USD
       }
       setExchangeRates(mockRates)
-    } catch (err) {
+    } catch (err: unknown) {
       console.error("Failed to fetch exchange rates:", err)
       // Optionally set an error state for exchange rates
     }
@@ -76,9 +189,9 @@ export function useStellarWallet(address: string | null) {
 
     try {
       const server = getServer()
-      const account = await server.loadAccount(address)
+      const account: CustomAccountResponse = await server.loadAccount(address)
 
-      const stellarBalances: StellarBalance[] = account.balances.map((balance: any) => ({
+      const stellarBalances: StellarBalance[] = account.balances.map((balance: CustomBalanceLine) => ({
         asset_type: balance.asset_type,
         asset_code: balance.asset_code,
         asset_issuer: balance.asset_issuer,
@@ -97,12 +210,14 @@ export function useStellarWallet(address: string | null) {
       } else {
         setTotalXlmUsdValue("0.00")
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Failed to fetch balances:", err)
-      if (err.response?.status === 404) {
+      if (isHorizonError(err) && err.response?.status === 404) {
         setError("Account not found on the Stellar network")
+      } else if (err instanceof Error) {
+        setError(err.message)
       } else {
-        setError(err.message || "Failed to fetch balances")
+        setError("Failed to fetch balances")
       }
       setBalances([])
       setTotalXlmUsdValue("0.00")
@@ -127,7 +242,7 @@ export function useStellarWallet(address: string | null) {
       const transactionsResponse = await server.transactions().forAccount(address).order("desc").limit(50).call()
 
       const stellarTransactions: Transaction[] = await Promise.all(
-        transactionsResponse.records.map(async (tx: any) => {
+        transactionsResponse.records.map(async (tx) => {
           try {
             // Get operations for this transaction to determine type and amount
             const operations = await server.operations().forTransaction(tx.hash).call()
@@ -139,39 +254,42 @@ export function useStellarWallet(address: string | null) {
             let type: Transaction["type"] = "payment"
 
             if (operations.records.length > 0) {
-              const firstOp = operations.records[0]
-              const opType = firstOp.type as string
+              const firstOp: CustomOperationResponse = operations.records[0]
+              const opType = firstOp.type
 
               // Handle all possible operation types with string comparison
               if (opType === "payment") {
+                const paymentOp = firstOp as CustomPaymentOperationResponse
                 type = "payment"
-                amount = (firstOp as any).amount || "0"
-                asset = (firstOp as any).asset_type === "native" ? "XLM" : (firstOp as any).asset_code || "XLM"
-                from = (firstOp as any).from || address
-                to = (firstOp as any).to || address
+                amount = paymentOp.amount || "0"
+                asset = paymentOp.asset_type === "native" ? "XLM" : paymentOp.asset_code || "XLM"
+                from = paymentOp.from || address
+                to = paymentOp.to || address
               } else if (opType === "create_account") {
+                const createAccountOp = firstOp as CustomCreateAccountOperationResponse
                 type = "create_account"
-                amount = (firstOp as any).starting_balance || "0"
+                amount = createAccountOp.starting_balance || "0"
                 asset = "XLM"
-                from = (firstOp as any).funder || address
-                to = (firstOp as any).account || address
-              } else if (opType.includes("path_payment")) {
+                from = createAccountOp.funder || address
+                to = createAccountOp.account || address
+              } else if (opType === "path_payment_strict_receive" || opType === "path_payment_strict_send") {
+                const pathPaymentOp = firstOp as CustomPathPaymentOperationResponse
                 type = "path_payment"
-                amount = (firstOp as any).amount || (firstOp as any).source_amount || "0"
-                asset = (firstOp as any).asset_type === "native" ? "XLM" : (firstOp as any).asset_code || "XLM"
-                from = (firstOp as any).from || address
-                to = (firstOp as any).to || address
-              } else if (opType.includes("offer")) {
+                amount = pathPaymentOp.amount || pathPaymentOp.source_amount || "0"
+                asset = pathPaymentOp.asset_type === "native" ? "XLM" : pathPaymentOp.asset_code || "XLM"
+                from = pathPaymentOp.from || address
+                to = pathPaymentOp.to || address
+              } else if (opType === "manage_sell_offer" || opType === "manage_buy_offer") {
+                const offerOp = firstOp as CustomManageOfferOperationResponse
                 type = "manage_offer"
-                amount = (firstOp as any).amount || "0"
+                amount = offerOp.amount || "0"
                 asset =
-                  (firstOp as any).selling_asset_type === "native"
-                    ? "XLM"
-                    : (firstOp as any).selling_asset_code || "XLM"
+                  offerOp.selling_asset_type === "native" ? "XLM" : offerOp.selling_asset_code || "XLM"
               } else if (opType === "change_trust") {
+                const changeTrustOp = firstOp as CustomChangeTrustOperationResponse
                 type = "change_trust"
-                amount = (firstOp as any).limit || "0"
-                asset = (firstOp as any).asset_code || "UNKNOWN"
+                amount = changeTrustOp.limit || "0"
+                asset = changeTrustOp.asset_code || "UNKNOWN"
               } else if (opType === "manage_data") {
                 type = "manage_data"
               }
@@ -188,10 +306,10 @@ export function useStellarWallet(address: string | null) {
               timestamp: tx.created_at,
               status: tx.successful ? "success" : ("failed" as const),
               memo: tx.memo || "",
-              fee: (Number.parseInt(tx.fee_charged) / 10000000).toString(),
+              fee: (Number.parseInt(tx.fee_charged.toString()) / 10000000).toString(),
               operation_count: tx.operation_count,
             }
-          } catch (opError) {
+          } catch (opError: unknown) {
             console.error("Error fetching operations for transaction:", opError)
             return {
               id: tx.id,
@@ -204,7 +322,7 @@ export function useStellarWallet(address: string | null) {
               timestamp: tx.created_at,
               status: tx.successful ? "success" : ("failed" as const),
               memo: tx.memo || "",
-              fee: (Number.parseInt(tx.fee_charged) / 10000000).toString(),
+              fee: (Number.parseInt(tx.fee_charged.toString()) / 10000000).toString(),
               operation_count: tx.operation_count,
             }
           }
@@ -212,12 +330,14 @@ export function useStellarWallet(address: string | null) {
       )
 
       setTransactions(stellarTransactions)
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Failed to fetch transactions:", err)
-      if (err.response?.status === 404) {
+      if (isHorizonError(err) && err.response?.status === 404) {
         setError("No transactions found for this account")
+      } else if (err instanceof Error) {
+        setError(err.message)
       } else {
-        setError(err.message || "Failed to fetch transactions")
+        setError("Failed to fetch transactions")
       }
       setTransactions([])
     } finally {
@@ -314,9 +434,9 @@ export function useStellarWallet(address: string | null) {
         }, 2000)
 
         return transactionResult.hash
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Payment error:", err)
-        throw new Error(err.message || "Failed to send payment")
+        throw new Error(err instanceof Error ? err.message : "Failed to send payment")
       }
     },
     [address, getServer, getNetworkPassphrase, fetchBalances, fetchTransactions],
@@ -373,9 +493,9 @@ export function useStellarWallet(address: string | null) {
         }, 2000)
 
         return transactionResult.hash
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Trustline creation error:", err)
-        throw new Error(err.message || "Failed to create trustline")
+        throw new Error(err instanceof Error ? err.message : "Failed to create trustline")
       }
     },
     [address, getServer, getNetworkPassphrase, fetchBalances],
@@ -427,7 +547,7 @@ export function useStellarWallet(address: string | null) {
     totalXlmUsdValue,
     fetchBalances,
     fetchTransactions,
-    preparePaymentTransaction, // New function to prepare transaction for confirmation
+    preparePaymentTransaction,
     sendPayment,
     createTrustline,
     switchNetwork,

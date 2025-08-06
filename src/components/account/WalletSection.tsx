@@ -8,25 +8,24 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Wallet,
-  Copy,
-  ExternalLink,
-  RefreshCw,
-  CheckCircle,
-  DollarSign,
-  Send,
-  Plus,
-  AlertCircle,
-  Globe,
-  TestTube,
-  Info,
-} from "lucide-react"
+import { Wallet, Copy, ExternalLink, RefreshCw, CheckCircle, DollarSign, Send, Plus, AlertCircle, Globe, TestTube, Info } from 'lucide-react'
 import { useWalletStore } from "@/store"
 import { useWallet } from "@/wallet/hooks/useWallet.hook"
 import { toast } from "sonner"
 import { useStellarWallet } from "@/hooks/useStellarWallet"
 import { Keypair } from "@stellar/stellar-sdk"
+
+// Define the type for prepared transaction details
+interface PreparedTransactionDetails {
+  xdr: string
+  estimatedFee: string
+  sourceAccount: string
+  destination: string
+  amount: string
+  assetCode: string
+  assetIssuer: string
+  memo: string
+}
 
 export default function WalletSection() {
   const t = useTranslations("Account")
@@ -65,7 +64,7 @@ export default function WalletSection() {
   const [isSending, setIsSending] = useState(false)
   const [isCreatingTrustline, setIsCreatingTrustline] = useState(false)
   const [paymentError, setPaymentError] = useState<string | null>(null)
-  const [confirmTransactionDetails, setConfirmTransactionDetails] = useState<any>(null)
+  const [confirmTransactionDetails, setConfirmTransactionDetails] = useState<PreparedTransactionDetails | null>(null)
 
   const handleCopyAddress = () => {
     if (address) {
