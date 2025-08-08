@@ -74,6 +74,68 @@
       "exploreProducts": "Explorar Productos"
     },
 
+  "FarmerSubscription": {
+    "ctaLabel": "Empezar a Vender",
+    "title": "Suscripción de Agricultor",
+    "subtitle": "Regístrate para comenzar a vender tus productos en Revolutionary Farmers",
+    "fields": {
+      "fullName": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "phone": "Número de Teléfono",
+      "farmName": "Nombre de la Granja",
+      "city": "Ciudad",
+      "state": "Estado/Provincia",
+      "country": "País",
+      "productTypes": "Tipos de productos",
+      "farmingMethod": "Método de cultivo",
+      "password": "Crear Contraseña"
+    },
+    "productTypes": {
+      "vegetables": "Vegetales",
+      "fruits": "Frutas",
+      "grains": "Granos",
+      "dairy": "Lácteos",
+      "meat": "Carne",
+      "herbs": "Hierbas"
+    },
+    "farmingMethods": {
+      "organic": "Orgánico",
+      "conventional": "Convencional",
+      "hydroponic": "Hidropónico",
+      "other": "Otro"
+    },
+    "placeholders": {
+      "fullName": "Ingresa tu nombre completo",
+      "email": "Ingresa tu correo",
+      "phone": "Ingresa tu teléfono",
+      "farmName": "Ingresa el nombre de tu granja",
+      "city": "Ciudad",
+      "state": "Estado/Provincia",
+      "country": "País",
+      "farmingMethod": "Selecciona un método",
+      "password": "Crea una contraseña segura"
+    },
+    "buttons": {
+      "back": "Atrás",
+      "next": "Siguiente",
+      "submit": "Enviar",
+      "submitting": "Enviando..."
+    },
+    "agreePrefix": "Acepto los",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
+    "and": "y",
+    "success": {
+      "title": "Registro recibido",
+      "message": "Te enviamos un correo de confirmación para verificar tu dirección.",
+      "nextSteps": "Después de verificar, recibirás acceso para publicar productos."
+    },
+    "errors": {
+      "submitFailed": "No se pudo enviar. Inténtalo de nuevo.",
+      "spamDetected": "Se detectó un envío sospechoso."
+    }
+  },
+
   "ItemsHeader": {
     "initializeEscrow": "Crear Escrow",
     "claimEarnings": "Reclamar Ganancias de Escrow"
