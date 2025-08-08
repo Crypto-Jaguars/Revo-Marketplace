@@ -31,7 +31,22 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
 
   const form = useForm<FormValues>({
     resolver: zodResolver(farmerSubscriptionSchema),
-    defaultValues: data as FormValues,
+    defaultValues: {
+      fullName: data.fullName || '',
+      email: data.email || '',
+      phone: data.phone || '',
+      farmName: data.farmName || '',
+      location: {
+        city: data.location?.city || '',
+        state: data.location?.state || '',
+        country: data.location?.country || '',
+      },
+      productTypes: data.productTypes || [],
+      farmingMethod: data.farmingMethod || 'organic',
+      password: data.password || '',
+      agreeToTerms: data.agreeToTerms || false,
+      website: data.website || '',
+    },
     mode: 'onChange',
   });
 
@@ -57,10 +72,10 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
       subscription.unsubscribe();
       clearTimeout(timeoutId);
     };
-  }, [form, updateData, markSaved, setSaving, form.watch]);
+  }, [updateData, markSaved, setSaving]);
 
   useEffect(() => {
-    form.reset(data as FormValues);
+    form.reset(data);
   }, [data]);
 
   const progress = useMemo(() => (currentStep / 3) * 100, [currentStep]);
@@ -69,12 +84,14 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
     try {
       const schema = stepSchemas[currentStep - 1];
       const values = form.getValues();
-      const currentData = { ...values } as unknown as Record<string, unknown>;
-      const parsed = schema.parse(currentStep === 2 ? { ...currentData } : currentData);
-      if (parsed) nextStep();
+      schema.parse(values);
+      nextStep();
     } catch (err) {
-      const zerr = err as z.ZodError;
-      zerr.issues.forEach((issue) => toast.error(issue.message));
+      if (err instanceof z.ZodError) {
+        err.issues.forEach((issue) => toast.error(issue.message));
+      } else {
+        toast.error('Validation failed');
+      }
     }
   };
 
@@ -96,15 +113,18 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
           body: JSON.stringify(values),
         });
         if (!res.ok) {
-          const body = await res.json().catch(() => ({}));
-          throw new Error(body?.error || 'Request failed');
+          const body = await res.json().catch(() => ({ error: 'Unknown error' }));
+          const errorMessage = body?.error || `Request failed with status ${res.status}`;
+          toast.error(errorMessage);
+          return;
         }
         setSubmitted(true);
         toast.success(t('success.title'));
         reset();
         onSuccess?.();
       } catch (e) {
-        toast.error(t('errors.submitFailed'));
+        const errorMessage = e instanceof Error ? e.message : t('errors.submitFailed');
+        toast.error(errorMessage);
       }
     });
   };
@@ -203,20 +223,23 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
           <div>
             <Label>{t('fields.productTypes')}</Label>
             <div className="grid grid-cols-2 gap-2 mt-2">
-              {['vegetables', 'fruits', 'grains', 'dairy', 'meat', 'herbs'].map((type) => (
-                <label key={type} className="flex items-center space-x-2 text-sm">
-                                   <Checkbox
-                   checked={form.getValues('productTypes')?.includes(type)}
-                   onCheckedChange={(checked) => {
-                     const list = new Set(form.getValues('productTypes'));
-                     if (checked) list.add(type);
-                     else list.delete(type);
-                     form.setValue('productTypes', Array.from(list));
-                   }}
-                   className="data-[state=checked]:bg-[#375B42] data-[state=checked]:border-[#375B42]"
-                 />
-                  <span className="capitalize">{t(`productTypes.${type}`)}</span>
-                </label>
+                            {['vegetables', 'fruits', 'grains', 'dairy', 'meat', 'herbs'].map((type) => (
+                <div key={type} className="flex items-center space-x-2 text-sm">
+                  <Checkbox
+                    id={`product-type-${type}`}
+                    checked={form.getValues('productTypes')?.includes(type)}
+                    onCheckedChange={(checked) => {
+                      const list = new Set(form.getValues('productTypes'));
+                      if (checked) list.add(type);
+                      else list.delete(type);
+                      form.setValue('productTypes', Array.from(list));
+                    }}
+                    className="data-[state=checked]:bg-[#375B42] data-[state=checked]:border-[#375B42]"
+                  />
+                  <Label htmlFor={`product-type-${type}`} className="capitalize cursor-pointer">
+                    {t(`productTypes.${type}`)}
+                  </Label>
+                </div>
               ))}
             </div>
           </div>
