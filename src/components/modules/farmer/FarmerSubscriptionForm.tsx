@@ -57,7 +57,7 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
       subscription.unsubscribe();
       clearTimeout(timeoutId);
     };
-  }, [form, updateData, markSaved, setSaving]);
+  }, [form, updateData, markSaved, setSaving, form.watch]);
 
   useEffect(() => {
     form.reset(data as FormValues);
@@ -120,7 +120,7 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit as any)} className="space-y-6">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
              <Progress value={progress} className="h-2 [&>div]:bg-[#375B42]" />
 
       {currentStep === 1 && (
