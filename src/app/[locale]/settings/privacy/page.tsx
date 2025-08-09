@@ -158,7 +158,7 @@ function PrivacySettingsPage() {
                   <Select
                     value={privacy.profileVisibility}
                     onValueChange={(value) => 
-                      updatePrivacySettings({ profileVisibility: value as any })
+                      updatePrivacySettings({ profileVisibility: value as 'public' | 'private' | 'friends' })
                     }
                   >
                     <SelectTrigger className="w-48">

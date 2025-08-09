@@ -154,32 +154,32 @@ function WalletSettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {mockWallets.map((wallet) => (
+                {mockWallets.map((connectedWallet) => (
                   <div
-                    key={wallet.id}
+                    key={connectedWallet.id}
                     className="p-4 border rounded-lg hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className="text-2xl">{getWalletIcon(wallet.type)}</div>
+                        <div className="text-2xl">{getWalletIcon(connectedWallet.type)}</div>
                         <div>
                           <h3 className="font-medium text-gray-900">
-                            {wallet.name}
+                            {connectedWallet.name}
                           </h3>
                           <div className="flex items-center gap-2 mt-1">
                             <Badge 
-                              variant={wallet.isConnected ? "default" : "secondary"}
+                              variant={connectedWallet.isConnected ? "default" : "secondary"}
                               className="text-xs"
                             >
-                              {wallet.isConnected ? t('status.connected') : t('status.disconnected')}
+                              {connectedWallet.isConnected ? t('status.connected') : t('status.disconnected')}
                             </Badge>
                             <Badge 
                               variant="outline" 
-                              className={`text-xs ${getWalletTypeColor(wallet.type)}`}
+                              className={`text-xs ${getWalletTypeColor(connectedWallet.type)}`}
                             >
-                              {wallet.type.toUpperCase()}
+                              {connectedWallet.type.toUpperCase()}
                             </Badge>
-                            {wallet.id === wallet.primaryWallet && (
+                                                          {connectedWallet.id === wallet.primaryWallet && (
                               <Badge variant="secondary" className="text-xs">
                                 <Star className="w-3 h-3 mr-1" />
                                 {t('status.primary')}
@@ -189,11 +189,11 @@ function WalletSettingsPage() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        {wallet.id !== wallet.primaryWallet && (
+                        {connectedWallet.id !== wallet.primaryWallet && (
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => handleSetPrimary(wallet.id)}
+                            onClick={() => handleSetPrimary(connectedWallet.id)}
                             className="flex items-center gap-1"
                           >
                             <Star className="w-3 h-3" />
@@ -203,7 +203,7 @@ function WalletSettingsPage() {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handleCopyAddress(wallet.address)}
+                          onClick={() => handleCopyAddress(connectedWallet.address)}
                           className="flex items-center gap-1"
                         >
                           <Copy className="w-3 h-3" />
@@ -212,7 +212,7 @@ function WalletSettingsPage() {
                         <Button
                           variant="destructive"
                           size="sm"
-                          onClick={() => handleRemoveWallet(wallet.id)}
+                          onClick={() => handleRemoveWallet(connectedWallet.id)}
                           className="flex items-center gap-1"
                         >
                           <Trash2 className="w-3 h-3" />
@@ -223,11 +223,11 @@ function WalletSettingsPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <p className="text-sm text-gray-600 font-mono break-all">
-                          {wallet.address}
+                          {connectedWallet.address}
                         </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {t('lastUsed')}: {wallet.lastUsed.toLocaleDateString()}
-                        </p>
+                                                  <p className="text-xs text-gray-500 mt-1">
+                            {t('lastUsed')}: {connectedWallet.lastUsed.toLocaleDateString()}
+                          </p>
                       </div>
                       <Button
                         variant="ghost"

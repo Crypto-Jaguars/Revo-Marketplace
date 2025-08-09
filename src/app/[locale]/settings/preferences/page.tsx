@@ -155,7 +155,7 @@ function PreferencesSettingsPage() {
                             ? 'border-primary bg-primary/5'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
-                        onClick={() => updatePreferences({ theme: theme.value as any })}
+                        onClick={() => updatePreferences({ theme: theme.value as 'light' | 'dark' | 'system' })}
                       >
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-lg">{theme.icon}</span>

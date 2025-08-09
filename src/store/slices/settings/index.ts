@@ -31,6 +31,7 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
         sms: {
           enabled: false,
           orderUpdates: false,
+          priceAlerts: false,
           securityAlerts: true,
           marketing: false,
         },
@@ -156,6 +157,7 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
             sms: {
               enabled: false,
               orderUpdates: false,
+              priceAlerts: false,
               securityAlerts: true,
               marketing: false,
             },
