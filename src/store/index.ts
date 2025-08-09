@@ -42,3 +42,17 @@ export type {
 // Utils store
 export { useLoaderStore } from './slices/utils/index';
 export type { LoaderState } from './slices/utils/types';
+
+// Settings store
+export { useSettingsStore } from './slices/settings/index';
+export type {
+  SettingsState,
+  SettingsActions,
+  WalletSettings,
+  NotificationSettings,
+  PrivacySettings,
+  RegionalSettings,
+  SecuritySettings,
+  UserPreferences,
+  ConnectedWallet,
+} from './slices/settings/types';
