@@ -13,7 +13,12 @@ export async function middleware(req: NextRequest) {
 
   if (req.nextUrl.locale === 'default') {
     const locale = req.cookies.get('NEXT_LOCALE')?.value || 'es';
-
-    return NextResponse.redirect(new URL(`/${locale}${req.nextUrl.pathname}${req.nextUrl.search}`, req.url));
+    const path = req.nextUrl.pathname === '/' ? '' : req.nextUrl.pathname;
+    const url = new URL(`/${locale}${path}${req.nextUrl.search}`, req.url);
+    const res = NextResponse.redirect(url);
+    if (!req.cookies.get('NEXT_LOCALE')) {
+      res.cookies.set('NEXT_LOCALE', locale, { path: '/', sameSite: 'lax' });
+    }
+    return res;
   }
 }

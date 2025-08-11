@@ -3,8 +3,7 @@ import { Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSearchStore } from '@/store';
-import { useLanguageStore } from '@/store';
-import { useTranslations } from 'next-intl';
+import { useI18n } from '@/i18n/I18nProvider';
 
 interface SearchBarProps {
   className?: string;
@@ -15,8 +14,7 @@ export function SearchBar({ className }: SearchBarProps) {
   const [showLink, setShowLink] = useState(false);
   const { setSearchTerm } = useSearchStore();
   const pathname = usePathname();
-  const { language } = useLanguageStore();
-  const t = useTranslations('Marketplace.search');
+  const { t, locale } = useI18n();
 
   const handleSearch = useCallback(
     (value: string) => {
@@ -39,13 +37,14 @@ export function SearchBar({ className }: SearchBarProps) {
           type="text"
           value={inputValue}
           onChange={(e) => handleSearch(e.target.value)}
-          placeholder={t('placeholder')}
+          placeholder={t('header.search.placeholder')}
+          aria-label={t('header.search.placeholder')}
           className="w-full py-2 px-4 pl-10 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-filter_active/50"
         />
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
         {showLink && (
           <Link
-            href={`/${language}/products`}
+            href={`/${locale}/products`}
             className="absolute inset-0"
             onClick={() => setShowLink(false)}
           />

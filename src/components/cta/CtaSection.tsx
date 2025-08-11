@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { useLanguageStore } from '@/store/languageStore/store';
+import { useLanguageStore } from '@/store';
 import FarmerSubscriptionDialog from '@/components/modules/farmer/FarmerSubscriptionDialog';
 
 export default function CtaSection() {

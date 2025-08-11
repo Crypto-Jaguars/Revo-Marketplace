@@ -1,8 +1,7 @@
 'use client';
-// @ts-nocheck
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, type AbstractIntlMessages } from 'next-intl';
 import { useLanguageStore } from '@/store';
 
 type SupportedLocale = 'en' | 'es';
@@ -15,13 +14,13 @@ interface I18nContextValue {
 
 const I18nContext = createContext<I18nContextValue | null>(null);
 
-async function loadBaseMessages(locale: SupportedLocale): Promise<Record<string, unknown>> {
+async function loadBaseMessages(locale: SupportedLocale): Promise<AbstractIntlMessages> {
   // Load legacy combined messages to preserve existing keys
   try {
     const mod = await import(`../../messages/${locale}.json`);
-    return mod.default as Record<string, unknown>;
+    return mod.default as AbstractIntlMessages;
   } catch {
-    return {};
+    return {} as AbstractIntlMessages;
   }
 }
 
@@ -39,25 +38,25 @@ const NAMESPACES = [
 
 async function loadNamespacedMessages(
   locale: SupportedLocale
-): Promise<Record<string, unknown>> {
-  const results: Record<string, unknown> = {};
+): Promise<AbstractIntlMessages> {
+  const results: Record<string, any> = {};
   await Promise.all(
     NAMESPACES.map(async (ns) => {
       try {
         const mod = await import(`../../messages/${locale}/${ns}.json`);
-        results[ns] = mod.default;
+        results[ns] = mod.default as AbstractIntlMessages;
       } catch {
         // optional namespace
       }
     })
   );
-  return results;
+  return results as AbstractIntlMessages;
 }
 
 function mergeMessages(
-  base: Record<string, unknown>,
-  overrides: Record<string, unknown>
-): Record<string, unknown> {
+  base: AbstractIntlMessages,
+  overrides: AbstractIntlMessages
+): AbstractIntlMessages {
   // Shallow merge by namespace; overrides take precedence
   return { ...base, ...overrides };
 }
@@ -65,7 +64,7 @@ function mergeMessages(
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const { language, setLanguage } = useLanguageStore();
   const [locale, setLocaleState] = useState<SupportedLocale>((language as SupportedLocale) || 'es');
-  const [messages, setMessages] = useState<Record<string, unknown> | null>(null);
+  const [messages, setMessages] = useState<AbstractIntlMessages | null>(null);
   const [liveAnnouncement, setLiveAnnouncement] = useState<string>('');
 
   // Ensure localStorage default and cookie for middleware compatibility
