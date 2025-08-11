@@ -3,8 +3,9 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { NextIntlClientProvider, type AbstractIntlMessages } from 'next-intl';
 import { useLanguageStore } from '@/store';
+import { type SupportedLocale } from '@/i18n/locales';
 
-type SupportedLocale = 'en' | 'es';
+// SupportedLocale is centralized in '@/i18n/locales'
 
 interface I18nContextValue {
   locale: SupportedLocale;
@@ -63,35 +64,32 @@ function mergeMessages(
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const { language, setLanguage } = useLanguageStore();
-  const [locale, setLocaleState] = useState<SupportedLocale>((language as SupportedLocale) || 'es');
+  const [locale, setLocaleState] = useState<SupportedLocale>(() => {
+    try {
+      const raw = localStorage.getItem('language-store');
+      if (raw) {
+        const parsed = JSON.parse(raw) as { state?: { language?: string } };
+        const fromStore = parsed?.state?.language as SupportedLocale | undefined;
+        if (fromStore) return fromStore;
+      }
+      const direct = localStorage.getItem('language') as SupportedLocale | null;
+      return (direct as SupportedLocale) || (language as SupportedLocale) || 'es';
+    } catch {
+      return (language as SupportedLocale) || 'es';
+    }
+  });
   const [messages, setMessages] = useState<AbstractIntlMessages | null>(null);
   const [liveAnnouncement, setLiveAnnouncement] = useState<string>('');
 
-  // Ensure localStorage default and cookie for middleware compatibility
+  // Persist current locale for layout/middleware compatibility
   useEffect(() => {
-    const stored = (() => {
-      try {
-        const raw = localStorage.getItem('language-store');
-        if (raw) {
-          const parsed = JSON.parse(raw) as { state?: { language?: string } };
-          return parsed?.state?.language as SupportedLocale | undefined;
-        }
-        const direct = localStorage.getItem('language');
-        return (direct as SupportedLocale | null) || undefined;
-      } catch {
-        return undefined;
-      }
-    })();
-    const initial = stored || (language as SupportedLocale) || 'es';
-    if (initial !== locale) {
-      setLocaleState(initial);
-    }
-    // Persist in a simple key for layout/middleware and set cookie
     try {
-      localStorage.setItem('language', initial);
-      document.cookie = `NEXT_LOCALE=${initial}; path=/; max-age=${60 * 60 * 24 * 365}`;
+      localStorage.setItem('language', locale);
+      const isProduction = process.env.NODE_ENV === 'production';
+      const secure = isProduction ? '; Secure' : '';
+      document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax${secure}`;
     } catch {}
-  }, []); // init only
+  }, [locale]);
 
   useEffect(() => {
     let active = true;
@@ -118,7 +116,9 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       setLanguage(next);
       try {
         localStorage.setItem('language', next);
-        document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=${60 * 60 * 24 * 365}`;
+        const isProduction = process.env.NODE_ENV === 'production';
+        const secure = isProduction ? '; Secure' : '';
+        document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax${secure}`;
       } catch {}
       announceChange(next);
     },

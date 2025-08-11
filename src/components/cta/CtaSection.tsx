@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { useLanguageStore } from '@/store';
+import { useI18n } from '@/i18n/I18nProvider';
 import FarmerSubscriptionDialog from '@/components/modules/farmer/FarmerSubscriptionDialog';
 
 export default function CtaSection() {
   const t = useTranslations('cta');
-  const { language } = useLanguageStore();
+  const { locale } = useI18n();
 
   return (
     <section className="w-full bg-gray-50 py-16 md:py-24">
@@ -23,7 +23,7 @@ export default function CtaSection() {
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <FarmerSubscriptionDialog />
           <Link
-            href={`/${language}/products`}
+            href={`/${locale}/products`}
             className="inline-flex h-12 items-center justify-center rounded-md border border-gray-300 bg-white px-6 text-base font-medium text-gray-800 shadow-sm hover:bg-gray-50 transition-colors duration-200"
           >
             {t('exploreProducts')}
