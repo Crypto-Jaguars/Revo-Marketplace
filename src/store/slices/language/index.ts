@@ -12,7 +12,7 @@ import type { LanguageState } from './types';
 export const useLanguageStore = create<LanguageState>()(
   persist(
     (set) => ({
-      language: 'en',
+      language: 'es',
       setLanguage: (language) => set({ language }),
     }),
     {

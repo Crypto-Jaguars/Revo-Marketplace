@@ -1,0 +1,57 @@
+{
+  "whatIs": {
+    "title": "What is Revolutionary Farmers?",
+    "description": "Revolutionary Farmers is a decentralized platform that provides trust and transparency in agricultural transactions using blockchain technology. We connect farmers with buyers, ensuring fair trade, secure transactions, and traceability of products.",
+    "features": {
+      "smartContracts": {
+        "title": "Smart Contracts",
+        "description": "Secure payments and transactions through blockchain technology."
+      },
+      "trustSystem": {
+        "title": "Verified Trust System",
+        "description": "Built-in reputation system for farmers and buyers."
+      },
+      "supplyChain": {
+        "title": "Sustainable Supply Chain",
+        "description": "Transparent and traceable agricultural products."
+      }
+    }
+  },
+  "howWeWork": {
+    "title": "How It Works",
+    "farmer": {
+      "listProducts": {
+        "title": "List Products",
+        "description": "Farmers can list their products for sale with complete transparency."
+      },
+      "receiveOrders": {
+        "title": "Receive Orders",
+        "description": "Get notified when buyers place orders on your listed products."
+      },
+      "prepareShipment": {
+        "title": "Prepare Shipment",
+        "description": "Package and send the products through verified logistics partners."
+      }
+    },
+    "buyer": {
+      "browsePurchase": {
+        "title": "Browse & Purchase",
+        "description": "Buyers can explore a variety of fresh products and place orders."
+      },
+      "securePayment": {
+        "title": "Secure Payment",
+        "description": "Payments are secured using blockchain technology and smart contracts."
+      },
+      "deliveryTracking": {
+        "title": "Delivery & Tracking",
+        "description": "Products are delivered with real-time tracking and transparency."
+      }
+    }
+  },
+  "cta": {
+    "ready": "Ready to Get Started?",
+    "startSelling": "Start Selling",
+    "exploreProducts": "Explore Products"
+  }
+}
+

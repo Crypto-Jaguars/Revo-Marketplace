@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "farm": "Farm",
+    "farms": "Farms"
+  },
+  "search": {
+    "placeholder": "Search for products..."
+  },
+  "user": {
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "wallet": "Connected Wallet",
+    "profile": "Profile",
+    "orders": "My Orders",
+    "settings": "Settings"
+  }
+}
+

@@ -1,0 +1,13 @@
+{
+  "title": "Nuestro Equipo",
+  "roles": {
+    "ceo": "Director Ejecutivo",
+    "cto": "Director de Tecnología",
+    "leadEngineer": "Ingeniero Líder",
+    "productDesigner": "Diseñador de Producto"
+  },
+  "bios": {
+    "placeholder": "Biografía próximamente."
+  }
+}
+

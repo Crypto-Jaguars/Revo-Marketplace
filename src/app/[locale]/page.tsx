@@ -1,3 +1,4 @@
+
 'use client';
 
 import Bounded from '@/components/Bounded';
@@ -6,9 +7,11 @@ import { useTranslations } from 'next-intl';
 import { AboutUs } from '@/components/sections/about-us/AboutUs';
 import { HowItWorks } from '@/components/sections/how-it-works/HowItWorks';
 import CtaSection from '@/components/cta/CtaSection';
+import { useI18n } from '@/i18n/I18nProvider';
 
 export default function Home() {
   const t = useTranslations('HomePage');
+  useI18n();
 
   return (
     <main className="flex flex-col w-full">

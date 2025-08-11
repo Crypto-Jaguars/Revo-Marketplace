@@ -1,0 +1,14 @@
+{
+  "title": "Contáctanos",
+  "labels": {
+    "name": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "message": "Mensaje",
+    "submit": "Enviar Mensaje"
+  },
+  "mailto": {
+    "subject": "Solicitud de soporte de {name}",
+    "body": "Hola, me gustaría preguntar sobre..."
+  }
+}
+

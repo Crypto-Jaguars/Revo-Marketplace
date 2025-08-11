@@ -1,0 +1,57 @@
+{
+  "whatIs": {
+    "title": "¿Qué es Revolutionary Farmers?",
+    "description": "Revolutionary Farmers es una plataforma descentralizada que proporciona confianza y transparencia en las transacciones agrícolas mediante tecnología blockchain. Conectamos a los agricultores con los compradores, garantizando comercio justo, transacciones seguras y trazabilidad de los productos.",
+    "features": {
+      "smartContracts": {
+        "title": "Contratos Inteligentes",
+        "description": "Pagos y transacciones seguras mediante tecnología blockchain."
+      },
+      "trustSystem": {
+        "title": "Sistema de Confianza Verificado",
+        "description": "Sistema de reputación integrado para agricultores y compradores."
+      },
+      "supplyChain": {
+        "title": "Cadena de Suministro Sostenible",
+        "description": "Productos agrícolas transparentes y rastreables."
+      }
+    }
+  },
+  "howWeWork": {
+    "title": "Cómo Funciona",
+    "farmer": {
+      "listProducts": {
+        "title": "Publicar Productos",
+        "description": "Los agricultores pueden listar sus productos para la venta con total transparencia."
+      },
+      "receiveOrders": {
+        "title": "Recibir Pedidos",
+        "description": "Recibe notificaciones cuando los compradores hagan pedidos en tus productos."
+      },
+      "prepareShipment": {
+        "title": "Preparar Envío",
+        "description": "Empaqueta y envía los productos a través de socios logísticos verificados."
+      }
+    },
+    "buyer": {
+      "browsePurchase": {
+        "title": "Explorar y Comprar",
+        "description": "Los compradores pueden explorar una variedad de productos frescos y realizar pedidos."
+      },
+      "securePayment": {
+        "title": "Pago Seguro",
+        "description": "Los pagos están asegurados mediante blockchain y contratos inteligentes."
+      },
+      "deliveryTracking": {
+        "title": "Entrega y Seguimiento",
+        "description": "Los productos son entregados con seguimiento en tiempo real y transparencia."
+      }
+    }
+  },
+  "cta": {
+    "ready": "¿Listo para Empezar?",
+    "startSelling": "Empezar a Vender",
+    "exploreProducts": "Explorar Productos"
+  }
+}
+
