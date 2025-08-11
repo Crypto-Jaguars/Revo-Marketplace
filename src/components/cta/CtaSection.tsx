@@ -4,14 +4,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useLanguageStore } from '@/store/languageStore/store';
-import FarmerSubscriptionDialog from '@/components/modules/farmer/FarmerSubscriptionDialog';
 
 export default function CtaSection() {
   const t = useTranslations('cta');
   const { language } = useLanguageStore();
 
   return (
-    <section className="w-full bg-gray-50 py-16 md:py-24">
+    <section className="w-full bg-brand-200 py-14 md:py-20">
       <motion.div
         className="container mx-auto px-6 text-center max-w-4xl"
         initial={{ opacity: 0, y: 20 }}
@@ -19,12 +18,17 @@ export default function CtaSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary_green">{t('ready')}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-forest-800">{t('ready')}</h2>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <FarmerSubscriptionDialog />
           <Link
-            href={`/${language}/products`}
-            className="inline-flex h-12 items-center justify-center rounded-md border border-gray-300 bg-white px-6 text-base font-medium text-gray-800 shadow-sm hover:bg-gray-50 transition-colors duration-200"
+            href={`/${language}/login/farmer`}
+            className="inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-tl from-forest-600 to-forest-400 px-8 font-semibold shadow-md hover:from-forest-700 hover:to-forest-500 transition-all duration-200 border border-brand-700/80 text-white"
+          >
+            {t('startSelling')}
+          </Link>
+          <Link
+            href={`/${language}/marketplace`}
+            className="inline-flex h-12 items-center justify-center rounded-full bg-gray-100 px-8 text-base font-semibold text-brand-600 shadow-md hover:bg-gray-200 transition-all duration-200 border border-brand-700/80"
           >
             {t('exploreProducts')}
           </Link>

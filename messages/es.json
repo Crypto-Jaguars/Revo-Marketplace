@@ -32,11 +32,12 @@
       }
     }
   },
-  "HowItWorks": {
-    "title": "Cómo Funciona",
+  "HowWeWork": {
+    "title": "Cómo Funcionamos",
     "toggle": {
       "farmer": "Agricultor",
-      "buyer": "Comprador"
+      "buyer": "Comprador",
+      "switchUserType": "Cambiar entre perspectivas de agricultor y comprador"
     },
     "farmerSteps": {
       "listProducts": {
@@ -69,8 +70,8 @@
   },
 
   "cta": {
-      "ready": "¿Listo para Empezar?",
-      "startSelling": "Empezar a Vender",
+      "ready": "¿Listo para Comenzar?",
+      "startSelling": "Empieza a Vender",
       "exploreProducts": "Explorar Productos"
     },
 
