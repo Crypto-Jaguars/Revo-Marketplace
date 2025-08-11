@@ -1,0 +1,23 @@
+{
+  "support": "Soporte",
+  "account": "Cuenta",
+  "quickLinks": "Enlaces Rápidos",
+  "downloadApp": "Descargar App",
+  "myAccount": "Mi Cuenta",
+  "loginRegister": "Iniciar Sesión / Registrarse",
+  "cart": "Carrito",
+  "wishlist": "Lista de Deseos",
+  "shop": "Tienda",
+  "privacyPolicy": "Política de Privacidad",
+  "termsOfUse": "Términos de Uso",
+  "faq": "Preguntas Frecuentes",
+  "contact": "Contacto",
+  "documentation": "Documentación",
+  "barcode": "Código QR",
+  "playStore": "Descargar en Play Store",
+  "twitter": "Twitter",
+  "linkedIn": "LinkedIn",
+  "github": "GitHub",
+  "copyright": "© Copyright Revolutionary Farmer {year}. Todos los derechos reservados."
+}
+

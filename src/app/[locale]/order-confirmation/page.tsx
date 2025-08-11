@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 export default function OrderConfirmationPage() {
   const t = useTranslations('OrderSuccess');
   const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'en';
+  const locale = pathname.split('/')[1] || 'es';
 
   // Generate a random order number for demo purposes
   const [orderNumber, setOrderNumber] = useState('');

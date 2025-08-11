@@ -42,7 +42,7 @@ interface Address {
 export default function AddressBookPage() {
   const t = useTranslations('AddressBook');
   const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'en';
+  const locale = pathname.split('/')[1] || 'es';
 
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);

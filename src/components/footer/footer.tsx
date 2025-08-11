@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import { RiFacebookLine, RiGithubLine, RiInstagramLine } from 'react-icons/ri';
+import { RiGithubLine } from 'react-icons/ri';
 import { RiLinkedinLine } from 'react-icons/ri';
 import { RiTwitterLine } from 'react-icons/ri';
-import { FaGithub } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';
 
 interface FooterLinkItem {
@@ -25,59 +24,59 @@ interface FooterLink {
 
 const footerLinks: FooterLink[] = [
   {
-    title: 'Support',
+    title: 'support',
     items: ['San Jose, Costa Rica', 'Revolutionaryfarmer@gmail.com'],
   },
   {
-    title: 'Account',
+    title: 'account',
     items: [
-      { label: 'My Account', href: '#' },
-      { label: 'Login / Register', href: '#' },
-      { label: 'Cart', href: '#' },
-      { label: 'Wishlist', href: '#' },
-      { label: 'Shop', href: '/products' },
+      { label: 'myAccount', href: '#' },
+      { label: 'loginRegister', href: '#' },
+      { label: 'cart', href: '#' },
+      { label: 'wishlist', href: '#' },
+      { label: 'shop', href: '/products' },
     ],
   },
   {
-    title: 'Quick Links',
+    title: 'quickLinks',
     items: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Use', href: '#' },
-      { label: 'FAQ', href: '#' },
-      { label: 'Contact', href: '#' },
+      { label: 'privacyPolicy', href: '#' },
+      { label: 'termsOfUse', href: '#' },
+      { label: 'faq', href: '#' },
+      { label: 'contact', href: '#' },
       {
-        label: 'Documentation',
+        label: 'documentation',
         href: 'https://revolutionary-farmers.gitbook.io/revolutionary-farmers',
       },
     ],
   },
   {
-    title: 'Download App',
+    title: 'downloadApp',
     items: [
       {
-        label: 'Barcode',
+        label: 'barcode',
         img: '/qrcode.png',
         href: '#',
       },
       {
-        label: 'Play store',
+        label: 'playStore',
         href: '#',
         img: '/googleplay.png',
       },
     ],
     social: [
       {
-        label: 'Twitter',
+        label: 'twitter',
         href: 'https://x.com/revofarmers',
         component: <RiTwitterLine size={20} />,
       },
       {
-        label: 'LinkedIn',
+        label: 'linkedIn',
         href: 'https://www.linkedin.com/company/revofarmers/',
         component: <RiLinkedinLine size={20} />,
       },
       {
-        label: 'Github',
+        label: 'github',
         href: 'https://github.com/Crypto-Jaguars',
         component: <RiGithubLine size={20} />,
       },
@@ -97,12 +96,12 @@ const Footer = () => {
     <div className="bg-[#375B42] dark:bg-background-dark h-auto w-full ">
       <div className="py-16 px-10 md:px-40">
         <div className="flex flex-col md:flex-row justify-between">
-          {footerLinks.map(({ title, items, social }) => (
+              {footerLinks.map(({ title, items, social }) => (
             <div key={title} className="flex text-base flex-col gap-4 w-full md:w-1/6">
               <h3 className="text-white-dark font-bold">{t(title)}</h3>
               <ul
-                className={`flex ${
-                  title === 'Download App' ? 'flex-row ' : 'flex-col'
+                  className={`flex ${
+                  title === 'downloadApp' ? 'flex-row ' : 'flex-col'
                 } text-sm font-normal gap-5`}
               >
                 {items.map((item, index) => (
@@ -136,7 +135,7 @@ const Footer = () => {
                 ))}
               </ul>
               {/* Render social links only for 'Download App' */}
-              {title === 'Download App' && social && (
+                {title === 'downloadApp' && social && (
                 <div className="flex flex-col">
                   {/* Display social icons in a row */}
                   <div className="flex flex-row gap-4">
@@ -147,7 +146,7 @@ const Footer = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white-dark hover:text-primary"
-                        aria-label={label}
+                          aria-label={t(label)}
                       >
                         {component}
                       </a>

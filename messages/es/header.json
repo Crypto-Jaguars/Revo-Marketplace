@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "farm": "Granja",
+    "farms": "Granjas"
+  },
+  "search": {
+    "placeholder": "Buscar productos..."
+  },
+  "user": {
+    "connect": "Conectar Billetera",
+    "disconnect": "Desconectar",
+    "wallet": "Billetera Conectada",
+    "profile": "Perfil",
+    "orders": "Mis Pedidos",
+    "settings": "Configuración"
+  }
+}
+

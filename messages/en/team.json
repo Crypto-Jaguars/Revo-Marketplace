@@ -1,0 +1,13 @@
+{
+  "title": "Our Team",
+  "roles": {
+    "ceo": "Chief Executive Officer",
+    "cto": "Chief Technology Officer",
+    "leadEngineer": "Lead Engineer",
+    "productDesigner": "Product Designer"
+  },
+  "bios": {
+    "placeholder": "Bio coming soon."
+  }
+}
+

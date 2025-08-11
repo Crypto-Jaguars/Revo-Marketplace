@@ -1,7 +1,7 @@
 // Helper function to redirect to order-confirmation page with the correct locale
 function redirectToOrderSuccess() {
   const urlPath = window.location.pathname;
-  const locale = urlPath.split('/')[1] || 'en';
+  const locale = urlPath.split('/')[1] || 'es';
   window.location.href = `/${locale}/order-confirmation`;
 }
 

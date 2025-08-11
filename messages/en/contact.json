@@ -1,0 +1,14 @@
+{
+  "title": "Contact Us",
+  "labels": {
+    "name": "Full Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Send Message"
+  },
+  "mailto": {
+    "subject": "Support request from {name}",
+    "body": "Hello, I would like to ask about..."
+  }
+}
+

@@ -1,12 +1,14 @@
 import { useLanguageStore } from '@/store';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react';
+import { useI18n } from '@/i18n/I18nProvider';
 import { ChevronDown } from 'lucide-react';
 
 export function LanguageSwitcher() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { language, setLanguage } = useLanguageStore();
+  const { setLocale } = useI18n();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -25,6 +27,7 @@ export function LanguageSwitcher() {
 
   const changeLanguage = (locale: string) => {
     setLanguage(locale);
+    setLocale(locale as 'en' | 'es');
 
     const segments = pathname.split('/');
     const hasLangPrefix = /^[a-z]{2}$/.test(segments[1]);
