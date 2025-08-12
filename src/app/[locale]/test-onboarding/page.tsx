@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useStore } from '@/store';
+import { useOnboardingStore } from '@/store';
 
 export default function TestPage() {
   const [isClient, setIsClient] = useState(false);
-  const store = useStore();
+  const store = useOnboardingStore();
   
   useEffect(() => {
     setIsClient(true);

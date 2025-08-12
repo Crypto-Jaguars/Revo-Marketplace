@@ -11,6 +11,8 @@ import { WalletSetupStep } from '@/components/onboarding/WalletSetupStep';
 import { OnboardingComplete } from '@/components/onboarding/OnboardingComplete';
 import { AccountVerification } from '@/components/onboarding/AccountVerification';
 import { UserTypeSelection } from '@/components/onboarding/UserTypeSelection';
+import type { OnboardingStep } from '@/store';
+
 
 const validSteps = ['welcome', 'wallet-setup', 'user-type', 'tour', 'verification', 'complete'];
 
@@ -36,31 +38,33 @@ export default function OnboardingPage() {
   }, [loadProgress]);
 
   // Handle initial step setup and URL synchronization
-  useEffect(() => {
-    if (!isClient || isInitialized) return;
+// Replace the problematic useEffect in your onboarding page with this:
 
-    const stepFromUrl = searchParams.get('step');
-    const currentStoreStep = progress.currentStep;
+useEffect(() => {
+  if (!isClient || isInitialized) return;
 
-    if (stepFromUrl && validSteps.includes(stepFromUrl)) {
-      // URL has valid step - sync store with URL
-      if (stepFromUrl !== currentStoreStep) {
-        setCurrentStep(stepFromUrl);
-      }
-      setIsInitialized(true);
-    } else if (currentStoreStep && validSteps.includes(currentStoreStep)) {
-      // Store has valid step - sync URL with store
-      const locale = pathname.split('/')[1] || 'en';
-      router.replace(`/${locale}/onboarding?step=${currentStoreStep}`, { scroll: false });
-      setIsInitialized(true);
-    } else {
-      // Neither URL nor store has valid step - default to welcome
-      const locale = pathname.split('/')[1] || 'en';
-      setCurrentStep('welcome');
-      router.replace(`/${locale}/onboarding?step=welcome`, { scroll: false });
-      setIsInitialized(true);
+  const stepFromUrl = searchParams.get('step');
+  const currentStoreStep = progress.currentStep;
+
+  if (stepFromUrl && validSteps.includes(stepFromUrl)) {
+    // URL has valid step - sync store with URL
+    if (stepFromUrl !== currentStoreStep) {
+      setCurrentStep(stepFromUrl as OnboardingStep); // Add type assertion
     }
-  }, [isClient, searchParams, progress.currentStep, pathname, router, setCurrentStep, isInitialized]);
+    setIsInitialized(true);
+  } else if (currentStoreStep && validSteps.includes(currentStoreStep)) {
+    // Store has valid step - sync URL with store
+    const locale = pathname.split('/')[1] || 'en';
+    router.replace(`/${locale}/onboarding?step=${currentStoreStep}`, { scroll: false });
+    setIsInitialized(true);
+  } else {
+    // Neither URL nor store has valid step - default to welcome
+    const locale = pathname.split('/')[1] || 'en';
+    setCurrentStep('welcome' as OnboardingStep); // Add type assertion
+    router.replace(`/${locale}/onboarding?step=welcome`, { scroll: false });
+    setIsInitialized(true);
+  }
+}, [isClient, searchParams, progress.currentStep, pathname, router, setCurrentStep, isInitialized]);
 
   // Handle step changes from store (when user navigates via UI)
   useEffect(() => {
