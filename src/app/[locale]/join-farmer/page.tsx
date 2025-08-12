@@ -81,11 +81,11 @@ export default function JoinFarmerPage() {
   ];
 
   return (
-    <Bounded>
+    <Bounded className="pt-16">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">Join Revolutionary Farmers</h1>
-          <p className="text-gray-300 text-lg">
+          <p className="text-gray-700 text-lg">
             Become part of the future of agriculture. Connect directly with consumers and grow your
             business.
           </p>
@@ -99,7 +99,7 @@ export default function JoinFarmerPage() {
                   <div className="flex-shrink-0">{benefit.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">{benefit.title}</h3>
-                    <p className="text-gray-300">{benefit.description}</p>
+                    <p className="text-gray-700">{benefit.description}</p>
                   </div>
                 </div>
               </CardContent>
@@ -110,7 +110,7 @@ export default function JoinFarmerPage() {
         <Card className="bg-white/10 backdrop-blur-sm border-white/20">
           <CardHeader>
             <CardTitle className="text-2xl text-white">Farmer Application</CardTitle>
-            <CardDescription className="text-gray-300">
+            <CardDescription className="text-gray-700">
               Fill out this form to start your journey with Revolutionary Farmers
             </CardDescription>
           </CardHeader>
@@ -127,7 +127,7 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                   />
                 </div>
                 <div>
@@ -140,7 +140,7 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                   />
                 </div>
               </div>
@@ -157,7 +157,7 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                   />
                 </div>
                 <div>
@@ -171,7 +171,7 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                   />
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function JoinFarmerPage() {
                   required
                   value={formData.farmName}
                   onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                 />
               </div>
 
@@ -200,7 +200,7 @@ export default function JoinFarmerPage() {
                   required
                   value={formData.farmAddress}
                   onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                 />
               </div>
 
@@ -215,7 +215,7 @@ export default function JoinFarmerPage() {
                     type="number"
                     value={formData.farmSize}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                   />
                 </div>
                 <div>
@@ -228,7 +228,7 @@ export default function JoinFarmerPage() {
                     placeholder="e.g., Organic, Conventional, Sustainable"
                     value={formData.farmingMethod}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                   />
                 </div>
               </div>
@@ -243,7 +243,7 @@ export default function JoinFarmerPage() {
                   placeholder="e.g., Tomatoes, Lettuce, Carrots"
                   value={formData.mainCrops}
                   onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                 />
               </div>
 
@@ -258,7 +258,7 @@ export default function JoinFarmerPage() {
                   placeholder="Share your farming philosophy, experience, and what makes your farm special..."
                   value={formData.description}
                   onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-700"
                 />
               </div>
 
