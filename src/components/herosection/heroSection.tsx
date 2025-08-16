@@ -11,7 +11,7 @@ export default function HeroSection() {
   const { language } = useLanguageStore();
 
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F5F7F5] via-[#E6EFE8] to-[#D8E8DE]">
+    <div className="relative w-full min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-[#F5F7F5] via-[#E6EFE8] to-[#D8E8DE]">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary_green/10"></div>

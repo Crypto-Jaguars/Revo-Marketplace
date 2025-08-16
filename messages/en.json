@@ -473,26 +473,38 @@
     "buttonText": "Back to home page"
   },
   "footer": {
-    "copyright": "© Copyright Revolutionary Farmer {year}. All rights reserved.",
-    "Support": "Support",
-    "Account": "Account",
-    "Quick Links": "Quick Links",
-    "Download App": "Download App",
+    "copyright": "© Copyright Revolutionary Farmers {year}. All rights reserved.",
+    "description": "We foster responsible trade through modern technology that ensures agility, clarity, and fair treatment for everyone.",
+    "quickLinks": "Quick Links",
+    "helpCompany": "Help & Company",
     "My Account": "My Account",
-    "Login / Register": "Login / Register",
+    "Login/Register": "Login/Register",
     "Cart": "Cart",
-    "Wishlist": "Wishlist",
     "Shop": "Shop",
-    "Privacy Policy": "Privacy Policy",
-    "Terms of Use": "Terms of Use",
     "FAQ": "FAQ",
     "Contact": "Contact",
-    "Documentation": "Documentation",
-    "Barcode": "QR Code",
-    "Play store": "Get on Play Store",
+    "Our Team": "Our Team",
     "Twitter": "Twitter",
     "LinkedIn": "LinkedIn",
-    "Github": "GitHub"
+    "Instagram": "Instagram",
+    "Instagram coming soon": "Instagram coming soon"
+  },
+  "OurTeam": {
+    "title": "Our Team",
+    "subtitle": "People building a transparent, fair, and sustainable agricultural trade.",
+    "languages": "Languages",
+    "ctaTitle": "Join Our Mission",
+    "ctaDescription": "Ready to be part of the agricultural revolution? Connect with us or join as a farmer to start making a difference.",
+    "contactUs": "Contact Us",
+    "joinAsFarmer": "Join as Farmer"
+  },
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Clarify your doubts about how the platform works, our technology, and investment opportunities.",
+    "needHelp": "Still need help?",
+    "contactDescription": "Can't find what you're looking for? Our support team is here to help.",
+    "emailUs": "Email Us",
+    "meetTeam": "Meet Our Team"
   },
   "SignUp": {
     "title": "Create an account",
