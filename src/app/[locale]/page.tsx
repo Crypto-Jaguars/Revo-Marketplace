@@ -4,7 +4,7 @@ import Bounded from '@/components/Bounded';
 import HeroSection from '@/components/herosection/heroSection';
 import { useTranslations } from 'next-intl';
 import { AboutUs } from '@/components/sections/about-us/AboutUs';
-import { HowItWorks } from '@/components/sections/how-it-works/HowItWorks';
+import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
 import CtaSection from '@/components/cta/CtaSection';
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
         </div>
       </Bounded>
       <AboutUs />
-      <HowItWorks />
+      <HowWeWork />
       <CtaSection />
     </main>
   );

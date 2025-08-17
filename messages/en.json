@@ -32,11 +32,12 @@
       }
     }
   },
-  "HowItWorks": {
-    "title": "How It Works",
+  "HowWeWork": {
+    "title": "How We Work",
     "toggle": {
       "farmer": "Farmer",
-      "buyer": "Buyer"
+      "buyer": "Buyer",
+      "switchUserType": "Switch between farmer and buyer perspectives"
     },
     "farmerSteps": {
       "listProducts": {

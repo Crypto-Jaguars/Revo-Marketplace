@@ -14,7 +14,8 @@ export default function FarmerSubscriptionDialog() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="inline-flex h-12 items-center justify-center rounded-md bg-[#375B42] px-6 text-base font-medium shadow-sm hover:bg-[#2A4632] transition-colors duration-200 text-white"
+          className="inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-tl from-forest-600 to-forest-400 px-8 font-semibold shadow-md hover:bg-forest-600 transition-all duration-200 border border-brand-700/80"
+          style={{ color: '#FFFFFF' }}
         >
           {t('ctaLabel')}
         </button>
