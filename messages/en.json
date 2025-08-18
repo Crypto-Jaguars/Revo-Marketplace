@@ -487,7 +487,9 @@
     "Twitter": "Twitter",
     "LinkedIn": "LinkedIn",
     "Instagram": "Instagram",
-    "Instagram coming soon": "Instagram coming soon"
+    "Instagram coming soon": "Instagram coming soon",
+    "emailSubject": "Contact request — Revolutionary Farmers",
+    "emailBody": "Hello Revolutionary Farmers,%0D%0A%0D%0AName: %0D%0ARole/Company: %0D%0AMessage: %0D%0A%0D%0AThanks."
   },
   "OurTeam": {
     "title": "Our Team",

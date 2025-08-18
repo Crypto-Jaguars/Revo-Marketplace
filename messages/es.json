@@ -299,7 +299,9 @@
     "Twitter": "Twitter",
     "LinkedIn": "LinkedIn",
     "Instagram": "Instagram",
-    "Instagram coming soon": "Instagram próximamente"
+    "Instagram coming soon": "Instagram próximamente",
+    "emailSubject": "Solicitud de contacto — Revolutionary Farmers",
+    "emailBody": "Hola Revolutionary Farmers,%0D%0A%0D%0ANombre: %0D%0ARol/Empresa: %0D%0AMessage: %0D%0A%0D%0AGracias."
   },
   "OurTeam": {
     "title": "Nuestro Equipo",

@@ -287,10 +287,8 @@ export default function ContactPage() {
                   type="button"
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 mt-4"
                   onClick={() => {
-                    const subject = encodeURIComponent('Contact request — Revolutionary Farmers');
-                    const body = encodeURIComponent(
-                      'Hello Revolutionary Farmers,\n\nName: \nRole/Company: \nMessage: \n\nThanks.'
-                    );
+                    const subject = encodeURIComponent(t('emailSubject'));
+                    const body = t('emailBody'); // Already URL-encoded in translation
                     window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
                   }}
                 >
@@ -321,10 +319,8 @@ export default function ContactPage() {
                   variant="outline"
                   className="border-white text-white hover:bg-white/10"
                   onClick={() => {
-                    const subject = encodeURIComponent('Contact request — Revolutionary Farmers');
-                    const body = encodeURIComponent(
-                      'Hello Revolutionary Farmers,\n\nName: \nRole/Company: \nMessage: \n\nThanks.'
-                    );
+                    const subject = encodeURIComponent(t('emailSubject'));
+                    const body = t('emailBody'); // Already URL-encoded in translation
                     window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
                   }}
                 >

@@ -1,7 +1,8 @@
 'use client';
 
 import { FaGithub } from 'react-icons/fa';
-
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
 interface TeamMember {
   name: string;
   role: string;
@@ -73,14 +74,14 @@ const teamMembers: TeamMember[] = [
 ];
 
 export default function OurTeamPage() {
+  const t = useTranslations('OurTeam');
+const isEs = useLocale().startsWith('es');
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-green-100 py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Our Team</h1>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            People building transparent, fair and sustainable agricultural commerce.
-          </p>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">{t('title')}</h1>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto">{t('subtitle')}</p>
         </div>
       </div>
 
@@ -94,18 +95,20 @@ export default function OurTeamPage() {
               >
                 <div className="relative mx-auto mb-4">
                   <div className="w-24 h-24 rounded-full overflow-hidden border border-green-400 mx-auto">
-                    <img
+                  <Image
                       src={member.avatar || '/placeholder.svg'}
                       alt={`Portrait of ${member.name}`}
+                      width={96}
+                      height={96}
                       className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
 
                 <h3 className="text-gray-900 font-bold text-lg mb-1">{member.name}</h3>
-                <p className="text-gray-600 text-sm mb-2">{member.role}</p>
-                <p className="text-gray-500 text-xs mb-3">{member.bio}</p>
-                
+                <p className="text-gray-600 text-sm mb-2">{isEs ? member.roleEs : member.role}</p>
+                <p className="text-gray-500 text-xs mb-3">{isEs ? member.bioEs : member.bio}</p>
+
                 <div className="flex flex-wrap gap-1 mb-3">
                   {member.expertise.map((skill, skillIndex) => (
                     <span
@@ -116,9 +119,10 @@ export default function OurTeamPage() {
                     </span>
                   ))}
                 </div>
-                
+
                 <p className="text-gray-500 text-xs mb-3">
-                  <span className="font-medium">Languages:</span> {member.languages}
+                  {' '}
+                  <span className="font-medium">{t('languages')}:</span> {member.languages}
                 </p>
 
                 <a

@@ -27,14 +27,13 @@ const Footer = () => {
   const locale = params.locale as string;
   const currentYear = new Date().getFullYear();
 
+  const emailSubject = t('emailSubject');
+  const emailBody = t('emailBody');
   const handleContactClick = () => {
-    const subject = encodeURIComponent('Contact request — Revolutionary Farmers');
-    const body = encodeURIComponent(
-      'Hello Revolutionary Farmers,\n\nName: \nRole/Company: \nMessage: \n\nThanks.'
-    );
+    const subject = encodeURIComponent(emailSubject);
+    const body = emailBody; // Already URL-encoded in translation
     window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
   };
-
   const navigationLinks = {
     column1: [
       { label: t('Login/Register'), href: `/${locale}/signin` },
@@ -73,11 +72,11 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-primary_green h-auto w-full overflow-hidden ">
-              <div className="font-bold max-w-7xl mx-auto px-4 ">
-          <div
-            className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: 'url("/images/footer-img.png")' }}
-          ></div>
+      <div className="font-bold max-w-7xl mx-auto px-4 ">
+        <div
+          className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url("/images/footer-img.png")' }}
+        ></div>
 
         <div className="relative z-10 py-16 ">
           <div className="flex flex-col md:flex-row justify-between items-start gap-x-8 gap-y-12">
@@ -93,18 +92,18 @@ const Footer = () => {
                 <span className="text-gray-50 font-bold text-xl">Revolutionary Farmers</span>
               </div>
 
-              <p className="text-gray-50/90 text-sm leading-relaxed max-w-md">
-                {t('description')}
-              </p>
+              <p className="text-gray-50/90 text-sm leading-relaxed max-w-md">{t('description')}</p>
 
               <div className="flex gap-4 items-center">
-                {socialLinks.map((social, index) => (
-                  <div key={index} className="relative group">
+                {socialLinks.map((social) => (
+                  <div key={social.label} className="relative group">
                     {social.disabled ? (
                       <button
-                        className="text-gray-50/60 hover:text-gray-50/80 transition-colors p-2"
+                        type="button"
+                        className="text-gray-50/60 hover:text-gray-50/80 transition-colors p-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-primary_green"
                         aria-disabled="true"
-                        aria-describedby={`tooltip-${index}`}
+                        aria-label={`${social.label} — ${social.tooltip ?? ''}`}
+                        aria-describedby={`tooltip-${social.label.replace(/\s+/g, '-')}`}
                       >
                         {social.component}
                       </button>
@@ -113,7 +112,7 @@ const Footer = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-50/85 hover:text-gray-50 transition-colors p-2"
+                        className="text-gray-50/85 hover:text-gray-50 transition-colors p-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-primary_green"
                         aria-label={social.label}
                       >
                         {social.component}
@@ -121,8 +120,9 @@ const Footer = () => {
                     )}
                     {social.tooltip && (
                       <div
-                        id={`tooltip-${index}`}
-                        className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-white text-gray-900 text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap"
+                        role="tooltip"
+                        id={`tooltip-${social.label.replace(/\s+/g, '-')}`}
+                        className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-white text-gray-900 text-xs rounded-md opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none whitespace-nowrap"
                       >
                         {social.tooltip}
                       </div>
@@ -130,9 +130,9 @@ const Footer = () => {
                   </div>
                 ))}
               </div>
-                         </div>
+            </div>
 
-             <div className="flex gap-12 lg:gap-20 ">
+            <div className="flex gap-12 lg:gap-20 ">
               <div className="flex flex-col gap-3">
                 {navigationLinks.column1.map((link, index) => (
                   <Link
@@ -158,7 +158,7 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col gap-3">
-                {navigationLinks.column3.map((link, index) => (
+                {navigationLinks.column3.map((link, index) =>
                   link.onClick ? (
                     <button
                       key={index}
@@ -176,16 +176,14 @@ const Footer = () => {
                       {link.label}
                     </Link>
                   )
-                ))}
+                )}
               </div>
             </div>
           </div>
-                 </div>
+        </div>
 
-         <div className="relative z-10 flex items-center justify-center border-t border-white/10 py-5 ">
-                  <p className="text-gray-50/85 text-sm">
-          {t('copyright', { year: currentYear })}
-        </p>
+        <div className="relative z-10 flex items-center justify-center border-t border-white/10 py-5 ">
+          <p className="text-gray-50/85 text-sm">{t('copyright', { year: currentYear })}</p>
         </div>
       </div>
     </footer>
