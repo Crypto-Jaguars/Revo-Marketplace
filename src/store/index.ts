@@ -42,3 +42,13 @@ export type {
 // Utils store
 export { useLoaderStore } from './slices/utils/index';
 export type { LoaderState } from './slices/utils/types';
+
+// Onboarding store
+export { useOnboardingStore } from './slices/onboarding/index';
+export type { 
+  OnboardingState, 
+  OnboardingActions, 
+  OnboardingStep,
+  OnboardingProgress,
+  UserPreferences 
+} from './slices/onboarding/types';

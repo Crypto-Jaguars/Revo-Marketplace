@@ -51,32 +51,64 @@ export default function FarmerSubscriptionForm({ onSuccess }: FarmerSubscription
   });
 
   // Sync form values to store for auto-save with debouncing
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+  // useEffect(() => {
+  //   let timeoutId: NodeJS.Timeout;
     
-    const subscription = form.watch((values) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        if (values && Object.keys(values).length > 0) {
-          updateData(values as Partial<FormValues>);
-          setSaving(true);
-          setTimeout(() => {
-            markSaved();
-            setSaving(false);
-          }, 300);
-        }
-      }, 500); // Debounce for 500ms
-    });
+  //   const subscription = form.watch((values) => {
+  //     clearTimeout(timeoutId);
+  //     timeoutId = setTimeout(() => {
+  //       if (values && Object.keys(values).length > 0) {
+  //         updateData(values as Partial<FormValues>);
+  //         setSaving(true);
+  //         setTimeout(() => {
+  //           markSaved();
+  //           setSaving(false);
+  //         }, 300);
+  //       }
+  //     }, 500); // Debounce for 500ms
+  //   });
     
-    return () => {
-      subscription.unsubscribe();
-      clearTimeout(timeoutId);
-    };
-  }, [updateData, markSaved, setSaving]);
+  //   return () => {
+  //     subscription.unsubscribe();
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, [updateData, markSaved, setSaving]);
 
-  useEffect(() => {
-    form.reset(data);
-  }, [data]);
+  // useEffect(() => {
+  //   form.reset(data);
+  // }, [data]);
+
+
+  // Fix for lines 75-85 in FarmerSubscriptionForm.tsx
+
+// Replace this useEffect:
+useEffect(() => {
+  let timeoutId: NodeJS.Timeout;
+  
+  const subscription = form.watch((values) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      if (values && Object.keys(values).length > 0) {
+        updateData(values as Partial<FormValues>);
+        setSaving(true);
+        setTimeout(() => {
+          markSaved();
+          setSaving(false);
+        }, 300);
+      }
+    }, 500); // Debounce for 500ms
+  });
+  
+  return () => {
+    subscription.unsubscribe();
+    clearTimeout(timeoutId);
+  };
+}, [updateData, markSaved, setSaving]); // Add missing dependencies
+
+// Replace this useEffect:
+useEffect(() => {
+  form.reset(data);
+}, [data, form]); // Add 'form' to the dependency array
 
   const progress = useMemo(() => (currentStep / 3) * 100, [currentStep]);
 
