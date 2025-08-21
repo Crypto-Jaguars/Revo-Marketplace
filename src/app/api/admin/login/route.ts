@@ -129,8 +129,31 @@ export async function POST(request: NextRequest) {
     
     const { adminKey } = await request.json();
     
-    // Validate admin key
-    if (adminKey !== process.env.ADMIN_API_KEY) {
+    // Check if admin key is configured
+    if (!process.env.ADMIN_API_KEY) {
+      console.error('ADMIN_API_KEY environment variable is not configured');
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+    
+    // Validate admin key using timing-safe comparison
+    if (!adminKey || typeof adminKey !== 'string') {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+    
+    // Convert to buffers for secure comparison
+    const providedKeyBuffer = Buffer.from(adminKey, 'utf8');
+    const expectedKeyBuffer = Buffer.from(process.env.ADMIN_API_KEY, 'utf8');
+    
+    // Check buffer lengths first - timingSafeEqual throws on unequal lengths
+    if (providedKeyBuffer.length !== expectedKeyBuffer.length) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+    
+    // Timing-safe comparison
+    if (!crypto.timingSafeEqual(providedKeyBuffer, expectedKeyBuffer)) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
     
