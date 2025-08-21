@@ -974,5 +974,509 @@
       "subtitle": "Join our growing community of investors supporting sustainable agriculture and earning competitive returns.",
       "button": "Start Investing Today"
     }
+  },
+  "Settings": {
+    "title": "Settings",
+    "description": "Manage your account preferences and configurations",
+    "breadcrumb": {
+      "home": "Home",
+      "settings": "Settings"
+    },
+    "search": {
+      "placeholder": "Search settings..."
+    },
+    "quickSettings": {
+      "title": "Quick Settings",
+      "theme": "Theme",
+      "autoSave": "Auto Save",
+      "compactMode": "Compact Mode",
+      "searchHistory": "Search History",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
+    "settingsCount": "settings",
+    "actions": {
+      "save": "Save Changes",
+      "reset": "Reset to Defaults",
+      "resetConfirm": "Are you sure you want to reset all settings to defaults?",
+      "configure": "Configure"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "walletConnected": "Wallet connected successfully",
+      "notificationsUpdated": "Notification settings updated",
+      "privacyChanged": "Privacy settings modified"
+    },
+    "sections": {
+      "wallet": {
+        "title": "Wallet & Payment",
+        "description": "Manage connected wallets and payment preferences"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "description": "Configure email, push, and SMS notifications"
+      },
+      "privacy": {
+        "title": "Privacy & Data",
+        "description": "Control your privacy settings and data sharing"
+      },
+      "regional": {
+        "title": "Regional",
+        "description": "Set language, currency, and regional preferences"
+      },
+      "security": {
+        "title": "Security",
+        "description": "Manage security settings and authentication"
+      },
+      "preferences": {
+        "title": "Preferences",
+        "description": "Customize your interface and experience"
+      }
+    },
+    "wallet": {
+      "title": "Wallet Settings",
+      "description": "Manage your connected wallets and payment preferences",
+      "breadcrumb": {
+        "wallet": "Wallet"
+      },
+      "connectedWallets": {
+        "title": "Connected Wallets"
+      },
+      "status": {
+        "connected": "Connected",
+        "disconnected": "Disconnected",
+        "primary": "Primary"
+      },
+      "lastUsed": "Last used",
+      "actions": {
+        "addWallet": "Add Wallet",
+        "setPrimary": "Set Primary",
+        "copy": "Copy",
+        "view": "View",
+        "remove": "Remove",
+        "removeConfirm": "Are you sure you want to remove this wallet?"
+      },
+      "security": {
+        "title": "Security Settings",
+        "transactionConfirmations": "Transaction Confirmations",
+        "transactionConfirmationsDesc": "Require confirmation for all transactions",
+        "autoConnect": "Auto-connect Wallets",
+        "autoConnectDesc": "Automatically connect wallets on page load"
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "optimizeGas": "Optimize Gas",
+        "securityCheck": "Security Check",
+        "viewOnExplorer": "View on Explorer"
+      },
+      "statistics": {
+        "title": "Wallet Statistics",
+        "totalWallets": "Total Wallets",
+        "connectedWallets": "Connected Wallets",
+        "totalBalance": "Total Balance",
+        "lastTransaction": "Last Transaction"
+      },
+      "alerts": {
+        "title": "Alerts",
+        "backupWallet": {
+          "title": "Backup Your Wallet",
+          "description": "Consider backing up your wallet for added security"
+        },
+        "securityCheck": {
+          "title": "Security Check Complete",
+          "description": "All security measures are up to date"
+        }
+      }
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "description": "Configure how you receive notifications",
+      "breadcrumb": {
+        "notifications": "Notifications"
+      },
+      "types": {
+        "orderUpdates": "Order Updates",
+        "orderUpdatesDesc": "Get notified about order status changes",
+        "priceAlerts": "Price Alerts",
+        "priceAlertsDesc": "Receive alerts when prices change",
+        "securityAlerts": "Security Alerts",
+        "securityAlertsDesc": "Important security notifications",
+        "marketing": "Marketing",
+        "marketingDesc": "Promotional and marketing communications"
+      },
+      "channels": {
+        "email": {
+          "title": "Email Notifications",
+          "enable": "Enable Email Notifications",
+          "description": "Receive notifications via email"
+        },
+        "push": {
+          "title": "Push Notifications",
+          "enable": "Enable Push Notifications",
+          "description": "Receive notifications on your device"
+        },
+        "sms": {
+          "title": "SMS Notifications",
+          "enable": "Enable SMS Notifications",
+          "description": "Receive notifications via text message"
+        }
+      },
+      "notificationTypes": {
+        "title": "Notification Types"
+      },
+      "emailSettings": {
+        "title": "Email Settings",
+        "frequency": "Email Frequency",
+        "frequencyImmediate": "Immediate",
+        "frequencyDaily": "Daily Digest",
+        "frequencyWeekly": "Weekly Digest",
+        "format": "Email Format",
+        "formatHtml": "HTML",
+        "formatText": "Plain Text"
+      },
+      "pushSettings": {
+        "title": "Push Settings",
+        "sound": "Notification Sound",
+        "soundDefault": "Default",
+        "soundNone": "None",
+        "soundCustom": "Custom",
+        "vibration": "Vibration",
+        "vibrationDefault": "Default",
+        "vibrationNone": "None",
+        "vibrationLong": "Long"
+      },
+      "smsSettings": {
+        "title": "SMS Settings",
+        "warning": {
+          "title": "SMS Charges May Apply",
+          "description": "Standard messaging rates may apply to SMS notifications"
+        }
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "enableAll": "Enable All",
+        "disableAll": "Disable All",
+        "snooze": "Snooze Notifications"
+      },
+      "statistics": {
+        "title": "Notification Statistics",
+        "totalNotifications": "Total Notifications",
+        "today": "Today",
+        "thisWeek": "This Week",
+        "lastNotification": "Last Notification"
+      },
+      "channelStatus": {
+        "title": "Channel Status"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Settings",
+      "description": "Control your privacy and data sharing preferences",
+      "breadcrumb": {
+        "privacy": "Privacy"
+      },
+      "profileVisibility": {
+        "title": "Profile Visibility",
+        "setting": "Profile Visibility",
+        "description": "Control who can see your profile information",
+        "public": "Public",
+        "private": "Private",
+        "friends": "Friends Only",
+        "preview": "Visibility Preview",
+        "previewPublic": "Your profile is visible to everyone",
+        "previewFriends": "Your profile is visible to friends only",
+        "previewPrivate": "Your profile is private"
+      },
+      "showBalance": {
+        "title": "Show Balance",
+        "description": "Display your wallet balance to others"
+      },
+      "allowAnalytics": {
+        "title": "Allow Analytics",
+        "description": "Help improve the platform with anonymous analytics"
+      },
+      "allowCookies": {
+        "title": "Allow Cookies",
+        "description": "Accept cookies for better experience"
+      },
+      "dataSharing": {
+        "title": "Data Sharing",
+        "description": "Allow sharing of your data with partners"
+      },
+      "dataControls": {
+        "title": "Data & Privacy Controls"
+      },
+      "dataManagement": {
+        "title": "Data Management",
+        "info": {
+          "title": "Your Data Rights",
+          "description": "You have the right to download or delete your data at any time"
+        },
+        "downloadData": "Download My Data",
+        "deleteData": "Delete My Data"
+      },
+      "privacyStatus": {
+        "title": "Privacy Status",
+        "profileVisibility": "Profile Visibility",
+        "dataSharing": "Data Sharing",
+        "analytics": "Analytics",
+        "lastUpdated": "Last Updated"
+      },
+      "privacyTips": {
+        "title": "Privacy Tips",
+        "strongPassword": {
+          "title": "Use Strong Passwords",
+          "description": "Create unique, complex passwords for better security"
+        },
+        "twoFactor": {
+          "title": "Enable Two-Factor Auth",
+          "description": "Add an extra layer of security to your account"
+        },
+        "regularReview": {
+          "title": "Regular Review",
+          "description": "Review your privacy settings regularly"
+        }
+      },
+      "accountActions": {
+        "title": "Account Actions",
+        "deleteAccount": "Delete Account",
+        "warning": "This action cannot be undone"
+      },
+      "actions": {
+        "deleteAccountConfirm": "Are you sure you want to delete your account? This action cannot be undone."
+      },
+      "status": {
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      }
+    },
+    "regional": {
+      "title": "Regional Settings",
+      "description": "Configure language, currency, and regional preferences",
+      "breadcrumb": {
+        "regional": "Regional"
+      },
+      "language": {
+        "title": "Language Settings",
+        "setting": "Language",
+        "description": "Choose your preferred language",
+        "preview": "Language Preview",
+        "previewText": "Interface language changed successfully",
+        "previewDescription": "All text and labels will be displayed in the selected language"
+      },
+      "currency": {
+        "title": "Currency Settings",
+        "setting": "Currency",
+        "description": "Select your preferred currency for transactions",
+        "preview": "Currency Preview",
+        "previewPrice": "Sample Price",
+        "previewTotal": "Sample Total"
+      },
+      "timezone": {
+        "title": "Timezone Settings",
+        "setting": "Timezone",
+        "description": "Set your local timezone for accurate timestamps",
+        "preview": "Timezone Preview",
+        "previewDescription": "All times will be displayed in your selected timezone"
+      },
+      "formats": {
+        "title": "Format Settings",
+        "dateFormat": "Date Format",
+        "numberFormat": "Number Format",
+        "preview": "Preview"
+      },
+      "summary": {
+        "title": "Current Settings",
+        "language": "Language",
+        "currency": "Currency",
+        "timezone": "Timezone",
+        "lastUpdated": "Last Updated"
+      },
+      "tips": {
+        "title": "Regional Tips",
+        "language": {
+          "title": "Language Changes",
+          "description": "Language changes apply immediately to the interface"
+        },
+        "currency": {
+          "title": "Currency Display",
+          "description": "Currency affects how prices are displayed throughout the platform"
+        },
+        "timezone": {
+          "title": "Timezone Accuracy",
+          "description": "Correct timezone ensures accurate transaction timestamps"
+        }
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "detectLocation": "Detect Location",
+        "resetToDefaults": "Reset to Defaults"
+      }
+    },
+    "security": {
+      "title": "Security Settings",
+      "description": "Manage your account security and authentication",
+      "breadcrumb": {
+        "security": "Security"
+      },
+      "securityScore": {
+        "title": "Security Score",
+        "description": "Your account security level based on enabled features",
+        "excellent": "Excellent",
+        "good": "Good",
+        "fair": "Fair",
+        "poor": "Poor",
+        "twoFactor": "Two-Factor Auth",
+        "loginNotifications": "Login Notifications",
+        "deviceManagement": "Device Management",
+        "sessionTimeout": "Session Timeout"
+      },
+      "twoFactor": {
+        "title": "Two-Factor Authentication",
+        "setting": "Two-Factor Authentication",
+        "description": "Add an extra layer of security to your account",
+        "enable": "Enable 2FA",
+        "disable": "Disable 2FA",
+        "disableConfirm": "Are you sure you want to disable two-factor authentication?",
+        "recommendation": {
+          "title": "Security Recommendation",
+          "description": "We strongly recommend enabling two-factor authentication for enhanced security"
+        }
+      },
+      "passwordChange": {
+        "title": "Change Password",
+        "currentPassword": "Current Password",
+        "currentPasswordPlaceholder": "Enter your current password",
+        "newPassword": "New Password",
+        "newPasswordPlaceholder": "Enter your new password",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm your new password",
+        "change": "Change Password",
+        "errorMismatch": "Passwords do not match",
+        "errorTooShort": "Password must be at least 8 characters long"
+      },
+      "sessionManagement": {
+        "title": "Session Management",
+        "timeout": "Session Timeout",
+        "timeoutDescription": "Automatically log out after inactivity",
+        "loginNotifications": "Login Notifications",
+        "loginNotificationsDescription": "Get notified of new login attempts",
+        "deviceManagement": "Device Management",
+        "deviceManagementDescription": "Manage active sessions and devices"
+      },
+      "securityStatus": {
+        "title": "Security Status",
+        "twoFactor": "Two-Factor Auth",
+        "lastPasswordChange": "Last Password Change",
+        "activeSessions": "Active Sessions",
+        "lastLogin": "Last Login"
+      },
+      "securityTips": {
+        "title": "Security Tips",
+        "strongPassword": {
+          "title": "Use Strong Passwords",
+          "description": "Create unique, complex passwords for better security"
+        },
+        "twoFactor": {
+          "title": "Enable Two-Factor Auth",
+          "description": "Add an extra layer of security to your account"
+        },
+        "regularReview": {
+          "title": "Regular Review",
+          "description": "Review your security settings regularly"
+        }
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "manageDevices": "Manage Devices",
+        "clearSessions": "Clear Sessions",
+        "securityAudit": "Security Audit"
+      },
+      "status": {
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      }
+    },
+    "preferences": {
+      "title": "User Preferences",
+      "description": "Customize your interface and experience",
+      "breadcrumb": {
+        "preferences": "Preferences"
+      },
+      "theme": {
+        "title": "Theme Settings",
+        "setting": "Theme",
+        "description": "Choose your preferred visual theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "preview": "Theme Preview",
+        "lightDescription": "Clean, bright interface",
+        "darkDescription": "Easy on the eyes in low light",
+        "systemDescription": "Follows your system preference"
+      },
+      "interface": {
+        "title": "Interface Preferences",
+        "compactMode": "Compact Mode",
+        "compactModeDescription": "Reduce spacing for more content on screen",
+        "autoSave": "Auto Save",
+        "autoSaveDescription": "Automatically save your changes",
+        "searchHistory": "Search History",
+        "searchHistoryDescription": "Remember your recent searches"
+      },
+      "performance": {
+        "title": "Performance Settings",
+        "info": {
+          "title": "Performance Optimizations",
+          "description": "These settings help optimize your experience"
+        },
+        "optimizations": {
+          "enabled": "Enabled Optimizations",
+          "lazyLoading": "Lazy loading of images",
+          "imageOptimization": "Image optimization",
+          "caching": "Smart caching",
+          "recommended": "Recommended",
+          "compression": "Data compression",
+          "minification": "Code minification",
+          "cdn": "CDN delivery"
+        }
+      },
+      "currentPreferences": {
+        "title": "Current Preferences",
+        "theme": "Theme",
+        "compactMode": "Compact Mode",
+        "autoSave": "Auto Save",
+        "lastUpdated": "Last Updated"
+      },
+      "tips": {
+        "title": "Preference Tips",
+        "theme": {
+          "title": "Theme Selection",
+          "description": "Choose a theme that works best for your environment"
+        },
+        "performance": {
+          "title": "Performance",
+          "description": "Enable optimizations for better performance"
+        },
+        "accessibility": {
+          "title": "Accessibility",
+          "description": "Consider accessibility features for better usability"
+        }
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "previewChanges": "Preview Changes",
+        "mobilePreview": "Mobile Preview",
+        "optimizePerformance": "Optimize Performance"
+      },
+      "status": {
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      }
+    }
   }
 }
