@@ -127,7 +127,17 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    const { adminKey } = await request.json();
+    // Parse JSON with error handling
+    let adminKey;
+    try {
+      const body = await request.json();
+      adminKey = body.adminKey;
+    } catch (error) {
+      return NextResponse.json(
+        { error: 'Invalid JSON' },
+        { status: 400 }
+      );
+    }
     
     // Check if admin key is configured
     if (!process.env.ADMIN_API_KEY) {
