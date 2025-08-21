@@ -54,15 +54,15 @@ export default function HeroSection() {
           </Button>
           <Button
             asChild
-            className="bg-[#264534] hover:bg-[#264534]/90 px-6 py-6 text-base font-medium"
+            className="bg-revolutionary_green hover:bg-revolutionary_green/90 px-6 py-6 text-base font-medium"
             style={{ color: '#FFFFFF' }}
           >
             <Link
-              href={`/${language}/invest`}
+              href={`/${language}/waitlist`}
               style={{ color: '#FFFFFF' }}
               className="!text-[#FFFFFF]"
             >
-              {t('investNow')}
+              {t('joinWaitlist')}
             </Link>
           </Button>
         </div>

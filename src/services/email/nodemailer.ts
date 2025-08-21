@@ -1,0 +1,34 @@
+import nodemailer from 'nodemailer';
+import type { Transporter } from 'nodemailer';
+
+let transporter: Transporter | null = null;
+
+export function getEmailTransporter(): Transporter {
+  if (!transporter) {
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+      throw new Error('Missing Gmail credentials in env');
+    }
+
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    });
+  }
+
+  return transporter;
+}
+
+export async function verifyEmailConfiguration() {
+  try {
+    const transport = getEmailTransporter();
+    await transport.verify();
+    console.log('Email config ok');
+    return true;
+  } catch (error) {
+    console.error('Email verification error:', error);
+    return false;
+  }
+}
