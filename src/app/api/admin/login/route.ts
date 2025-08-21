@@ -2,8 +2,131 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import crypto from 'crypto';
 
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 60 seconds
+const RATE_LIMIT_MAX_ATTEMPTS = 5;
+
+// Rate limiter types
+interface RateLimitEntry {
+  count: number;
+  firstAttemptTs: number;
+}
+
+// Global rate limiter storage
+// NOTE: In production with multiple instances, replace with Redis or similar shared store
+declare global {
+  // eslint-disable-next-line no-var
+  var adminLoginRateLimit: Map<string, RateLimitEntry> | undefined;
+}
+
+// Extract client IP from request with fallbacks
+function extractClientIP(request: NextRequest): string {
+  // Priority 1: Use NextRequest.ip when available (Edge Runtime)
+  if (request.ip) {
+    return request.ip;
+  }
+  
+  // Priority 2: First hop from x-forwarded-for (most trusted)
+  const xForwardedFor = request.headers.get('x-forwarded-for');
+  if (xForwardedFor) {
+    const firstIP = xForwardedFor.split(',')[0].trim();
+    if (firstIP) {
+      return firstIP;
+    }
+  }
+  
+  // Priority 3: x-real-ip header
+  const xRealIp = request.headers.get('x-real-ip');
+  if (xRealIp) {
+    return xRealIp.trim();
+  }
+  
+  // Priority 4: CF-Connecting-IP (Cloudflare)
+  const cfConnectingIp = request.headers.get('cf-connecting-ip');
+  if (cfConnectingIp) {
+    return cfConnectingIp.trim();
+  }
+  
+  // Fallback to default when IP extraction fails
+  return 'unknown';
+}
+
+// Check and update rate limit for IP
+function checkRateLimit(ip: string): boolean {
+  // Initialize global rate limit map if not exists
+  if (!global.adminLoginRateLimit) {
+    global.adminLoginRateLimit = new Map();
+  }
+  
+  const now = Date.now();
+  const entry = global.adminLoginRateLimit.get(ip);
+  
+  if (!entry) {
+    // First attempt from this IP
+    global.adminLoginRateLimit.set(ip, {
+      count: 1,
+      firstAttemptTs: now
+    });
+    return true;
+  }
+  
+  // Check if window has expired
+  if (now - entry.firstAttemptTs > RATE_LIMIT_WINDOW_MS) {
+    // Reset the window
+    global.adminLoginRateLimit.set(ip, {
+      count: 1,
+      firstAttemptTs: now
+    });
+    return true;
+  }
+  
+  // Increment count within the window
+  entry.count++;
+  global.adminLoginRateLimit.set(ip, entry);
+  
+  // Check if limit exceeded
+  return entry.count <= RATE_LIMIT_MAX_ATTEMPTS;
+}
+
+// Cleanup expired entries to prevent memory leaks
+function cleanupExpiredRateLimits(): void {
+  if (!global.adminLoginRateLimit) return;
+  
+  const now = Date.now();
+  const expiredEntries: string[] = [];
+  
+  // Convert to array to avoid iterator issues
+  const entries = Array.from(global.adminLoginRateLimit.entries());
+  for (const [ip, entry] of entries) {
+    if (now - entry.firstAttemptTs > RATE_LIMIT_WINDOW_MS) {
+      expiredEntries.push(ip);
+    }
+  }
+  
+  // Remove expired entries
+  expiredEntries.forEach(ip => {
+    global.adminLoginRateLimit?.delete(ip);
+  });
+}
+
 export async function POST(request: NextRequest) {
   try {
+    // Extract client IP for rate limiting
+    const clientIP = extractClientIP(request);
+    
+    // Perform cleanup occasionally (every ~20 requests to avoid overhead)
+    if (Math.random() < 0.05) {
+      cleanupExpiredRateLimits();
+    }
+    
+    // Check rate limit before validating credentials
+    if (!checkRateLimit(clientIP)) {
+      return NextResponse.json(
+        { error: 'Too many login attempts. Please try again later.' },
+        { status: 429 }
+      );
+    }
+    
     const { adminKey } = await request.json();
     
     // Validate admin key

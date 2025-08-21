@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { 
   generateUnsubscribeToken, 
   verifyUnsubscribeToken, 
@@ -6,6 +7,15 @@ import {
   addToUnsubscribed, 
   isAlreadyUnsubscribed 
 } from '@/services/email/unsubscribe';
+
+// Helper to create a non-reversible hashed identifier for PII-safe logging
+function hashEmail(email: string): string {
+  return crypto
+    .createHash('sha256')
+    .update(email.toLowerCase().trim())
+    .digest('hex')
+    .substring(0, 16); // First 16 hex chars for stable identifier
+}
 
 function extractLocaleFromRequest(request: NextRequest): string {
   // Priority 1: Try to extract locale from current URL pathname
@@ -88,34 +98,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // If token is provided, verify it with expiration
-    if (token) {
-      if (!exp) {
-        return NextResponse.json(
-          { success: false, message: 'Invalid unsubscribe link' },
-          { status: 401 }
-        );
-      }
+    // Require signed token + expiration for state-changing unsubscribe
+    if (!token || !exp) {
+      return NextResponse.json(
+        { success: false, message: 'Unsubscribe link required. Please use the link we sent to your email.' },
+        { status: 401 }
+      );
+    }
 
-      // Parse and validate expiration
-      const expTimestamp = parseInt(exp, 10);
-      if (isNaN(expTimestamp) || expTimestamp <= Math.floor(Date.now() / 1000)) {
-        return NextResponse.json(
-          { success: false, message: 'Unsubscribe link has expired' },
-          { status: 401 }
-        );
-      }
+    // Parse and validate expiration
+    const expTimestamp = parseInt(exp, 10);
+    if (isNaN(expTimestamp) || expTimestamp <= Math.floor(Date.now() / 1000)) {
+      return NextResponse.json(
+        { success: false, message: 'Unsubscribe link has expired' },
+        { status: 401 }
+      );
+    }
 
-      // Reconstruct payload for verification
-      const emailLowercased = email.toLowerCase().trim();
-      const payload = `${emailLowercased}:${expTimestamp}`;
+    // Reconstruct payload for verification
+    const emailLowercased = email.toLowerCase().trim();
+    const payload = `${emailLowercased}:${expTimestamp}`;
 
-      if (!verifyUnsubscribeToken(payload, token)) {
-        return NextResponse.json(
-          { success: false, message: 'Invalid unsubscribe link' },
-          { status: 401 }
-        );
-      }
+    if (!verifyUnsubscribeToken(payload, token)) {
+      return NextResponse.json(
+        { success: false, message: 'Invalid unsubscribe link' },
+        { status: 401 }
+      );
     }
 
     const normalizedEmail = email.toLowerCase().trim();
@@ -131,9 +139,9 @@ export async function POST(request: NextRequest) {
     // Add to unsubscribed list
     await addToUnsubscribed(normalizedEmail, reason);
 
-    // Log the unsubscribe (in production, update database)
+    // Log the unsubscribe with hashed email for PII/GDPR compliance
     console.log('Unsubscribed:', {
-      email: normalizedEmail,
+      emailHash: hashEmail(normalizedEmail),
       reason: reason || 'No reason provided',
       timestamp: new Date().toISOString(),
     });

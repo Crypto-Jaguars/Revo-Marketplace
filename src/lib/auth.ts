@@ -14,8 +14,13 @@ export async function validateAdminSession(): Promise<boolean> {
     const cookieStore = await cookies();
     const sessionToken = cookieStore.get('admin-session')?.value;
     
-    if (!sessionToken || !global.adminSessions) {
+    if (!sessionToken) {
       return false;
+    }
+    
+    // Lazily initialize global.adminSessions to survive cold starts and HMR
+    if (!global.adminSessions) {
+      global.adminSessions = new Map();
     }
     
     const session = global.adminSessions.get(sessionToken);
