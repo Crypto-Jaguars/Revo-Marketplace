@@ -60,7 +60,7 @@ export default function ContactPage() {
     {
       icon: <Mail className="h-6 w-6 text-green-500" />,
       title: 'Email',
-      content: 'support@revolutionaryfarmers.com',
+      content: 'revolutionaryfarmers@gmail.com',
       description: 'Send us an email anytime',
     },
     {
@@ -281,6 +281,20 @@ export default function ContactPage() {
                     </>
                   )}
                 </Button>
+
+                {/* Email Us Button */}
+                <Button
+                  type="button"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 mt-4"
+                  onClick={() => {
+                    const subject = encodeURIComponent(t('emailSubject'));
+                    const body = t('emailBody'); // Already URL-encoded in translation
+                    window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
+                  }}
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  Email Us
+                </Button>
               </form>
             </CardContent>
           </Card>
@@ -301,13 +315,17 @@ export default function ContactPage() {
               >
                 View FAQ
               </Button>
-              <Button
-                variant="outline"
-                className="border-white text-white hover:bg-white/10"
-                onClick={() => (window.location.href = 'mailto:support@revolutionaryfarmers.com')}
-              >
-                Email Support
-              </Button>
+                              <Button
+                  variant="outline"
+                  className="border-white text-white hover:bg-white/10"
+                  onClick={() => {
+                    const subject = encodeURIComponent(t('emailSubject'));
+                    const body = t('emailBody'); // Already URL-encoded in translation
+                    window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
+                  }}
+                >
+                  Email Support
+                </Button>
             </div>
           </CardContent>
         </Card>
