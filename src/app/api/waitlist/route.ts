@@ -5,6 +5,80 @@ import { sendWaitlistConfirmationEmail } from '@/services/email/waitlistEmail';
 import connectDB from '@/lib/mongodb';
 import { WaitlistSubmissionModel } from '@/models/WaitlistSubmission';
 import { getGeolocationFromIP } from '@/services/analytics/geolocation';
+import crypto from 'crypto';
+
+// MongoDB error type for duplicate key errors
+interface MongoDBError extends Error {
+  code?: number | string;
+  message: string;
+}
+
+function extractClientIP(request: NextRequest): string {
+  // Priority 1: Use NextRequest.ip when available (Edge Runtime)
+  if (request.ip) {
+    return normalizeIP(request.ip);
+  }
+  
+  // Priority 2: First hop from x-forwarded-for (most trusted)
+  const xForwardedFor = request.headers.get('x-forwarded-for');
+  if (xForwardedFor) {
+    const firstIP = xForwardedFor.split(',')[0].trim();
+    if (firstIP) {
+      return normalizeIP(firstIP);
+    }
+  }
+  
+  // Priority 3: x-real-ip header
+  const xRealIP = request.headers.get('x-real-ip');
+  if (xRealIP) {
+    return normalizeIP(xRealIP.trim());
+  }
+  
+  // Fallback
+  return 'unknown';
+}
+
+function normalizeIP(ip: string): string {
+  const trimmedIP = ip.trim();
+  
+  // Convert IPv6-mapped IPv4 addresses (::ffff:a.b.c.d) to plain IPv4
+  if (trimmedIP.startsWith('::ffff:')) {
+    const ipv4Part = trimmedIP.substring(7);
+    // Validate it looks like an IPv4 address
+    if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(ipv4Part)) {
+      return ipv4Part;
+    }
+  }
+  
+  return trimmedIP;
+}
+
+function extractLocaleFromRequest(request: NextRequest, submissionData?: { locale?: string }): string {
+  // Priority 1: Locale from submission data
+  if (submissionData?.locale && ['en', 'es'].includes(submissionData.locale)) {
+    return submissionData.locale;
+  }
+  
+  // Priority 2: Accept-Language header
+  const acceptLanguage = request.headers.get('accept-language');
+  if (acceptLanguage) {
+    // Parse Accept-Language header (e.g., "es-ES,es;q=0.9,en;q=0.8")
+    const languages = acceptLanguage
+      .split(',')
+      .map(lang => lang.split(';')[0].trim().toLowerCase())
+      .map(lang => lang.split('-')[0]); // Take just the language part (es from es-ES)
+    
+    // Find first supported language
+    for (const lang of languages) {
+      if (['en', 'es'].includes(lang)) {
+        return lang;
+      }
+    }
+  }
+  
+  // Fallback to English
+  return 'en';
+}
 
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; 
 const MAX_REQUESTS_PER_IP = 3;
@@ -47,9 +121,7 @@ export async function POST(request: NextRequest) {
   try {
     await connectDB();
     
-    const ip = request.headers.get('x-forwarded-for') || 
-               request.headers.get('x-real-ip') || 
-               'unknown';
+    const ip = extractClientIP(request);
     
     cleanupRateLimits();
     
@@ -72,6 +144,14 @@ export async function POST(request: NextRequest) {
 
     const { name, email, role, consent } = validationResult.data;
 
+    // Additional explicit consent validation for security
+    if (consent !== true) {
+      return NextResponse.json(
+        { success: false, message: 'Consent is required to join the waitlist' },
+        { status: 400 }
+      );
+    }
+
     const existingSubmission = await WaitlistSubmissionModel.findOne({ 
       email: email.toLowerCase() 
     });
@@ -87,8 +167,9 @@ export async function POST(request: NextRequest) {
         existingSubmission.name = name?.trim();
         await existingSubmission.save();
         
-        // Send welcome back email
-        const emailSent = await sendWaitlistConfirmationEmail(existingSubmission.toObject(), 'en');
+        // Send welcome back email  
+        const locale = extractLocaleFromRequest(request, existingSubmission.toObject());
+        const emailSent = await sendWaitlistConfirmationEmail(existingSubmission.toObject(), locale);
         if (emailSent) {
           existingSubmission.emailSent = true;
           existingSubmission.emailSentAt = new Date();
@@ -134,14 +215,41 @@ export async function POST(request: NextRequest) {
     };
 
     const submission = new WaitlistSubmissionModel(submissionData);
-    await submission.save();
+    
+    // Attempt initial save with duplicate key error handling
+    try {
+      await submission.save();
+    } catch (saveError: unknown) {
+      const mongoError = saveError as MongoDBError;
+      // Handle duplicate key errors (E11000)
+      if (mongoError.code === 11000 || mongoError.code === 'E11000' || 
+          (mongoError.message && mongoError.message.includes('E11000'))) {
+        return NextResponse.json(
+          { success: false, message: 'This email is already registered on our waitlist' },
+          { status: 409 }
+        );
+      }
+      
+      // Re-throw other errors to be handled by outer catch
+      throw mongoError;
+    }
 
-    // Send email
-    const emailSent = await sendWaitlistConfirmationEmail(submission.toObject(), 'en');
+    // Send email after successful save
+    const locale = extractLocaleFromRequest(request, submission.toObject());
+    const emailSent = await sendWaitlistConfirmationEmail(submission.toObject(), locale);
+    
+    // Update email status with error handling
     if (emailSent) {
       submission.emailSent = true;
       submission.emailSentAt = new Date();
-      await submission.save();
+      
+      try {
+        await submission.save();
+      } catch (updateError: unknown) {
+        console.error('Failed to update email status:', updateError);
+        // Continue execution - the main submission was successful
+        // Email was sent, but we couldn't update the status flag
+      }
     }
 
     return NextResponse.json({
@@ -168,8 +276,25 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     
     const authHeader = request.headers.get('authorization');
     
-    // Simple auth check for admin access
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_KEY}`) {
+    // Constant-time comparison for admin access to prevent timing attacks
+    const expectedToken = process.env.ADMIN_API_KEY;
+    if (!authHeader || !expectedToken || !authHeader.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    
+    const providedToken = authHeader.slice('Bearer '.length);
+    
+    // Convert to buffers for constant-time comparison
+    const providedBuffer = Buffer.from(providedToken, 'utf8');
+    const expectedBuffer = Buffer.from(expectedToken, 'utf8');
+    
+    // Check buffer lengths first
+    if (providedBuffer.length !== expectedBuffer.length) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    
+    // Constant-time comparison
+    if (!crypto.timingSafeEqual(providedBuffer, expectedBuffer)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

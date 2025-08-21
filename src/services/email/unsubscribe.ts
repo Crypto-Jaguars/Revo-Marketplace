@@ -2,18 +2,34 @@ import crypto from 'crypto';
 import connectDB from '@/lib/mongodb';
 import { WaitlistSubmissionModel } from '@/models/WaitlistSubmission';
 
-export function generateUnsubscribeToken(email: string) {
-  const secret = process.env.ADMIN_API_KEY || 'default-secret';
+export function generateUnsubscribeToken(payload: string) {
+  const secret = process.env.EMAIL_UNSUBSCRIBE_SECRET;
+  
+  if (!secret) {
+    throw new Error('EMAIL_UNSUBSCRIBE_SECRET environment variable is required but not set');
+  }
+  
   return crypto
     .createHmac('sha256', secret)
-    .update(email.toLowerCase())
+    .update(payload)
     .digest('hex')
     .substring(0, 32);
 }
 
-export function verifyUnsubscribeToken(email: string, token: string) {
-  const expectedToken = generateUnsubscribeToken(email);
-  return token === expectedToken;
+export function verifyUnsubscribeToken(payload: string, token: string) {
+  const expectedToken = generateUnsubscribeToken(payload);
+  
+  // Convert to buffers for constant-time comparison
+  const tokenBuffer = Buffer.from(token, 'utf8');
+  const expectedBuffer = Buffer.from(expectedToken, 'utf8');
+  
+  // Check buffer lengths first - timingSafeEqual throws on unequal lengths
+  if (tokenBuffer.length !== expectedBuffer.length) {
+    return false;
+  }
+  
+  // Constant-time comparison
+  return crypto.timingSafeEqual(tokenBuffer, expectedBuffer);
 }
 
 export async function isUnsubscribed(email: string) {

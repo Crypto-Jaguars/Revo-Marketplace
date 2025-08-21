@@ -69,6 +69,7 @@ export default function UnsubscribePage() {
 
       setIsSuccess(true);
     } catch (err) {
+      console.error('Waitlist unsubscribe error:', err);
       setError(t('errors.generic'));
     } finally {
       setIsSubmitting(false);

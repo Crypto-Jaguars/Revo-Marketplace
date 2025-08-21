@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Server-only email service - DO NOT import in client components
+ * @server-only
+ */
+
+// Prevent client-side bundling
+if (typeof window !== 'undefined') {
+  throw new Error('This module can only be used on the server side');
+}
+
 import type { WaitlistSubmission } from '@/types/waitlist';
 import { getEmailTransporter } from './nodemailer';
 import { generateUnsubscribeToken } from '@/services/email/unsubscribe';
@@ -31,16 +41,39 @@ function getRoleLabel(role?: string, locale: string = 'en'): string {
   return labels[locale as 'en' | 'es']?.[role as keyof typeof labels.en] || role;
 }
 
+// HTML escape helper to prevent injection
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
   const isSpanish = locale === 'es';
   const name = submission.name || (isSpanish ? 'Amigo' : 'Friend');
   const roleLabel = getRoleLabel(submission.role, locale);
   
-  // TODO: Make unsubscribe more secure
-  const unsubscribeToken = generateUnsubscribeToken(submission.email);
+  // Escape user-controlled values for HTML safety
+  const safeName = escapeHtml(name);
+  const safeRoleLabel = escapeHtml(roleLabel);
+  const safeLocale = escapeHtml(locale);
+  
+  // Dynamic current year
+  const currentYear = new Date().getFullYear();
+  
+  // Create time-limited unsubscribe token (24 hours TTL)
+  const TTL_HOURS = 24;
+  const expTimestamp = Math.floor(Date.now() / 1000) + (TTL_HOURS * 60 * 60);
+  const emailLowercased = submission.email.toLowerCase().trim();
+  const payload = `${emailLowercased}:${expTimestamp}`;
+  const unsubscribeToken = generateUnsubscribeToken(payload);
+  
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
-  const unsubscribeUrl = `${baseUrl}/api/waitlist/unsubscribe?email=${encodeURIComponent(submission.email)}&token=${unsubscribeToken}`;
+  const unsubscribeUrl = `${baseUrl}/api/waitlist/unsubscribe?email=${encodeURIComponent(submission.email)}&token=${unsubscribeToken}&exp=${expTimestamp}`;
 
   const subject = isSpanish
     ? '¡Bienvenido a la Lista de Espera de Revo Farmers!'
@@ -48,7 +81,7 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
 
   const html = `
     <!DOCTYPE html>
-    <html lang="${locale}">
+    <html lang="${safeLocale}">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,7 +106,7 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
         
         <div class="content">
           <p style="font-size: 18px; color: #111827;">
-            ${isSpanish ? `¡Hola ${name}!` : `Hi ${name}!`}
+            ${isSpanish ? `¡Hola ${safeName}!` : `Hi ${safeName}!`}
           </p>
           
           <p style="color: #4b5563; line-height: 1.6;">
@@ -85,7 +118,7 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
 
           ${roleLabel ? `
           <div class="highlight">
-            <strong>${isSpanish ? 'Tu rol de interés:' : 'Your interest role:'}</strong> ${roleLabel}
+            <strong>${isSpanish ? 'Tu rol de interés:' : 'Your interest role:'}</strong> ${safeRoleLabel}
           </div>
           ` : ''}
 
@@ -111,12 +144,6 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
             </div>
           </div>
 
-          <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 30px 0;">
-            <strong style="color: #92400e;">
-              ${isSpanish ? 'Objetivo de lanzamiento:' : 'Launch Target:'}
-            </strong>
-            <span style="color: #78350f;">Q1 2025</span>
-          </div>
         </div>
 
         <div class="footer">
@@ -136,7 +163,7 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
             </a>
           </p>
           <p style="margin-top: 20px;">
-            © 2024 Revolutionary Farmers. ${isSpanish ? 'Todos los derechos reservados.' : 'All rights reserved.'}
+            © ${currentYear} Revolutionary Farmers. ${isSpanish ? 'Todos los derechos reservados.' : 'All rights reserved.'}
           </p>
         </div>
       </div>
@@ -156,14 +183,12 @@ ${roleLabel ? `Tu rol de interés: ${roleLabel}\n` : ''}
 - Disfruta de beneficios exclusivos como miembro fundador
 - Ayúdanos a dar forma al futuro de la agricultura
 
-Objetivo de lanzamiento: Q1 2025
-
 Síguenos en redes sociales:
 Twitter: https://x.com/revofarmers
 LinkedIn: https://www.linkedin.com/company/revofarmers/
 GitHub: https://github.com/Crypto-Jaguars
 
-© 2024 Revolutionary Farmers. Todos los derechos reservados.`
+© ${currentYear} Revolutionary Farmers. Todos los derechos reservados.`
     : `Hi ${name}!
 
 Thank you for joining the Revo Farmers waitlist.
@@ -175,14 +200,12 @@ What's Next?
 - Enjoy exclusive benefits as a founding member
 - Help us shape the future of agriculture
 
-Launch Target: Q1 2025
-
 Follow us on social media:
 Twitter: https://x.com/revofarmers
 LinkedIn: https://www.linkedin.com/company/revofarmers/
 GitHub: https://github.com/Crypto-Jaguars
 
-© 2024 Revolutionary Farmers. All rights reserved.`;
+© ${currentYear} Revolutionary Farmers. All rights reserved.`;
 
   return { subject, html, text };
 }

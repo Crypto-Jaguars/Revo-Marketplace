@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Server-only email service - DO NOT import in client components
+ * @server-only
+ */
+
+// Prevent client-side bundling
+if (typeof window !== 'undefined') {
+  throw new Error('This module can only be used on the server side');
+}
+
 import nodemailer from 'nodemailer';
 import type { Transporter } from 'nodemailer';
 

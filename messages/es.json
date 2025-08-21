@@ -94,7 +94,7 @@
     "success": {
       "title": "¡Bienvenido a bordo!",
       "message": "¡Gracias por unirte! Revisa tu correo para la confirmación.",
-      "emailSent": "Confirmación enviada a {{email}}",
+      "emailSent": "Confirmación enviada a {email}",
       "sharePrompt": "¡Ayúdanos a correr la voz!",
       "addAnother": "Agregar otro correo"
     },

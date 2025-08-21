@@ -9,7 +9,7 @@ const waitlistSubmissionSchema = new mongoose.Schema({
     type: String,
     required: true,
     lowercase: true,
-    unique: true,
+    trim: true,
   },
   role: {
     type: String,
@@ -17,7 +17,7 @@ const waitlistSubmissionSchema = new mongoose.Schema({
   },
   consent: {
     type: Boolean,
-    default: true,
+    required: true,
   },
   source: String,
   ip: String,
@@ -40,8 +40,10 @@ const waitlistSubmissionSchema = new mongoose.Schema({
   timestamps: true,
 });
 
+// Explicit unique index for email (database-level enforcement)
+waitlistSubmissionSchema.index({ email: 1 }, { unique: true });
+
 // Basic indexes for queries we actually use
-waitlistSubmissionSchema.index({ email: 1 });
 waitlistSubmissionSchema.index({ createdAt: -1 });
 waitlistSubmissionSchema.index({ unsubscribed: 1 });
 

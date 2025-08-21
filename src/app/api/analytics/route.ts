@@ -1,10 +1,45 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { trackEvent, getConversionFunnels, getAnalyticsEvents, getTopSources, getTopCountries } from '@/services/analytics/tracking';
+import { validateAdminSession } from '@/lib/auth';
+import { z } from 'zod';
+
+const analyticsEventSchema = z.object({
+  type: z.union([
+    z.literal('page_view'),
+    z.literal('form_start'),
+    z.literal('form_submit'),
+    z.literal('form_success'),
+    z.literal('form_error')
+  ]),
+  page: z.string().min(1),
+  sessionId: z.string().min(1),
+  source: z.string().optional()
+});
+
+function parseLimit(value: string | null, defaultValue = 10, maxValue = 500): number {
+  if (!value) return defaultValue;
+  
+  const parsed = parseInt(value, 10);
+  if (Number.isNaN(parsed)) return defaultValue;
+  
+  // Clamp between 1 and maxValue
+  return Math.max(1, Math.min(parsed, maxValue));
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { type, source, page, sessionId } = body;
+    const rawBody = await request.json();
+    
+    // Validate request body
+    const parseResult = analyticsEventSchema.safeParse(rawBody);
+    if (!parseResult.success) {
+      return NextResponse.json(
+        { error: 'Invalid request body', details: parseResult.error.errors },
+        { status: 400 }
+      );
+    }
+    
+    const { type, source, page, sessionId } = parseResult.data;
     
     const ip = request.headers.get('x-forwarded-for') || 
                request.headers.get('x-real-ip') || 
@@ -25,10 +60,9 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  const authHeader = request.headers.get('authorization');
-  
-  // Simple auth check for admin access
-  if (authHeader !== `Bearer ${process.env.ADMIN_API_KEY}`) {
+  // Validate admin session from secure cookie
+  const isAuthenticated = await validateAdminSession();
+  if (!isAuthenticated) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   
@@ -49,12 +83,12 @@ export async function GET(request: NextRequest) {
         break;
       }
       case 'sources': {
-        const limit = parseInt(url.searchParams.get('limit') || '10');
+        const limit = parseLimit(url.searchParams.get('limit'));
         data = await getTopSources(limit);
         break;
       }
       case 'countries': {
-        const countryLimit = parseInt(url.searchParams.get('limit') || '10');
+        const countryLimit = parseLimit(url.searchParams.get('limit'));
         data = await getTopCountries(countryLimit);
         break;
       }

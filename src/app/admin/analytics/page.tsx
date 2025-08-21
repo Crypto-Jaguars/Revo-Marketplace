@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -59,18 +59,16 @@ export default function AnalyticsPage() {
   const [adminKey, setAdminKey] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
 
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch('/api/analytics', {
-        headers: {
-          'Authorization': `Bearer ${adminKey}`,
-        },
+        credentials: 'include', // Include cookies in request
       });
 
       if (response.status === 401) {
         setAuthenticated(false);
-        setError('Invalid admin key');
+        setError('Session expired. Please login again.');
         return;
       }
 
@@ -87,19 +85,48 @@ export default function AnalyticsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    await fetchAnalytics();
+    
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Login via secure endpoint
+      const loginResponse = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ adminKey }),
+      });
+
+      if (!loginResponse.ok) {
+        const result = await loginResponse.json();
+        setError(result.error || 'Login failed');
+        return;
+      }
+
+      // Clear the key from memory after successful login
+      setAdminKey('');
+      
+      // Fetch analytics data
+      await fetchAnalytics();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Login failed');
+      setLoading(false);
+    }
   };
+
+  // Removed insecure client-side key storage functions
 
   const downloadCSV = async (type: string) => {
     try {
       const response = await fetch(`/api/analytics?type=${type}&format=csv`, {
-        headers: {
-          'Authorization': `Bearer ${adminKey}`,
-        },
+        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -120,20 +147,26 @@ export default function AnalyticsPage() {
     }
   };
 
-  useEffect(() => {
-    // Try to authenticate with stored admin key
-    const storedKey = localStorage.getItem('analytics-admin-key');
-    if (storedKey) {
-      setAdminKey(storedKey);
-      // Auto-fetch if we have a stored key
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/login', {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      setAuthenticated(false);
+      setData(null);
+    } catch (err) {
+      console.error('Logout error:', err);
+      // Force logout on error
+      setAuthenticated(false);
+      setData(null);
     }
-  }, []);
+  };
 
+  // Check for existing session on mount
   useEffect(() => {
-    if (adminKey && !authenticated) {
-      fetchAnalytics();
-    }
-  }, [adminKey]);
+    fetchAnalytics();
+  }, [fetchAnalytics]);
 
   // Authentication form
   if (!authenticated) {
@@ -159,10 +192,7 @@ export default function AnalyticsPage() {
                   id="adminKey"
                   type="password"
                   value={adminKey}
-                  onChange={(e) => {
-                    setAdminKey(e.target.value);
-                    localStorage.setItem('analytics-admin-key', e.target.value);
-                  }}
+                  onChange={(e) => setAdminKey(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500"
                   placeholder="Enter admin key..."
                   required
@@ -234,6 +264,9 @@ export default function AnalyticsPage() {
             </Button>
             <Button onClick={fetchAnalytics}>
               Refresh
+            </Button>
+            <Button variant="outline" onClick={handleLogout}>
+              Logout
             </Button>
           </div>
         </div>

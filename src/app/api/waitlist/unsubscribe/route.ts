@@ -7,33 +7,79 @@ import {
   isAlreadyUnsubscribed 
 } from '@/services/email/unsubscribe';
 
+function extractLocaleFromRequest(request: NextRequest): string {
+  // Priority 1: Try to extract locale from current URL pathname
+  const pathname = request.nextUrl.pathname;
+  const pathSegments = pathname.split('/').filter(Boolean);
+  if (pathSegments.length > 0 && ['en', 'es'].includes(pathSegments[0])) {
+    return pathSegments[0];
+  }
+  
+  // Priority 2: Check Accept-Language header
+  const acceptLanguage = request.headers.get('accept-language');
+  if (acceptLanguage) {
+    // Parse Accept-Language header (e.g., "es-ES,es;q=0.9,en;q=0.8")
+    const languages = acceptLanguage
+      .split(',')
+      .map(lang => lang.split(';')[0].trim().toLowerCase())
+      .map(lang => lang.split('-')[0]); // Take just the language part (es from es-ES)
+    
+    // Find first supported language
+    for (const lang of languages) {
+      if (['en', 'es'].includes(lang)) {
+        return lang;
+      }
+    }
+  }
+  
+  // Fallback to English
+  return 'en';
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const email = searchParams.get('email');
   const token = searchParams.get('token');
+  const exp = searchParams.get('exp');
 
-  if (!email || !token) {
+  if (!email || !token || !exp) {
     // Redirect to unsubscribe page without params for manual entry
-    return NextResponse.redirect(new URL('/en/waitlist/unsubscribe', request.url));
+    const locale = extractLocaleFromRequest(request);
+    return NextResponse.redirect(new URL(`/${locale}/waitlist/unsubscribe`, request.url));
   }
 
-  // Verify token
-  if (!verifyUnsubscribeToken(email, token)) {
+  // Parse and validate expiration
+  const expTimestamp = parseInt(exp, 10);
+  if (isNaN(expTimestamp) || expTimestamp <= Math.floor(Date.now() / 1000)) {
+    const locale = extractLocaleFromRequest(request);
     return NextResponse.redirect(
-      new URL('/en/waitlist/unsubscribe?error=invalid_token', request.url)
+      new URL(`/${locale}/waitlist/unsubscribe?error=expired_token`, request.url)
+    );
+  }
+
+  // Reconstruct payload for verification
+  const emailLowercased = email.toLowerCase().trim();
+  const payload = `${emailLowercased}:${expTimestamp}`;
+
+  // Verify token
+  if (!verifyUnsubscribeToken(payload, token)) {
+    const locale = extractLocaleFromRequest(request);
+    return NextResponse.redirect(
+      new URL(`/${locale}/waitlist/unsubscribe?error=invalid_token`, request.url)
     );
   }
 
   // Redirect to unsubscribe page with valid email and token
+  const locale = extractLocaleFromRequest(request);
   return NextResponse.redirect(
-    new URL(`/en/waitlist/unsubscribe?email=${encodeURIComponent(email)}&token=${token}`, request.url)
+    new URL(`/${locale}/waitlist/unsubscribe?email=${encodeURIComponent(email)}&token=${token}&exp=${exp}`, request.url)
   );
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, token, reason } = body;
+    const { email, token, exp, reason } = body;
 
     if (!email) {
       return NextResponse.json(
@@ -42,12 +88,34 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // If token is provided, verify it
-    if (token && !verifyUnsubscribeToken(email, token)) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid unsubscribe link' },
-        { status: 401 }
-      );
+    // If token is provided, verify it with expiration
+    if (token) {
+      if (!exp) {
+        return NextResponse.json(
+          { success: false, message: 'Invalid unsubscribe link' },
+          { status: 401 }
+        );
+      }
+
+      // Parse and validate expiration
+      const expTimestamp = parseInt(exp, 10);
+      if (isNaN(expTimestamp) || expTimestamp <= Math.floor(Date.now() / 1000)) {
+        return NextResponse.json(
+          { success: false, message: 'Unsubscribe link has expired' },
+          { status: 401 }
+        );
+      }
+
+      // Reconstruct payload for verification
+      const emailLowercased = email.toLowerCase().trim();
+      const payload = `${emailLowercased}:${expTimestamp}`;
+
+      if (!verifyUnsubscribeToken(payload, token)) {
+        return NextResponse.json(
+          { success: false, message: 'Invalid unsubscribe link' },
+          { status: 401 }
+        );
+      }
     }
 
     const normalizedEmail = email.toLowerCase().trim();
