@@ -77,8 +77,38 @@ export async function POST(request: NextRequest) {
     });
     
     if (existingSubmission) {
+      // Check if user previously unsubscribed
+      if (existingSubmission.unsubscribed) {
+        // Reactivate their subscription
+        existingSubmission.unsubscribed = false;
+        existingSubmission.unsubscribedAt = undefined;
+        existingSubmission.consent = consent;
+        existingSubmission.role = role;
+        existingSubmission.name = name?.trim();
+        await existingSubmission.save();
+        
+        // Send welcome back email
+        const emailSent = await sendWaitlistConfirmationEmail(existingSubmission.toObject(), 'en');
+        if (emailSent) {
+          existingSubmission.emailSent = true;
+          existingSubmission.emailSentAt = new Date();
+          await existingSubmission.save();
+        }
+        
+        return NextResponse.json({
+          success: true,
+          message: 'Welcome back! You have been re-added to the waitlist.',
+          data: {
+            id: existingSubmission._id,
+            email: existingSubmission.email,
+            role: existingSubmission.role,
+          },
+        });
+      }
+      
+      // User is already registered and active
       return NextResponse.json(
-        { success: false, message: 'Email already registered' },
+        { success: false, message: 'This email is already registered on our waitlist' },
         { status: 409 }
       );
     }

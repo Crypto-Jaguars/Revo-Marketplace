@@ -75,6 +75,11 @@ export function useWaitlistForm() {
             type: 'manual',
             message: 'This email is already registered',
           });
+          toast({
+            title: 'Already Registered',
+            description: 'This email is already on our waitlist. Check your inbox for our welcome email.',
+            variant: 'destructive',
+          });
         } else {
           toast({
             title: 'Error',
