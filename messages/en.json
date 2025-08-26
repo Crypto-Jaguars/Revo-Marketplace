@@ -4,6 +4,15 @@
     "subtitle": "Farmers",
     "description": "Escrows for the field of agriculture, and with the objective of benefiting farmers as well as the buyers of the products grown."
   },
+  "Hero": {
+    "title": "Trust from Farm to Table",
+    "subtitle": "Transforming commerce with technology that ensures speed, transparency, and fairness.",
+    "imageText": {
+      "processed": "Processed",
+      "harvest": "Harvest",
+      "freshness": "Freshness"
+    }
+  },
 
   "HeroSection": {
     "title": "Revolutionary Farmers",
@@ -446,7 +455,8 @@
       "home": "Home",
       "products": "Products",
       "farm": "Farm",
-      "farms": "Farms"
+      "farms": "Farms",
+      "marketplace": "Marketplace"
     },
     "search": {
       "placeholder": "Search for products..."
@@ -508,6 +518,11 @@
     "errorMessage": "Something went wrong. Please try again.",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Log in"
+  },
+  "LoginModal": {
+    "farmerButton": "Farmer/Merchant",
+    "buyerButton": "Buyer",
+    "walletButton": "Connect Wallet"
   },
   "SignIn": {
     "title": "Log in to Exclusive",
