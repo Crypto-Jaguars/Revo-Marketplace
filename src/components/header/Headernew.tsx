@@ -10,6 +10,7 @@ import { useLanguageStore } from '@/store';
 import { LanguageSwitcherDropdown } from './LanguageSwitcherDropdown';
 import { useTranslations } from 'next-intl';
 import LoginModal from './LoginModal';
+import Link from 'next/link';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -79,9 +80,15 @@ const Header = () => {
           </div>
           <nav aria-label="Main navigation">
             <div className="flex gap-6 items-center text-white">
-              <p style={{ color: 'white' }} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">{t('Marketplace.navigation.home')}</p>
-              <p style={{ color: 'white' }} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">{t('Marketplace.navigation.products')}</p>
-              <p style={{ color: 'white' }} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">{t('Marketplace.navigation.marketplace')}</p>
+              <Link style={{ color: 'white' }} href={`/${language}`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+                {t('Marketplace.navigation.home')}
+              </Link>
+              <Link style={{ color: 'white' }} href={`/${language}/products`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+                {t('Marketplace.navigation.products')}
+              </Link>
+              <Link style={{ color: 'white' }} href={`/${language}/marketplace`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+                {t('Marketplace.navigation.marketplace')}
+              </Link>
             </div>
           </nav>
           <div className='flex items-center gap-4'>
@@ -151,9 +158,9 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-green-700/95 shadow-lg z-40">
           <div className="flex flex-col items-center gap-2 p-4 text-white">
-            <a href={`/${language}`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.home')}</a>
-            <a href={`/${language}/products`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.products')}</a>
-            <a href={`/${language}/marketplace`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.marketplace')}</a>
+            <Link href={`/${language}`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.home')}</Link>
+            <Link href={`/${language}/products`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.products')}</Link>
+            <Link href={`/${language}/marketplace`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.marketplace')}</Link>
             <div className="mt-2 w-full border-t border-white/20 pt-4 flex justify-center">
               <LanguageSwitcherDropdown onClose={() => setIsMenuOpen(false)} />
             </div>

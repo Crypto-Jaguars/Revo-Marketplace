@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col w-full">
-      <HeroSection />
+      
       <HeroSectionNew />
       <Bounded>
         <div className="container mx-auto px-4 py-12 md:py-24">
