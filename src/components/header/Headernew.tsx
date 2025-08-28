@@ -7,14 +7,13 @@ import { Globe, Menu, Search, ShoppingCart, X } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLanguageStore } from '@/store';
-import { LanguageSwitcherDropdown } from './LanguageSwitcherDropdown';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { useTranslations } from 'next-intl';
 import LoginModal from './LoginModal';
 import Link from 'next/link';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLangOpen, setIsLangOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { disconnectWallet } = useWallet();
   const { address } = useWalletStore();
@@ -61,7 +60,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="relative flex flex-col px-4 sm:px-8 md:px-40 py-3 z-50" style={{ backgroundImage: "url('/images/header-bg.png')" }}>
+      <header className="fixed top-0 left-0 right-0 flex flex-col px-4 sm:px-8 md:px-40 py-3 z-50" style={{ backgroundImage: "url('/images/header-bg.png')" }}>
         <div className="absolute inset-0 bg-green-700/90"></div>
         
         {/* Desktop Header */}
@@ -110,14 +109,7 @@ const Header = () => {
             >
               {address ? t('Marketplace.user.disconnect') : t('SignIn.submit')}
             </button>
-            <div className="relative">
-              <button onClick={() => setIsLangOpen(!isLangOpen)} className="border border-white rounded-full p-2">
-                <Globe size={24} style={{ color: 'white' }} />
-              </button>
-              {isLangOpen && (
-                <div className="absolute top-full right-0 mt-2"><LanguageSwitcherDropdown onClose={() => setIsLangOpen(false)} /></div>
-              )}
-            </div>
+            <LanguageSwitcher />
           </div>
         </div>
 
@@ -126,7 +118,7 @@ const Header = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
               <button onClick={toggleMenu} className="p-2" aria-expanded={isMenuOpen} aria-controls="mobile-menu">
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMenuOpen ? <X size={24} style={{ color: 'white' }} /> : <Menu size={24} style={{ color: 'white' }} />}
               </button>
               <button onClick={handleLogoClick} className="flex justify-center items-center size-[30px] bg-white" aria-label="Home">
                 <Image src="/logo.svg" width={20} height={20} alt="Website logo" priority />
@@ -134,11 +126,13 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-2">
               <button aria-label="Cart" className="p-2">
-                <ShoppingCart size={24} />
+                <ShoppingCart size={24} style={{ color: 'white' }} />
               </button>
+              <LanguageSwitcher />
               <button
+                style={{ color: 'white' }}
                 onClick={address ? handleDisconnect : handleOpenModal}
-                className="border border-white rounded-full px-4 py-1.5 text-sm"
+                className="border border-white rounded-full px-4 py-1.5 text-sm text-white"
               >
                 {address ? t('Marketplace.user.disconnect') : t('SignIn.submit')}
               </button>
@@ -150,20 +144,17 @@ const Header = () => {
               placeholder={t('Marketplace.search.placeholder')}
               className="bg-white/20 placeholder-gray-300 rounded-full py-2 pl-10 pr-4 focus:outline-none w-full"
             />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={20} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={20} style={{ color: 'white' }} />
           </div>
         </div>
       </header>
 
       {isMenuOpen && (
-        <div className="md:hidden bg-green-700/95 shadow-lg z-40">
+        <div className="md:hidden bg-green-700/95 shadow-lg pt-24 z-40">
           <div className="flex flex-col items-center gap-2 p-4 text-white">
-            <Link href={`/${language}`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.home')}</Link>
-            <Link href={`/${language}/products`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.products')}</Link>
-            <Link href={`/${language}/marketplace`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.marketplace')}</Link>
-            <div className="mt-2 w-full border-t border-white/20 pt-4 flex justify-center">
-              <LanguageSwitcherDropdown onClose={() => setIsMenuOpen(false)} />
-            </div>
+            <Link style={{ color: 'white' }} href={`/${language}`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.home')}</Link>
+            <Link style={{ color: 'white' }} href={`/${language}/products`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.products')}</Link>
+            <Link style={{ color: 'white' }} href={`/${language}/marketplace`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.marketplace')}</Link>
           </div>
         </div>
       )}
