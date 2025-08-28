@@ -19,7 +19,7 @@ export default function HeroSectionNew() {
   }
   return (
     <section className="w-full h-screen flex flex-col">
-      <main className="flex-grow flex flex-col lg:flex-row items-center justify-center text-center px-4 md:px-14 gap-8 lg:gap-2 bg-gradient-to-b from-[#D8E8DE] via-[#B8D8C8] to-[#98C8B8]">
+      <main className="flex-grow flex flex-col lg:flex-row items-center justify-center text-center px-4 pt-28 md:px-14 lg:pt-20 gap-8 lg:gap-2 bg-gradient-to-b from-[#D8E8DE] via-[#B8D8C8] to-[#98C8B8]">
         <article className='max-w-xl'>
           <h1 className="text-4xl text-center lg:text-left lg:text-6xl font-bold text-primary_green leading-tight">
             {t('title')}
