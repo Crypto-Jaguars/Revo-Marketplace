@@ -9,6 +9,7 @@ import { Toaster as SonnerToaster } from 'sonner';
 import MarketplaceHeader from '@/components/marketplace/header/MarketplaceHeader';
 import './globals.css';
 import Footer from '@/components/footer/footer';
+import Header from '@/components/header/Headernew';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -81,7 +82,7 @@ export default function RootLayout({ children, params: { locale } }: RootLayoutP
       >
         <NextIntlClientProvider locale={currentLocale} messages={messages}>
           <div className="h-screen flex flex-col">
-            <MarketplaceHeader />
+            <Header />
             <main className="flex-1 w-full">{children}</main>
             <Footer />
             <Toaster />

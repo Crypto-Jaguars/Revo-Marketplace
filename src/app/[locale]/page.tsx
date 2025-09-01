@@ -6,13 +6,15 @@ import { useTranslations } from 'next-intl';
 import { AboutUs } from '@/components/sections/about-us/AboutUs';
 import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
 import CtaSection from '@/components/cta/CtaSection';
+import HeroSectionNew from '@/components/herosection/herosectionnew';
 
 export default function Home() {
   const t = useTranslations('HomePage');
 
   return (
     <main className="flex flex-col w-full">
-      <HeroSection />
+      
+      <HeroSectionNew />
       <Bounded>
         <div className="container mx-auto px-4 py-12 md:py-24">
           <div className="flex flex-col items-center w-full space-y-8">

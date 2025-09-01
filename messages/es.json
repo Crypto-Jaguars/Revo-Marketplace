@@ -4,6 +4,15 @@
     "subtitle": "Farmers",
     "description": "Fideicomisos especializados para el sector agrícola, cuyo objetivo principal es beneficiar tanto a los agricultores como a los compradores de los productos cultivados."
   },
+  "Hero": {
+    "title": "Confianza del Campo a la Mesa",
+    "subtitle": "Transformamos el comercio con tecnología que garantiza velocidad, transparencia y justicia.",
+    "imageText": {
+      "processed": "Procesado",
+      "harvest": "Cosecha",
+      "freshness": "Frescura"
+    }
+  },
 
   "HeroSection": {
     "title": "Revolutionary Farmers",
@@ -259,7 +268,8 @@
       "home": "Inicio",
       "products": "Productos",
       "farm": "Granja",
-      "farms": "Granjas"
+      "farms": "Granjas",
+      "marketplace": "Mercado"
     },
     "search": {
       "placeholder": "Buscar productos..."
@@ -321,6 +331,11 @@
     "errorMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
     "alreadyHaveAccount": "¿Ya tienes una cuenta?",
     "login": "Iniciar sesión"
+  },
+  "LoginModal": {
+    "farmerButton": "Agricultor/Comerciante",
+    "buyerButton": "Comprador",
+    "walletButton": "Conectar Billetera"
   },
   "SignIn": {
     "title": "Iniciar Sesión",
