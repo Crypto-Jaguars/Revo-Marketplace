@@ -20,7 +20,8 @@
     "description": "Empowering farmers through blockchain-powered trust and transparency.",
     "exploreMarketplace": "Explore the Marketplace",
     "joinAsFarmer": "Join as a Farmer",
-    "investNow": "Invest Now"
+    "investNow": "Invest Now",
+    "joinWaitlist": "Join Waitlist"
   },
 
   "AboutUs": {
@@ -39,6 +40,115 @@
         "title": "Sustainable Supply Chain",
         "description": "Transparent and traceable agricultural products."
       }
+    }
+  },
+  "Waitlist": {
+    "title": "Join the Waitlist",
+    "subtitle": "Be the first to know when we launch and get exclusive early access benefits.",
+    "pageTitle": "Be Part of the Agricultural Revolution",
+    "pageDescription": "Join thousands of farmers, investors, and consumers transforming agriculture through blockchain technology.",
+    "optional": "(optional)",
+    "benefits": {
+      "earlyAccess": {
+        "title": "Early Access",
+        "description": "Get exclusive early access to our platform before public launch"
+      },
+      "specialBenefits": {
+        "title": "Special Benefits",
+        "description": "Enjoy reduced fees and premium features as an early adopter"
+      },
+      "shapeFuture": {
+        "title": "Shape the Future",
+        "description": "Your feedback will help us build the best platform for everyone"
+      },
+      "communityUpdates": {
+        "title": "Community Updates",
+        "description": "Stay informed about our progress and upcoming features"
+      }
+    },
+    "stats": {
+      "signups": "Early Signups",
+      "countries": "Countries",
+      "launchDate": "Launch Date"
+    },
+    "trustBadges": "Trusted by leading organizations",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "John Doe"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "john@example.com"
+      },
+      "role": {
+        "label": "I'm interested as a...",
+        "placeholder": "Select your role"
+      },
+      "consent": {
+        "label": "I agree to receive updates about Revo Farmers launch and news",
+        "description": "You can unsubscribe at any time"
+      }
+    },
+    "roles": {
+      "farmer": "Farmer/Producer",
+      "investor": "Investor",
+      "consumer": "Consumer/Buyer",
+      "partner": "Business Partner",
+      "other": "Other"
+    },
+    "submit": "Join Waitlist",
+    "submitting": "Joining...",
+    "privacy": "We respect your privacy and will never share your information.",
+    "success": {
+      "title": "Welcome aboard!",
+      "message": "Thanks for joining! Check your email for confirmation.",
+      "emailSent": "Confirmation sent to {{email}}",
+      "sharePrompt": "Help us spread the word!",
+      "addAnother": "Add another email"
+    },
+    "social": {
+      "shareText": "I just joined the Revo Farmers waitlist! Join me in revolutionizing agriculture 🌱",
+      "share": "Share"
+    },
+    "errors": {
+      "emailExists": "This email is already registered",
+      "invalidEmail": "Please enter a valid email",
+      "rateLimited": "Too many requests. Please try again later.",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "Unsubscribe": {
+    "title": "Unsubscribe from Waitlist",
+    "description": "We're sorry to see you go. Please confirm your email address to unsubscribe from the Revo Farmers waitlist.",
+    "optional": "(optional)",
+    "fields": {
+      "email": {
+        "label": "Email Address",
+        "placeholder": "your.email@example.com",
+        "verified": "Email verified from unsubscribe link"
+      },
+      "reason": {
+        "label": "Reason for unsubscribing",
+        "placeholder": "Help us improve by telling us why you're leaving...",
+        "help": "Your feedback helps us improve our service"
+      }
+    },
+    "submit": "Unsubscribe",
+    "submitting": "Unsubscribing...",
+    "cancel": "Cancel",
+    "privacy": "Your data will be removed from our waitlist and marketing communications.",
+    "success": {
+      "title": "Successfully Unsubscribed",
+      "message": "You have been removed from the Revo Farmers waitlist. You will no longer receive updates from us.",
+      "resubscribe": "Changed your mind? You can always join our waitlist again.",
+      "backToHome": "Back to Home",
+      "rejoin": "Join Waitlist Again"
+    },
+    "errors": {
+      "invalidEmail": "Please enter a valid email address",
+      "invalidToken": "This unsubscribe link is invalid or has expired. Please enter your email below.",
+      "generic": "Something went wrong. Please try again."
     }
   },
   "HowWeWork": {
@@ -485,6 +595,11 @@
   },
   "footer": {
     "copyright": "© Copyright Revolutionary Farmer {year}. All rights reserved.",
+    "waitlistCta": {
+      "title": "Be an Early Adopter",
+      "subtitle": "Join our waitlist and get exclusive benefits when we launch",
+      "button": "Join Waitlist"
+    },
     "Support": "Support",
     "Account": "Account",
     "Quick Links": "Quick Links",

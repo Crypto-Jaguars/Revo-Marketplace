@@ -1,9 +1,16 @@
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { RiFacebookLine, RiGithubLine, RiInstagramLine } from 'react-icons/ri';
 import { RiLinkedinLine } from 'react-icons/ri';
 import { RiTwitterLine } from 'react-icons/ri';
 import { FaGithub } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
+import { Sparkles } from 'lucide-react';
+import { useLanguageStore } from '@/store';
 
 interface FooterLinkItem {
   label: string;
@@ -88,6 +95,11 @@ const footerLinks: FooterLink[] = [
 const Footer = () => {
   const t = useTranslations('footer');
   const currentYear = new Date().getFullYear();
+  const { language } = useLanguageStore();
+  const pathname = usePathname();
+  
+  // Check if we're on the waitlist page
+  const isWaitlistPage = pathname?.includes('/waitlist');
 
   const isFooterLinkItem = (item: string | FooterLinkItem): item is FooterLinkItem => {
     return typeof item !== 'string';
@@ -95,6 +107,31 @@ const Footer = () => {
 
   return (
     <div className="bg-[#375B42] dark:bg-background-dark h-auto w-full ">
+      {/* Waitlist CTA Section - Only show if not on waitlist page */}
+      {!isWaitlistPage && (
+        <div className="bg-revolutionary_green/10 border-t border-revolutionary_green/20">
+          <div className="py-8 px-10 md:px-40">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-6 h-6 text-revolutionary_green" />
+                <div>
+                  <h3 className="text-white font-semibold text-lg">{t('waitlistCta.title')}</h3>
+                  <p className="text-white/80 text-sm">{t('waitlistCta.subtitle')}</p>
+                </div>
+              </div>
+              <Button
+                asChild
+                className="bg-revolutionary_green hover:bg-revolutionary_green/90 text-white"
+              >
+                <Link href={`/${language}/waitlist`}>
+                  {t('waitlistCta.button')}
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className="py-16 px-10 md:px-40">
         <div className="flex flex-col md:flex-row justify-between">
           {footerLinks.map(({ title, items, social }) => (
