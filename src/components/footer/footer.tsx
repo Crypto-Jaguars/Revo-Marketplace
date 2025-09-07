@@ -106,7 +106,7 @@ const Footer = () => {
         </div>
       )}
 
-      <div className="font-bold max-w-7xl mx-auto px-4">
+      <div className="font-bold px-4 sm:px-8 md:px-40">
         <div
           className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: 'url("/images/footer-img.png")' }}
