@@ -17,7 +17,7 @@ const MarketplaceHeader = () => {
   const t = useTranslations('Marketplace.navigation');
 
   return (
-    <header className="w-full bg-white">
+    <header className="w-full bg-white ">
       <div className="w-full bg-filter_active">
         <div className="max-w-7xl mx-auto px-4 py-2 flex justify-end">
           <LanguageSwitcher />

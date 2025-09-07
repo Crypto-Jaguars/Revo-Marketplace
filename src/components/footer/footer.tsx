@@ -3,9 +3,12 @@
 import Image from 'next/image';
 import { RiInstagramLine, RiLinkedinLine, RiTwitterLine } from 'react-icons/ri';
 import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import type { ReactElement } from 'react';
+import { Button } from '@/components/ui/button';
+import { Sparkles } from 'lucide-react';
+import { useLanguageStore } from '@/store';
 
 interface FooterLinkItem {
   label: string;
@@ -26,6 +29,11 @@ const Footer = () => {
   const params = useParams();
   const locale = params.locale as string;
   const currentYear = new Date().getFullYear();
+  const { language } = useLanguageStore();
+  const pathname = usePathname();
+  
+  // Check if we're on the waitlist page
+  const isWaitlistPage = pathname?.includes('/waitlist');
 
   const emailSubject = t('emailSubject');
   const emailBody = t('emailBody');
@@ -34,6 +42,7 @@ const Footer = () => {
     const body = emailBody; // Already URL-encoded in translation
     window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
   };
+
   const navigationLinks = {
     column1: [
       { label: t('Login/Register'), href: `/${locale}/signin` },
@@ -71,14 +80,39 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-primary_green h-auto w-full overflow-hidden ">
-      <div className="font-bold max-w-7xl mx-auto px-4 ">
+    <footer className="relative bg-primary_green h-auto w-full overflow-hidden">
+      {/* Waitlist CTA Section - Only show if not on waitlist page */}
+      {!isWaitlistPage && (
+        <div className="bg-revolutionary_green/10 border-t border-revolutionary_green/20">
+          <div className="py-8 px-10 md:px-40">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-6 h-6 text-revolutionary_green" />
+                <div>
+                  <h3 className="text-white font-semibold text-lg">{t('waitlistCta.title')}</h3>
+                  <p className="text-white/80 text-sm">{t('waitlistCta.subtitle')}</p>
+                </div>
+              </div>
+              <Button
+                asChild
+                className="bg-revolutionary_green hover:bg-revolutionary_green/90 text-white"
+              >
+                <Link href={`/${language}/waitlist`}>
+                  {t('waitlistCta.button')}
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="font-bold max-w-7xl mx-auto px-4">
         <div
           className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: 'url("/images/footer-img.png")' }}
         ></div>
 
-        <div className="relative z-10 py-16 ">
+        <div className="relative z-10 py-16">
           <div className="flex flex-col md:flex-row justify-between items-start gap-x-8 gap-y-12">
             <div className="flex flex-col gap-4 lg:w-1/2">
               <div className="flex items-center gap-3">
@@ -132,7 +166,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="flex gap-12 lg:gap-20 ">
+            <div className="flex gap-12 lg:gap-20">
               <div className="flex flex-col gap-3">
                 {navigationLinks.column1.map((link, index) => (
                   <Link
@@ -182,7 +216,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="relative z-10 flex items-center justify-center border-t border-white/10 py-5 ">
+        <div className="relative z-10 flex items-center justify-center border-t border-white/10 py-5">
           <p className="text-gray-50/85 text-sm">{t('copyright', { year: currentYear })}</p>
         </div>
       </div>

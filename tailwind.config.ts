@@ -27,6 +27,7 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        'surface-0': '#ffffff',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -48,6 +49,32 @@ const config: Config = {
         revolutionary_green: {
           DEFAULT: '#A0D911',
           foreground: '#FFFFFF',
+        },
+        forest: {
+          50: '#f0f7f2',
+          100: '#dbede0',
+          200: '#b9dcc4',
+          300: '#8cc29e',
+          400: '#5ba373',
+          500: '#3e8654',
+          600: '#2f6a42',
+          700: '#316a3c',
+          800: '#24532f',
+          900: '#1e4428',
+          950: '#0f2516',
+        },
+        brand: {
+          50: '#f6f9f7',
+          100: '#e8f0ea',
+          200: '#d1e1d5',
+          300: '#b1ceb8',
+          400: '#8eae9b',
+          500: '#6f927e',
+          600: '#597768',
+          700: '#486156',
+          800: '#3c5048',
+          900: '#34433c',
+          950: '#1b2420',
         },
         filter_active: {
           DEFAULT: '#375B42',

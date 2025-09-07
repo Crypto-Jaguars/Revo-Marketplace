@@ -3,9 +3,10 @@ import StepCard from './StepCard';
 import ToggleUserType from './ToggleUserType';
 import { useTranslations } from 'next-intl';
 import { ShoppingCart, CreditCard, Truck, Store, Package, ThumbsUp } from 'lucide-react';
+import Image from 'next/image';
 
-export function HowItWorks() {
-  const t = useTranslations('HowItWorks');
+export function HowWeWork() {
+  const t = useTranslations('HowWeWork');
   const [activeType, setActiveType] = useState<'farmer' | 'buyer'>('farmer');
 
   const farmerSteps = [
@@ -45,9 +46,16 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="w-full py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary_green mb-8 text-center">
+    <section className="w-full py-16 md:py-24 relative overflow-hidden">
+      <Image
+        src="/background-lp-sections.png"
+        alt="Background"
+        fill
+        style={{ objectFit: 'cover' }}
+        className="absolute top-0 left-0 w-full h-full -z-10 opacity-10"
+      />
+      <div className="container mx-auto px-6 max-w-6xl relative z-10 ">
+        <h2 className="text-3xl md:text-4xl font-bold text-forest-800 mb-8 text-center">
           {t('title')}
         </h2>
         <div className="mb-12 flex justify-center">

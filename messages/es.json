@@ -4,6 +4,15 @@
     "subtitle": "Farmers",
     "description": "Fideicomisos especializados para el sector agrícola, cuyo objetivo principal es beneficiar tanto a los agricultores como a los compradores de los productos cultivados."
   },
+  "Hero": {
+    "title": "Confianza del Campo a la Mesa",
+    "subtitle": "Transformamos el comercio con tecnología que garantiza velocidad, transparencia y justicia.",
+    "imageText": {
+      "processed": "Procesado",
+      "harvest": "Cosecha",
+      "freshness": "Frescura"
+    }
+  },
 
   "HeroSection": {
     "title": "Revolutionary Farmers",
@@ -11,7 +20,8 @@
     "description": "Empoderando a los agricultores mediante confianza y transparencia impulsadas por blockchain.",
     "exploreMarketplace": "Explorar el Mercado",
     "joinAsFarmer": "Unirse como Agricultor",
-    "investNow": "Invertir Ahora"
+    "investNow": "Invertir Ahora",
+    "joinWaitlist": "Unirse a Lista de Espera"
   },
 
   "AboutUs": {
@@ -32,11 +42,121 @@
       }
     }
   },
-  "HowItWorks": {
-    "title": "Cómo Funciona",
+  "Waitlist": {
+    "title": "Únete a la Lista de Espera",
+    "subtitle": "Sé el primero en saber cuando lancemos y obtén beneficios exclusivos de acceso anticipado.",
+    "pageTitle": "Sé Parte de la Revolución Agrícola",
+    "pageDescription": "Únete a miles de agricultores, inversionistas y consumidores transformando la agricultura a través de la tecnología blockchain.",
+    "optional": "(opcional)",
+    "benefits": {
+      "earlyAccess": {
+        "title": "Acceso Anticipado",
+        "description": "Obtén acceso exclusivo anticipado a nuestra plataforma antes del lanzamiento público"
+      },
+      "specialBenefits": {
+        "title": "Beneficios Especiales",
+        "description": "Disfruta de tarifas reducidas y características premium como adoptador temprano"
+      },
+      "shapeFuture": {
+        "title": "Moldea el Futuro",
+        "description": "Tu retroalimentación nos ayudará a construir la mejor plataforma para todos"
+      },
+      "communityUpdates": {
+        "title": "Actualizaciones de la Comunidad",
+        "description": "Mantente informado sobre nuestro progreso y próximas características"
+      }
+    },
+    "stats": {
+      "signups": "Registros Tempranos",
+      "countries": "Países",
+      "launchDate": "Fecha de Lanzamiento"
+    },
+    "trustBadges": "Confiado por organizaciones líderes",
+    "fields": {
+      "name": {
+        "label": "Nombre",
+        "placeholder": "Juan Pérez"
+      },
+      "email": {
+        "label": "Correo",
+        "placeholder": "juan@ejemplo.com"
+      },
+      "role": {
+        "label": "Me interesa como...",
+        "placeholder": "Selecciona tu rol"
+      },
+      "consent": {
+        "label": "Acepto recibir actualizaciones sobre el lanzamiento y noticias de Revo Farmers",
+        "description": "Puedes cancelar la suscripción en cualquier momento"
+      }
+    },
+    "roles": {
+      "farmer": "Agricultor/Productor",
+      "investor": "Inversionista",
+      "consumer": "Consumidor/Comprador",
+      "partner": "Socio Comercial",
+      "other": "Otro"
+    },
+    "submit": "Unirse a la Lista",
+    "submitting": "Uniéndose...",
+    "privacy": "Respetamos tu privacidad y nunca compartiremos tu información.",
+    "success": {
+      "title": "¡Bienvenido a bordo!",
+      "message": "¡Gracias por unirte! Revisa tu correo para la confirmación.",
+      "emailSent": "Confirmación enviada a {email}",
+      "sharePrompt": "¡Ayúdanos a correr la voz!",
+      "addAnother": "Agregar otro correo"
+    },
+    "social": {
+      "shareText": "¡Me uní a la lista de espera de Revo Farmers! Únete a revolucionar la agricultura 🌱",
+      "share": "Compartir"
+    },
+    "errors": {
+      "emailExists": "Este correo ya está registrado",
+      "invalidEmail": "Por favor ingresa un correo válido",
+      "rateLimited": "Demasiadas solicitudes. Por favor intenta más tarde.",
+      "generic": "Algo salió mal. Por favor intenta de nuevo."
+    }
+  },
+  "Unsubscribe": {
+    "title": "Cancelar Suscripción de la Lista",
+    "description": "Lamentamos verte partir. Por favor confirma tu dirección de correo para cancelar tu suscripción a la lista de espera de Revo Farmers.",
+    "optional": "(opcional)",
+    "fields": {
+      "email": {
+        "label": "Dirección de Correo",
+        "placeholder": "tu.correo@ejemplo.com",
+        "verified": "Correo verificado desde el enlace de cancelación"
+      },
+      "reason": {
+        "label": "Razón para cancelar la suscripción",
+        "placeholder": "Ayúdanos a mejorar diciéndonos por qué te vas...",
+        "help": "Tu retroalimentación nos ayuda a mejorar nuestro servicio"
+      }
+    },
+    "submit": "Cancelar Suscripción",
+    "submitting": "Cancelando...",
+    "cancel": "Cancelar",
+    "privacy": "Tus datos serán eliminados de nuestra lista de espera y comunicaciones de marketing.",
+    "success": {
+      "title": "Suscripción Cancelada Exitosamente",
+      "message": "Has sido eliminado de la lista de espera de Revo Farmers. Ya no recibirás actualizaciones de nosotros.",
+      "resubscribe": "¿Cambiaste de opinión? Siempre puedes unirte a nuestra lista de espera nuevamente.",
+      "backToHome": "Volver al Inicio",
+      "rejoin": "Unirse a la Lista Nuevamente"
+    },
+    "errors": {
+      "invalidEmail": "Por favor ingresa una dirección de correo válida",
+      "invalidToken": "Este enlace de cancelación es inválido o ha expirado. Por favor ingresa tu correo abajo.",
+      "generic": "Algo salió mal. Por favor intenta de nuevo."
+    }
+  },
+  "HowWeWork": {
+    "title": "Cómo Funcionamos",
     "toggle": {
       "farmer": "Agricultor",
-      "buyer": "Comprador"
+      "buyer": "Comprador",
+      "switchUserType": "Cambiar entre perspectivas de agricultor y comprador"
     },
     "farmerSteps": {
       "listProducts": {
@@ -69,8 +189,8 @@
   },
 
   "cta": {
-      "ready": "¿Listo para Empezar?",
-      "startSelling": "Empezar a Vender",
+      "ready": "¿Listo para Comenzar?",
+      "startSelling": "Empieza a Vender",
       "exploreProducts": "Explorar Productos"
     },
 
@@ -258,7 +378,8 @@
       "home": "Inicio",
       "products": "Productos",
       "farm": "Granja",
-      "farms": "Granjas"
+      "farms": "Granjas",
+      "marketplace": "Mercado"
     },
     "search": {
       "placeholder": "Buscar productos..."
@@ -301,24 +422,31 @@
     "Instagram": "Instagram",
     "Instagram coming soon": "Instagram próximamente",
     "emailSubject": "Solicitud de contacto — Revolutionary Farmers",
-    "emailBody": "Hola Revolutionary Farmers,%0D%0A%0D%0ANombre: %0D%0ARol/Empresa: %0D%0AMensaje: %0D%0A%0D%0AGracias."
-  },
-  "OurTeam": {
-    "title": "Nuestro Equipo",
-    "subtitle": "Personas construyendo un comercio agrícola transparente, justo y sostenible.",
-    "languages": "Idiomas",
-    "ctaTitle": "Únete a Nuestra Misión",
-    "ctaDescription": "¿Listo para ser parte de la revolución agrícola? Conéctate con nosotros o únete como agricultor para empezar a hacer la diferencia.",
-    "contactUs": "Contáctanos",
-    "joinAsFarmer": "Únete como Agricultor"
-  },
-  "FAQ": {
-    "title": "Preguntas Frecuentes",
-    "subtitle": "Aclara tus dudas sobre cómo funciona la plataforma, nuestra tecnología y oportunidades de inversión.",
-    "needHelp": "¿Aún necesitas ayuda?",
-    "contactDescription": "¿No encuentras lo que buscas? Nuestro equipo de soporte está aquí para ayudarte.",
-    "emailUs": "Escríbenos",
-    "meetTeam": "Conoce Nuestro Equipo"
+    "emailBody": "Hola Revolutionary Farmers,%0D%0A%0D%0ANombre: %0D%0ARol/Empresa: %0D%0AMensaje: %0D%0A%0D%0AGracias.",
+    "waitlistCta": {
+      "title": "Sé un Adoptador Temprano",
+      "subtitle": "Únete a nuestra lista de espera y obtén beneficios exclusivos cuando lancemos",
+      "button": "Unirse a la Lista"
+    },
+    "Support": "Soporte",
+    "Account": "Cuenta",
+    "Quick Links": "Enlaces Rápidos",
+    "Download App": "Descargar App",
+    "My Account": "Mi Cuenta",
+    "Login / Register": "Iniciar Sesión / Registrarse",
+    "Cart": "Carrito",
+    "Wishlist": "Lista de Deseos",
+    "Shop": "Tienda",
+    "Privacy Policy": "Política de Privacidad",
+    "Terms of Use": "Términos de Uso",
+    "FAQ": "Preguntas Frecuentes",
+    "Contact": "Contacto",
+    "Documentation": "Documentación",
+    "Barcode": "Código QR",
+    "Play store": "Descargar en Play Store",
+    "Twitter": "Twitter",
+    "LinkedIn": "LinkedIn",
+    "Github": "GitHub"
   },
   "SignUp": {
     "title": "Crear una cuenta",
@@ -334,6 +462,11 @@
     "errorMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
     "alreadyHaveAccount": "¿Ya tienes una cuenta?",
     "login": "Iniciar sesión"
+  },
+  "LoginModal": {
+    "farmerButton": "Agricultor/Comerciante",
+    "buyerButton": "Comprador",
+    "walletButton": "Conectar Billetera"
   },
   "SignIn": {
     "title": "Iniciar Sesión",
