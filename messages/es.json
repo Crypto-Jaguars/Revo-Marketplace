@@ -427,26 +427,7 @@
       "title": "Sé un Adoptador Temprano",
       "subtitle": "Únete a nuestra lista de espera y obtén beneficios exclusivos cuando lancemos",
       "button": "Unirse a la Lista"
-    },
-    "Support": "Soporte",
-    "Account": "Cuenta",
-    "Quick Links": "Enlaces Rápidos",
-    "Download App": "Descargar App",
-    "My Account": "Mi Cuenta",
-    "Login / Register": "Iniciar Sesión / Registrarse",
-    "Cart": "Carrito",
-    "Wishlist": "Lista de Deseos",
-    "Shop": "Tienda",
-    "Privacy Policy": "Política de Privacidad",
-    "Terms of Use": "Términos de Uso",
-    "FAQ": "Preguntas Frecuentes",
-    "Contact": "Contacto",
-    "Documentation": "Documentación",
-    "Barcode": "Código QR",
-    "Play store": "Descargar en Play Store",
-    "Twitter": "Twitter",
-    "LinkedIn": "LinkedIn",
-    "Github": "GitHub"
+    }
   },
   "SignUp": {
     "title": "Crear una cuenta",

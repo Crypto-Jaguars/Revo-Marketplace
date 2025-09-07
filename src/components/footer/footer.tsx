@@ -8,7 +8,6 @@ import Link from 'next/link';
 import type { ReactElement } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sparkles } from 'lucide-react';
-import { useLanguageStore } from '@/store';
 
 interface FooterLinkItem {
   label: string;
@@ -29,7 +28,6 @@ const Footer = () => {
   const params = useParams();
   const locale = params.locale as string;
   const currentYear = new Date().getFullYear();
-  const { language } = useLanguageStore();
   const pathname = usePathname();
   
   // Check if we're on the waitlist page
@@ -97,7 +95,7 @@ const Footer = () => {
                 asChild
                 className="bg-revolutionary_green hover:bg-revolutionary_green/90 text-white"
               >
-                <Link href={`/${language}/waitlist`}>
+                <Link href={`/${locale}/waitlist`}>
                   {t('waitlistCta.button')}
                 </Link>
               </Button>
