@@ -60,7 +60,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 flex flex-col px-4 sm:px-8 md:px-40 py-3 z-50" style={{ backgroundImage: "url('/images/header-bg.png')" }}>
+      <header className="sticky top-0 left-0 right-0 flex flex-col px-4 sm:px-8 md:px-40 py-3 z-50" style={{ backgroundImage: "url('/images/header-bg.png')" }}>
         <div className="absolute inset-0 bg-green-700/90"></div>
         
         {/* Desktop Header */}

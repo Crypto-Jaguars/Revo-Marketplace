@@ -1102,6 +1102,15 @@
       "button": "Start Investing Today"
     }
   },
+  "OurTeam": {
+    "title": "Our Team",
+    "subtitle": "Meet the passionate individuals behind Revolutionary Farmers, dedicated to transforming agriculture through innovative technology and sustainable practices.",
+    "languages": "Languages"
+  },
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about Revolutionary Farmers, our platform, and how we're transforming agriculture through blockchain technology."
+  },
   "Settings": {
     "title": "Settings",
     "description": "Manage your account preferences and configurations",
