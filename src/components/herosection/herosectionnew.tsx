@@ -40,7 +40,7 @@ function handleMouseLeave(){
   return (
     <section className="w-full h-screen flex flex-col">
       <main className="flex-grow flex flex-col lg:flex-row items-center justify-center text-center px-4 pt-28 md:px-14 lg:pt-20 gap-8 lg:gap-2 bg-gradient-to-b from-[#D8E8DE] via-[#B8D8C8] to-[#98C8B8] ">
-        <article className='max-w-2xl '>
+        <article className='max-w-4xl '>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
