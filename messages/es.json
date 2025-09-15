@@ -854,6 +854,15 @@
       "defaultSet": "Dirección predeterminada actualizada"
     }
   },
+  "OurTeam": {
+    "title": "Nuestro Equipo",
+    "subtitle": "Conoce a las personas apasionadas detrás de Revolutionary Farmers, dedicadas a transformar la agricultura a través de tecnología innovadora y prácticas sostenibles.",
+    "languages": "Idiomas"
+  },
+  "FAQ": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Encuentra respuestas a preguntas comunes sobre Revolutionary Farmers, nuestra plataforma y cómo estamos transformando la agricultura a través de la tecnología blockchain."
+  },
   "Invest": {
     "title": "Oportunidades de Inversión para Agricultores",
     "subtitle": "Apoya la agricultura sostenible mientras obtienes rendimientos. Invierte directamente en proyectos agrícolas que marcan la diferencia.",
