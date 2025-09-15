@@ -15,19 +15,6 @@ export default function Home() {
     <main className="flex flex-col w-full">
       
       <HeroSectionNew />
-      <Bounded>
-        <div className="container mx-auto px-4 py-12 md:py-24">
-          <div className="flex flex-col items-center w-full space-y-8">
-            <h1 className="text-3xl md:text-5xl font-bold text-primary_green">
-              {t('title')}
-              <span className="block text-3xl md:text-5xl text-gray-800 mt-2">{t('subtitle')}</span>
-            </h1>
-            <p className="text-base md:text-lg max-w-2xl text-gray-600 text-center">
-              {t('description')}
-            </p>
-          </div>
-        </div>
-      </Bounded>
       <AboutUs />
       <HowWeWork />
       <CtaSection />
