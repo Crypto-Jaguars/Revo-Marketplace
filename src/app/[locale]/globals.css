@@ -41,8 +41,6 @@
     --color-primary-light: #38b66a;
     --color-primary-dark: #1f5f35;
 
-    /* Font family */
-    --font-plus-jakarta-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
   .dark {
     --background: 0 0% 3.9%;
