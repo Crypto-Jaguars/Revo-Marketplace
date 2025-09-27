@@ -1,12 +1,26 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, memo, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import ProfileHeader from '@/components/farmer-profile/ProfileHeader';
 import AboutSection from '@/components/farmer-profile/AboutSection';
-import PhotoGallery from '@/components/farmer-profile/PhotoGallery';
-import CertificationCards from '@/components/farmer-profile/CertificationCards';
-import SeasonalProducts from '@/components/farmer-profile/SeasonalProducts';
-import ContactInfo from '@/components/farmer-profile/ContactInfo';
+
+// Dynamic imports for non-critical components
+const PhotoGallery = dynamic(() => import('@/components/farmer-profile/PhotoGallery'), {
+  loading: () => <div className="bg-white p-6 mb-8 rounded-lg shadow-sm animate-pulse h-64" />
+});
+
+const CertificationCards = dynamic(() => import('@/components/farmer-profile/CertificationCards'), {
+  loading: () => <div className="bg-white p-6 mb-8 rounded-lg shadow-sm animate-pulse h-48" />
+});
+
+const ContactInfo = dynamic(() => import('@/components/farmer-profile/ContactInfo'), {
+  loading: () => <div className="bg-white p-6 mb-8 rounded-lg shadow-sm animate-pulse h-64" />
+});
+
+const SeasonalProducts = dynamic(() => import('@/components/farmer-profile/SeasonalProducts'), {
+  loading: () => <div className="bg-white p-6 mb-8 rounded-lg shadow-sm animate-pulse h-48" />
+});
 
 interface FarmerProfileProps {
   params: {
@@ -14,7 +28,7 @@ interface FarmerProfileProps {
   };
 }
 
-// Default data for seasonal products
+// Default data for seasonal products - memoized
 const defaultProducts = [
   {
     id: 1,
@@ -46,7 +60,7 @@ const defaultProducts = [
   }
 ];
 
-const FarmerProfile = ({ params }: FarmerProfileProps) => {
+const FarmerProfile = memo<FarmerProfileProps>(({ params }) => {
   const [isOwner] = useState(false);
 
   return (
@@ -73,6 +87,8 @@ const FarmerProfile = ({ params }: FarmerProfileProps) => {
       </div>
     </div>
   );
-};
+});
+
+FarmerProfile.displayName = 'FarmerProfile';
 
 export default FarmerProfile;

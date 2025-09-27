@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import { Edit3, Save, X } from 'lucide-react';
 
 interface FarmData {
@@ -30,12 +30,12 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   const [formData, setFormData] = useState(initialData);
   const [tempData, setTempData] = useState(initialData);
 
-  const handleEdit = () => {
+  const handleEdit = useCallback(() => {
     setTempData(formData);
     setIsEditing(true);
-  };
+  }, [formData]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     try {
       // TODO: Replace with actual API call
       // await saveFarmData(tempData);
@@ -45,19 +45,19 @@ const AboutSection: React.FC<AboutSectionProps> = ({
       console.error('Error saving farm data:', error);
       // TODO: Show user-friendly error message
     }
-  };
+  }, [tempData]);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     setTempData(formData);
     setIsEditing(false);
-  };
+  }, [formData]);
 
-  const handleInputChange = (field: keyof FarmData, value: string) => {
+  const handleInputChange = useCallback((field: keyof FarmData, value: string) => {
     setTempData(prev => ({
       ...prev,
       [field]: value
     }));
-  };
+  }, []);
 
   return (
     <section className="bg-white p-6 mb-8 rounded-lg shadow-sm">
@@ -169,4 +169,4 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   );
 };
 
-export default AboutSection;
+export default memo(AboutSection);

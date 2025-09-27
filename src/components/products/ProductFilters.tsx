@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
+import { useState, useCallback, useRef, useEffect, useMemo, memo } from 'react';
 import { useTranslations } from 'next-intl';
 import { productsMock } from '@/mocks/products';
 import { calculateDiscountedPrice } from '@/constants/helpers/CalculateDiscountedPrice';
@@ -20,11 +20,11 @@ export interface ProductFilters {
   priceRange: [number, number];
 }
 
-export function ProductFilters({
+const ProductFilters = memo<ProductFiltersProps>(({
   onFilterChange,
   categories,
   farmingMethods,
-}: ProductFiltersProps) {
+}) => {
   const t = useTranslations('Products');
 
   const { maxPrice } = useMemo(() => {
@@ -236,4 +236,8 @@ export function ProductFilters({
       )}
     </div>
   );
-}
+});
+
+ProductFilters.displayName = 'ProductFilters';
+
+export { ProductFilters };

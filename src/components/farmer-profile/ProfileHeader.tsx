@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 
@@ -9,10 +9,10 @@ interface ProfileHeaderProps {
 }
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ isOwner = false }) => {
-  const handleContactClick = () => {
+  const handleContactClick = useCallback(() => {
     // TODO: Implement contact functionality
     console.log('Contact farmer clicked');
-  };
+  }, []);
 
   return (
     <div className="relative">
@@ -24,6 +24,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ isOwner = false }) => {
           fill
           className="object-cover"
           priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
         />
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
       </div>
@@ -84,4 +85,4 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ isOwner = false }) => {
   );
 };
 
-export default ProfileHeader;
+export default memo(ProfileHeader);

@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { memo, useMemo, useCallback } from 'react';
 import { Award, Leaf, Medal } from 'lucide-react';
 
 interface Certification {
@@ -16,8 +16,46 @@ interface CertificationCardsProps {
   isOwner?: boolean;
 }
 
+// Memoized Certification Item Component
+const CertificationItem = memo<{ certification: Certification }>(({ certification }) => {
+  const getIcon = useCallback((iconType: 'star' | 'medal' | 'leaf') => {
+    const iconProps = {
+      className: "w-8 h-8 text-filter_active stroke-2",
+      fill: "none" as const
+    };
+
+    switch (iconType) {
+      case 'star':
+        return <Award {...iconProps} />;
+      case 'medal':
+        return <Medal {...iconProps} />;
+      case 'leaf':
+        return <Leaf {...iconProps} />;
+      default:
+        return <Award {...iconProps} />;
+    }
+  }, []);
+
+  return (
+    <div className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+      <div className="flex items-start space-x-4">
+        <div className="flex-shrink-0 mt-1">
+          {getIcon(certification.icon)}
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">{certification.name}</h3>
+          <p className="text-sm text-gray-600 mb-1">Emisor: {certification.issuer}</p>
+          <p className="text-sm text-gray-500">Válido hasta: {certification.validUntil}</p>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+CertificationItem.displayName = 'CertificationItem';
+
 const CertificationCards: React.FC<CertificationCardsProps> = ({ isOwner = false }) => {
-  const certifications: Certification[] = [
+  const certifications = useMemo<Certification[]>(() => [
     {
       id: 1,
       name: "Certificación Orgánica",
@@ -42,30 +80,12 @@ const CertificationCards: React.FC<CertificationCardsProps> = ({ isOwner = false
       status: "Vigente",
       icon: "leaf"
     }
-  ];
+  ], []);
 
-  const getIcon = (iconType: 'star' | 'medal' | 'leaf') => {
-    const iconProps = {
-      className: "w-8 h-8 text-filter_active stroke-2",
-      fill: "none" as const
-    };
-
-    switch (iconType) {
-      case 'star':
-        return <Award {...iconProps} />;
-      case 'medal':
-        return <Medal {...iconProps} />;
-      case 'leaf':
-        return <Leaf {...iconProps} />;
-      default:
-        return <Award {...iconProps} />;
-    }
-  };
-
-  const handleAddCertification = () => {
+  const handleAddCertification = useCallback(() => {
     // TODO: Implement add certification functionality
     console.log('Add certification clicked');
-  };
+  }, []);
 
   return (
     <section className="bg-white p-6 mb-8 rounded-lg shadow-sm">
@@ -85,22 +105,11 @@ const CertificationCards: React.FC<CertificationCardsProps> = ({ isOwner = false
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {certifications.map((cert) => (
-          <div key={cert.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-            <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0 mt-1">
-                {getIcon(cert.icon)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{cert.name}</h3>
-                <p className="text-sm text-gray-600 mb-1">Emisor: {cert.issuer}</p>
-                <p className="text-sm text-gray-500">Válido hasta: {cert.validUntil}</p>
-              </div>
-            </div>
-          </div>
+          <CertificationItem key={cert.id} certification={cert} />
         ))}
       </div>
     </section>
   );
 };
 
-export default CertificationCards;
+export default memo(CertificationCards);
