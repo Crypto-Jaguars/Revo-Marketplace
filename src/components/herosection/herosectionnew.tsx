@@ -8,12 +8,16 @@ import { useLanguageStore } from '@/store';
 import Link from 'next/link';
 import {Button} from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 export default function HeroSectionNew() {
   const t = useTranslations('Hero');
   const tButton = useTranslations('HeroSection');
   const {language} = useLanguageStore()
   const [expandedIndex, setExpandedIndex] = useState(0);
+  
+  // Use typewriter effect for the main title with 120ms speed
+  const typewriterTitle = useTypewriter(t('title'), 120);
 function handleMouseEnter(index: number){
 setExpandedIndex(index);
 }
@@ -47,7 +51,7 @@ function handleMouseLeave(){
             transition={{ duration: 0.5 }}
             className="text-6xl text-center lg:text-left lg:text-8xl font-bold text-primary_green leading-tight"
           >
-            {t('title')}
+            {typewriterTitle}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
