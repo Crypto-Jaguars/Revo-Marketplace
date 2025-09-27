@@ -88,6 +88,9 @@ const Header = () => {
               <Link style={{ color: 'white' }} href={`/${language}/marketplace`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
                 {t('Marketplace.navigation.marketplace')}
               </Link>
+              <Link style={{ color: 'white' }} href={`/${language}/producers`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+                {t('Marketplace.navigation.producers')}
+              </Link>
             </div>
           </nav>
           <div className='flex items-center gap-4'>
@@ -155,6 +158,7 @@ const Header = () => {
             <Link style={{ color: 'white' }} href={`/${language}`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.home')}</Link>
             <Link style={{ color: 'white' }} href={`/${language}/products`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.products')}</Link>
             <Link style={{ color: 'white' }} href={`/${language}/marketplace`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.marketplace')}</Link>
+            <Link style={{ color: 'white' }} href={`/${language}/producers`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.producers')}</Link>
           </div>
         </div>
       )}
