@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Bounded from '@/components/Bounded';
 import { ProducerGrid } from '@/components/producers/ProducerGrid';
-import { ProducerFilters } from '@/components/producers/ProducerFilters';
+import { ProducerFilters, ProducerFilterValues } from '@/components/producers/ProducerFilters';
 import { producersMock } from '@/mocks/producers';
 import {
   Select,
@@ -18,14 +18,8 @@ import { Input } from '@/components/ui/input';
 import { useSearchStore } from '@/store';
 import { Filter, X, Search } from 'lucide-react';
 
-interface ProducerFilters {
-  search: string;
-  location: string;
-  certification: string;
-  farmingMethod: string;
-  distance: number;
-  rating: number;
-}
+// Using shared type from ProducerFilters component
+type ProducerFiltersState = ProducerFilterValues;
 
 export default function ProducersPage() {
   const t = useTranslations('Producers');
@@ -40,7 +34,7 @@ export default function ProducersPage() {
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const itemsPerPage = 12;
 
-  const [filters, setFilters] = useState<ProducerFilters>({
+  const [filters, setFilters] = useState<ProducerFiltersState>({
     search: searchTerm,
     location: 'all',
     certification: 'all',
@@ -55,6 +49,7 @@ export default function ProducersPage() {
       ...prev,
       search: searchTerm,
     }));
+    setHasMore(true);
   }, [searchTerm]);
 
   const handleProducerClick = useCallback((producerId: string) => {
@@ -134,14 +129,19 @@ export default function ProducersPage() {
     return sortedProducers.slice(0, endIndex);
   }, [sortedProducers, currentPage, itemsPerPage]);
 
-  const handleFilterChange = useCallback((newFilters: Partial<ProducerFilters>) => {
-    setFilters((prev) => ({ ...prev, ...newFilters }));
-    setCurrentPage(1);
+  const handleFilterChange = useCallback((newFilters: Partial<ProducerFiltersState>) => {
+    // Add a small delay to prevent rapid DOM updates
+    setTimeout(() => {
+      setFilters((prev) => ({ ...prev, ...newFilters }));
+      setCurrentPage(1);
+      setHasMore(true);
+    }, 0);
   }, []);
 
   const handleSortChange = useCallback((value: string) => {
     setSortBy(value as 'distance' | 'rating' | 'name' | 'products');
     setCurrentPage(1);
+    setHasMore(true);
   }, []);
 
   const handleLoadMore = useCallback(() => {
@@ -222,7 +222,7 @@ export default function ProducersPage() {
           </Button>
           
           {/* Sort Dropdown */}
-          <Select value={sortBy} onValueChange={(value: any) => setSortBy(value)}>
+          <Select value={sortBy} onValueChange={(value: 'distance' | 'rating' | 'name' | 'products') => setSortBy(value)}>
             <SelectTrigger className="flex-1 h-12 bg-white/10 border-white/20 text-white">
               <SelectValue />
             </SelectTrigger>

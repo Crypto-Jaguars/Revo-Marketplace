@@ -16,19 +16,21 @@ import {
 } from '@/components/ui/select';
 import { Search, X, MapPin, Award, Leaf } from 'lucide-react';
 
+export type ProducerFilterValues = {
+  search: string;
+  location: string;
+  certification: string;
+  farmingMethod: string;
+  distance: number;
+  rating: number;
+};
+
 interface ProducerFiltersProps {
-  onFilterChange: (filters: any) => void;
+  onFilterChange: (filters: ProducerFilterValues) => void;
   locations: string[];
   certifications: string[];
   farmingMethods: string[];
-  filters: {
-    search: string;
-    location: string;
-    certification: string;
-    farmingMethod: string;
-    distance: number;
-    rating: number;
-  };
+  filters: ProducerFilterValues;
   isMobile?: boolean;
   hideSearch?: boolean;
 }
@@ -43,7 +45,7 @@ export function ProducerFilters({
   hideSearch = false,
 }: ProducerFiltersProps) {
   const t = useTranslations('Producers');
-  const [localFilters, setLocalFilters] = useState(filters);
+  const [localFilters, setLocalFilters] = useState<ProducerFilterValues>(filters);
 
   const handleSearchChange = (value: string) => {
     const newFilters = { ...localFilters, search: value };
@@ -146,7 +148,7 @@ export function ProducerFilters({
               <SelectValue placeholder={t('filters.location')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{t('filters.location')}</SelectItem>
+              <SelectItem value="all">{t('filters.any')}</SelectItem>
               {locations.map((location) => (
                 <SelectItem key={location} value={location}>
                   {location}
@@ -167,7 +169,7 @@ export function ProducerFilters({
               <SelectValue placeholder={t('filters.certification')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{t('filters.certification')}</SelectItem>
+              <SelectItem value="all">{t('filters.any')}</SelectItem>
               {certifications.map((cert) => (
                 <SelectItem key={cert} value={cert}>
                   {cert === 'organic' ? t('producerCard.organic') : 
@@ -189,7 +191,7 @@ export function ProducerFilters({
               <SelectValue placeholder={t('filters.farmingMethod')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{t('filters.farmingMethod')}</SelectItem>
+              <SelectItem value="all">{t('filters.any')}</SelectItem>
               {farmingMethods.map((method) => (
                 <SelectItem key={method} value={method}>
                   {method}
@@ -217,7 +219,7 @@ export function ProducerFilters({
         {/* Rating */}
         <div className="space-y-3">
           <label className={isMobile ? "text-gray-900 text-sm font-medium" : "text-white text-sm font-medium"}>
-            {t('filters.rating')}: {localFilters.rating > 0 ? `${localFilters.rating}+ ⭐` : 'Any'}
+            {t('filters.rating')}: {localFilters.rating > 0 ? `${localFilters.rating}+ ⭐` : t('filters.any')}
           </label>
           <Slider
             value={[localFilters.rating]}
@@ -232,11 +234,11 @@ export function ProducerFilters({
         {/* Active Filters */}
         {hasActiveFilters && (
           <div className="space-y-2">
-            <label className={isMobile ? "text-gray-900 text-sm font-medium" : "text-white text-sm font-medium"}>Active Filters:</label>
+            <label className={isMobile ? "text-gray-900 text-sm font-medium" : "text-white text-sm font-medium"}>{t('filters.active')}:</label>
             <div className="flex flex-wrap gap-2">
               {localFilters.search && (
                 <Badge variant="secondary" className="bg-green-100 text-green-800">
-                  Search: {localFilters.search}
+                  {t('filters.labels.search')}: {localFilters.search}
                   <button
                     onClick={() => handleSearchChange('')}
                     className="ml-1 hover:text-green-600"
@@ -247,7 +249,7 @@ export function ProducerFilters({
               )}
               {localFilters.location && localFilters.location !== 'all' && (
                 <Badge variant="secondary" className="bg-green-100 text-green-800">
-                  Location: {localFilters.location}
+                  {t('filters.labels.location')}: {localFilters.location}
                   <button
                     onClick={() => handleLocationChange('all')}
                     className="ml-1 hover:text-green-600"
@@ -258,7 +260,7 @@ export function ProducerFilters({
               )}
               {localFilters.certification && localFilters.certification !== 'all' && (
                 <Badge variant="secondary" className="bg-green-100 text-green-800">
-                  Cert: {localFilters.certification}
+                  {t('filters.labels.cert')}: {localFilters.certification}
                   <button
                     onClick={() => handleCertificationChange('all')}
                     className="ml-1 hover:text-green-600"
@@ -269,7 +271,7 @@ export function ProducerFilters({
               )}
               {localFilters.farmingMethod && localFilters.farmingMethod !== 'all' && (
                 <Badge variant="secondary" className="bg-green-100 text-green-800">
-                  Method: {localFilters.farmingMethod}
+                  {t('filters.labels.method')}: {localFilters.farmingMethod}
                   <button
                     onClick={() => handleFarmingMethodChange('all')}
                     className="ml-1 hover:text-green-600"
@@ -280,7 +282,7 @@ export function ProducerFilters({
               )}
               {localFilters.distance !== 50 && (
                 <Badge variant="secondary" className="bg-green-100 text-green-800">
-                  Distance: {localFilters.distance}km
+                  {t('filters.labels.distance')}: {localFilters.distance} km
                   <button
                     onClick={() => handleDistanceChange([50])}
                     className="ml-1 hover:text-green-600"
@@ -291,7 +293,7 @@ export function ProducerFilters({
               )}
               {localFilters.rating > 0 && (
                 <Badge variant="secondary" className="bg-green-100 text-green-800">
-                  Rating: {localFilters.rating}+
+                  {t('filters.labels.rating')}: {localFilters.rating}+
                   <button
                     onClick={() => handleRatingChange([0])}
                     className="ml-1 hover:text-green-600"
