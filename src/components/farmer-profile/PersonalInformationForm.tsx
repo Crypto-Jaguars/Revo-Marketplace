@@ -18,27 +18,32 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-// Schema for personal information validation
-const personalInfoSchema = z.object({
+// Schema factory for personal information validation with localized messages
+const createPersonalInfoSchema = (t: (key: string) => string) => z.object({
   name: z
     .string()
-    .min(2, 'Name must be at least 2 characters')
-    .max(50, 'Name must be at most 50 characters'),
+    .min(2, t('validation.nameMin'))
+    .max(50, t('validation.nameMax')),
   surname: z
     .string()
-    .min(2, 'Surname must be at least 2 characters')
-    .max(50, 'Surname must be at most 50 characters'),
+    .min(2, t('validation.surnameMin'))
+    .max(50, t('validation.surnameMax')),
   email: z
     .string()
-    .email('Invalid email address'),
+    .email(t('validation.emailInvalid')),
   phone: z
     .string()
-    .min(7, 'Phone number seems too short')
-    .max(20, 'Phone number seems too long')
-    .regex(/^[\+]?[0-9\s\-\(\)]+$/, 'Invalid phone number format'),
+    .min(7, t('validation.phoneMin'))
+    .max(20, t('validation.phoneMax'))
+    .regex(/^[+]?[0-9\s\-()]+$/, t('validation.phoneFormat')),
 });
 
-type PersonalInfoFormData = z.infer<typeof personalInfoSchema>;
+type PersonalInfoFormData = {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+};
 
 interface PersonalInformationFormProps {
   initialData?: Partial<PersonalInfoFormData>;
@@ -52,6 +57,9 @@ const PersonalInformationForm: React.FC<PersonalInformationFormProps> = ({
   isOwner = false,
 }) => {
   const t = useTranslations('farmerProfile.personalInfo');
+  
+  // Create schema with localized messages
+  const personalInfoSchema = createPersonalInfoSchema(t);
 
   const form = useForm<PersonalInfoFormData>({
     resolver: zodResolver(personalInfoSchema),
@@ -62,6 +70,16 @@ const PersonalInformationForm: React.FC<PersonalInformationFormProps> = ({
       phone: initialData.phone || '',
     },
   });
+
+  // Reset form when initialData changes
+  React.useEffect(() => {
+    form.reset({
+      name: initialData.name ?? '',
+      surname: initialData.surname ?? '',
+      email: initialData.email ?? '',
+      phone: initialData.phone ?? '',
+    });
+  }, [initialData, form]);
 
   const handleSubmit = (data: PersonalInfoFormData) => {
     console.log('Personal information submitted:', data);

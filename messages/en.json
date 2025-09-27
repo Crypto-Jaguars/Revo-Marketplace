@@ -54,7 +54,17 @@
       "emailPlaceholder": "Enter your email address",
       "phonePlaceholder": "Enter your phone number",
       "save": "Save Personal Information",
-      "saving": "Saving Personal Information..."
+      "saving": "Saving Personal Information...",
+      "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must be at most 50 characters",
+        "surnameMin": "Surname must be at least 2 characters",
+        "surnameMax": "Surname must be at most 50 characters",
+        "emailInvalid": "Invalid email address",
+        "phoneMin": "Phone number seems too short",
+        "phoneMax": "Phone number seems too long",
+        "phoneFormat": "Invalid phone number format"
+      }
     }
   },
   "Waitlist": {
