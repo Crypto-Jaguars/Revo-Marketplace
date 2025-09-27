@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import localFont from 'next/font/local';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { Toaster } from '@/components/ui/toaster';
 import { Toaster as SonnerToaster } from 'sonner';
 import MarketplaceHeader from '@/components/marketplace/header/MarketplaceHeader';
@@ -11,16 +11,14 @@ import './globals.css';
 import Footer from '@/components/footer/footer';
 import Header from '@/components/header/Headernew';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+// Configure Plus Jakarta Sans with all required weights
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta-sans',
+  display: 'swap', // Optimizes font loading and prevents FOIT
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 interface RootLayoutProps {
@@ -61,8 +59,20 @@ export default function RootLayout({ children, params: { locale } }: RootLayoutP
   if (!messages) {
     return (
       <html lang={currentLocale}>
+        <head>
+          {/* Preload Plus Jakarta Sans for critical rendering */}
+          <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+            as="style"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          />
+        </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}
+          className={`${plusJakartaSans.variable} font-sans antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}
         >
           <div className="flex items-center justify-center h-screen">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
@@ -75,10 +85,20 @@ export default function RootLayout({ children, params: { locale } }: RootLayoutP
   return (
     <html lang={currentLocale}>
       <head>
+        {/* Preload Plus Jakarta Sans for optimal performance */}
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          as="style"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        />
         <script src="/js/checkout-redirect.js" async></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}
+        className={`${plusJakartaSans.variable} font-sans antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}
       >
         <NextIntlClientProvider locale={currentLocale} messages={messages}>
           <div className="min-h-screen flex flex-col">
