@@ -189,10 +189,10 @@
   },
 
   "cta": {
-      "ready": "¿Listo para Comenzar?",
-      "startSelling": "Empieza a Vender",
-      "exploreProducts": "Explorar Productos"
-    },
+    "ready": "¿Listo para Comenzar?",
+    "startSelling": "Empieza a Vender",
+    "exploreProducts": "Explorar Productos"
+  },
 
   "FarmerSubscription": {
     "ctaLabel": "Empezar a Vender",
@@ -587,7 +587,7 @@
           "title": "Precipitación",
           "unit": "mm"
         },
-        "growingSeason": {  
+        "growingSeason": {
           "title": "Temporada de Crecimiento",
           "unit": "días"
         }
@@ -901,6 +901,18 @@
       "subtitle": "Únete a nuestra creciente comunidad de inversores que apoyan la agricultura sostenible y obtienen rendimientos competitivos.",
       "button": "Comienza a Invertir Hoy"
     }
+  },
+  "producerCTA": {
+    "title": "¿Eres un Productor?",
+    "subtitle": "Únete a Nuestro Mercado Hoy",
+    "description": "Únete a nuestro mercado y conéctate directamente con consumidores que valoran productos frescos y de calidad. Amplía tu alcance, incrementa tus ventas y construye relaciones duraderas con clientes que aprecian tu arduo trabajo.",
+    "benefit1Title": "Ventas Directas",
+    "benefit1Desc": "Vende directamente a consumidores sin intermediarios",
+    "benefit2Title": "Precios Justos",
+    "benefit2Desc": "Establece tus propios precios y maximiza tus ganancias",
+    "benefit3Title": "Construcción de Comunidad",
+    "benefit3Desc": "Construye relaciones con consumidores locales",
+    "buttonText": "Únete como Productor"
   }
 }
 
