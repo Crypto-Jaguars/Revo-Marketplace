@@ -42,6 +42,21 @@
       }
     }
   },
+  "farmerProfile": {
+    "personalInfo": {
+      "title": "Información Personal",
+      "name": "Nombre",
+      "surname": "Apellido",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "namePlaceholder": "Ingresa tu nombre",
+      "surnamePlaceholder": "Ingresa tu apellido",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "phonePlaceholder": "Ingresa tu número de teléfono",
+      "save": "Guardar Información Personal",
+      "saving": "Guardando Información Personal..."
+    }
+  },
   "Waitlist": {
     "title": "Únete a la Lista de Espera",
     "subtitle": "Sé el primero en saber cuando lancemos y obtén beneficios exclusivos de acceso anticipado.",
