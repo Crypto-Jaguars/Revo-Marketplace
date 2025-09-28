@@ -11,6 +11,8 @@ import {
   getFarmerRedirect,
   getDefaultRedirect,
 } from '@/lib/auth-redirects';
+import { usePasskey } from '@/hooks/usePasskey';
+import { usePasskeyStore } from '@/store/slices/passkey';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -44,6 +46,9 @@ export default function AuthPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
 
+  const { getCurrentUser, createPasskey, isCreating, error, clearError } = usePasskey();
+  const { connect, isLoading: isConnecting, isConnected } = usePasskeyStore();
+
   // Check device compatibility for WebAuthn/Passkeys
   useEffect(() => {
     const checkCompatibility = () => {
@@ -70,19 +75,25 @@ export default function AuthPage() {
   const handlePasskeyLogin = async () => {
     try {
       setIsLoading(true);
-      // TODO: Implement passkey login API call
-      // const response = await fetch('/api/auth/passkey/login/begin', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' }
-      // });
+      clearError();
 
-      // For now, simulate success and get user role from response
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Usar connect del passkey store para conectar con passkey
+      await connect();
 
-      // TODO: Get actual user role from authentication response
-      // For now, redirect to default marketplace
-      const redirectUrl = getDefaultRedirect(language);
-      router.push(redirectUrl);
+      // Después de conectar exitosamente, verificar usuario y redirigir
+      const currentUser = getCurrentUser();
+
+      if (currentUser && currentUser.hasPasskey) {
+        // Usuario ya tiene passkey, redirigir al dashboard
+        const safeLanguage = language || 'en';
+        const redirectUrl = getRoleBasedRedirect(currentUser.role as any, safeLanguage);
+        router.push(redirectUrl);
+        return;
+      }
+
+      // Si no hay usuario, redirigir al marketplace
+      const safeLanguage = language || 'en';
+      router.push(`/${safeLanguage}/marketplace`);
     } catch (error) {
       console.error('Passkey login failed:', error);
     } finally {
@@ -91,28 +102,25 @@ export default function AuthPage() {
   };
 
   const handleEmailPassword = () => {
-    router.push(`/${language}/signin`);
+    const safeLanguage = language || 'en';
+    router.push(`/${safeLanguage}/signin`);
   };
 
   const handleWalletConnect = () => {
     // This will use the existing wallet connection flow
     // After successful wallet connection, redirect based on role
-    router.push(`/${language}/`);
+    const safeLanguage = language || 'en';
+    router.push(`/${safeLanguage}/`);
   };
 
   const handleCreatePasskey = async () => {
     try {
       setIsLoading(true);
-      // TODO: Implement passkey registration API call
-      // const response = await fetch('/api/auth/passkey/register/begin', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' }
-      // });
+      clearError();
 
-      // For now, simulate success
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      router.push(`/${language}/signup`);
+      // Redirigir directamente a signup para crear cuenta con passkey
+      const safeLanguage = language || 'en';
+      router.push(`/${safeLanguage}/signup`);
     } catch (error) {
       console.error('Passkey registration failed:', error);
     } finally {
@@ -173,6 +181,14 @@ export default function AuthPage() {
               </Alert>
             )}
 
+            {/* Passkey Error Banner */}
+            {error && (
+              <Alert className="mb-6 border-red-200 bg-red-50">
+                <AlertTriangle className="h-4 w-4 text-red-600" />
+                <AlertDescription className="text-red-800">{error}</AlertDescription>
+              </Alert>
+            )}
+
             {/* Auth Options Cards */}
             <div className="space-y-4">
               {/* Primary: Passkey Login */}
@@ -205,19 +221,27 @@ export default function AuthPage() {
                 <CardContent className="pt-0">
                   <Button
                     onClick={handlePasskeyLogin}
-                    disabled={!deviceCompatibility.isSupported || isLoading}
+                    disabled={
+                      !deviceCompatibility.isSupported || isLoading || isCreating || isConnecting
+                    }
                     variant="outline"
                     className="w-full border-gray-300 hover:bg-gray-50 py-3 rounded-full font-medium"
                   >
-                    {isLoading ? (
+                    {isLoading || isCreating || isConnecting ? (
                       <div className="flex items-center space-x-2">
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        <span>{t('signingIn')}</span>
+                        <span>
+                          {isCreating
+                            ? 'Setting up...'
+                            : isConnecting
+                              ? 'Connecting...'
+                              : t('signingIn')}
+                        </span>
                       </div>
                     ) : (
                       <div className="flex items-center space-x-2">
                         <Fingerprint className="h-4 w-4" />
-                        <span>{t('passkeyButton')}</span>
+                        <span>{isConnected ? 'Connected' : t('passkeyButton')}</span>
                       </div>
                     )}
                   </Button>
@@ -286,12 +310,19 @@ export default function AuthPage() {
                 onClick={handleCreatePasskey}
                 variant="ghost"
                 className="text-green-800 hover:text-green-700 hover:bg-green-50 font-medium"
-                disabled={!deviceCompatibility.isSupported || isLoading}
+                disabled={!deviceCompatibility.isSupported || isLoading || isCreating}
               >
-                <div className="flex items-center space-x-2">
-                  <Sparkles className="h-4 w-4" />
-                  <span>{t('createPasskeyButton')}</span>
-                </div>
+                {isLoading || isCreating ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-green-600 border-t-transparent rounded-full animate-spin" />
+                    <span>Setting up...</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <Sparkles className="h-4 w-4" />
+                    <span>{t('createPasskeyButton')}</span>
+                  </div>
+                )}
               </Button>
             </div>
 

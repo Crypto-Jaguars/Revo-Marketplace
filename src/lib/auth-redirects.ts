@@ -6,10 +6,15 @@ import { UserRole } from '@/types/waitlist';
  * @param locale - The current locale
  * @returns The redirect URL for the user's dashboard
  */
-export function getRoleBasedRedirect(role: UserRole, locale: string = 'en'): string {
-  const basePath = `/${locale}`;
+export function getRoleBasedRedirect(role: UserRole | undefined, locale: string = 'en'): string {
+  // Asegurar que locale no sea undefined
+  const safeLocale = locale || 'en';
+  const basePath = `/${safeLocale}`;
 
-  switch (role) {
+  // Asegurar que role no sea undefined
+  const safeRole = role || 'consumer';
+
+  switch (safeRole) {
     case 'farmer':
       return `${basePath}/dashboard/farm`;
     case 'consumer':
@@ -30,7 +35,8 @@ export function getRoleBasedRedirect(role: UserRole, locale: string = 'en'): str
  * @returns The redirect URL for buyers
  */
 export function getBuyerRedirect(locale: string = 'en'): string {
-  return `/${locale}/orders`;
+  const safeLocale = locale || 'en';
+  return `/${safeLocale}/orders`;
 }
 
 /**
@@ -39,7 +45,8 @@ export function getBuyerRedirect(locale: string = 'en'): string {
  * @returns The redirect URL for farmers
  */
 export function getFarmerRedirect(locale: string = 'en'): string {
-  return `/${locale}/dashboard/farm`;
+  const safeLocale = locale || 'en';
+  return `/${safeLocale}/dashboard/farm`;
 }
 
 /**
@@ -48,7 +55,8 @@ export function getFarmerRedirect(locale: string = 'en'): string {
  * @returns The redirect URL for investors
  */
 export function getInvestorRedirect(locale: string = 'en'): string {
-  return `/${locale}/invest`;
+  const safeLocale = locale || 'en';
+  return `/${safeLocale}/invest`;
 }
 
 /**
@@ -57,5 +65,6 @@ export function getInvestorRedirect(locale: string = 'en'): string {
  * @returns The default redirect URL
  */
 export function getDefaultRedirect(locale: string = 'en'): string {
-  return `/${locale}/marketplace`;
+  const safeLocale = locale || 'en';
+  return `/${safeLocale}/marketplace`;
 }

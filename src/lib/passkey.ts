@@ -4,15 +4,18 @@ import { Buffer } from 'buffer';
 import { basicNodeSigner } from '@stellar/stellar-sdk/minimal/contract';
 import { Server } from '@stellar/stellar-sdk/minimal/rpc';
 
-const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL!;
-const networkPassphrase = process.env.NEXT_PUBLIC_NETWORK_PASSPHRASE!;
-const walletWasmHash = process.env.NEXT_PUBLIC_WALLET_WASM_HASH!;
-const launchtubeUrl = process.env.NEXT_PUBLIC_LAUNCHTUBE_URL!;
-const launchtubeJwt = process.env.NEXT_PUBLIC_LAUNCHTUBE_JWT!;
-const mercuryProjectName = process.env.NEXT_PUBLIC_MERCURY_PROJECT_NAME!;
-const mercuryUrl = process.env.NEXT_PUBLIC_MERCURY_URL!;
-const mercuryJwt = process.env.NEXT_PUBLIC_MERCURY_JWT!;
-const nativeContractId = process.env.NEXT_PUBLIC_NATIVE_CONTRACT_ID!;
+// Environment variables with fallback values for development
+const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://soroban-testnet.stellar.org:443';
+const networkPassphrase =
+  process.env.NEXT_PUBLIC_NETWORK_PASSPHRASE || 'Test SDF Network ; September 2015';
+const walletWasmHash = process.env.NEXT_PUBLIC_WALLET_WASM_HASH || 'mock-wallet-hash-for-dev';
+const launchtubeUrl =
+  process.env.NEXT_PUBLIC_LAUNCHTUBE_URL || 'https://launchtube.testnet.stellar.org';
+const launchtubeJwt = process.env.NEXT_PUBLIC_LAUNCHTUBE_JWT || 'mock-jwt-for-dev';
+const mercuryProjectName = process.env.NEXT_PUBLIC_MERCURY_PROJECT_NAME || 'mock-mercury-project';
+const mercuryUrl = process.env.NEXT_PUBLIC_MERCURY_URL || 'https://mercury.testnet.stellar.org';
+const mercuryJwt = process.env.NEXT_PUBLIC_MERCURY_JWT || 'mock-mercury-jwt';
+const nativeContractId = process.env.NEXT_PUBLIC_NATIVE_CONTRACT_ID || 'mock-native-contract-id';
 
 export const rpc = new Server(rpcUrl);
 
@@ -45,15 +48,36 @@ export async function getFundSigner() {
   return basicNodeSigner(await fundKeypairPromise, networkPassphrase);
 }
 
-export const account = new PasskeyKit({ rpcUrl, networkPassphrase, walletWasmHash });
+// Validate required URLs before creating instances
+function validateUrl(url: string, name: string): string {
+  if (!url || url === 'undefined') {
+    throw new Error(`${name} is not properly configured. Please check your environment variables.`);
+  }
+  return url;
+}
+
+// Validate URLs
+const validatedRpcUrl = validateUrl(rpcUrl, 'RPC_URL');
+const validatedLaunchtubeUrl = validateUrl(launchtubeUrl, 'LAUNCHTUBE_URL');
+const validatedMercuryUrl = validateUrl(mercuryUrl, 'MERCURY_URL');
+
+export const account = new PasskeyKit({
+  rpcUrl: validatedRpcUrl,
+  networkPassphrase,
+  walletWasmHash,
+});
+
 export const server = new PasskeyServer({
-  rpcUrl,
-  launchtubeUrl,
+  rpcUrl: validatedRpcUrl,
+  launchtubeUrl: validatedLaunchtubeUrl,
   launchtubeJwt,
   mercuryProjectName,
-  mercuryUrl,
+  mercuryUrl: validatedMercuryUrl,
   mercuryJwt,
 });
 
-export const sac = new SACClient({ rpcUrl, networkPassphrase });
+export const sac = new SACClient({
+  rpcUrl: validatedRpcUrl,
+  networkPassphrase,
+});
 export const native = sac.getSACClient(nativeContractId);

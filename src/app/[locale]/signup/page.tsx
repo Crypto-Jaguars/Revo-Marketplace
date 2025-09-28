@@ -18,7 +18,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
+import { usePasskey } from '@/hooks/usePasskey';
+import { UserRole } from '@/types/waitlist';
+import { getRoleBasedRedirect } from '@/lib/auth-redirects';
 
 const signUpSchema = z.object({
   name: z.string().min(2, {
@@ -35,14 +45,21 @@ const signUpSchema = z.object({
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, {
       message: 'Password must contain uppercase, lowercase and numbers.',
     }),
+  role: z
+    .enum(['consumer', 'farmer', 'investor', 'partner', 'other'])
+    .optional()
+    .default('consumer'),
 });
 
 type SignUpFormValues = z.infer<typeof signUpSchema>;
 
-export default function SignUpPage() {
+export default function SignUpPage({ params }: { params: { locale: string } }) {
   const t = useTranslations('SignUp');
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  const { registerUser, createPasskey, isRegistering, isCreating, error, clearError } =
+    usePasskey();
 
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
@@ -50,24 +67,63 @@ export default function SignUpPage() {
       name: '',
       email: '',
       password: '',
+      role: 'consumer',
     },
   });
 
   async function onSubmit(data: SignUpFormValues) {
     try {
       setIsLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      clearError();
 
-      toast({
-        title: t('successTitle'),
-        description: t('successMessage'),
+      // Paso 1: Registrar usuario en localStorage
+      const userResult = await registerUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        role: data.role,
       });
 
-      router.push('/login');
-    } catch (error) {
+      if (!userResult.success) {
+        toast({
+          title: 'Registration Failed',
+          description: userResult.error || 'Failed to create account',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      // Paso 2: Crear passkey y asociarlo con el usuario
+      const passkeyResult = await createPasskey({
+        name: data.name,
+        email: data.email,
+        role: data.role,
+      });
+
+      if (!passkeyResult.success) {
+        toast({
+          title: 'Passkey Creation Failed',
+          description: passkeyResult.error || 'Failed to create passkey',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      // Éxito completo
       toast({
-        title: t('errorTitle'),
-        description: t('errorMessage'),
+        title: 'Account Created Successfully!',
+        description:
+          'Your account has been created with passkey authentication. Welcome to Revo Marketplace!',
+      });
+
+      // Redirigir basado en el rol del usuario
+      const redirectUrl = getRoleBasedRedirect(data.role, params.locale);
+      router.push(redirectUrl);
+    } catch (error) {
+      console.error('Signup error:', error);
+      toast({
+        title: 'Registration Failed',
+        description: 'An unexpected error occurred. Please try again.',
         variant: 'destructive',
       });
     } finally {
@@ -156,13 +212,60 @@ export default function SignUpPage() {
                 )}
               />
 
+              <FormField
+                control={form.control}
+                name="role"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-500 font-normal">Account Type</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="!border-0 !border-b !border-gray-300 !rounded-none focus:!border-b-2 focus:!border-green-800 !ring-0 !ring-offset-0 !px-0 focus:!ring-0 focus:!ring-offset-0">
+                          <SelectValue placeholder="Select your account type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="consumer">
+                          🛒 Consumer - Purchase fresh products
+                        </SelectItem>
+                        <SelectItem value="farmer">👨‍🌾 Farmer - Sell your products</SelectItem>
+                        <SelectItem value="investor">
+                          💰 Investor - Fund agricultural projects
+                        </SelectItem>
+                        <SelectItem value="partner">🤝 Partner - Business partnerships</SelectItem>
+                        <SelectItem value="other">🔧 Other - Other roles</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <Button
                 type="submit"
                 className="w-full bg-green-800 hover:bg-green-700 rounded-full py-6 text-lg"
-                disabled={isLoading}
+                disabled={isLoading || isRegistering || isCreating}
               >
-                {isLoading ? t('submitting') : t('submit')}
+                {isLoading || isRegistering || isCreating ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    {isRegistering
+                      ? 'Creating Account...'
+                      : isCreating
+                        ? 'Setting up Passkey...'
+                        : 'Processing...'}
+                  </div>
+                ) : (
+                  t('submit')
+                )}
               </Button>
+
+              {/* Mostrar errores del passkey si existen */}
+              {error && (
+                <div className="text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg">
+                  {error}
+                </div>
+              )}
 
               <div className="text-center mt-4">
                 <span className="text-gray-600">{t('alreadyHaveAccount')} </span>
