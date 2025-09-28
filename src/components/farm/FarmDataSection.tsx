@@ -136,12 +136,13 @@ export function FarmDataSection({
       case 'location':
         if (!value.trim()) return 'Location is required';
         break;
-      case 'size':
+      case 'size': {
         if (!value.trim()) return 'Farm size is required';
         const sizeNum = parseFloat(value);
         if (isNaN(sizeNum) || sizeNum <= 0) return 'Please enter a valid size in hectares';
         if (sizeNum > 10000) return 'Size seems unusually large. Please verify.';
         break;
+      }
       case 'cultivationMethod':
         if (!value) return 'Cultivation method is required';
         break;
