@@ -1614,5 +1614,11 @@
         "disabled": "Disabled"
       }
     }
+  },
+  "ContactSection": {
+    "title": "Can't find the product you're looking for?",
+    "description": "Get in touch with us or explore our network of trusted producers",
+    "talkToUs": "Talk to Us",
+    "viewProducers": "View Our Producers"
   }
 }

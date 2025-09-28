@@ -901,6 +901,12 @@
       "subtitle": "Únete a nuestra creciente comunidad de inversores que apoyan la agricultura sostenible y obtienen rendimientos competitivos.",
       "button": "Comienza a Invertir Hoy"
     }
+  },
+  "ContactSection": {
+    "title": "¿No encuentras el producto que buscas?",
+    "description": "Ponte en contacto con nosotros o explora nuestra red de productores de confianza",
+    "talkToUs": "Habla con Nosotros",
+    "viewProducers": "Ver Nuestros Productores"
   }
 }
 
