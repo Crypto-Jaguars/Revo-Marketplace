@@ -637,6 +637,27 @@
     "buyerButton": "Buyer",
     "walletButton": "Connect Wallet"
   },
+  "Auth": {
+    "title": "Welcome Back",
+    "subtitle": "Choose your preferred way to sign in",
+    "passkeyTitle": "Sign in with Passkey",
+    "passkeyDescription": "Fast and secure biometric authentication",
+    "passkeyButton": "Use Passkey",
+    "passkeyAvailable": "Available",
+    "emailTitle": "Email & Password",
+    "emailDescription": "Traditional sign-in method",
+    "emailButton": "Use Email/Password",
+    "walletTitle": "Connect Wallet",
+    "walletDescription": "Sign in with your Stellar wallet",
+    "walletButton": "Connect Wallet",
+    "createPasskey": "Don't have a Passkey yet?",
+    "createPasskeyButton": "Create a Passkey",
+    "securityTitle": "Secure Authentication",
+    "securityDescription": "All authentication methods are secured with industry-standard encryption. Your biometric data never leaves your device.",
+    "deviceNotSupported": "Your device doesn't support Passkeys. Please use email/password or wallet connection.",
+    "signingIn": "Signing in...",
+    "backToHome": "Back to Home"
+  },
   "SignIn": {
     "title": "Log in to Exclusive",
     "subtitle": "Enter your details below",
