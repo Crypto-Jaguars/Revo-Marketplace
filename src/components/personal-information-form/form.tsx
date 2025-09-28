@@ -1,17 +1,25 @@
 import { useState } from 'react';
 
+// Define an interface for the form data
+interface FormData {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+}
+
 export default function Form() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     surname: '',
     email: '',
     phone: ''
   });
 
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -26,7 +34,7 @@ export default function Form() {
     }
   };
 
-  const handleBlur = (field) => {
+  const handleBlur = (field: keyof FormData) => {
     setTouched(prev => ({
       ...prev,
       [field]: true
@@ -35,7 +43,7 @@ export default function Form() {
     validateField(field, formData[field]);
   };
 
-  const validateField = (field, value) => {
+  const validateField = (field: keyof FormData, value: string) => {
     let error = '';
     
     switch (field) {
@@ -55,7 +63,7 @@ export default function Form() {
       case 'phone':
         if (!value.trim()) {
           error = 'Phone is required / Teléfono es requerido';
-        } else if (!/^[\+]?[0-9\s\-\(\)]{10,}$/.test(value)) {
+        } else if (!/^[+]?[0-9\s-()]{10,}$/.test(value)) {
           error = 'Invalid phone format / Formato de teléfono inválido';
         }
         break;
@@ -72,10 +80,10 @@ export default function Form() {
   const handleSubmit = () => {
     
     // Validate all fields
-    const newErrors = {};
+    const newErrors: Partial<Record<keyof FormData, string>> = {};
     let isValid = true;
     
-    Object.keys(formData).forEach(field => {
+    (Object.keys(formData) as Array<keyof FormData>).forEach(field => {
       if (!validateField(field, formData[field])) {
         isValid = false;
       }
@@ -95,7 +103,7 @@ export default function Form() {
     }
   };
 
-  const getInputClassName = (field) => {
+  const getInputClassName = (field: keyof FormData) => {
     const baseClasses = "w-full px-4 py-3 border rounded-lg transition-all duration-200 placeholder-gray-500";
     const focusClasses = "focus:outline-none focus:ring-2 focus:border-transparent";
     
