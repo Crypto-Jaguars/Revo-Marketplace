@@ -32,7 +32,9 @@ export const fundKeypairPromise: Promise<Keypair> = (async () => {
   } catch {
     try {
       await rpc.requestAirdrop(kp.publicKey());
-    } catch {}
+    } catch {
+      // Ignore airdrop failures
+    }
   }
   return kp;
 })();

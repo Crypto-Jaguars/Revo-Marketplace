@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { kit } from '@/wallet/walletKit';
+import { getKit } from '@/wallet/walletKit';
 import { WalletNetwork } from '@creit.tech/stellar-wallets-kit';
 import { signTransaction } from '@stellar/freighter-api';
 
@@ -15,7 +15,7 @@ export const cancelEscrow = async (payload: EscrowPayload) => {
   try {
     const response = await axios.post(`${API_URL}/escrow/cancel-escrow`, payload);
     const { unsignedTransaction } = response.data;
-    const { address } = await kit.getAddress();
+    const { address } = await getKit().getAddress();
     const { signedTxXdr } = await signTransaction(unsignedTransaction, {
       address,
       networkPassphrase: WalletNetwork.TESTNET,
