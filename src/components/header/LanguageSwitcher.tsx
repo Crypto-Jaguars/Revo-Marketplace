@@ -23,7 +23,10 @@ export const LanguageSwitcher = () => {
 
   return (
     <div className="relative" ref={switcherRef}>
-      <button onClick={() => setIsLangOpen(!isLangOpen)} className="md:border border-white border-0  rounded-full p-2">
+      <button
+        onClick={() => setIsLangOpen(!isLangOpen)}
+        className="md:border border-white border-0  rounded-full p-2"
+      >
         <Globe size={24} style={{ color: 'white' }} />
       </button>
       {isLangOpen && (

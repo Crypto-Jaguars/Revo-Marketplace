@@ -2,17 +2,17 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { 
-  Wallet, 
-  Plus, 
-  Trash2, 
-  Star, 
-  Copy, 
+import {
+  Wallet,
+  Plus,
+  Trash2,
+  Star,
+  Copy,
   ExternalLink,
   Shield,
   Zap,
   AlertCircle,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -26,13 +26,13 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 function WalletSettingsPage() {
   const t = useTranslations('Settings.wallet');
   const locale = useLocale();
-  const { 
-    wallet, 
-    updateWalletSettings, 
-    addConnectedWallet, 
-    removeConnectedWallet, 
+  const {
+    wallet,
+    updateWalletSettings,
+    addConnectedWallet,
+    removeConnectedWallet,
     setPrimaryWallet,
-    setLoading 
+    setLoading,
   } = useSettingsStore();
 
   const [showAddWallet, setShowAddWallet] = useState(false);
@@ -125,17 +125,10 @@ function WalletSettingsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {t('title')}
-            </h1>
-            <p className="text-gray-600">
-              {t('description')}
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+            <p className="text-gray-600">{t('description')}</p>
           </div>
-          <Button
-            onClick={handleAddWallet}
-            className="flex items-center gap-2"
-          >
+          <Button onClick={handleAddWallet} className="flex items-center gap-2">
             <Plus className="w-4 h-4" />
             {t('actions.addWallet')}
           </Button>
@@ -163,23 +156,23 @@ function WalletSettingsPage() {
                       <div className="flex items-center gap-3">
                         <div className="text-2xl">{getWalletIcon(connectedWallet.type)}</div>
                         <div>
-                          <h3 className="font-medium text-gray-900">
-                            {connectedWallet.name}
-                          </h3>
+                          <h3 className="font-medium text-gray-900">{connectedWallet.name}</h3>
                           <div className="flex items-center gap-2 mt-1">
-                            <Badge 
-                              variant={connectedWallet.isConnected ? "default" : "secondary"}
+                            <Badge
+                              variant={connectedWallet.isConnected ? 'default' : 'secondary'}
                               className="text-xs"
                             >
-                              {connectedWallet.isConnected ? t('status.connected') : t('status.disconnected')}
+                              {connectedWallet.isConnected
+                                ? t('status.connected')
+                                : t('status.disconnected')}
                             </Badge>
-                            <Badge 
-                              variant="outline" 
+                            <Badge
+                              variant="outline"
                               className={`text-xs ${getWalletTypeColor(connectedWallet.type)}`}
                             >
                               {connectedWallet.type.toUpperCase()}
                             </Badge>
-                                                          {connectedWallet.id === wallet.primaryWallet && (
+                            {connectedWallet.id === wallet.primaryWallet && (
                               <Badge variant="secondary" className="text-xs">
                                 <Star className="w-3 h-3 mr-1" />
                                 {t('status.primary')}
@@ -225,15 +218,11 @@ function WalletSettingsPage() {
                         <p className="text-sm text-gray-600 font-mono break-all">
                           {connectedWallet.address}
                         </p>
-                                                  <p className="text-xs text-gray-500 mt-1">
-                            {t('lastUsed')}: {connectedWallet.lastUsed.toLocaleDateString()}
-                          </p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {t('lastUsed')}: {connectedWallet.lastUsed.toLocaleDateString()}
+                        </p>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="flex items-center gap-1"
-                      >
+                      <Button variant="ghost" size="sm" className="flex items-center gap-1">
                         <ExternalLink className="w-3 h-3" />
                         {t('actions.view')}
                       </Button>
@@ -265,25 +254,19 @@ function WalletSettingsPage() {
                   </div>
                   <Switch
                     checked={wallet.transactionConfirmations}
-                    onCheckedChange={(checked) => 
+                    onCheckedChange={(checked) =>
                       updateWalletSettings({ transactionConfirmations: checked })
                     }
                   />
                 </div>
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t('security.autoConnect')}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {t('security.autoConnectDesc')}
-                    </p>
+                    <p className="font-medium text-gray-900">{t('security.autoConnect')}</p>
+                    <p className="text-sm text-gray-600">{t('security.autoConnectDesc')}</p>
                   </div>
                   <Switch
                     checked={wallet.autoConnect}
-                    onCheckedChange={(checked) => 
-                      updateWalletSettings({ autoConnect: checked })
-                    }
+                    onCheckedChange={(checked) => updateWalletSettings({ autoConnect: checked })}
                   />
                 </div>
               </div>
@@ -300,27 +283,15 @@ function WalletSettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Zap className="w-4 h-4 mr-2" />
                   {t('quickActions.optimizeGas')}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Shield className="w-4 h-4 mr-2" />
                   {t('quickActions.securityCheck')}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <ExternalLink className="w-4 h-4 mr-2" />
                   {t('quickActions.viewOnExplorer')}
                 </Button>
@@ -336,30 +307,22 @@ function WalletSettingsPage() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">
-                    {t('statistics.totalWallets')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('statistics.totalWallets')}</span>
                   <span className="font-semibold">{mockWallets.length}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">
-                    {t('statistics.connectedWallets')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('statistics.connectedWallets')}</span>
                   <span className="font-semibold text-green-600">
-                    {mockWallets.filter(w => w.isConnected).length}
+                    {mockWallets.filter((w) => w.isConnected).length}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">
-                    {t('statistics.totalBalance')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('statistics.totalBalance')}</span>
                   <span className="font-semibold">$2,450.00</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">
-                    {t('statistics.lastTransaction')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('statistics.lastTransaction')}</span>
                   <span className="text-sm">2 hours ago</span>
                 </div>
               </div>
@@ -407,4 +370,4 @@ function WalletSettingsPage() {
   );
 }
 
-export default WithAuthProtect(WalletSettingsPage); 
+export default WithAuthProtect(WalletSettingsPage);

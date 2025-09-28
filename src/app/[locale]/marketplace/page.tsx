@@ -187,8 +187,8 @@ export default function MarketplacePage() {
                 <div className="space-y-8">
                   <div className="bg-white rounded-lg shadow-sm flex items-center justify-center py-12">
                     <div className="text-center text-gray-500">
-                      <p className="text-xl mb-2">No products found</p>
-                      <p>Try adjusting your filters or browse our producers</p>
+                      <p className="text-xl mb-2">{t('empty.title')}</p>
+                      <p>{t('empty.description')}</p>
                     </div>
                   </div>
                   <ContactSection />

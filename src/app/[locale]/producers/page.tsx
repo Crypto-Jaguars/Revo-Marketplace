@@ -19,7 +19,7 @@ const mockProducers = [
     image: '/farm-placeholder.jpg',
     description: 'Sustainable farming practices with over 20 years of experience',
     certifications: ['Organic', 'Fair Trade'],
-    productCount: 25
+    productCount: 25,
   },
   {
     id: '2',
@@ -30,7 +30,7 @@ const mockProducers = [
     image: '/farm-placeholder.jpg',
     description: 'Family-owned farm specializing in premium organic fruits',
     certifications: ['Organic', 'Biodynamic'],
-    productCount: 18
+    productCount: 18,
   },
   {
     id: '3',
@@ -41,26 +41,27 @@ const mockProducers = [
     image: '/farm-placeholder.jpg',
     description: 'Ancient grain varieties and heirloom seeds',
     certifications: ['Non-GMO', 'Heirloom'],
-    productCount: 32
-  }
+    productCount: 32,
+  },
 ];
 
 export default function ProducersPage() {
-  const t = useTranslations();
+  const t = useTranslations('ProducersPage');
 
   return (
     <Bounded>
       <div className="py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Our Producers</h1>
-          <p className="text-gray-300 text-lg">
-            Meet our network of trusted farmers and producers committed to sustainable agriculture
-          </p>
+          <h1 className="text-4xl font-bold text-white mb-4">{t('title')}</h1>
+          <p className="text-gray-300 text-lg">{t('subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {mockProducers.map((producer) => (
-            <Card key={producer.id} className="bg-white/95 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+            <Card
+              key={producer.id}
+              className="bg-white/95 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+            >
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src={producer.image}
@@ -89,9 +90,7 @@ export default function ProducersPage() {
               </CardHeader>
 
               <CardContent className="space-y-4">
-                <p className="text-gray-700 text-sm line-clamp-2">
-                  {producer.description}
-                </p>
+                <p className="text-gray-700 text-sm line-clamp-2">{producer.description}</p>
 
                 <div className="flex flex-wrap gap-2">
                   {producer.specialties.map((specialty) => (
@@ -113,13 +112,10 @@ export default function ProducersPage() {
                 <div className="flex items-center justify-between pt-2">
                   <div className="flex items-center text-gray-600 text-sm">
                     <Users className="w-4 h-4 mr-1" />
-                    {producer.productCount} products
+                    {producer.productCount} {t('products')}
                   </div>
-                  <Button
-                    size="sm"
-                    className="bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    View Profile
+                  <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white">
+                    {t('viewProfile')}
                   </Button>
                 </div>
               </CardContent>
@@ -128,17 +124,10 @@ export default function ProducersPage() {
         </div>
 
         <div className="mt-12 text-center">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            Interested in Joining Our Network?
-          </h2>
-          <p className="text-gray-300 mb-6">
-            We're always looking for passionate farmers and producers to join our community
-          </p>
-          <Button
-            size="lg"
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
-          >
-            Become a Producer
+          <h2 className="text-2xl font-semibold text-white mb-4">{t('joinNetwork.title')}</h2>
+          <p className="text-gray-300 mb-6">{t('joinNetwork.description')}</p>
+          <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8 py-3">
+            {t('joinNetwork.button')}
           </Button>
         </div>
       </div>

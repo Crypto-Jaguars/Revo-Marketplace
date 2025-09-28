@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -29,8 +29,8 @@ export const useFarmerSubscriptionStore = create<
     (set) => ({
       ...initialState,
       setStep: (step) => set({ currentStep: step }),
-      nextStep: () => set((s) => ({ currentStep: (Math.min(3, s.currentStep + 1) as 1 | 2 | 3) })),
-      prevStep: () => set((s) => ({ currentStep: (Math.max(1, s.currentStep - 1) as 1 | 2 | 3) })),
+      nextStep: () => set((s) => ({ currentStep: Math.min(3, s.currentStep + 1) as 1 | 2 | 3 })),
+      prevStep: () => set((s) => ({ currentStep: Math.max(1, s.currentStep - 1) as 1 | 2 | 3 })),
       updateData: (patch) => set((s) => ({ data: { ...s.data, ...patch } })),
       setSaving: (saving) => set({ isSaving: saving }),
       markSaved: () => set({ lastSavedAt: Date.now() }),
@@ -38,9 +38,11 @@ export const useFarmerSubscriptionStore = create<
     }),
     {
       name: 'farmer-subscription',
-      partialize: (state) => ({ currentStep: state.currentStep, data: state.data, lastSavedAt: state.lastSavedAt }),
+      partialize: (state) => ({
+        currentStep: state.currentStep,
+        data: state.data,
+        lastSavedAt: state.lastSavedAt,
+      }),
     }
   )
 );
-
-

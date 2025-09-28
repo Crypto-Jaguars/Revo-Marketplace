@@ -14,33 +14,19 @@ export default function ContactSection({ className = '' }: ContactSectionProps) 
   const t = useTranslations('ContactSection');
   const { language } = useLanguageStore();
 
-  const emailSubject = encodeURIComponent('Product Inquiry - Revolutionary Farmers');
-  const emailBody = encodeURIComponent(
-    'Hello Revolutionary Farmers,\n\n' +
-    'I am looking for a specific product that I couldn\'t find in your marketplace.\n\n' +
-    'Product details:\n' +
-    '- Product name: \n' +
-    '- Category: \n' +
-    '- Quantity needed: \n' +
-    '- Preferred delivery date: \n\n' +
-    'Additional notes:\n\n' +
-    'Please let me know if you can help me find this product or connect me with a suitable producer.\n\n' +
-    'Thank you for your assistance!\n\n' +
-    'Best regards'
-  );
+  const emailSubject = encodeURIComponent(t('emailSubject'));
+  const emailBody = encodeURIComponent(t('emailBody'));
 
   const mailtoLink = `mailto:revolutionaryfarmers@gmail.com?subject=${emailSubject}&body=${emailBody}`;
 
   return (
-    <div className={`bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center shadow-lg border border-green-200 ${className}`}>
+    <div
+      className={`bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center shadow-lg border border-green-200 ${className}`}
+    >
       <div className="max-w-md mx-auto space-y-6">
         <div className="space-y-3">
-          <h3 className="text-2xl font-bold text-gray-900">
-            {t('title')}
-          </h3>
-          <p className="text-gray-600 text-lg">
-            {t('description')}
-          </p>
+          <h3 className="text-2xl font-bold text-gray-900">{t('title')}</h3>
+          <p className="text-gray-600 text-lg">{t('description')}</p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

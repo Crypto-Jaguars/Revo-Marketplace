@@ -337,7 +337,7 @@
     },
     "empty": {
       "title": "No se encontraron productos",
-      "description": "Intenta ajustar tus filtros o criterios de búsqueda para encontrar lo que buscas."
+      "description": "Intenta ajustar tus filtros o explora nuestros productores"
     },
     "pagination": {
       "previous": "Anterior",
@@ -906,7 +906,27 @@
     "title": "¿No encuentras el producto que buscas?",
     "description": "Ponte en contacto con nosotros o explora nuestra red de productores de confianza",
     "talkToUs": "Habla con Nosotros",
-    "viewProducers": "Ver Nuestros Productores"
+    "viewProducers": "Ver Nuestros Productores",
+    "emailSubject": "Consulta de Producto - Revolutionary Farmers",
+    "emailBody": "Hola Revolutionary Farmers,\\n\\nEstoy buscando un producto específico que no pude encontrar en su mercado.\\n\\nDetalles del producto:\\n- Nombre del producto: \\n- Categoría: \\n- Cantidad necesaria: \\n- Fecha de entrega preferida: \\n\\nNotas adicionales:\\n\\nPor favor, háganme saber si pueden ayudarme a encontrar este producto o conectarme con un productor adecuado.\\n\\n¡Gracias por su asistencia!\\n\\nSaludos cordiales"
+  },
+  "ProducersPage": {
+    "title": "Nuestros Productores",
+    "subtitle": "Conoce nuestra red de agricultores y productores de confianza comprometidos con la agricultura sostenible",
+    "rating": "Calificación",
+    "specialties": "Especialidades",
+    "certifications": "Certificaciones",
+    "products": "productos",
+    "viewProfile": "Ver Perfil",
+    "joinNetwork": {
+      "title": "¿Interesado en Unirte a Nuestra Red?",
+      "description": "Siempre estamos buscando agricultores y productores apasionados para unirse a nuestra comunidad",
+      "button": "Convertirse en Productor"
+    },
+    "producerCard": {
+      "lastUsed": "Usado por última vez",
+      "location": "Ubicación"
+    }
   }
 }
 
