@@ -47,49 +47,62 @@ export function ProducerFilters({
   const t = useTranslations('Producers');
   const [localFilters, setLocalFilters] = useState<ProducerFilterValues>(filters);
 
+  // Keep 'all' in local UI state; normalize before emitting to parent
+  const toParentFilters = (f: ProducerFilterValues): ProducerFilterValues => ({
+    ...f,
+    location: f.location === 'all' ? '' : f.location,
+    certification: f.certification === 'all' ? '' : f.certification,
+    farmingMethod: f.farmingMethod === 'all' ? '' : f.farmingMethod,
+  });
+
   // Sync local filters with prop changes
   useEffect(() => {
-    setLocalFilters(filters);
+    setLocalFilters({
+      ...filters,
+      location: filters.location || 'all',
+      certification: filters.certification || 'all',
+      farmingMethod: filters.farmingMethod || 'all',
+    });
   }, [filters]);
 
   const handleSearchChange = (value: string) => {
     const newFilters = { ...localFilters, search: value };
     setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    onFilterChange(toParentFilters(newFilters));
   };
 
   const handleLocationChange = (value: string) => {
-    const newFilters = { ...localFilters, location: value === 'all' ? '' : value };
+    const newFilters = { ...localFilters, location: value };
     setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    onFilterChange(toParentFilters(newFilters));
   };
 
   const handleCertificationChange = (value: string) => {
-    const newFilters = { ...localFilters, certification: value === 'all' ? '' : value };
+    const newFilters = { ...localFilters, certification: value };
     setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    onFilterChange(toParentFilters(newFilters));
   };
 
   const handleFarmingMethodChange = (value: string) => {
-    const newFilters = { ...localFilters, farmingMethod: value === 'all' ? '' : value };
+    const newFilters = { ...localFilters, farmingMethod: value };
     setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    onFilterChange(toParentFilters(newFilters));
   };
 
   const handleDistanceChange = (value: number[]) => {
     const newFilters = { ...localFilters, distance: value[0] };
     setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    onFilterChange(toParentFilters(newFilters));
   };
 
   const handleRatingChange = (value: number[]) => {
     const newFilters = { ...localFilters, rating: value[0] };
     setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    onFilterChange(toParentFilters(newFilters));
   };
 
   const clearFilters = () => {
-    const clearedFilters = {
+    const clearedFiltersLocal = {
       search: '',
       location: 'all',
       certification: 'all',
@@ -97,8 +110,8 @@ export function ProducerFilters({
       distance: 50,
       rating: 0,
     };
-    setLocalFilters(clearedFilters);
-    onFilterChange(clearedFilters);
+    setLocalFilters(clearedFiltersLocal);
+    onFilterChange(toParentFilters(clearedFiltersLocal));
   };
 
   const hasActiveFilters = Object.values(localFilters).some(
@@ -119,6 +132,8 @@ export function ProducerFilters({
               size="sm"
               onClick={clearFilters}
               className={isMobile ? "text-gray-500 hover:text-gray-700" : "text-white hover:text-gray-300"}
+              type="button"
+              aria-label={t('filters.clearAll')}
             >
               <X className="w-4 h-4" />
             </Button>
@@ -130,10 +145,11 @@ export function ProducerFilters({
         {/* Search */}
         {!hideSearch && (
           <div className="space-y-2">
-            <label className={isMobile ? "text-gray-900 text-sm font-medium" : "text-white text-sm font-medium"}>
+            <label htmlFor="producers-search" className={isMobile ? "text-gray-900 text-sm font-medium" : "text-white text-sm font-medium"}>
               {t('filters.search')}
             </label>
             <Input
+              id="producers-search"
               placeholder={t('filters.search')}
               value={localFilters.search}
               onChange={(e) => handleSearchChange(e.target.value)}
@@ -144,12 +160,12 @@ export function ProducerFilters({
 
         {/* Location */}
         <div className="space-y-2">
-          <label className={isMobile ? "text-gray-900 text-sm font-medium flex items-center gap-2" : "text-white text-sm font-medium flex items-center gap-2"}>
+          <label id="location-label" className={isMobile ? "text-gray-900 text-sm font-medium flex items-center gap-2" : "text-white text-sm font-medium flex items-center gap-2"}>
             <MapPin className="w-4 h-4" />
             {t('filters.location')}
           </label>
           <Select value={localFilters.location} onValueChange={handleLocationChange}>
-            <SelectTrigger className={isMobile ? "bg-white border-gray-300 text-gray-900" : "bg-white/10 border-white/20 text-white"}>
+            <SelectTrigger aria-labelledby="location-label" className={isMobile ? "bg-white border-gray-300 text-gray-900" : "bg-white/10 border-white/20 text-white"}>
               <SelectValue placeholder={t('filters.location')} />
             </SelectTrigger>
             <SelectContent>
@@ -165,12 +181,12 @@ export function ProducerFilters({
 
         {/* Certification */}
         <div className="space-y-2">
-          <label className={isMobile ? "text-gray-900 text-sm font-medium flex items-center gap-2" : "text-white text-sm font-medium flex items-center gap-2"}>
+          <label id="certification-label" className={isMobile ? "text-gray-900 text-sm font-medium flex items-center gap-2" : "text-white text-sm font-medium flex items-center gap-2"}>
             <Award className="w-4 h-4" />
             {t('filters.certification')}
           </label>
           <Select value={localFilters.certification} onValueChange={handleCertificationChange}>
-            <SelectTrigger className={isMobile ? "bg-white border-gray-300 text-gray-900" : "bg-white/10 border-white/20 text-white"}>
+            <SelectTrigger aria-labelledby="certification-label" className={isMobile ? "bg-white border-gray-300 text-gray-900" : "bg-white/10 border-white/20 text-white"}>
               <SelectValue placeholder={t('filters.certification')} />
             </SelectTrigger>
             <SelectContent>
@@ -187,12 +203,12 @@ export function ProducerFilters({
 
         {/* Farming Method */}
         <div className="space-y-2">
-          <label className={isMobile ? "text-gray-900 text-sm font-medium flex items-center gap-2" : "text-white text-sm font-medium flex items-center gap-2"}>
+          <label id="method-label" className={isMobile ? "text-gray-900 text-sm font-medium flex items-center gap-2" : "text-white text-sm font-medium flex items-center gap-2"}>
             <Leaf className="w-4 h-4" />
             {t('filters.farmingMethod')}
           </label>
           <Select value={localFilters.farmingMethod} onValueChange={handleFarmingMethodChange}>
-            <SelectTrigger className={isMobile ? "bg-white border-gray-300 text-gray-900" : "bg-white/10 border-white/20 text-white"}>
+            <SelectTrigger aria-labelledby="method-label" className={isMobile ? "bg-white border-gray-300 text-gray-900" : "bg-white/10 border-white/20 text-white"}>
               <SelectValue placeholder={t('filters.farmingMethod')} />
             </SelectTrigger>
             <SelectContent>
@@ -218,6 +234,7 @@ export function ProducerFilters({
             min={1}
             step={1}
             className="w-full"
+            aria-label={t('filters.distance')}
           />
         </div>
 
@@ -233,6 +250,7 @@ export function ProducerFilters({
             min={0}
             step={1}
             className="w-full"
+            aria-label={t('filters.rating')}
           />
         </div>
 
@@ -247,6 +265,8 @@ export function ProducerFilters({
                   <button
                     onClick={() => handleSearchChange('')}
                     className="ml-1 hover:text-green-600"
+                    type="button"
+                    aria-label={t('filters.clearSearch')}
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -258,6 +278,8 @@ export function ProducerFilters({
                   <button
                     onClick={() => handleLocationChange('all')}
                     className="ml-1 hover:text-green-600"
+                    type="button"
+                    aria-label={t('filters.clearLocation')}
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -269,6 +291,8 @@ export function ProducerFilters({
                   <button
                     onClick={() => handleCertificationChange('all')}
                     className="ml-1 hover:text-green-600"
+                    type="button"
+                    aria-label={t('filters.clearCertification')}
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -280,6 +304,8 @@ export function ProducerFilters({
                   <button
                     onClick={() => handleFarmingMethodChange('all')}
                     className="ml-1 hover:text-green-600"
+                    type="button"
+                    aria-label={t('filters.clearMethod')}
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -291,6 +317,8 @@ export function ProducerFilters({
                   <button
                     onClick={() => handleDistanceChange([50])}
                     className="ml-1 hover:text-green-600"
+                    type="button"
+                    aria-label={t('filters.clearDistance')}
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -302,6 +330,8 @@ export function ProducerFilters({
                   <button
                     onClick={() => handleRatingChange([0])}
                     className="ml-1 hover:text-green-600"
+                    type="button"
+                    aria-label={t('filters.clearRating')}
                   >
                     <X className="w-3 h-3" />
                   </button>
