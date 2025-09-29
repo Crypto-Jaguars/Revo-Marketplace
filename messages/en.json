@@ -1614,5 +1614,9 @@
         "disabled": "Disabled"
       }
     }
+  },
+  "Producers": {
+    "loadMore": "Load more producers",
+    "loadMoreAria": "Load more producers"
   }
 }
