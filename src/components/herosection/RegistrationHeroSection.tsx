@@ -118,21 +118,15 @@ export default function RegistrationHeroSection() {
         >
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 bg-green-400 rounded-full flex-shrink-0" />
-            <span className="text-sm font-medium whitespace-nowrap">
-              {heroContent.trustIndicator1}
-            </span>
+            <span className="text-sm font-medium whitespace-nowrap">{t('trustIndicator1')} </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 bg-green-400 rounded-full flex-shrink-0" />
-            <span className="text-sm font-medium whitespace-nowrap">
-              {heroContent.trustIndicator2}
-            </span>
+            <span className="text-sm font-medium whitespace-nowrap">{t('trustIndicator2')}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 bg-green-400 rounded-full flex-shrink-0" />
-            <span className="text-sm font-medium whitespace-nowrap">
-              {heroContent.trustIndicator3}
-            </span>
+            <span className="text-sm font-medium whitespace-nowrap">{t('trustIndicator3')}</span>
           </div>
         </motion.div>
       </motion.div>
