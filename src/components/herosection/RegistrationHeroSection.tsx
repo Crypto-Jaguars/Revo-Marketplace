@@ -3,11 +3,11 @@
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-// import { useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useLanguageStore } from '@/store';
 
 export default function RegistrationHeroSection() {
-  // const t = useTranslations('RegistrationHero');
+  const t = useTranslations('RegistrationHero');
   const { language } = useLanguageStore();
 
   // Content based on your requirements

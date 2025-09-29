@@ -41,7 +41,7 @@ export default function HeroSectionNew() {
 
   return (
     <section className="w-full min-h-screen flex flex-col overflow-hidden">
-      <main className="flex-grow flex flex-col lg:flex-row items-center justify-center text-center px-4 pt-28 md:px-14 lg:pt-20 gap-8 lg:gap-12 bg-gradient-to-b from-[#D8E8DE] via-[#B8D8C8] to-[#98C8B8]">
+      <div className="flex-grow flex flex-col lg:flex-row items-center justify-center text-center px-4 pt-28 md:px-14 lg:pt-20 gap-8 lg:gap-12 bg-gradient-to-b from-[#D8E8DE] via-[#B8D8C8] to-[#98C8B8]">
         <article className="max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -124,10 +124,10 @@ export default function HeroSectionNew() {
             ))}
           </div>
         </motion.div>
-      </main>
+      </div>
 
       {/* Buttons Section */}
-      <main className="flex justify-center items-center py-8 sm:py-12 bg-gradient-to-b from-[#98C8B8] to-[#81B8A2]">
+      <div className="flex justify-center items-center py-8 sm:py-12 bg-gradient-to-b from-[#98C8B8] to-[#81B8A2]">
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-4xl px-4 sm:px-6 justify-center">
           <Button
             asChild
@@ -148,7 +148,7 @@ export default function HeroSectionNew() {
             <Link href={`/${language}/invest`}>{tButton('investNow')}</Link>
           </Button>
         </div>
-      </main>
+      </div>
 
       {/* Mobile scroll indicator */}
       <div className="lg:hidden flex justify-center items-center py-2 bg-gradient-to-b from-[#81B8A2] to-[#6BA892]">
