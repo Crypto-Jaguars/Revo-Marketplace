@@ -40,14 +40,14 @@ const BenefitsGrid = () => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: 'url(/images/crops-collage.png)',
           opacity: 0.06,
         }}
       />
-      
+
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="text-center mb-12">
@@ -70,10 +70,13 @@ const BenefitsGrid = () => {
                   perspective: '1000px',
                 }}
               >
-                <div className="relative p-8 transition-transform duration-500 group-hover:rotate-y-2 group-hover:rotate-x-2">
+                <div
+                  className="relative p-8 transition-transform duration-500 group-hover:-translate-y-1 group-hover:[transform:rotateX(6deg)_rotateY(6deg)]"
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
                   {/* Gradient Background */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${benefit.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-                  
+
                   {/* Icon Container */}
                   <div className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${benefit.gradient} mb-6 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6`}>
                     <Icon className="w-10 h-10 text-white" strokeWidth={2.5} />
