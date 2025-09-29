@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -46,6 +46,11 @@ export function ProducerFilters({
 }: ProducerFiltersProps) {
   const t = useTranslations('Producers');
   const [localFilters, setLocalFilters] = useState<ProducerFilterValues>(filters);
+
+  // Sync local filters with prop changes
+  useEffect(() => {
+    setLocalFilters(filters);
+  }, [filters]);
 
   const handleSearchChange = (value: string) => {
     const newFilters = { ...localFilters, search: value };
