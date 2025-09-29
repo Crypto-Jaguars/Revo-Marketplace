@@ -189,10 +189,11 @@
   },
 
   "cta": {
-      "ready": "¿Listo para Comenzar?",
-      "startSelling": "Empieza a Vender",
-      "exploreProducts": "Explorar Productos"
-    },
+    "ready": "¿Listo para Comenzar?",
+    "startSelling": "Empieza a Vender",
+    "exploreProducts": "Explorar Productos",
+    "joinWaitlist": "Unirse a la Lista de Espera"
+  },
 
   "FarmerSubscription": {
     "ctaLabel": "Empezar a Vender",
@@ -587,7 +588,7 @@
           "title": "Precipitación",
           "unit": "mm"
         },
-        "growingSeason": {  
+        "growingSeason": {
           "title": "Temporada de Crecimiento",
           "unit": "días"
         }
@@ -903,4 +904,3 @@
     }
   }
 }
-
