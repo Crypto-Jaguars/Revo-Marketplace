@@ -901,6 +901,10 @@
       "subtitle": "Únete a nuestra creciente comunidad de inversores que apoyan la agricultura sostenible y obtienen rendimientos competitivos.",
       "button": "Comienza a Invertir Hoy"
     }
+  },
+  "Producers": {
+    "loadMore": "Cargar más productores",
+    "loadMoreAria": "Cargar más productores"
   }
 }
 
