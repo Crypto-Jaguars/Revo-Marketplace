@@ -10,7 +10,7 @@ import { InventoryMetrics } from '@/components/inventory/InventoryMetrics';
 import { ProductList } from '@/components/inventory/ProductList';
 import { StockMovements } from '@/components/inventory/StockMovements';
 import { InventoryAdjustments } from '@/components/inventory/InventoryAdjustments';
-import  {BulkOperations} from '@/components/inventory/BulkOperations'
+import { BulkOperations } from '@/components/inventory/BulkOperations';
 import {
   Package,
   TrendingUp,

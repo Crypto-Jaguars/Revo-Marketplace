@@ -26,6 +26,10 @@ const Footer = () => {
   const params = useParams();
   const locale = params.locale as string;
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+  // Check if we're on the waitlist page
+  const isWaitlistPage = pathname?.includes('/waitlist');
 
   const emailSubject = t('emailSubject');
   const emailBody = t('emailBody');
@@ -73,6 +77,28 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-primary_green h-auto w-full overflow-hidden">
+      {/* Waitlist CTA Section - Only show if not on waitlist page */}
+      {!isWaitlistPage && (
+        <div className="bg-revolutionary_green/10 border-t border-revolutionary_green/20">
+          <div className="py-8 px-10 md:px-40">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-6 h-6 text-revolutionary_green" />
+                <div>
+                  <h3 className="text-white font-semibold text-lg">{t('waitlistCta.title')}</h3>
+                  <p className="text-white/80 text-sm">{t('waitlistCta.subtitle')}</p>
+                </div>
+              </div>
+              <Button
+                asChild
+                className="bg-revolutionary_green hover:bg-revolutionary_green/90 text-white"
+              >
+                <Link href={`/${locale}/waitlist`}>{t('waitlistCta.button')}</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="font-bold px-4 sm:px-8 md:px-40">
         <div

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { ProductGrid } from '@/components/products/ProductGrid';
+import dynamic from 'next/dynamic';
 import { productsMock } from '@/mocks/products';
 import Bounded from '@/components/Bounded';
 import { useTranslations } from 'next-intl';
@@ -12,9 +12,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ProductFilters } from '@/components/products/ProductFilters';
 import { calculateDiscountedPrice } from '@/constants/helpers/CalculateDiscountedPrice';
 import { useSearchStore } from '@/store';
+import type { ProductFilters as ProductFiltersType } from '@/components/products/ProductFilters';
+import ContactSection from '@/components/marketplace/ContactSection';
+
+// Dynamic imports for better performance
+const ProductGrid = dynamic(() => import('@/components/products/ProductGrid').then(mod => ({ default: mod.ProductGrid })), {
+  loading: () => <div className="animate-pulse h-96 bg-gray-200 rounded-lg" />
+});
+
+const ProductFilters = dynamic(() => import('@/components/products/ProductFilters').then(mod => ({ default: mod.ProductFilters })), {
+  loading: () => <div className="animate-pulse h-64 bg-gray-200 rounded-lg" />
+});
 
 export default function MarketplacePage() {
   const t = useTranslations('Products');
@@ -34,7 +44,7 @@ export default function MarketplacePage() {
     };
   }, []);
 
-  const [filters, setFilters] = useState<ProductFilters>({
+  const [filters, setFilters] = useState<ProductFiltersType>({
     search: searchTerm,
     category: '',
     farmingMethod: '',
@@ -105,7 +115,7 @@ export default function MarketplacePage() {
     []
   );
 
-  const handleFilterChange = useCallback(async (newFilters: Partial<ProductFilters>) => {
+  const handleFilterChange = useCallback(async (newFilters: Partial<ProductFiltersType>) => {
     setIsFilterLoading(true);
     setFilters((prev) => ({ ...prev, ...newFilters }));
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -183,11 +193,14 @@ export default function MarketplacePage() {
 
             <div className="flex-grow">
               {sortedProducts.length === 0 ? (
-                <div className="bg-white rounded-lg shadow-sm h-full flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <p className="text-xl mb-2">No products found</p>
-                    <p>Try adjusting your filters</p>
+                <div className="space-y-8">
+                  <div className="bg-white rounded-lg shadow-sm flex items-center justify-center py-12">
+                    <div className="text-center text-gray-500">
+                      <p className="text-xl mb-2">{t('empty.title')}</p>
+                      <p>{t('empty.description')}</p>
+                    </div>
                   </div>
+                  <ContactSection />
                 </div>
               ) : (
                 <ProductGrid

@@ -1,38 +1,46 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
-import { Button } from "@/components/ui/button"
-import { Bell, Globe, DollarSign, Lock } from "lucide-react"
-import { toast } from "sonner"
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
+import { Bell, Globe, DollarSign, Lock } from 'lucide-react';
+import { toast } from 'sonner';
 
 export function ProfileSettings() {
   const [settings, setSettings] = useState({
-    language: "en",
-    currency: "USD",
+    language: 'en',
+    currency: 'USD',
     emailNotifications: true,
     smsNotifications: false,
     darkMode: false,
     privacyPublicProfile: true,
-  })
+  });
 
   const handleSelectChange = (id: string, value: string) => {
-    setSettings((prev) => ({ ...prev, [id]: value }))
-    toast.success(`${id.replace(/([A-Z])/g, " $1").toLowerCase()} updated to ${value}!`)
-  }
+    setSettings((prev) => ({ ...prev, [id]: value }));
+    toast.success(`${id.replace(/([A-Z])/g, ' $1').toLowerCase()} updated to ${value}!`);
+  };
 
   const handleSwitchChange = (id: string, checked: boolean) => {
-    setSettings((prev) => ({ ...prev, [id]: checked }))
-    toast.success(`${id.replace(/([A-Z])/g, " $1").toLowerCase()} ${checked ? "enabled" : "disabled"}!`)
-  }
+    setSettings((prev) => ({ ...prev, [id]: checked }));
+    toast.success(
+      `${id.replace(/([A-Z])/g, ' $1').toLowerCase()} ${checked ? 'enabled' : 'disabled'}!`
+    );
+  };
 
   const handleSaveSettings = () => {
-    console.log("Settings saved:", settings)
-    toast.success("All settings saved successfully!")
-  }
+    console.log('Settings saved:', settings);
+    toast.success('All settings saved successfully!');
+  };
 
   return (
     <div className="space-y-6">
@@ -40,7 +48,9 @@ export function ProfileSettings() {
       <Card>
         <CardHeader>
           <CardTitle>General Preferences</CardTitle>
-          <CardDescription>Configure your language, currency, and display settings.</CardDescription>
+          <CardDescription>
+            Configure your language, currency, and display settings.
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -48,7 +58,10 @@ export function ProfileSettings() {
               <Label htmlFor="language" className="flex items-center gap-2 mb-2">
                 <Globe className="h-4 w-4" /> Language
               </Label>
-              <Select value={settings.language} onValueChange={(value) => handleSelectChange("language", value)}>
+              <Select
+                value={settings.language}
+                onValueChange={(value) => handleSelectChange('language', value)}
+              >
                 <SelectTrigger id="language">
                   <SelectValue placeholder="Select language" />
                 </SelectTrigger>
@@ -64,7 +77,10 @@ export function ProfileSettings() {
               <Label htmlFor="currency" className="flex items-center gap-2 mb-2">
                 <DollarSign className="h-4 w-4" /> Preferred Currency
               </Label>
-              <Select value={settings.currency} onValueChange={(value) => handleSelectChange("currency", value)}>
+              <Select
+                value={settings.currency}
+                onValueChange={(value) => handleSelectChange('currency', value)}
+              >
                 <SelectTrigger id="currency">
                   <SelectValue placeholder="Select currency" />
                 </SelectTrigger>
@@ -84,7 +100,7 @@ export function ProfileSettings() {
             <Switch
               id="darkMode"
               checked={settings.darkMode}
-              onCheckedChange={(checked) => handleSwitchChange("darkMode", checked)}
+              onCheckedChange={(checked) => handleSwitchChange('darkMode', checked)}
             />
           </div>
         </CardContent>
@@ -104,7 +120,7 @@ export function ProfileSettings() {
             <Switch
               id="emailNotifications"
               checked={settings.emailNotifications}
-              onCheckedChange={(checked) => handleSwitchChange("emailNotifications", checked)}
+              onCheckedChange={(checked) => handleSwitchChange('emailNotifications', checked)}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -114,7 +130,7 @@ export function ProfileSettings() {
             <Switch
               id="smsNotifications"
               checked={settings.smsNotifications}
-              onCheckedChange={(checked) => handleSwitchChange("smsNotifications", checked)}
+              onCheckedChange={(checked) => handleSwitchChange('smsNotifications', checked)}
             />
           </div>
         </CardContent>
@@ -134,7 +150,7 @@ export function ProfileSettings() {
             <Switch
               id="privacyPublicProfile"
               checked={settings.privacyPublicProfile}
-              onCheckedChange={(checked) => handleSwitchChange("privacyPublicProfile", checked)}
+              onCheckedChange={(checked) => handleSwitchChange('privacyPublicProfile', checked)}
             />
           </div>
         </CardContent>
@@ -144,5 +160,5 @@ export function ProfileSettings() {
         Save All Settings
       </Button>
     </div>
-  )
+  );
 }

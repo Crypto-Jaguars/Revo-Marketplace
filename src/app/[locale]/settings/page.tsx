@@ -3,17 +3,17 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
-import { 
-  Wallet, 
-  Bell, 
-  Shield, 
-  Globe, 
-  User, 
+import {
+  Wallet,
+  Bell,
+  Shield,
+  Globe,
+  User,
   Settings as SettingsIcon,
   ChevronRight,
   Search,
   Save,
-  RotateCcw
+  RotateCcw,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -99,15 +99,16 @@ function SettingsPage() {
     },
   ];
 
-  const filteredSections = settingsSections.filter(section =>
-    section.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    section.description.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredSections = settingsSections.filter(
+    (section) =>
+      section.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      section.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleQuickSave = async () => {
     setLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
   };
 
@@ -115,7 +116,7 @@ function SettingsPage() {
     if (confirm(t('actions.resetConfirm'))) {
       setLoading(true);
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setLoading(false);
     }
   };
@@ -128,12 +129,8 @@ function SettingsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {t('title')}
-            </h1>
-            <p className="text-gray-600">
-              {t('description')}
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+            <p className="text-gray-600">{t('description')}</p>
           </div>
           <div className="flex items-center gap-3">
             <Button
@@ -144,10 +141,7 @@ function SettingsPage() {
               <RotateCcw className="w-4 h-4" />
               {t('actions.reset')}
             </Button>
-            <Button
-              onClick={handleQuickSave}
-              className="flex items-center gap-2"
-            >
+            <Button onClick={handleQuickSave} className="flex items-center gap-2">
               <Save className="w-4 h-4" />
               {t('actions.save')}
             </Button>
@@ -179,12 +173,8 @@ function SettingsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div>
-                <p className="text-sm font-medium text-gray-700">
-                  {t('quickSettings.theme')}
-                </p>
-                <p className="text-xs text-gray-500 capitalize">
-                  {preferences.theme}
-                </p>
+                <p className="text-sm font-medium text-gray-700">{t('quickSettings.theme')}</p>
+                <p className="text-xs text-gray-500 capitalize">{preferences.theme}</p>
               </div>
               <Switch
                 checked={preferences.theme === 'dark'}
@@ -194,18 +184,12 @@ function SettingsPage() {
             </div>
             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div>
-                <p className="text-sm font-medium text-gray-700">
-                  {t('quickSettings.autoSave')}
-                </p>
+                <p className="text-sm font-medium text-gray-700">{t('quickSettings.autoSave')}</p>
                 <p className="text-xs text-gray-500">
                   {preferences.autoSave ? t('quickSettings.enabled') : t('quickSettings.disabled')}
                 </p>
               </div>
-              <Switch
-                checked={preferences.autoSave}
-                onCheckedChange={() => {}}
-                className="ml-2"
-              />
+              <Switch checked={preferences.autoSave} onCheckedChange={() => {}} className="ml-2" />
             </div>
             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div>
@@ -213,7 +197,9 @@ function SettingsPage() {
                   {t('quickSettings.compactMode')}
                 </p>
                 <p className="text-xs text-gray-500">
-                  {preferences.compactMode ? t('quickSettings.enabled') : t('quickSettings.disabled')}
+                  {preferences.compactMode
+                    ? t('quickSettings.enabled')
+                    : t('quickSettings.disabled')}
                 </p>
               </div>
               <Switch
@@ -228,7 +214,9 @@ function SettingsPage() {
                   {t('quickSettings.searchHistory')}
                 </p>
                 <p className="text-xs text-gray-500">
-                  {preferences.searchHistory ? t('quickSettings.enabled') : t('quickSettings.disabled')}
+                  {preferences.searchHistory
+                    ? t('quickSettings.enabled')
+                    : t('quickSettings.disabled')}
                 </p>
               </div>
               <Switch
@@ -246,11 +234,7 @@ function SettingsPage() {
         {filteredSections.map((section) => {
           const Icon = section.icon;
           return (
-            <Link
-              key={section.id}
-              href={section.href}
-              className="group block"
-            >
+            <Link key={section.id} href={section.href} className="group block">
               <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/20 group-hover:scale-[1.02]">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
@@ -273,11 +257,11 @@ function SettingsPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600 mb-3">
-                    {section.description}
-                  </p>
+                  <p className="text-sm text-gray-600 mb-3">{section.description}</p>
                   <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span>{section.settingsCount} {t('settingsCount')}</span>
+                    <span>
+                      {section.settingsCount} {t('settingsCount')}
+                    </span>
                     <span className="group-hover:text-primary transition-colors">
                       {t('actions.configure')}
                     </span>
@@ -299,9 +283,7 @@ function SettingsPage() {
             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-gray-700">
-                  {t('recentActivity.walletConnected')}
-                </span>
+                <span className="text-sm text-gray-700">{t('recentActivity.walletConnected')}</span>
               </div>
               <span className="text-xs text-gray-500">2 hours ago</span>
             </div>
@@ -317,9 +299,7 @@ function SettingsPage() {
             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                <span className="text-sm text-gray-700">
-                  {t('recentActivity.privacyChanged')}
-                </span>
+                <span className="text-sm text-gray-700">{t('recentActivity.privacyChanged')}</span>
               </div>
               <span className="text-xs text-gray-500">3 days ago</span>
             </div>
@@ -330,4 +310,4 @@ function SettingsPage() {
   );
 }
 
-export default WithAuthProtect(SettingsPage); 
+export default WithAuthProtect(SettingsPage);

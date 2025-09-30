@@ -2,26 +2,32 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { 
-  Shield, 
-  Eye, 
-  EyeOff, 
-  Users, 
-  UserCheck, 
+import {
+  Shield,
+  Eye,
+  EyeOff,
+  Users,
+  UserCheck,
   Lock,
   Download,
   Trash2,
   AlertTriangle,
   CheckCircle,
   Info,
-  Settings
+  Settings,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useSettingsStore } from '@/store';
 import WithAuthProtect from '@/constants/helpers/WithAuth';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -29,11 +35,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 function PrivacySettingsPage() {
   const t = useTranslations('Settings.privacy');
   const locale = useLocale();
-  const { 
-    privacy, 
-    updatePrivacySettings,
-    setLoading 
-  } = useSettingsStore();
+  const { privacy, updatePrivacySettings, setLoading } = useSettingsStore();
 
   const breadcrumbItems = [
     { label: t('breadcrumb.home'), href: '/' },
@@ -87,14 +89,14 @@ function PrivacySettingsPage() {
   const handleSaveSettings = async () => {
     setLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
   };
 
   const handleDownloadData = async () => {
     setLoading(true);
     // Simulate data export
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setLoading(false);
     // In a real app, this would trigger a download
   };
@@ -103,7 +105,7 @@ function PrivacySettingsPage() {
     if (confirm(t('actions.deleteAccountConfirm'))) {
       setLoading(true);
       // Simulate account deletion
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       setLoading(false);
     }
   };
@@ -116,17 +118,10 @@ function PrivacySettingsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {t('title')}
-            </h1>
-            <p className="text-gray-600">
-              {t('description')}
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+            <p className="text-gray-600">{t('description')}</p>
           </div>
-          <Button
-            onClick={handleSaveSettings}
-            className="flex items-center gap-2"
-          >
+          <Button onClick={handleSaveSettings} className="flex items-center gap-2">
             <Settings className="w-4 h-4" />
             {t('actions.save')}
           </Button>
@@ -148,17 +143,15 @@ function PrivacySettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t('profileVisibility.setting')}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {t('profileVisibility.description')}
-                    </p>
+                    <p className="font-medium text-gray-900">{t('profileVisibility.setting')}</p>
+                    <p className="text-sm text-gray-600">{t('profileVisibility.description')}</p>
                   </div>
                   <Select
                     value={privacy.profileVisibility}
-                    onValueChange={(value) => 
-                      updatePrivacySettings({ profileVisibility: value as 'public' | 'private' | 'friends' })
+                    onValueChange={(value) =>
+                      updatePrivacySettings({
+                        profileVisibility: value as 'public' | 'private' | 'friends',
+                      })
                     }
                   >
                     <SelectTrigger className="w-48">
@@ -237,17 +230,13 @@ function PrivacySettingsPage() {
                       <div className="flex items-center gap-3">
                         <Icon className="w-5 h-5 text-gray-500" />
                         <div>
-                          <p className="font-medium text-gray-900">
-                            {option.label}
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            {option.description}
-                          </p>
+                          <p className="font-medium text-gray-900">{option.label}</p>
+                          <p className="text-sm text-gray-600">{option.description}</p>
                         </div>
                       </div>
                       <Switch
                         checked={privacy[option.id as keyof typeof privacy] as boolean}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           updatePrivacySettings({ [option.id]: checked })
                         }
                       />
@@ -291,11 +280,7 @@ function PrivacySettingsPage() {
                     <Download className="w-4 h-4" />
                     {t('dataManagement.downloadData')}
                   </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {}}
-                    className="flex items-center gap-2"
-                  >
+                  <Button variant="outline" onClick={() => {}} className="flex items-center gap-2">
                     <Trash2 className="w-4 h-4" />
                     {t('dataManagement.deleteData')}
                   </Button>
@@ -321,38 +306,28 @@ function PrivacySettingsPage() {
                   <span className="text-sm text-gray-600">
                     {t('privacyStatus.profileVisibility')}
                   </span>
-                  <Badge 
-                    variant={privacy.profileVisibility === 'private' ? "default" : "secondary"}
+                  <Badge
+                    variant={privacy.profileVisibility === 'private' ? 'default' : 'secondary'}
                     className="capitalize"
                   >
                     {privacy.profileVisibility}
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('privacyStatus.dataSharing')}
-                  </span>
-                  <Badge 
-                    variant={privacy.dataSharing ? "destructive" : "default"}
-                  >
+                  <span className="text-sm text-gray-600">{t('privacyStatus.dataSharing')}</span>
+                  <Badge variant={privacy.dataSharing ? 'destructive' : 'default'}>
                     {privacy.dataSharing ? t('status.enabled') : t('status.disabled')}
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('privacyStatus.analytics')}
-                  </span>
-                  <Badge 
-                    variant={privacy.allowAnalytics ? "secondary" : "default"}
-                  >
+                  <span className="text-sm text-gray-600">{t('privacyStatus.analytics')}</span>
+                  <Badge variant={privacy.allowAnalytics ? 'secondary' : 'default'}>
                     {privacy.allowAnalytics ? t('status.enabled') : t('status.disabled')}
                   </Badge>
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('privacyStatus.lastUpdated')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('privacyStatus.lastUpdated')}</span>
                   <span className="text-sm">2 days ago</span>
                 </div>
               </div>
@@ -421,9 +396,7 @@ function PrivacySettingsPage() {
                   <Trash2 className="w-4 h-4" />
                   {t('accountActions.deleteAccount')}
                 </Button>
-                <p className="text-xs text-gray-500 text-center">
-                  {t('accountActions.warning')}
-                </p>
+                <p className="text-xs text-gray-500 text-center">{t('accountActions.warning')}</p>
               </div>
             </CardContent>
           </Card>
@@ -433,4 +406,4 @@ function PrivacySettingsPage() {
   );
 }
 
-export default WithAuthProtect(PrivacySettingsPage); 
+export default WithAuthProtect(PrivacySettingsPage);

@@ -6,10 +6,7 @@ export const basicInfoSchema = z.object({
     .min(2, 'Name must be at least 2 characters')
     .max(100, 'Name must be at most 100 characters'),
   email: z.string().email('Invalid email address'),
-  phone: z
-    .string()
-    .min(7, 'Phone number seems too short')
-    .max(20, 'Phone number seems too long'),
+  phone: z.string().min(7, 'Phone number seems too short').max(20, 'Phone number seems too long'),
   farmName: z
     .string()
     .min(2, 'Farm name must be at least 2 characters')
@@ -48,5 +45,3 @@ export const farmerSubscriptionSchema = basicInfoSchema
   .and(accountSetupSchema);
 
 export type FarmerSubscriptionData = z.infer<typeof farmerSubscriptionSchema>;
-
-
