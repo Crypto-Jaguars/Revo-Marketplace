@@ -42,6 +42,31 @@
       }
     }
   },
+  "farmerProfile": {
+    "personalInfo": {
+      "title": "Personal Information",
+      "name": "Name",
+      "surname": "Surname", 
+      "email": "Email",
+      "phone": "Phone",
+      "namePlaceholder": "Enter your first name",
+      "surnamePlaceholder": "Enter your last name",
+      "emailPlaceholder": "Enter your email address",
+      "phonePlaceholder": "Enter your phone number",
+      "save": "Save Personal Information",
+      "saving": "Saving Personal Information...",
+      "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must be at most 50 characters",
+        "surnameMin": "Surname must be at least 2 characters",
+        "surnameMax": "Surname must be at most 50 characters",
+        "emailInvalid": "Invalid email address",
+        "phoneMin": "Phone number seems too short",
+        "phoneMax": "Phone number seems too long",
+        "phoneFormat": "Invalid phone number format"
+      }
+    }
+  },
   "Waitlist": {
     "title": "Join the Waitlist",
     "subtitle": "Be the first to know when we launch and get exclusive early access benefits.",
@@ -190,7 +215,8 @@
   "cta": {
     "ready": "Ready to Get Started?",
     "startSelling": "Start Selling",
-    "exploreProducts": "Explore Products"
+    "exploreProducts": "Explore Products",
+    "joinWaitlist" : "Join Waitlist"
   },
 
   "FarmerSubscription": {
@@ -1009,7 +1035,6 @@
     "deliveryPending": "Your order will be delivered soon.",
     "estimated": "Estimated: {date}",
     "pending": "Pending",
-    "processing": "Processing",
     "completed": "Completed",
     "cancelled": "Cancelled"
   },
@@ -1110,6 +1135,60 @@
   "FAQ": {
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to common questions about Revolutionary Farmers, our platform, and how we're transforming agriculture through blockchain technology."
+  },
+  "JoinFarmer": {
+    "title": "Join Revolutionary Farmers",
+    "subtitle": "Become part of the future of agriculture. Connect directly with consumers and grow your business.",
+    "benefits": {
+      "directSales": {
+        "title": "Direct Sales",
+        "description": "Sell directly to consumers without intermediaries"
+      },
+      "growingCommunity": {
+        "title": "Growing Community",
+        "description": "Join a network of sustainable farmers"
+      },
+      "securePayments": {
+        "title": "Secure Payments",
+        "description": "Guaranteed payments through blockchain technology"
+      },
+      "easyManagement": {
+        "title": "Easy Management",
+        "description": "Simple tools to manage your listings and orders"
+      }
+    },
+    "application": {
+      "title": "Farmer Application",
+      "subtitle": "Fill out this form to start your journey with Revolutionary Farmers",
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "farmName": "Farm Name",
+        "farmAddress": "Farm Address",
+        "farmSize": "Farm Size (acres)",
+        "farmingMethod": "Farming Method",
+        "mainCrops": "Main Crops",
+        "description": "Tell us about your farm"
+      },
+      "placeholders": {
+        "farmingMethod": "e.g., Organic, Conventional, Sustainable",
+        "mainCrops": "e.g., Tomatoes, Lettuce, Carrots",
+        "description": "Share your farming philosophy, experience, and what makes your farm special..."
+      },
+      "terms": {
+        "agree": "I agree to the",
+        "termsOfService": "Terms of Service",
+        "and": "and",
+        "privacyPolicy": "Privacy Policy"
+      },
+      "submit": "Submit Application",
+      "submitting": "Submitting Application...",
+      "success": "Application submitted successfully! We will contact you soon.",
+      "error": "Error submitting application. Please try again.",
+      "termsError": "Please accept the terms and conditions"
+    }
   },
   "Settings": {
     "title": "Settings",
@@ -1640,5 +1719,8 @@
       "lastUsed": "Last used",
       "location": "Location"
     }
+  "Producers": {
+    "loadMore": "Load more producers",
+    "loadMoreAria": "Load more producers"
   }
 }

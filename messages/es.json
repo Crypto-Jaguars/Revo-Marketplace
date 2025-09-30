@@ -42,6 +42,31 @@
       }
     }
   },
+  "farmerProfile": {
+    "personalInfo": {
+      "title": "Información Personal",
+      "name": "Nombre",
+      "surname": "Apellido",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "namePlaceholder": "Ingresa tu nombre",
+      "surnamePlaceholder": "Ingresa tu apellido",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "phonePlaceholder": "Ingresa tu número de teléfono",
+      "save": "Guardar Información Personal",
+      "saving": "Guardando Información Personal...",
+      "validation": {
+        "nameMin": "El nombre debe tener al menos 2 caracteres",
+        "nameMax": "El nombre debe tener máximo 50 caracteres",
+        "surnameMin": "El apellido debe tener al menos 2 caracteres",
+        "surnameMax": "El apellido debe tener máximo 50 caracteres",
+        "emailInvalid": "Dirección de correo electrónico inválida",
+        "phoneMin": "El número de teléfono parece muy corto",
+        "phoneMax": "El número de teléfono parece muy largo",
+        "phoneFormat": "Formato de número de teléfono inválido"
+      }
+    }
+  },
   "Waitlist": {
     "title": "Únete a la Lista de Espera",
     "subtitle": "Sé el primero en saber cuando lancemos y obtén beneficios exclusivos de acceso anticipado.",
@@ -189,10 +214,11 @@
   },
 
   "cta": {
-      "ready": "¿Listo para Comenzar?",
-      "startSelling": "Empieza a Vender",
-      "exploreProducts": "Explorar Productos"
-    },
+    "ready": "¿Listo para Comenzar?",
+    "startSelling": "Empieza a Vender",
+    "exploreProducts": "Explorar Productos",
+    "joinWaitlist": "Unirse a la Lista de Espera"
+  },
 
   "FarmerSubscription": {
     "ctaLabel": "Empezar a Vender",
@@ -587,7 +613,7 @@
           "title": "Precipitación",
           "unit": "mm"
         },
-        "growingSeason": {  
+        "growingSeason": {
           "title": "Temporada de Crecimiento",
           "unit": "días"
         }
@@ -863,6 +889,60 @@
     "title": "Preguntas Frecuentes",
     "subtitle": "Encuentra respuestas a preguntas comunes sobre Revolutionary Farmers, nuestra plataforma y cómo estamos transformando la agricultura a través de la tecnología blockchain."
   },
+  "JoinFarmer": {
+    "title": "Únete a Revolutionary Farmers",
+    "subtitle": "Conviértete en parte del futuro de la agricultura. Conecta directamente con los consumidores y haz crecer tu negocio.",
+    "benefits": {
+      "directSales": {
+        "title": "Ventas Directas",
+        "description": "Vende directamente a los consumidores sin intermediarios"
+      },
+      "growingCommunity": {
+        "title": "Comunidad en Crecimiento",
+        "description": "Únete a una red de agricultores sostenibles"
+      },
+      "securePayments": {
+        "title": "Pagos Seguros",
+        "description": "Pagos garantizados a través de tecnología blockchain"
+      },
+      "easyManagement": {
+        "title": "Gestión Fácil",
+        "description": "Herramientas simples para gestionar tus listados y pedidos"
+      }
+    },
+    "application": {
+      "title": "Solicitud de Agricultor",
+      "subtitle": "Completa este formulario para comenzar tu viaje con Revolutionary Farmers",
+      "fields": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Correo Electrónico",
+        "phone": "Número de Teléfono",
+        "farmName": "Nombre de la Granja",
+        "farmAddress": "Dirección de la Granja",
+        "farmSize": "Tamaño de la Granja (hectáreas)",
+        "farmingMethod": "Método de Cultivo",
+        "mainCrops": "Cultivos Principales",
+        "description": "Cuéntanos sobre tu granja"
+      },
+      "placeholders": {
+        "farmingMethod": "ej., Orgánico, Convencional, Sostenible",
+        "mainCrops": "ej., Tomates, Lechuga, Zanahorias",
+        "description": "Comparte tu filosofía de cultivo, experiencia y qué hace especial a tu granja..."
+      },
+      "terms": {
+        "agree": "Acepto los",
+        "termsOfService": "Términos de Servicio",
+        "and": "y",
+        "privacyPolicy": "Política de Privacidad"
+      },
+      "submit": "Enviar Solicitud",
+      "submitting": "Enviando Solicitud...",
+      "success": "¡Solicitud enviada con éxito! Te contactaremos pronto.",
+      "error": "Error al enviar la solicitud. Por favor, inténtalo de nuevo.",
+      "termsError": "Por favor acepta los términos y condiciones"
+    }
+  },
   "Invest": {
     "title": "Oportunidades de Inversión para Agricultores",
     "subtitle": "Apoya la agricultura sostenible mientras obtienes rendimientos. Invierte directamente en proyectos agrícolas que marcan la diferencia.",
@@ -927,6 +1007,8 @@
       "lastUsed": "Usado por última vez",
       "location": "Ubicación"
     }
+  "Producers": {
+    "loadMore": "Cargar más productores",
+    "loadMoreAria": "Cargar más productores"
   }
 }
-

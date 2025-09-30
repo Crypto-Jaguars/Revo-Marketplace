@@ -14,9 +14,11 @@ export default function HeroSectionNew() {
   const tButton = useTranslations('HeroSection');
   const { language } = useLanguageStore();
   const [expandedIndex, setExpandedIndex] = useState(0);
+
   function handleMouseEnter(index: number) {
     setExpandedIndex(index);
   }
+
   function handleMouseLeave() {
     setExpandedIndex(0);
   }
@@ -26,8 +28,8 @@ export default function HeroSectionNew() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // This will animate each child with a 0.2s delay
-        delayChildren: 0.4, // Starts the first child animation after the text
+        staggerChildren: 0.2,
+        delayChildren: 0.4,
       },
     },
   };
@@ -41,11 +43,12 @@ export default function HeroSectionNew() {
     <section className="w-full h-screen flex flex-col">
       <main className="flex-grow flex flex-col lg:flex-row items-center justify-center text-center px-4 pt-28 md:px-14 lg:pt-20 gap-8 lg:gap-2 bg-gradient-to-b from-[#D8E8DE] via-[#B8D8C8] to-[#98C8B8] ">
         <article className="max-w-4xl ">
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-6xl text-center lg:text-left lg:text-8xl font-bold text-primary_green leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center lg:text-left font-bold text-primary_green leading-tight"
           >
             {t('title')}
           </motion.h1>
@@ -53,14 +56,16 @@ export default function HeroSectionNew() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl text-forest-900/90 leading-relaxed mt-4 max-w-xl text-center lg:text-left"
+            className="text-lg sm:text-xl lg:text-2xl text-forest-900/90 leading-relaxed mt-4 max-w-xl mx-auto lg:mx-0 text-center lg:text-left"
           >
             {t('subtitle')}
           </motion.p>
         </article>
+
+        {/* Image Gallery Container - Mobile scroll, desktop hover */}
         <motion.div
           onMouseLeave={handleMouseLeave}
-          className="mt-8 flex h-72 md:h-[500px] items-center justify-center gap-3"
+          className="w-full lg:w-auto mt-8 flex items-center justify-start lg:justify-center gap-3 max-w-full overflow-x-auto lg:overflow-visible py-4"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -136,23 +141,33 @@ export default function HeroSectionNew() {
             asChild
             style={{ color: 'white' }}
             className="py-3 px-6 bg-gradient-to-b from-green-500 to-green-700 text-white font-semibold rounded-full border-2 border-green-800 shadow-lg transition-transform transform hover:scale-105 hover:brightness-95 active:translate-y-px"
+
           >
             <Link href={`/${language}/marketplace`}>{tButton('exploreMarketplace')}</Link>
           </Button>
           <Button
             asChild
             className="py-3 px-6 bg-gradient-to-b from-gray-100 to-gray-300 text-gray-800 font-semibold rounded-full border-2 border-gray-400 shadow-lg transition-transform transform hover:scale-105 hover:brightness-95 active:translate-y-px"
+
           >
             <Link href={`/${language}/join-farmer`}>{tButton('joinAsFarmer')}</Link>
           </Button>
           <Button
             asChild
             className="py-3 px-6 bg-gradient-to-b from-yellow-400 to-yellow-600 text-yellow-900 font-semibold rounded-full border-2 border-yellow-700 shadow-lg transition-transform transform hover:scale-105 hover:brightness-95 active:translate-y-px"
+
           >
             <Link href={`/${language}/invest`}>{tButton('investNow')}</Link>
           </Button>
         </div>
-      </main>
+      </div>
+
+      {/* Mobile scroll indicator */}
+      <div className="lg:hidden flex justify-center items-center py-2 bg-gradient-to-b from-[#81B8A2] to-[#6BA892]">
+        <div className="flex items-center gap-2 text-white/70 text-sm">
+          <span>← Scroll →</span>
+        </div>
+      </div>
     </section>
   );
 }

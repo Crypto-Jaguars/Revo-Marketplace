@@ -7,6 +7,7 @@ import PhotoGallery from '@/components/farmer-profile/PhotoGallery';
 import CertificationCards from '@/components/farmer-profile/CertificationCards';
 import SeasonalProducts from '@/components/farmer-profile/SeasonalProducts';
 import ContactInfo from '@/components/farmer-profile/ContactInfo';
+import PersonalInformationForm from '@/components/farmer-profile/PersonalInformationForm';
 
 interface FarmerProfileProps {
   params: {
@@ -47,7 +48,12 @@ const defaultProducts = [
 ];
 
 const FarmerProfile = ({ params }: FarmerProfileProps) => {
-  const [isOwner] = useState(false);
+  const [isOwner] = useState(true);
+
+  const handlePersonalInfoSubmit = (data: any) => {
+    console.log('Personal information submitted:', data);
+    // TODO: Implement API call to save personal information
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,6 +63,10 @@ const FarmerProfile = ({ params }: FarmerProfileProps) => {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Contenido Principal */}
           <div className="flex-1 lg:w-2/3">
+            <PersonalInformationForm 
+              isOwner={isOwner} 
+              onSubmit={handlePersonalInfoSubmit}
+            />
             <AboutSection isOwner={isOwner} />
             <PhotoGallery isOwner={isOwner} />
             <CertificationCards isOwner={isOwner} />
