@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -16,14 +16,46 @@ interface PhotoGalleryProps {
 
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({ isOwner = false }) => {
   const [photos] = useState<Photo[]>([
-    { id: 1, url: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop", alt: "Cultivos de tomate" },
-    { id: 2, url: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=300&h=200&fit=crop", alt: "Invernadero" },
-    { id: 3, url: "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=300&h=200&fit=crop", alt: "Vista de la granja" },
-    { id: 4, url: "https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=300&h=200&fit=crop", alt: "Cosecha" },
-    { id: 5, url: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=200&fit=crop", alt: "Frutas frescas" },
-    { id: 6, url: "https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?w=300&h=200&fit=crop", alt: "Trabajadores" },
-    { id: 7, url: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300&h=200&fit=crop", alt: "Herramientas agrícolas" },
-    { id: 8, url: "https://images.unsplash.com/photo-1566281796817-93bc94d7dbd2?w=300&h=200&fit=crop", alt: "Plantación en surcos" }
+    {
+      id: 1,
+      url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop',
+      alt: 'Cultivos de tomate',
+    },
+    {
+      id: 2,
+      url: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=300&h=200&fit=crop',
+      alt: 'Invernadero',
+    },
+    {
+      id: 3,
+      url: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=300&h=200&fit=crop',
+      alt: 'Vista de la granja',
+    },
+    {
+      id: 4,
+      url: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=300&h=200&fit=crop',
+      alt: 'Cosecha',
+    },
+    {
+      id: 5,
+      url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=200&fit=crop',
+      alt: 'Frutas frescas',
+    },
+    {
+      id: 6,
+      url: 'https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?w=300&h=200&fit=crop',
+      alt: 'Trabajadores',
+    },
+    {
+      id: 7,
+      url: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300&h=200&fit=crop',
+      alt: 'Herramientas agrícolas',
+    },
+    {
+      id: 8,
+      url: 'https://images.unsplash.com/photo-1566281796817-93bc94d7dbd2?w=300&h=200&fit=crop',
+      alt: 'Plantación en surcos',
+    },
   ]);
 
   const handleAddPhotos = () => {
@@ -36,7 +68,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({ isOwner = false }) => {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-gray-900">Galería de Fotos</h2>
         {isOwner && (
-          <button 
+          <button
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
             onClick={handleAddPhotos}
             aria-label="Agregar fotos a la galería"
@@ -46,12 +78,15 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({ isOwner = false }) => {
           </button>
         )}
       </div>
-      
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {photos.map((photo) => (
-          <div key={photo.id} className="aspect-square rounded-lg overflow-hidden bg-gray-100 hover:shadow-md transition-shadow cursor-pointer relative">
-            <Image 
-              src={photo.url} 
+          <div
+            key={photo.id}
+            className="aspect-square rounded-lg overflow-hidden bg-gray-100 hover:shadow-md transition-shadow cursor-pointer relative"
+          >
+            <Image
+              src={photo.url}
               alt={photo.alt}
               fill
               className="object-cover hover:scale-105 transition-transform duration-200"

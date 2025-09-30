@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Edit3, Phone, Mail, MapPin, Clock, Facebook, Instagram, Globe } from 'lucide-react';
@@ -20,14 +20,14 @@ interface ContactInfoProps {
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
   const contactData: ContactData = {
-    phone: "+34 123 456 789",
-    email: "contacto@granjaelparaiso.es",
-    whatsapp: "+34 123 456 789",
-    location: "Valle Verde, Región Agrícola, España",
+    phone: '+34 123 456 789',
+    email: 'contacto@granjaelparaiso.es',
+    whatsapp: '+34 123 456 789',
+    location: 'Valle Verde, Región Agrícola, España',
     schedule: {
-      weekdays: "8:00 - 18:00",
-      weekend: "9:00 - 14:00"
-    }
+      weekdays: '8:00 - 18:00',
+      weekend: '9:00 - 14:00',
+    },
   };
 
   const handleEdit = () => {
@@ -55,7 +55,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-gray-900">Información de Contacto</h2>
         {isOwner && (
-          <button 
+          <button
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
             onClick={handleEdit}
             aria-label="Editar información de contacto"
@@ -65,7 +65,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
           </button>
         )}
       </div>
-      
+
       <div className="space-y-6">
         {/* Ubicación */}
         <div className="flex items-start space-x-3">
@@ -111,28 +111,28 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
       <div className="mt-8 pt-6 border-t border-gray-200">
         <h3 className="font-semibold text-gray-900 mb-4">Redes Sociales</h3>
         <div className="flex items-center space-x-6">
-          <button 
+          <button
             onClick={() => handleSocialClick('Facebook')}
             className="text-filter_active hover:opacity-75 transition-opacity"
             aria-label="Visitar página de Facebook"
           >
             <Facebook className="w-6 h-6 stroke-2" fill="none" />
           </button>
-          <button 
+          <button
             onClick={() => handleSocialClick('Instagram')}
             className="text-filter_active hover:opacity-75 transition-opacity"
             aria-label="Visitar página de Instagram"
           >
             <Instagram className="w-6 h-6 stroke-2" fill="none" />
           </button>
-          <button 
+          <button
             onClick={() => handleSocialClick('WhatsApp')}
             className="text-filter_active hover:opacity-75 transition-opacity"
             aria-label="Contactar por WhatsApp"
           >
             <Phone className="w-6 h-6 stroke-2" fill="none" />
           </button>
-          <button 
+          <button
             onClick={() => handleSocialClick('Website')}
             className="text-filter_active hover:opacity-75 transition-opacity"
             aria-label="Visitar sitio web"

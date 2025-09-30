@@ -74,4 +74,4 @@ export function HowWeWork() {
       </div>
     </section>
   );
-};
+}

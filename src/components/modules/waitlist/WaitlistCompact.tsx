@@ -22,7 +22,7 @@ export function WaitlistCompact({ className, buttonText }: WaitlistCompactProps)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast({
         title: 'Invalid email',
@@ -93,10 +93,7 @@ export function WaitlistCompact({ className, buttonText }: WaitlistCompactProps)
       <Button
         type="submit"
         disabled={isSubmitting || isSuccess}
-        className={cn(
-          'min-w-[120px]',
-          isSuccess && 'bg-green-600 hover:bg-green-700'
-        )}
+        className={cn('min-w-[120px]', isSuccess && 'bg-green-600 hover:bg-green-700')}
       >
         {isSubmitting ? (
           <>

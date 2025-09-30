@@ -46,7 +46,7 @@ function redactIp(ip: string): string {
   if (!ip || ip === 'unknown' || ip === 'localhost') {
     return ip;
   }
-  
+
   // IPv6 detection and redaction
   if (ip.includes(':')) {
     // For IPv6, keep first 4 segments and replace rest with ::
@@ -58,7 +58,7 @@ function redactIp(ip: string): string {
     // Malformed IPv6, return as-is but masked
     return ip.substring(0, Math.min(ip.length, 10)) + '::';
   }
-  
+
   // IPv4 redaction
   const octets = ip.split('.');
   if (octets.length === 4) {
@@ -66,7 +66,7 @@ function redactIp(ip: string): string {
     octets[3] = '0';
     return octets.join('.');
   }
-  
+
   // Malformed IP, partially redact
   return ip.substring(0, Math.min(ip.length, 8)) + '***';
 }
@@ -75,20 +75,20 @@ function redactIp(ip: string): string {
 function getCacheEntry(ip: string): GeolocationData | null {
   const entry = ipToCountryMap.get(ip);
   if (!entry) return null;
-  
+
   // Check if expired
   if (entry.expiresAt <= Date.now()) {
     ipToCountryMap.delete(ip);
     return null;
   }
-  
+
   return entry.data;
 }
 
 function setCacheEntry(ip: string, data: GeolocationData): void {
   const entry: CacheEntry = {
     data,
-    expiresAt: Date.now() + CACHE_TTL_MS
+    expiresAt: Date.now() + CACHE_TTL_MS,
   };
   ipToCountryMap.set(ip, entry);
 }
@@ -111,7 +111,7 @@ function mapApiResponse(data: GeolocationApiResponse, provider: string): Geoloca
     const apiData = data as IPApiCoResponse;
     if (apiData.error) {
       // Log explicit error with provider and reason for debugging
-      const errorMessage = apiData.reason 
+      const errorMessage = apiData.reason
         ? `Geolocation API error from ${provider}: ${apiData.reason}`
         : `Geolocation API error from ${provider}: Unknown error (no reason provided)`;
       console.error(errorMessage);
@@ -128,7 +128,9 @@ function mapApiResponse(data: GeolocationApiResponse, provider: string): Geoloca
     const apiData = data as IPApiComResponse;
     if (apiData.status !== 'success') {
       // Log explicit error for debugging
-      console.error(`Geolocation API error from ${provider}: Status = ${apiData.status || 'unknown'}`);
+      console.error(
+        `Geolocation API error from ${provider}: Status = ${apiData.status || 'unknown'}`
+      );
       return null;
     }
     return {
@@ -153,10 +155,10 @@ function mapApiResponse(data: GeolocationApiResponse, provider: string): Geoloca
 
 // Mock data for development
 const mockGeolocationData: Record<string, GeolocationData> = {
-  'localhost': { country: 'Costa Rica', countryCode: 'CR', city: 'San Jose' },
+  localhost: { country: 'Costa Rica', countryCode: 'CR', city: 'San Jose' },
   '127.0.0.1': { country: 'Costa Rica', countryCode: 'CR', city: 'San Jose' },
   '::1': { country: 'Costa Rica', countryCode: 'CR', city: 'San Jose' },
-  'unknown': { country: 'Unknown', countryCode: 'XX' },
+  unknown: { country: 'Unknown', countryCode: 'XX' },
 };
 
 export async function getGeolocationFromIP(ip: string): Promise<GeolocationData> {
@@ -182,26 +184,26 @@ export async function getGeolocationFromIP(ip: string): Promise<GeolocationData>
   try {
     // Build URL for configured provider
     const apiUrl = buildGeolocationUrl(ip, GEOLOCATION_API_BASE);
-    
+
     // Fetch with timeout and abort signal
     const response = await fetch(apiUrl, {
       signal: abortController.signal,
       headers: {
         'User-Agent': 'GeolocationService/1.0',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
     });
 
     // Clear timeout on successful response
     clearTimeout(timeoutId);
-    
+
     if (!response.ok) {
       throw new Error(`Geolocation API returned ${response.status}: ${response.statusText}`);
     }
-    
+
     const data = await response.json();
     const geoData = mapApiResponse(data, GEOLOCATION_API_BASE);
-    
+
     if (geoData) {
       // Cache the result with TTL
       setCacheEntry(ip, geoData);
@@ -212,14 +214,18 @@ export async function getGeolocationFromIP(ip: string): Promise<GeolocationData>
   } catch (error) {
     // Clear timeout in case of error
     clearTimeout(timeoutId);
-    
+
     // Handle different error types with PII-safe logging
     const redactedIp = redactIp(ip);
     if (error instanceof Error) {
       if (error.name === 'AbortError') {
-        console.error(`Geolocation API timeout for redacted IP ${redactedIp}: Timeout after ${GEOLOCATION_TIMEOUT_MS}ms`);
+        console.error(
+          `Geolocation API timeout for redacted IP ${redactedIp}: Timeout after ${GEOLOCATION_TIMEOUT_MS}ms`
+        );
       } else if (error.message.includes('fetch')) {
-        console.error(`Geolocation API network error for redacted IP ${redactedIp}: ${error.message}`);
+        console.error(
+          `Geolocation API network error for redacted IP ${redactedIp}: ${error.message}`
+        );
       } else {
         console.error(`Geolocation API error for redacted IP ${redactedIp}: ${error.message}`);
       }
@@ -237,23 +243,23 @@ export async function getGeolocationFromIP(ip: string): Promise<GeolocationData>
 export function getCountryFromUserAgent(userAgent?: string) {
   // Fallback method
   if (!userAgent) return 'Unknown';
-  
+
   // Look for language hints in user agent
   const languagePatterns = {
-    'es': 'Spain',
+    es: 'Spain',
     'en-US': 'United States',
     'en-GB': 'United Kingdom',
-    'fr': 'France',
-    'de': 'Germany',
-    'pt': 'Portugal',
-    'it': 'Italy',
+    fr: 'France',
+    de: 'Germany',
+    pt: 'Portugal',
+    it: 'Italy',
   };
-  
+
   for (const [lang, country] of Object.entries(languagePatterns)) {
     if (userAgent.toLowerCase().includes(lang.toLowerCase())) {
       return country;
     }
   }
-  
+
   return 'Unknown';
 }

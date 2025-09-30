@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { 
-  Bell, 
-  Mail, 
-  Smartphone, 
+import {
+  Bell,
+  Mail,
+  Smartphone,
   Settings,
   Volume2,
   VolumeX,
@@ -13,14 +13,20 @@ import {
   AlertTriangle,
   CheckCircle,
   Info,
-  Shield
+  Shield,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useSettingsStore } from '@/store';
 import WithAuthProtect from '@/constants/helpers/WithAuth';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -28,11 +34,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 function NotificationsSettingsPage() {
   const t = useTranslations('Settings.notifications');
   const locale = useLocale();
-  const { 
-    notifications, 
-    updateNotificationSettings,
-    setLoading 
-  } = useSettingsStore();
+  const { notifications, updateNotificationSettings, setLoading } = useSettingsStore();
 
   const [activeTab, setActiveTab] = useState<'email' | 'push' | 'sms'>('email');
 
@@ -80,7 +82,7 @@ function NotificationsSettingsPage() {
   const handleSaveSettings = async () => {
     setLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
   };
 
@@ -118,17 +120,10 @@ function NotificationsSettingsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {t('title')}
-            </h1>
-            <p className="text-gray-600">
-              {t('description')}
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+            <p className="text-gray-600">{t('description')}</p>
           </div>
-          <Button
-            onClick={handleSaveSettings}
-            className="flex items-center gap-2"
-          >
+          <Button onClick={handleSaveSettings} className="flex items-center gap-2">
             <Settings className="w-4 h-4" />
             {t('actions.save')}
           </Button>
@@ -155,8 +150,8 @@ function NotificationsSettingsPage() {
                 >
                   <Icon className="w-4 h-4" />
                   <span className="capitalize">{channel}</span>
-                  <Badge 
-                    variant={notifications[channel].enabled ? "default" : "secondary"}
+                  <Badge
+                    variant={notifications[channel].enabled ? 'default' : 'secondary'}
                     className="text-xs"
                   >
                     {notifications[channel].enabled ? t('status.active') : t('status.inactive')}
@@ -182,9 +177,7 @@ function NotificationsSettingsPage() {
                 {/* Channel Toggle */}
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t(`channels.${activeTab}.enable`)}
-                    </p>
+                    <p className="font-medium text-gray-900">{t(`channels.${activeTab}.enable`)}</p>
                     <p className="text-sm text-gray-600">
                       {t(`channels.${activeTab}.description`)}
                     </p>
@@ -198,12 +191,10 @@ function NotificationsSettingsPage() {
                 {notifications[activeTab].enabled && (
                   <>
                     <Separator />
-                    
+
                     {/* Notification Types */}
                     <div className="space-y-4">
-                      <h3 className="font-medium text-gray-900">
-                        {t('notificationTypes.title')}
-                      </h3>
+                      <h3 className="font-medium text-gray-900">{t('notificationTypes.title')}</h3>
                       {notificationTypes.map((type) => {
                         const Icon = type.icon;
                         return (
@@ -214,17 +205,17 @@ function NotificationsSettingsPage() {
                             <div className="flex items-center gap-3">
                               <Icon className="w-5 h-5 text-gray-500" />
                               <div>
-                                <p className="font-medium text-gray-900">
-                                  {type.label}
-                                </p>
-                                <p className="text-sm text-gray-600">
-                                  {type.description}
-                                </p>
+                                <p className="font-medium text-gray-900">{type.label}</p>
+                                <p className="text-sm text-gray-600">{type.description}</p>
                               </div>
                             </div>
                             <Switch
-                              checked={notifications[activeTab][type.id as keyof typeof notifications[typeof activeTab]]}
-                              onCheckedChange={(checked) => 
+                              checked={
+                                notifications[activeTab][
+                                  type.id as keyof (typeof notifications)[typeof activeTab]
+                                ]
+                              }
+                              onCheckedChange={(checked) =>
                                 handleToggleType(activeTab, type.id, checked)
                               }
                             />
@@ -238,9 +229,7 @@ function NotificationsSettingsPage() {
                       <>
                         <Separator />
                         <div className="space-y-4">
-                          <h3 className="font-medium text-gray-900">
-                            {t('emailSettings.title')}
-                          </h3>
+                          <h3 className="font-medium text-gray-900">{t('emailSettings.title')}</h3>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                               <label className="text-sm font-medium text-gray-700">
@@ -290,9 +279,7 @@ function NotificationsSettingsPage() {
                       <>
                         <Separator />
                         <div className="space-y-4">
-                          <h3 className="font-medium text-gray-900">
-                            {t('pushSettings.title')}
-                          </h3>
+                          <h3 className="font-medium text-gray-900">{t('pushSettings.title')}</h3>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                               <label className="text-sm font-medium text-gray-700">
@@ -345,9 +332,7 @@ function NotificationsSettingsPage() {
                       <>
                         <Separator />
                         <div className="space-y-4">
-                          <h3 className="font-medium text-gray-900">
-                            {t('smsSettings.title')}
-                          </h3>
+                          <h3 className="font-medium text-gray-900">{t('smsSettings.title')}</h3>
                           <div className="p-4 bg-yellow-50 rounded-lg">
                             <div className="flex items-start gap-3">
                               <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
@@ -380,27 +365,15 @@ function NotificationsSettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Volume2 className="w-4 h-4 mr-2" />
                   {t('quickActions.enableAll')}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <VolumeX className="w-4 h-4 mr-2" />
                   {t('quickActions.disableAll')}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Clock className="w-4 h-4 mr-2" />
                   {t('quickActions.snooze')}
                 </Button>
@@ -422,22 +395,16 @@ function NotificationsSettingsPage() {
                   <span className="font-semibold">1,247</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">
-                    {t('statistics.today')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('statistics.today')}</span>
                   <span className="font-semibold text-blue-600">23</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">
-                    {t('statistics.thisWeek')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('statistics.thisWeek')}</span>
                   <span className="font-semibold">156</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">
-                    {t('statistics.lastNotification')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('statistics.lastNotification')}</span>
                   <span className="text-sm">5 minutes ago</span>
                 </div>
               </div>
@@ -461,12 +428,10 @@ function NotificationsSettingsPage() {
                     >
                       <div className="flex items-center gap-2">
                         <Icon className="w-4 h-4" />
-                        <span className="text-sm font-medium capitalize">
-                          {channel}
-                        </span>
+                        <span className="text-sm font-medium capitalize">{channel}</span>
                       </div>
-                      <Badge 
-                        variant={isEnabled ? "default" : "secondary"}
+                      <Badge
+                        variant={isEnabled ? 'default' : 'secondary'}
                         className={`text-xs ${getChannelColor(channel)}`}
                       >
                         {isEnabled ? t('status.active') : t('status.inactive')}
@@ -483,4 +448,4 @@ function NotificationsSettingsPage() {
   );
 }
 
-export default WithAuthProtect(NotificationsSettingsPage); 
+export default WithAuthProtect(NotificationsSettingsPage);

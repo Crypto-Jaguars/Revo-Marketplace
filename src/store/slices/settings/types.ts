@@ -75,7 +75,10 @@ export interface SettingsActions {
   addConnectedWallet: (wallet: ConnectedWallet) => void;
   removeConnectedWallet: (walletId: string) => void;
   setPrimaryWallet: (walletId: string) => void;
-  updateNotificationSettings: (type: keyof NotificationSettings, settings: Partial<NotificationChannel>) => void;
+  updateNotificationSettings: (
+    type: keyof NotificationSettings,
+    settings: Partial<NotificationChannel>
+  ) => void;
   updatePrivacySettings: (settings: Partial<PrivacySettings>) => void;
   updateRegionalSettings: (settings: Partial<RegionalSettings>) => void;
   updateSecuritySettings: (settings: Partial<SecuritySettings>) => void;
@@ -84,4 +87,4 @@ export interface SettingsActions {
   setError: (error: string | null) => void;
   clearError: () => void;
   resetToDefaults: () => void;
-} 
+}

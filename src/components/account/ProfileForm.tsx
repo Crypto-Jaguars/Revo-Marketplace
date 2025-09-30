@@ -1,61 +1,67 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { CalendarIcon, User, TractorIcon as Farm } from "lucide-react"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { format } from "date-fns"
-import { Calendar } from "@/components/ui/calendar"
-import { cn } from "@/lib/utils"
-import { toast } from "sonner"
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { CalendarIcon, User, TractorIcon as Farm } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { format } from 'date-fns';
+import { Calendar } from '@/components/ui/calendar';
+import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export function ProfileForm() {
   const [profile, setProfile] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "+1234567890",
-    address: "123 Farm Lane",
-    city: "Ruralville",
-    state: "CA",
-    zip: "90210",
-    country: "USA",
-    farmName: "Green Acres Farm",
-    farmSize: "100 acres",
-    farmType: "Organic Vegetables",
-    establishedDate: new Date("2000-01-01"),
-    website: "https://www.greenacresfarm.com",
-    bio: "Passionate organic farmer dedicated to sustainable practices.",
-  })
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com',
+    phone: '+1234567890',
+    address: '123 Farm Lane',
+    city: 'Ruralville',
+    state: 'CA',
+    zip: '90210',
+    country: 'USA',
+    farmName: 'Green Acres Farm',
+    farmSize: '100 acres',
+    farmType: 'Organic Vegetables',
+    establishedDate: new Date('2000-01-01'),
+    website: 'https://www.greenacresfarm.com',
+    bio: 'Passionate organic farmer dedicated to sustainable practices.',
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target
-    setProfile((prev) => ({ ...prev, [id]: value }))
-  }
+    const { id, value } = e.target;
+    setProfile((prev) => ({ ...prev, [id]: value }));
+  };
 
   const handleSelectChange = (id: string, value: string) => {
-    setProfile((prev) => ({ ...prev, [id]: value }))
-  }
+    setProfile((prev) => ({ ...prev, [id]: value }));
+  };
 
   const handleDateChange = (date: Date | undefined) => {
     if (date) {
-      setProfile((prev) => ({ ...prev, establishedDate: date }))
+      setProfile((prev) => ({ ...prev, establishedDate: date }));
     }
-  }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically send the profile data to a backend API
-    console.log("Profile updated:", profile)
-    toast.success("Profile updated successfully!")
-  }
+    console.log('Profile updated:', profile);
+    toast.success('Profile updated successfully!');
+  };
 
   return (
     <Card>
@@ -128,7 +134,10 @@ export function ProfileForm() {
               </div>
               <div>
                 <Label htmlFor="farmType">Farm Type</Label>
-                <Select value={profile.farmType} onValueChange={(value) => handleSelectChange("farmType", value)}>
+                <Select
+                  value={profile.farmType}
+                  onValueChange={(value) => handleSelectChange('farmType', value)}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select farm type" />
                   </SelectTrigger>
@@ -147,14 +156,18 @@ export function ProfileForm() {
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
-                      variant={"outline"}
+                      variant={'outline'}
                       className={cn(
-                        "w-full justify-start text-left font-normal",
-                        !profile.establishedDate && "text-muted-foreground",
+                        'w-full justify-start text-left font-normal',
+                        !profile.establishedDate && 'text-muted-foreground'
                       )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {profile.establishedDate ? format(profile.establishedDate, "PPP") : <span>Pick a date</span>}
+                      {profile.establishedDate ? (
+                        format(profile.establishedDate, 'PPP')
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0">
@@ -184,5 +197,5 @@ export function ProfileForm() {
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }

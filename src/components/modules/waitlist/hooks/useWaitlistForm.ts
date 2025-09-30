@@ -46,13 +46,13 @@ export function useWaitlistForm() {
 
   const onSubmit = async (data: WaitlistFormValues) => {
     setIsSubmitting(true);
-    
+
     trackAnalyticsEvent('form_submit');
-    
+
     try {
       const params = new URLSearchParams(window.location.search);
       const queryString = params.toString() ? `?${params.toString()}` : '';
-      
+
       const response = await fetch(`/api/waitlist${queryString}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -63,7 +63,7 @@ export function useWaitlistForm() {
 
       if (!response.ok) {
         trackAnalyticsEvent('form_error');
-        
+
         if (response.status === 429) {
           toast({
             title: 'Too many attempts',
@@ -77,7 +77,8 @@ export function useWaitlistForm() {
           });
           toast({
             title: 'Already Registered',
-            description: 'This email is already on our waitlist. Check your inbox for our welcome email.',
+            description:
+              'This email is already on our waitlist. Check your inbox for our welcome email.',
             variant: 'destructive',
           });
         } else {
@@ -95,7 +96,7 @@ export function useWaitlistForm() {
       setSubmittedEmail(data.email);
       setIsSuccess(true);
       form.reset();
-      
+
       toast({
         title: 'Success!',
         description: 'Added to waitlist. Check your email.',

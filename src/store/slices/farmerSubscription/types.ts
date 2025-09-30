@@ -29,5 +29,3 @@ export interface FarmerSubscriptionActions {
   markSaved: () => void;
   reset: () => void;
 }
-
-
