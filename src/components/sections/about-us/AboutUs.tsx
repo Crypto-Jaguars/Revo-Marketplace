@@ -3,9 +3,13 @@ import FeatureCard from './FeatureCard';
 import { useTranslations } from 'next-intl';
 import { ShieldCheck, Users, Leaf } from 'lucide-react';
 import Image from 'next/image';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 export function AboutUs() {
   const t = useTranslations('AboutUs');
+  
+  // Use typewriter effect for the main title with default 100ms speed
+  const typewriterTitle = useTypewriter(t('title'));
 
   const features = [
     {
@@ -27,7 +31,7 @@ export function AboutUs() {
 
   return (
     <section className="w-full py-16 md:py-24 relative overflow-hidden">
-        <Image
+      <Image
         src="/background-lp-sections.png"
         alt="Background"
         fill
@@ -35,9 +39,8 @@ export function AboutUs() {
         className="absolute top-0 left-0 w-full h-full -z-10 opacity-10"
       />
       <div className="container mx-auto px-6 max-w-6xl">
-
         <h2 className="text-3xl md:text-4xl font-bold text-forest-800 mb-8 text-center">
-          {t('title')}
+          {typewriterTitle}
         </h2>
         <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto text-center mb-16">
           {t('description')}
@@ -56,4 +59,4 @@ export function AboutUs() {
       </div>
     </section>
   );
-};
+}

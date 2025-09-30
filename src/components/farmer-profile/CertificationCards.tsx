@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { memo, useMemo, useCallback } from 'react';
 import { Award, Leaf, Medal } from 'lucide-react';
@@ -58,28 +58,28 @@ const CertificationCards: React.FC<CertificationCardsProps> = ({ isOwner = false
   const certifications = useMemo<Certification[]>(() => [
     {
       id: 1,
-      name: "Certificación Orgánica",
-      issuer: "EcoAgro Cert",
-      validUntil: "2024-12-31",
-      status: "Vigente",
-      icon: "star"
+      name: 'Certificación Orgánica',
+      issuer: 'EcoAgro Cert',
+      validUntil: '2024-12-31',
+      status: 'Vigente',
+      icon: 'star',
     },
     {
       id: 2,
-      name: "Comercio Justo",
-      issuer: "Fair Trade",
-      validUntil: "2024-12-31",
-      status: "Vigente",
-      icon: "medal"
+      name: 'Comercio Justo',
+      issuer: 'Fair Trade',
+      validUntil: '2024-12-31',
+      status: 'Vigente',
+      icon: 'medal',
     },
     {
       id: 3,
-      name: "Producción Sostenible",
-      issuer: "Green Cert",
-      validUntil: "2024-12-31",
-      status: "Vigente",
-      icon: "leaf"
-    }
+      name: 'Producción Sostenible',
+      issuer: 'Green Cert',
+      validUntil: '2024-12-31',
+      status: 'Vigente',
+      icon: 'leaf',
+    },
   ], []);
 
   const handleAddCertification = useCallback(() => {
@@ -92,7 +92,7 @@ const CertificationCards: React.FC<CertificationCardsProps> = ({ isOwner = false
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-gray-900">Certificaciones</h2>
         {isOwner && (
-          <button 
+          <button
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
             onClick={handleAddCertification}
             aria-label="Agregar nueva certificación"
@@ -102,7 +102,7 @@ const CertificationCards: React.FC<CertificationCardsProps> = ({ isOwner = false
           </button>
         )}
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {certifications.map((cert) => (
           <CertificationItem key={cert.id} certification={cert} />

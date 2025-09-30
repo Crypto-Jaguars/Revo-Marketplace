@@ -15,7 +15,12 @@ import { FarmMetricsProps } from './types';
 import { formatDate } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
-export default function FarmMetrics({ crops, sustainabilityMetrics, ariaLabel = 'Farm metrics', ariaLive = 'polite' }: FarmMetricsProps) {
+export default function FarmMetrics({
+  crops,
+  sustainabilityMetrics,
+  ariaLabel = 'Farm metrics',
+  ariaLive = 'polite',
+}: FarmMetricsProps) {
   const t = useTranslations('Farm.metrics');
 
   return (

@@ -1,68 +1,74 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowUpRight, ArrowDownLeft, Search, Filter, Download } from "lucide-react"
-import { useWalletStore } from "@/store/walletStore"
-import { useStellarWallet } from "@/hooks/useStellarWallet"
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { ArrowUpRight, ArrowDownLeft, Search, Filter, Download } from 'lucide-react';
+import { useWalletStore } from '@/store/walletStore';
+import { useStellarWallet } from '@/hooks/useStellarWallet';
 
 export function TransactionHistory() {
-  const { address } = useWalletStore()
-  const { transactions, isLoading, error } = useStellarWallet(address)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [filterType, setFilterType] = useState("all")
+  const { address } = useWalletStore();
+  const { transactions, isLoading, error } = useStellarWallet(address);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('all');
 
   const filteredTransactions = transactions.filter((tx) => {
     const matchesSearch =
       tx.hash.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tx.from.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tx.to.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesFilter = filterType === "all" || tx.type === filterType
-    return matchesSearch && matchesFilter
-  })
+      tx.to.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filterType === 'all' || tx.type === filterType;
+    return matchesSearch && matchesFilter;
+  });
 
   const getTransactionIcon = (type: string, from: string, to: string) => {
     if (from === address) {
-      return <ArrowUpRight className="h-4 w-4 text-red-500" />
+      return <ArrowUpRight className="h-4 w-4 text-red-500" />;
     } else {
-      return <ArrowDownLeft className="h-4 w-4 text-green-500" />
+      return <ArrowDownLeft className="h-4 w-4 text-green-500" />;
     }
-  }
+  };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case "success":
+      case 'success':
         return (
           <Badge variant="default" className="bg-green-100 text-green-800">
             Success
           </Badge>
-        )
-      case "pending":
-        return <Badge variant="secondary">Pending</Badge>
-      case "failed":
-        return <Badge variant="destructive">Failed</Badge>
+        );
+      case 'pending':
+        return <Badge variant="secondary">Pending</Badge>;
+      case 'failed':
+        return <Badge variant="destructive">Failed</Badge>;
       default:
-        return <Badge variant="secondary">{status}</Badge>
+        return <Badge variant="secondary">{status}</Badge>;
     }
-  }
+  };
 
   const formatDate = (timestamp: string) => {
-    return new Date(timestamp).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    })
-  }
+    return new Date(timestamp).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
 
   const formatAddress = (addr: string) => {
-    return `${addr.slice(0, 6)}...${addr.slice(-6)}`
-  }
+    return `${addr.slice(0, 6)}...${addr.slice(-6)}`;
+  };
 
   if (isLoading) {
     return (
@@ -76,7 +82,7 @@ export function TransactionHistory() {
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   if (error) {
@@ -89,7 +95,7 @@ export function TransactionHistory() {
           <div className="text-center py-8 text-red-600">Error loading transactions: {error}</div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -137,7 +143,9 @@ export function TransactionHistory() {
         <div className="max-h-96 overflow-y-auto space-y-4">
           {filteredTransactions.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
-              {transactions.length === 0 ? "No transactions found" : "No transactions match your search"}
+              {transactions.length === 0
+                ? 'No transactions found'
+                : 'No transactions match your search'}
             </div>
           ) : (
             filteredTransactions.map((transaction) => (
@@ -151,7 +159,7 @@ export function TransactionHistory() {
                   </div>
                   <div>
                     <div className="flex items-center space-x-2">
-                      <p className="font-medium capitalize">{transaction.type.replace("_", " ")}</p>
+                      <p className="font-medium capitalize">{transaction.type.replace('_', ' ')}</p>
                       {getStatusBadge(transaction.status)}
                     </div>
                     <div className="text-sm text-gray-500 space-y-1">
@@ -165,7 +173,9 @@ export function TransactionHistory() {
                   <p className="font-medium">
                     {Number.parseFloat(transaction.amount).toFixed(2)} {transaction.asset}
                   </p>
-                  <p className="text-sm text-gray-500">Fee: {Number.parseFloat(transaction.fee).toFixed(7)} XLM</p>
+                  <p className="text-sm text-gray-500">
+                    Fee: {Number.parseFloat(transaction.fee).toFixed(7)} XLM
+                  </p>
                 </div>
               </div>
             ))
@@ -181,5 +191,5 @@ export function TransactionHistory() {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

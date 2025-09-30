@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { 
-  generateUnsubscribeToken, 
-  verifyUnsubscribeToken, 
-  isUnsubscribed as checkIsUnsubscribed, 
-  addToUnsubscribed, 
-  isAlreadyUnsubscribed 
+import {
+  generateUnsubscribeToken,
+  verifyUnsubscribeToken,
+  isUnsubscribed as checkIsUnsubscribed,
+  addToUnsubscribed,
+  isAlreadyUnsubscribed,
 } from '@/services/email/unsubscribe';
 
 // Helper to create a non-reversible hashed identifier for PII-safe logging
@@ -24,16 +24,16 @@ function extractLocaleFromRequest(request: NextRequest): string {
   if (pathSegments.length > 0 && ['en', 'es'].includes(pathSegments[0])) {
     return pathSegments[0];
   }
-  
+
   // Priority 2: Check Accept-Language header
   const acceptLanguage = request.headers.get('accept-language');
   if (acceptLanguage) {
     // Parse Accept-Language header (e.g., "es-ES,es;q=0.9,en;q=0.8")
     const languages = acceptLanguage
       .split(',')
-      .map(lang => lang.split(';')[0].trim().toLowerCase())
-      .map(lang => lang.split('-')[0]); // Take just the language part (es from es-ES)
-    
+      .map((lang) => lang.split(';')[0].trim().toLowerCase())
+      .map((lang) => lang.split('-')[0]); // Take just the language part (es from es-ES)
+
     // Find first supported language
     for (const lang of languages) {
       if (['en', 'es'].includes(lang)) {
@@ -41,7 +41,7 @@ function extractLocaleFromRequest(request: NextRequest): string {
       }
     }
   }
-  
+
   // Fallback to English
   return 'en';
 }
@@ -82,7 +82,10 @@ export async function GET(request: NextRequest) {
   // Redirect to unsubscribe page with valid email and token
   const locale = extractLocaleFromRequest(request);
   return NextResponse.redirect(
-    new URL(`/${locale}/waitlist/unsubscribe?email=${encodeURIComponent(email)}&token=${token}&exp=${exp}`, request.url)
+    new URL(
+      `/${locale}/waitlist/unsubscribe?email=${encodeURIComponent(email)}&token=${token}&exp=${exp}`,
+      request.url
+    )
   );
 }
 
@@ -92,16 +95,16 @@ export async function POST(request: NextRequest) {
     const { email, token, exp, reason } = body;
 
     if (!email) {
-      return NextResponse.json(
-        { success: false, message: 'Email is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: 'Email is required' }, { status: 400 });
     }
 
     // Require signed token + expiration for state-changing unsubscribe
     if (!token || !exp) {
       return NextResponse.json(
-        { success: false, message: 'Unsubscribe link required. Please use the link we sent to your email.' },
+        {
+          success: false,
+          message: 'Unsubscribe link required. Please use the link we sent to your email.',
+        },
         { status: 401 }
       );
     }
@@ -163,4 +166,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

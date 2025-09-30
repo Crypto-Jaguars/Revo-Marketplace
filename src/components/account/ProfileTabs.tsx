@@ -1,27 +1,27 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ProfileForm } from "./ProfileForm"
-import  WalletSection  from "./WalletSection"
-import { TransactionHistory } from "./TransactionHistory"
-import { FarmingActivity } from "./FarmingActivity"
-import { ProfileSettings } from "./ProfileSettings"
-import  SecuritySettings  from "./SecuritySettings"
-import { useStellarWallet } from "@/hooks/useStellarWallet"
-import { useWalletStore } from "@/store"
-import { DollarSign, Repeat, Sprout, FileText } from "lucide-react"
+import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProfileForm } from './ProfileForm';
+import WalletSection from './WalletSection';
+import { TransactionHistory } from './TransactionHistory';
+import { FarmingActivity } from './FarmingActivity';
+import { ProfileSettings } from './ProfileSettings';
+import SecuritySettings from './SecuritySettings';
+import { useStellarWallet } from '@/hooks/useStellarWallet';
+import { useWalletStore } from '@/store';
+import { DollarSign, Repeat, Sprout, FileText } from 'lucide-react';
 
 export function ProfileTabs() {
-  const [activeTab, setActiveTab] = useState("profile")
-  const { address } = useWalletStore()
-  const { totalXlmUsdValue, transactions } = useStellarWallet(address)
+  const [activeTab, setActiveTab] = useState('profile');
+  const { address } = useWalletStore();
+  const { totalXlmUsdValue, transactions } = useStellarWallet(address);
 
   // Mock data for farming activities and contracts count for summary cards
   // In a real app, these would come from actual data sources
-  const farmingActivitiesCount = 12 // Example count
-  const contractsCount = 5 // Example count
+  const farmingActivitiesCount = 12; // Example count
+  const contractsCount = 5; // Example count
 
   return (
     <div className="w-full max-w-6xl mx-auto py-8 px-4 md:px-6">
@@ -128,5 +128,5 @@ export function ProfileTabs() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

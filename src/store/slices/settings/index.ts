@@ -83,9 +83,7 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
         set((state) => ({
           wallet: {
             ...state.wallet,
-            connectedWallets: state.wallet.connectedWallets.filter(
-              (w) => w.id !== walletId
-            ),
+            connectedWallets: state.wallet.connectedWallets.filter((w) => w.id !== walletId),
           },
         })),
 
@@ -202,4 +200,4 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
       }),
     }
   )
-); 
+);

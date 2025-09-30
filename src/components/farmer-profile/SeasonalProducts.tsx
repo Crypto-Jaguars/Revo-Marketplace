@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { memo, useMemo, useCallback } from 'react';
 import Image from 'next/image';
@@ -74,7 +74,7 @@ const SeasonalProducts: React.FC<SeasonalProductsProps> = ({ isOwner = false, pr
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-gray-900">Productos de Temporada</h2>
         {isOwner && (
-          <button 
+          <button
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
             onClick={handleManageProducts}
             aria-label="Gestionar productos de temporada"
@@ -84,7 +84,7 @@ const SeasonalProducts: React.FC<SeasonalProductsProps> = ({ isOwner = false, pr
           </button>
         )}
       </div>
-      
+
       <div className="grid grid-cols-1 gap-4">
         {products.map((product, index) => (
           <ProductItem key={product.id} product={product} index={index} />

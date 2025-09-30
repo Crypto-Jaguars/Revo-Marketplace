@@ -6,7 +6,7 @@ import { Twitter, Linkedin, MessageCircle, Share2 } from 'lucide-react';
 
 export function SocialShareButtons() {
   const t = useTranslations('Waitlist.social');
-  
+
   const shareUrl = typeof window !== 'undefined' ? window.location.origin : '';
   const shareText = t('shareText');
   const hashtags = 'RevoFarmers,AgTech,Blockchain';
@@ -51,7 +51,7 @@ export function SocialShareButtons() {
         <Twitter className="w-4 h-4 mr-1" />
         Twitter
       </Button>
-      
+
       <Button
         variant="outline"
         size="sm"
@@ -61,7 +61,7 @@ export function SocialShareButtons() {
         <Linkedin className="w-4 h-4 mr-1" />
         LinkedIn
       </Button>
-      
+
       <Button
         variant="outline"
         size="sm"
@@ -72,17 +72,19 @@ export function SocialShareButtons() {
         WhatsApp
       </Button>
 
-      {typeof navigator !== 'undefined' && 'share' in navigator && typeof navigator.share === 'function' && (
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleGenericShare}
-          className="bg-gray-600 text-white hover:bg-gray-700 border-0"
-        >
-          <Share2 className="w-4 h-4 mr-1" />
-          {t('share')}
-        </Button>
-      )}
+      {typeof navigator !== 'undefined' &&
+        'share' in navigator &&
+        typeof navigator.share === 'function' && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleGenericShare}
+            className="bg-gray-600 text-white hover:bg-gray-700 border-0"
+          >
+            <Share2 className="w-4 h-4 mr-1" />
+            {t('share')}
+          </Button>
+        )}
     </div>
   );
 }

@@ -8,9 +8,7 @@ export async function POST(req: Request) {
     if (!parsed.success) {
       return NextResponse.json(
         {
-          error: parsed.error.issues
-            .map((i: { message: string }) => i.message)
-            .join(', '),
+          error: parsed.error.issues.map((i: { message: string }) => i.message).join(', '),
         },
         { status: 400 }
       );
@@ -57,5 +55,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
-
-

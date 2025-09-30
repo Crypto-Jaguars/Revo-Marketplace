@@ -83,4 +83,4 @@ export function UserMenu({ className }: UserMenuProps) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}
