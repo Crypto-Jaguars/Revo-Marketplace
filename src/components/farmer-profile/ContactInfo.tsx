@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { memo, useMemo, useCallback } from 'react';
 import { Edit3, Phone, Mail, MapPin, Clock, Facebook, Instagram, Globe } from 'lucide-react';
 
 interface ContactData {
@@ -19,7 +19,7 @@ interface ContactInfoProps {
 }
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
-  const contactData: ContactData = {
+  const contactData = useMemo<ContactData>(() => ({
     phone: '+34 123 456 789',
     email: 'contacto@granjaelparaiso.es',
     whatsapp: '+34 123 456 789',
@@ -28,27 +28,27 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
       weekdays: '8:00 - 18:00',
       weekend: '9:00 - 14:00',
     },
-  };
+  }), []);
 
-  const handleEdit = () => {
+  const handleEdit = useCallback(() => {
     // TODO: Implement edit functionality
     console.log('Edit contact info clicked');
-  };
+  }, []);
 
-  const handleCall = () => {
+  const handleCall = useCallback(() => {
     // TODO: Implement call functionality
     window.open(`tel:${contactData.phone}`);
-  };
+  }, [contactData.phone]);
 
-  const handleEmail = () => {
+  const handleEmail = useCallback(() => {
     // TODO: Implement email functionality
     window.open(`mailto:${contactData.email}`);
-  };
+  }, [contactData.email]);
 
-  const handleSocialClick = (platform: string) => {
+  const handleSocialClick = useCallback((platform: string) => {
     // TODO: Implement social media navigation
     console.log(`${platform} clicked`);
-  };
+  }, []);
 
   return (
     <section className="bg-white p-6 mb-8 rounded-lg shadow-sm">
@@ -145,4 +145,4 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
   );
 };
 
-export default ContactInfo;
+export default memo(ContactInfo);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, memo, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import { Camera } from 'lucide-react';
 
@@ -14,8 +14,25 @@ interface PhotoGalleryProps {
   isOwner?: boolean;
 }
 
+// Memoized Photo Item Component
+const PhotoItem = memo<{ photo: Photo; index: number }>(({ photo, index }) => (
+  <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 hover:shadow-md transition-shadow cursor-pointer relative">
+    <Image 
+      src={photo.url} 
+      alt={photo.alt}
+      fill
+      className="object-cover hover:scale-105 transition-transform duration-200"
+      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+      loading={index < 4 ? "eager" : "lazy"}
+      priority={index < 2}
+    />
+  </div>
+));
+
+PhotoItem.displayName = 'PhotoItem';
+
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({ isOwner = false }) => {
-  const [photos] = useState<Photo[]>([
+  const photos = useMemo<Photo[]>(() => [
     {
       id: 1,
       url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop',
@@ -56,12 +73,12 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({ isOwner = false }) => {
       url: 'https://images.unsplash.com/photo-1566281796817-93bc94d7dbd2?w=300&h=200&fit=crop',
       alt: 'Plantación en surcos',
     },
-  ]);
+  ], []);
 
-  const handleAddPhotos = () => {
+  const handleAddPhotos = useCallback(() => {
     // TODO: Implement photo upload functionality
     console.log('Add photos clicked');
-  };
+  }, []);
 
   return (
     <section className="bg-white p-6 mb-8 rounded-lg shadow-sm">
@@ -80,23 +97,12 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({ isOwner = false }) => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {photos.map((photo) => (
-          <div
-            key={photo.id}
-            className="aspect-square rounded-lg overflow-hidden bg-gray-100 hover:shadow-md transition-shadow cursor-pointer relative"
-          >
-            <Image
-              src={photo.url}
-              alt={photo.alt}
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-200"
-              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            />
-          </div>
+        {photos.map((photo, index) => (
+          <PhotoItem key={photo.id} photo={photo} index={index} />
         ))}
       </div>
     </section>
   );
 };
 
-export default PhotoGallery;
+export default memo(PhotoGallery);
