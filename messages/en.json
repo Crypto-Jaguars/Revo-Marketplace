@@ -42,6 +42,31 @@
       }
     }
   },
+  "farmerProfile": {
+    "personalInfo": {
+      "title": "Personal Information",
+      "name": "Name",
+      "surname": "Surname", 
+      "email": "Email",
+      "phone": "Phone",
+      "namePlaceholder": "Enter your first name",
+      "surnamePlaceholder": "Enter your last name",
+      "emailPlaceholder": "Enter your email address",
+      "phonePlaceholder": "Enter your phone number",
+      "save": "Save Personal Information",
+      "saving": "Saving Personal Information...",
+      "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must be at most 50 characters",
+        "surnameMin": "Surname must be at least 2 characters",
+        "surnameMax": "Surname must be at most 50 characters",
+        "emailInvalid": "Invalid email address",
+        "phoneMin": "Phone number seems too short",
+        "phoneMax": "Phone number seems too long",
+        "phoneFormat": "Invalid phone number format"
+      }
+    }
+  },
   "Waitlist": {
     "title": "Join the Waitlist",
     "subtitle": "Be the first to know when we launch and get exclusive early access benefits.",
@@ -190,7 +215,8 @@
   "cta": {
     "ready": "Ready to Get Started?",
     "startSelling": "Start Selling",
-    "exploreProducts": "Explore Products"
+    "exploreProducts": "Explore Products",
+    "joinWaitlist" : "Join Waitlist"
   },
 
   "FarmerSubscription": {
@@ -336,7 +362,7 @@
     },
     "empty": {
       "title": "No products found",
-      "description": "Try adjusting your filters or search criteria to find what you're looking for."
+      "description": "Try adjusting your filters or browse our producers"
     },
     "pagination": {
       "previous": "Previous",
@@ -567,7 +593,8 @@
       "products": "Products",
       "farm": "Farm",
       "farms": "Farms",
-      "marketplace": "Marketplace"
+      "marketplace": "Marketplace",
+      "producers": "Producers"
     },
     "search": {
       "placeholder": "Search for products..."
@@ -1009,7 +1036,6 @@
     "deliveryPending": "Your order will be delivered soon.",
     "estimated": "Estimated: {date}",
     "pending": "Pending",
-    "processing": "Processing",
     "completed": "Completed",
     "cancelled": "Cancelled"
   },
@@ -1110,6 +1136,60 @@
   "FAQ": {
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to common questions about Revolutionary Farmers, our platform, and how we're transforming agriculture through blockchain technology."
+  },
+  "JoinFarmer": {
+    "title": "Join Revolutionary Farmers",
+    "subtitle": "Become part of the future of agriculture. Connect directly with consumers and grow your business.",
+    "benefits": {
+      "directSales": {
+        "title": "Direct Sales",
+        "description": "Sell directly to consumers without intermediaries"
+      },
+      "growingCommunity": {
+        "title": "Growing Community",
+        "description": "Join a network of sustainable farmers"
+      },
+      "securePayments": {
+        "title": "Secure Payments",
+        "description": "Guaranteed payments through blockchain technology"
+      },
+      "easyManagement": {
+        "title": "Easy Management",
+        "description": "Simple tools to manage your listings and orders"
+      }
+    },
+    "application": {
+      "title": "Farmer Application",
+      "subtitle": "Fill out this form to start your journey with Revolutionary Farmers",
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "farmName": "Farm Name",
+        "farmAddress": "Farm Address",
+        "farmSize": "Farm Size (acres)",
+        "farmingMethod": "Farming Method",
+        "mainCrops": "Main Crops",
+        "description": "Tell us about your farm"
+      },
+      "placeholders": {
+        "farmingMethod": "e.g., Organic, Conventional, Sustainable",
+        "mainCrops": "e.g., Tomatoes, Lettuce, Carrots",
+        "description": "Share your farming philosophy, experience, and what makes your farm special..."
+      },
+      "terms": {
+        "agree": "I agree to the",
+        "termsOfService": "Terms of Service",
+        "and": "and",
+        "privacyPolicy": "Privacy Policy"
+      },
+      "submit": "Submit Application",
+      "submitting": "Submitting Application...",
+      "success": "Application submitted successfully! We will contact you soon.",
+      "error": "Error submitting application. Please try again.",
+      "termsError": "Please accept the terms and conditions"
+    }
   },
   "Settings": {
     "title": "Settings",
@@ -1615,6 +1695,7 @@
       }
     }
   },
+
   "producerCTA": {
     "title": "Are You a Producer?",
     "subtitle": "Join Our Marketplace Today",
@@ -1626,5 +1707,109 @@
     "benefit3Title": "Community Building",
     "benefit3Desc": "Build relationships with local consumers",
     "buttonText": "Join as Producer"
-  }
+},
+
+  "ContactSection": {
+    "title": "Can't find the product you're looking for?",
+    "description": "Get in touch with us or explore our network of trusted producers",
+    "talkToUs": "Talk to Us",
+    "viewProducers": "View Our Producers",
+    "emailSubject": "Product Inquiry - Revolutionary Farmers",
+    "emailBody": "Hello Revolutionary Farmers,\\n\\nI am looking for a specific product that I couldn't find in your marketplace.\\n\\nProduct details:\\n- Product name: \\n- Category: \\n- Quantity needed: \\n- Preferred delivery date: \\n\\nAdditional notes:\\n\\nPlease let me know if you can help me find this product or connect me with a suitable producer.\\n\\nThank you for your assistance!\\n\\nBest regards"
+  },
+  "ProducersPage": {
+    "title": "Our Producers",
+    "subtitle": "Meet our network of trusted farmers and producers committed to sustainable agriculture",
+    "rating": "Rating",
+    "specialties": "Specialties",
+    "certifications": "Certifications",
+    "products": "products",
+    "viewProfile": "View Profile",
+    "joinNetwork": {
+      "title": "Interested in Joining Our Network?",
+      "description": "We're always looking for passionate farmers and producers to join our community",
+      "button": "Become a Producer"
+    },
+    "producerCard": {
+      "lastUsed": "Last used",
+      "location": "Location"
+    }
+  "Producers": {
+    "hero": {
+      "title": "Our Producers",
+      "description": "Discover amazing local producers who are transforming agriculture with sustainable practices and innovative farming methods.",
+      "searchPlaceholder": "Search by producer, product or location...",
+      "locationText": "Showing producers near your location"
+    },
+    "filters": {
+      "label": "Filters",
+      "search": "Search producers...",
+      "location": "Location",
+      "certification": "Certification",
+      "farmingMethod": "Farming Method",
+      "distance": "Distance",
+      "rating": "Rating",
+      "apply": "Apply Filter",
+      "clear": "Clear filters",
+      "active": "Active Filters",
+      "any": "Any",
+      "labels": {
+        "search": "Search",
+        "location": "Location",
+        "cert": "Cert.",
+        "method": "Method",
+        "distance": "Distance",
+        "rating": "Rating"
+      },
+      "clearAll": "Clear all filters",
+      "clearSearch": "Clear search",
+      "clearLocation": "Clear location filter",
+      "clearCertification": "Clear certification filter",
+      "clearMethod": "Clear farming method filter",
+      "clearDistance": "Clear distance filter",
+      "clearRating": "Clear rating filter"
+    },
+    "sortBy": {
+      "showing": "Showing",
+      "of": "of",
+      "producers": "Producers",
+      "label": "Sort by",
+      "distance": "Distance",
+      "rating": "Rating",
+      "name": "Name",
+      "products": "Products Count"
+    },
+    "producerCard": {
+      "market": "Market",
+      "farmer": "Farmer",
+      "location": "Location",
+      "distance": "Distance",
+      "certifications": "Certifications",
+      "organic": "Certified Organic",
+      "fairTrade": "Fair Trade",
+      "viewProfile": "View Profile",
+      "addToCart": "Add to Cart",
+      "products": "Products",
+      "reviews": "Reviews",
+      "rating": "Rating",
+      "kmAway": "{distance} km away",
+      "milesAway": "{distance} miles away"
+    },
+    "cta": {
+      "title": "Are you a producer?",
+      "description": "Join our community of sustainable farmers and connect directly with consumers who value quality and transparency.",
+      "joinButton": "Join as Producer"
+    },
+    "loadMore": "Load more producers",
+    "loadMoreAria": "Load more producers",
+    "empty": {
+      "title": "No producers found",
+      "description": "Try adjusting your filters or search criteria to find producers in your area."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "producers": "Producers"
+    }
+
+  
 }

@@ -26,9 +26,7 @@ const ToggleUserType: React.FC<ToggleUserTypeProps> = ({ activeType, onChange })
       <button
         onClick={() => onChange('farmer')}
         className={`relative z-10 flex-1 text-base font-semibold transition-all duration-300 px-4 py-2 focus:outline-none rounded-full ${
-          activeType === 'farmer' 
-            ? 'text-white' 
-            : 'text-gray-600 hover:bg-gray-100'
+          activeType === 'farmer' ? 'text-white' : 'text-gray-600 hover:bg-gray-100'
         }`}
         style={activeType === 'farmer' ? { color: '#FFFFFF' } : {}}
         aria-pressed={activeType === 'farmer'}
@@ -44,9 +42,7 @@ const ToggleUserType: React.FC<ToggleUserTypeProps> = ({ activeType, onChange })
       <button
         onClick={() => onChange('buyer')}
         className={`relative z-10 flex-1 text-base font-semibold transition-all duration-300 px-4 py-2 focus:outline-none rounded-full ${
-          activeType === 'buyer' 
-            ? 'text-white' 
-            : 'text-gray-600 hover:bg-gray-100'
+          activeType === 'buyer' ? 'text-white' : 'text-gray-600 hover:bg-gray-100'
         }`}
         style={activeType === 'buyer' ? { color: '#FFFFFF' } : {}}
         aria-pressed={activeType === 'buyer'}

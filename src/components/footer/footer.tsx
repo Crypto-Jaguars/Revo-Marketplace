@@ -29,7 +29,7 @@ const Footer = () => {
   const locale = params.locale as string;
   const currentYear = new Date().getFullYear();
   const pathname = usePathname();
-  
+
   // Check if we're on the waitlist page
   const isWaitlistPage = pathname?.includes('/waitlist');
 
@@ -95,9 +95,7 @@ const Footer = () => {
                 asChild
                 className="bg-revolutionary_green hover:bg-revolutionary_green/90 text-white"
               >
-                <Link href={`/${locale}/waitlist`}>
-                  {t('waitlistCta.button')}
-                </Link>
+                <Link href={`/${locale}/waitlist`}>{t('waitlistCta.button')}</Link>
               </Button>
             </div>
           </div>

@@ -31,7 +31,8 @@ interface WaitlistFormProps {
 }
 
 export function WaitlistForm({ className, variant = 'default' }: WaitlistFormProps) {
-  const { form, onSubmit, isSubmitting, isSuccess, submittedEmail, resetSuccess } = useWaitlistForm();
+  const { form, onSubmit, isSubmitting, isSuccess, submittedEmail, resetSuccess } =
+    useWaitlistForm();
   const t = useTranslations('Waitlist');
 
   const trackFormStart = async () => {
@@ -60,24 +61,30 @@ export function WaitlistForm({ className, variant = 'default' }: WaitlistFormPro
 
   if (isSuccess && variant === 'default') {
     return (
-      <div className={cn(
-        'w-full max-w-md mx-auto p-6 sm:p-8 rounded-lg shadow-lg',
-        'bg-surface-0 border border-brand-200/60',
-        className
-      )}>
+      <div
+        className={cn(
+          'w-full max-w-md mx-auto p-6 sm:p-8 rounded-lg shadow-lg',
+          'bg-surface-0 border border-brand-200/60',
+          className
+        )}
+      >
         <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6">
           <div className="w-16 h-16 sm:w-20 sm:h-20 bg-success/10 rounded-full flex items-center justify-center">
             <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-revolutionary_green" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-semibold text-forest-900">{t('success.title')}</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold text-forest-900">
+            {t('success.title')}
+          </h3>
           <p className="text-sm sm:text-base text-gray-600">{t('success.message')}</p>
-          <p className="text-xs sm:text-sm text-gray-500">{t('success.emailSent', { email: submittedEmail })}</p>
-          
+          <p className="text-xs sm:text-sm text-gray-500">
+            {t('success.emailSent', { email: submittedEmail })}
+          </p>
+
           <div className="w-full pt-4 border-t border-gray-200">
             <p className="text-sm text-gray-700 mb-4">{t('success.sharePrompt')}</p>
             <SocialShareButtons />
           </div>
-          
+
           <Button
             variant="outline"
             onClick={resetSuccess}
@@ -99,12 +106,14 @@ export function WaitlistForm({ className, variant = 'default' }: WaitlistFormPro
   ];
 
   return (
-    <div className={cn(
-      'w-full max-w-md mx-auto p-6 sm:p-8 rounded-lg shadow-lg',
-      'bg-surface-0 border border-brand-200/60',
-      variant === 'compact' && 'p-4 sm:p-6',
-      className
-    )}>
+    <div
+      className={cn(
+        'w-full max-w-md mx-auto p-6 sm:p-8 rounded-lg shadow-lg',
+        'bg-surface-0 border border-brand-200/60',
+        variant === 'compact' && 'p-4 sm:p-6',
+        className
+      )}
+    >
       <div className="mb-4 sm:mb-6">
         <div className="flex items-center gap-2 mb-2">
           <Sparkles className="w-5 h-5 text-revolutionary_green" />
@@ -171,7 +180,7 @@ export function WaitlistForm({ className, variant = 'default' }: WaitlistFormPro
                 </FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger 
+                    <SelectTrigger
                       className="bg-surface-0 border-gray-300 text-forest-900 h-11 sm:h-12 text-base"
                       onFocus={trackFormStart}
                     >
@@ -239,9 +248,7 @@ export function WaitlistForm({ className, variant = 'default' }: WaitlistFormPro
             )}
           </Button>
 
-          <p className="text-xs sm:text-sm text-center text-gray-500">
-            {t('privacy')}
-          </p>
+          <p className="text-xs sm:text-sm text-center text-gray-500">{t('privacy')}</p>
         </form>
       </Form>
     </div>

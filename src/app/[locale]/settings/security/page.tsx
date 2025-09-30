@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { 
-  Shield, 
-  Lock, 
-  Key, 
-  Smartphone, 
+import {
+  Shield,
+  Lock,
+  Key,
+  Smartphone,
   Clock,
   Users,
   AlertTriangle,
@@ -15,7 +15,7 @@ import {
   Eye,
   EyeOff,
   RefreshCw,
-  Trash2
+  Trash2,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -23,7 +23,13 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useSettingsStore } from '@/store';
 import WithAuthProtect from '@/constants/helpers/WithAuth';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -31,11 +37,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 function SecuritySettingsPage() {
   const t = useTranslations('Settings.security');
   const locale = useLocale();
-  const { 
-    security, 
-    updateSecuritySettings,
-    setLoading 
-  } = useSettingsStore();
+  const { security, updateSecuritySettings, setLoading } = useSettingsStore();
 
   const [showPassword, setShowPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
@@ -59,7 +61,7 @@ function SecuritySettingsPage() {
   const handleSaveSettings = async () => {
     setLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
   };
 
@@ -72,12 +74,12 @@ function SecuritySettingsPage() {
       alert(t('passwordChange.errorTooShort'));
       return;
     }
-    
+
     setLoading(true);
     // Simulate password change
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setLoading(false);
-    
+
     // Clear form
     setCurrentPassword('');
     setNewPassword('');
@@ -87,7 +89,7 @@ function SecuritySettingsPage() {
   const handleEnable2FA = async () => {
     setLoading(true);
     // Simulate 2FA setup
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     setLoading(false);
     updateSecuritySettings({ twoFactorAuth: true });
   };
@@ -96,7 +98,7 @@ function SecuritySettingsPage() {
     if (confirm(t('twoFactor.disableConfirm'))) {
       setLoading(true);
       // Simulate 2FA disable
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setLoading(false);
       updateSecuritySettings({ twoFactorAuth: false });
     }
@@ -129,17 +131,10 @@ function SecuritySettingsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {t('title')}
-            </h1>
-            <p className="text-gray-600">
-              {t('description')}
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+            <p className="text-gray-600">{t('description')}</p>
           </div>
-          <Button
-            onClick={handleSaveSettings}
-            className="flex items-center gap-2"
-          >
+          <Button onClick={handleSaveSettings} className="flex items-center gap-2">
             <Settings className="w-4 h-4" />
             {t('actions.save')}
           </Button>
@@ -166,22 +161,24 @@ function SecuritySettingsPage() {
                       <div className={`font-medium ${securityLevel.color}`}>
                         {t(`securityScore.${securityLevel.level}`)}
                       </div>
-                      <div className="text-sm text-gray-600">
-                        {t('securityScore.description')}
-                      </div>
+                      <div className="text-sm text-gray-600">{t('securityScore.description')}</div>
                     </div>
                   </div>
                   <Badge className={`${securityLevel.bg} ${securityLevel.color}`}>
                     {securityLevel.level.toUpperCase()}
                   </Badge>
                 </div>
-                
+
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
+                  <div
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      securityLevel.level === 'excellent' ? 'bg-green-500' :
-                      securityLevel.level === 'good' ? 'bg-blue-500' :
-                      securityLevel.level === 'fair' ? 'bg-yellow-500' : 'bg-red-500'
+                      securityLevel.level === 'excellent'
+                        ? 'bg-green-500'
+                        : securityLevel.level === 'good'
+                          ? 'bg-blue-500'
+                          : securityLevel.level === 'fair'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                     }`}
                     style={{ width: `${securityScore}%` }}
                   ></div>
@@ -189,19 +186,27 @@ function SecuritySettingsPage() {
 
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div className="flex items-center gap-2">
-                    <CheckCircle className={`w-4 h-4 ${security.twoFactorAuth ? 'text-green-600' : 'text-gray-400'}`} />
+                    <CheckCircle
+                      className={`w-4 h-4 ${security.twoFactorAuth ? 'text-green-600' : 'text-gray-400'}`}
+                    />
                     <span>{t('securityScore.twoFactor')}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle className={`w-4 h-4 ${security.loginNotifications ? 'text-green-600' : 'text-gray-400'}`} />
+                    <CheckCircle
+                      className={`w-4 h-4 ${security.loginNotifications ? 'text-green-600' : 'text-gray-400'}`}
+                    />
                     <span>{t('securityScore.loginNotifications')}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle className={`w-4 h-4 ${security.deviceManagement ? 'text-green-600' : 'text-gray-400'}`} />
+                    <CheckCircle
+                      className={`w-4 h-4 ${security.deviceManagement ? 'text-green-600' : 'text-gray-400'}`}
+                    />
                     <span>{t('securityScore.deviceManagement')}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle className={`w-4 h-4 ${security.sessionTimeout <= 30 ? 'text-green-600' : 'text-gray-400'}`} />
+                    <CheckCircle
+                      className={`w-4 h-4 ${security.sessionTimeout <= 30 ? 'text-green-600' : 'text-gray-400'}`}
+                    />
                     <span>{t('securityScore.sessionTimeout')}</span>
                   </div>
                 </div>
@@ -221,17 +226,11 @@ function SecuritySettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t('twoFactor.setting')}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {t('twoFactor.description')}
-                    </p>
+                    <p className="font-medium text-gray-900">{t('twoFactor.setting')}</p>
+                    <p className="text-sm text-gray-600">{t('twoFactor.description')}</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Badge 
-                      variant={security.twoFactorAuth ? "default" : "secondary"}
-                    >
+                    <Badge variant={security.twoFactorAuth ? 'default' : 'secondary'}>
                       {security.twoFactorAuth ? t('status.enabled') : t('status.disabled')}
                     </Badge>
                     {security.twoFactorAuth ? (
@@ -360,16 +359,14 @@ function SecuritySettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t('sessionManagement.timeout')}
-                    </p>
+                    <p className="font-medium text-gray-900">{t('sessionManagement.timeout')}</p>
                     <p className="text-sm text-gray-600">
                       {t('sessionManagement.timeoutDescription')}
                     </p>
                   </div>
                   <Select
                     value={security.sessionTimeout.toString()}
-                    onValueChange={(value) => 
+                    onValueChange={(value) =>
                       updateSecuritySettings({ sessionTimeout: parseInt(value) })
                     }
                   >
@@ -397,7 +394,7 @@ function SecuritySettingsPage() {
                   </div>
                   <Switch
                     checked={security.loginNotifications}
-                    onCheckedChange={(checked) => 
+                    onCheckedChange={(checked) =>
                       updateSecuritySettings({ loginNotifications: checked })
                     }
                   />
@@ -414,7 +411,7 @@ function SecuritySettingsPage() {
                   </div>
                   <Switch
                     checked={security.deviceManagement}
-                    onCheckedChange={(checked) => 
+                    onCheckedChange={(checked) =>
                       updateSecuritySettings({ deviceManagement: checked })
                     }
                   />
@@ -437,12 +434,8 @@ function SecuritySettingsPage() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('securityStatus.twoFactor')}
-                  </span>
-                  <Badge 
-                    variant={security.twoFactorAuth ? "default" : "secondary"}
-                  >
+                  <span className="text-sm text-gray-600">{t('securityStatus.twoFactor')}</span>
+                  <Badge variant={security.twoFactorAuth ? 'default' : 'secondary'}>
                     {security.twoFactorAuth ? t('status.enabled') : t('status.disabled')}
                   </Badge>
                 </div>
@@ -460,9 +453,7 @@ function SecuritySettingsPage() {
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('securityStatus.lastLogin')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('securityStatus.lastLogin')}</span>
                   <span className="text-sm">2 hours ago</span>
                 </div>
               </div>
@@ -520,27 +511,15 @@ function SecuritySettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Users className="w-4 h-4 mr-2" />
                   {t('quickActions.manageDevices')}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Trash2 className="w-4 h-4 mr-2" />
                   {t('quickActions.clearSessions')}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Shield className="w-4 h-4 mr-2" />
                   {t('quickActions.securityAudit')}
                 </Button>
@@ -553,4 +532,4 @@ function SecuritySettingsPage() {
   );
 }
 
-export default WithAuthProtect(SecuritySettingsPage); 
+export default WithAuthProtect(SecuritySettingsPage);

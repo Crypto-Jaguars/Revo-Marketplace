@@ -3,7 +3,7 @@
 import { Product } from '@/types/product';
 import { ProductCard } from './ProductCard';
 import { useInView } from 'react-intersection-observer';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, memo, useMemo } from 'react';
 import { ProductSkeleton } from './ProductSkeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
@@ -28,7 +28,7 @@ interface ProductGridProps {
   onPageChange: (page: number) => void;
 }
 
-export function ProductGrid({
+const ProductGrid = memo<ProductGridProps>(function ProductGrid({
   products,
   viewMode,
   onProductClick,
@@ -40,7 +40,7 @@ export function ProductGrid({
   currentPage,
   totalPages,
   onPageChange,
-}: ProductGridProps) {
+}) {
   const t = useTranslations('Products');
   const pathname = usePathname();
 
@@ -59,7 +59,7 @@ export function ProductGrid({
     handleInView();
   }, [handleInView]);
 
-  const gridClassName =
+  const gridClassName = useMemo(() =>
     viewMode === 'grid'
       ? cn(
           'grid gap-8',
@@ -69,9 +69,11 @@ export function ProductGrid({
           'justify-items-center',
           isFilterLoading ? 'opacity-50' : ''
         )
-      : 'flex flex-col gap-4';
+      : 'flex flex-col gap-4',
+    [viewMode, isFilterLoading]
+  );
 
-  const renderPagination = () => {
+  const renderPagination = useCallback(() => {
     const pages = [];
     const maxVisiblePages = 5;
 
@@ -175,7 +177,7 @@ export function ProductGrid({
         </button>
       </nav>
     );
-  };
+  }, [currentPage, totalPages, onPageChange, t]);
 
   if (error) {
     return (
@@ -247,9 +249,11 @@ export function ProductGrid({
       )}
     </div>
   );
-}
+});
 
-export function ProductGridTable({ children }: { children: React.ReactNode }) {
+export { ProductGrid };
+
+export const ProductGridTable = memo<{ children: React.ReactNode }>(function ProductGridTable({ children }) {
   return (
     <div
       className={cn(
@@ -264,4 +268,6 @@ export function ProductGridTable({ children }: { children: React.ReactNode }) {
       {children}
     </div>
   );
-}
+});
+
+ProductGridTable.displayName = 'ProductGridTable';

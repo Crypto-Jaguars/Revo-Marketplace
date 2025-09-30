@@ -8,6 +8,8 @@ import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
 import CtaSection from '@/components/cta/CtaSection';
 import HeroSectionNew from '@/components/herosection/herosectionnew';
 import ProducerCTA from '@/components/cta/producer-Cta';
+import RegistrationHeroSection from '@/components/herosection/RegistrationHeroSection';
+
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -15,6 +17,7 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full">
       <HeroSectionNew />
+      <RegistrationHeroSection />
       <AboutUs />
       <HowWeWork />
       <CtaSection />

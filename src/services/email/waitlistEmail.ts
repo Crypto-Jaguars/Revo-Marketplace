@@ -56,22 +56,22 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
   const isSpanish = locale === 'es';
   const name = submission.name || (isSpanish ? 'Amigo' : 'Friend');
   const roleLabel = getRoleLabel(submission.role, locale);
-  
+
   // Escape user-controlled values for HTML safety
   const safeName = escapeHtml(name);
   const safeRoleLabel = escapeHtml(roleLabel);
   const safeLocale = escapeHtml(locale);
-  
+
   // Dynamic current year
   const currentYear = new Date().getFullYear();
-  
+
   // Create time-limited unsubscribe token (24 hours TTL)
   const TTL_HOURS = 24;
-  const expTimestamp = Math.floor(Date.now() / 1000) + (TTL_HOURS * 60 * 60);
+  const expTimestamp = Math.floor(Date.now() / 1000) + TTL_HOURS * 60 * 60;
   const emailLowercased = submission.email.toLowerCase().trim();
   const payload = `${emailLowercased}:${expTimestamp}`;
   const unsubscribeToken = generateUnsubscribeToken(payload);
-  
+
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
   const unsubscribeUrl = `${baseUrl}/api/waitlist/unsubscribe?email=${encodeURIComponent(submission.email)}&token=${unsubscribeToken}&exp=${expTimestamp}`;
 
@@ -110,17 +110,22 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
           </p>
           
           <p style="color: #4b5563; line-height: 1.6;">
-            ${isSpanish
-              ? 'Gracias por unirte a nuestra lista de espera. Estás oficialmente en el camino para ser parte de la revolución agrícola.'
-              : "Thank you for joining our waitlist. You're officially on track to be part of the agricultural revolution."
+            ${
+              isSpanish
+                ? 'Gracias por unirte a nuestra lista de espera. Estás oficialmente en el camino para ser parte de la revolución agrícola.'
+                : "Thank you for joining our waitlist. You're officially on track to be part of the agricultural revolution."
             }
           </p>
 
-          ${roleLabel ? `
+          ${
+            roleLabel
+              ? `
           <div class="highlight">
             <strong>${isSpanish ? 'Tu rol de interés:' : 'Your interest role:'}</strong> ${safeRoleLabel}
           </div>
-          ` : ''}
+          `
+              : ''
+          }
 
           <h2 style="color: #111827; font-size: 20px; margin-top: 30px;">
             ${isSpanish ? '¿Qué sigue?' : "What's Next?"}
@@ -148,9 +153,10 @@ export function generateWaitlistEmailTemplate(submission: any, locale = 'en') {
 
         <div class="footer">
           <p>
-            ${isSpanish
-              ? 'Estás recibiendo este correo porque te registraste en la lista de espera de Revo Farmers.'
-              : 'You are receiving this email because you signed up for the Revo Farmers waitlist.'
+            ${
+              isSpanish
+                ? 'Estás recibiendo este correo porque te registraste en la lista de espera de Revo Farmers.'
+                : 'You are receiving this email because you signed up for the Revo Farmers waitlist.'
             }
           </p>
           <p>
@@ -215,7 +221,7 @@ export async function sendWaitlistConfirmationEmail(submission: any, locale = 'e
   try {
     const template = generateWaitlistEmailTemplate(submission, locale);
     const transporter = getEmailTransporter();
-    
+
     const mailOptions = {
       from: {
         name: 'Revolutionary Farmers',
@@ -226,10 +232,10 @@ export async function sendWaitlistConfirmationEmail(submission: any, locale = 'e
       text: template.text,
       html: template.html,
     };
-    
+
     const info = await transporter.sendMail(mailOptions);
     console.log('Email sent:', info.messageId);
-    
+
     return true;
   } catch (error) {
     console.error('Email error:', error);
