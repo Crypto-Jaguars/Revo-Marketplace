@@ -14,7 +14,12 @@ import { Progress } from '@/components/ui/progress';
 import { FarmDetailsProps } from './types';
 import { Badge } from '@/components/ui/badge';
 
-export default function FarmDetails({ farmingMethods, infrastructure, ariaLabel = 'Farm details', ariaLive = 'polite' }: FarmDetailsProps) {
+export default function FarmDetails({
+  farmingMethods,
+  infrastructure,
+  ariaLabel = 'Farm details',
+  ariaLive = 'polite',
+}: FarmDetailsProps) {
   const t = useTranslations('Farm.details');
 
   return (

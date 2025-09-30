@@ -1,7 +1,14 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogDescription,
+} from '@/components/ui/dialog';
 import FarmerSubscriptionForm from './FarmerSubscriptionForm';
 import { useTranslations } from 'next-intl';
 
@@ -30,5 +37,3 @@ export default function FarmerSubscriptionDialog() {
     </Dialog>
   );
 }
-
-

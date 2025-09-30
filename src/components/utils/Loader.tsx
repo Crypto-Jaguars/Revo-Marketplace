@@ -23,4 +23,4 @@ export function Loader({ isLoading }: LoaderProps) {
     );
   }
   return null; // Ensure it returns null if not loading
-};
+}

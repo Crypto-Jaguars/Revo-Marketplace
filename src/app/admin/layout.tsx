@@ -18,11 +18,7 @@ export const metadata: Metadata = {
   description: 'Analytics and administration dashboard for Revolutionary Farmers waitlist',
 };
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import Image from 'next/image';
@@ -41,7 +41,7 @@ const SeasonalProducts: React.FC<SeasonalProductsProps> = ({ isOwner = false, pr
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-gray-900">Productos de Temporada</h2>
         {isOwner && (
-          <button 
+          <button
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
             onClick={handleManageProducts}
             aria-label="Gestionar productos de temporada"
@@ -51,14 +51,17 @@ const SeasonalProducts: React.FC<SeasonalProductsProps> = ({ isOwner = false, pr
           </button>
         )}
       </div>
-      
+
       <div className="grid grid-cols-1 gap-4">
         {products.map((product) => (
-          <div key={product.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+          <div
+            key={product.id}
+            className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+          >
             <div className="flex items-center space-x-3">
               <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 relative">
-                <Image 
-                  src={product.image} 
+                <Image
+                  src={product.image}
                   alt={product.name}
                   fill
                   className="object-cover"
@@ -71,7 +74,9 @@ const SeasonalProducts: React.FC<SeasonalProductsProps> = ({ isOwner = false, pr
                   <Calendar className="w-3 h-3 mr-1 flex-shrink-0" />
                   <span className="truncate">{product.season}</span>
                 </p>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAvailabilityColor(product.availability)}`}>
+                <span
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${getAvailabilityColor(product.availability)}`}
+                >
                   {product.availability}
                 </span>
               </div>

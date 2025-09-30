@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { Edit3, Save, X } from 'lucide-react';
@@ -16,15 +16,16 @@ interface AboutSectionProps {
 }
 
 const defaultFarmData: FarmData = {
-  description: "Somos una granja familiar con más de 20 años de experiencia en agricultura orgánica. Nos especializamos en el cultivo de frutas y verduras de temporada, utilizando métodos sostenibles y respetuosos con el medio ambiente.",
-  agricultureType: "Orgánica Certificada",
-  farmSize: "15 Hectáreas",
-  experience: "20+ Años"
+  description:
+    'Somos una granja familiar con más de 20 años de experiencia en agricultura orgánica. Nos especializamos en el cultivo de frutas y verduras de temporada, utilizando métodos sostenibles y respetuosos con el medio ambiente.',
+  agricultureType: 'Orgánica Certificada',
+  farmSize: '15 Hectáreas',
+  experience: '20+ Años',
 };
 
-const AboutSection: React.FC<AboutSectionProps> = ({ 
-  isOwner = false, 
-  initialData = defaultFarmData
+const AboutSection: React.FC<AboutSectionProps> = ({
+  isOwner = false,
+  initialData = defaultFarmData,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(initialData);
@@ -53,9 +54,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   };
 
   const handleInputChange = (field: keyof FarmData, value: string) => {
-    setTempData(prev => ({
+    setTempData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -106,9 +107,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
             aria-label="Descripción de la granja"
           />
         ) : (
-          <p className="text-gray-600 leading-relaxed">
-            {formData.description}
-          </p>
+          <p className="text-gray-600 leading-relaxed">{formData.description}</p>
         )}
       </div>
 

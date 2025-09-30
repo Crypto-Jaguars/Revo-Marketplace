@@ -75,7 +75,7 @@ const teamMembers: TeamMember[] = [
 
 export default function OurTeamPage() {
   const t = useTranslations('OurTeam');
-const isEs = useLocale().startsWith('es');
+  const isEs = useLocale().startsWith('es');
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-green-100 py-16 px-4">
@@ -95,7 +95,7 @@ const isEs = useLocale().startsWith('es');
               >
                 <div className="relative mx-auto mb-4">
                   <div className="w-24 h-24 rounded-full overflow-hidden border border-green-400 mx-auto">
-                  <Image
+                    <Image
                       src={member.avatar || '/placeholder.svg'}
                       alt={`Portrait of ${member.name}`}
                       width={96}

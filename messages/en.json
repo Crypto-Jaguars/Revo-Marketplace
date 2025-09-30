@@ -362,7 +362,7 @@
     },
     "empty": {
       "title": "No products found",
-      "description": "Try adjusting your filters or search criteria to find what you're looking for."
+      "description": "Try adjusting your filters or browse our producers"
     },
     "pagination": {
       "previous": "Previous",
@@ -1137,6 +1137,60 @@
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to common questions about Revolutionary Farmers, our platform, and how we're transforming agriculture through blockchain technology."
   },
+  "JoinFarmer": {
+    "title": "Join Revolutionary Farmers",
+    "subtitle": "Become part of the future of agriculture. Connect directly with consumers and grow your business.",
+    "benefits": {
+      "directSales": {
+        "title": "Direct Sales",
+        "description": "Sell directly to consumers without intermediaries"
+      },
+      "growingCommunity": {
+        "title": "Growing Community",
+        "description": "Join a network of sustainable farmers"
+      },
+      "securePayments": {
+        "title": "Secure Payments",
+        "description": "Guaranteed payments through blockchain technology"
+      },
+      "easyManagement": {
+        "title": "Easy Management",
+        "description": "Simple tools to manage your listings and orders"
+      }
+    },
+    "application": {
+      "title": "Farmer Application",
+      "subtitle": "Fill out this form to start your journey with Revolutionary Farmers",
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "farmName": "Farm Name",
+        "farmAddress": "Farm Address",
+        "farmSize": "Farm Size (acres)",
+        "farmingMethod": "Farming Method",
+        "mainCrops": "Main Crops",
+        "description": "Tell us about your farm"
+      },
+      "placeholders": {
+        "farmingMethod": "e.g., Organic, Conventional, Sustainable",
+        "mainCrops": "e.g., Tomatoes, Lettuce, Carrots",
+        "description": "Share your farming philosophy, experience, and what makes your farm special..."
+      },
+      "terms": {
+        "agree": "I agree to the",
+        "termsOfService": "Terms of Service",
+        "and": "and",
+        "privacyPolicy": "Privacy Policy"
+      },
+      "submit": "Submit Application",
+      "submitting": "Submitting Application...",
+      "success": "Application submitted successfully! We will contact you soon.",
+      "error": "Error submitting application. Please try again.",
+      "termsError": "Please accept the terms and conditions"
+    }
+  },
   "Settings": {
     "title": "Settings",
     "description": "Manage your account preferences and configurations",
@@ -1641,6 +1695,31 @@
       }
     }
   },
+  "ContactSection": {
+    "title": "Can't find the product you're looking for?",
+    "description": "Get in touch with us or explore our network of trusted producers",
+    "talkToUs": "Talk to Us",
+    "viewProducers": "View Our Producers",
+    "emailSubject": "Product Inquiry - Revolutionary Farmers",
+    "emailBody": "Hello Revolutionary Farmers,\\n\\nI am looking for a specific product that I couldn't find in your marketplace.\\n\\nProduct details:\\n- Product name: \\n- Category: \\n- Quantity needed: \\n- Preferred delivery date: \\n\\nAdditional notes:\\n\\nPlease let me know if you can help me find this product or connect me with a suitable producer.\\n\\nThank you for your assistance!\\n\\nBest regards"
+  },
+  "ProducersPage": {
+    "title": "Our Producers",
+    "subtitle": "Meet our network of trusted farmers and producers committed to sustainable agriculture",
+    "rating": "Rating",
+    "specialties": "Specialties",
+    "certifications": "Certifications",
+    "products": "products",
+    "viewProfile": "View Profile",
+    "joinNetwork": {
+      "title": "Interested in Joining Our Network?",
+      "description": "We're always looking for passionate farmers and producers to join our community",
+      "button": "Become a Producer"
+    },
+    "producerCard": {
+      "lastUsed": "Last used",
+      "location": "Location"
+    }
   "Producers": {
     "hero": {
       "title": "Our Producers",

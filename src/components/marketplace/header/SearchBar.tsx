@@ -51,4 +51,4 @@ export function SearchBar({ className }: SearchBarProps) {
       </div>
     </form>
   );
-};
+}

@@ -1,36 +1,55 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { useTranslations } from "next-intl"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Wallet, Copy, ExternalLink, RefreshCw, CheckCircle, DollarSign, Send, Plus, AlertCircle, Globe, TestTube, Info } from 'lucide-react'
-import { useWalletStore } from "@/store"
-import { useWallet } from "@/wallet/hooks/useWallet.hook"
-import { toast } from "sonner"
-import { useStellarWallet } from "@/hooks/useStellarWallet"
-import { Keypair } from "@stellar/stellar-sdk"
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Wallet,
+  Copy,
+  ExternalLink,
+  RefreshCw,
+  CheckCircle,
+  DollarSign,
+  Send,
+  Plus,
+  AlertCircle,
+  Globe,
+  TestTube,
+  Info,
+} from 'lucide-react';
+import { useWalletStore } from '@/store';
+import { useWallet } from '@/wallet/hooks/useWallet.hook';
+import { toast } from 'sonner';
+import { useStellarWallet } from '@/hooks/useStellarWallet';
+import { Keypair } from '@stellar/stellar-sdk';
 
 // Define the type for prepared transaction details
 interface PreparedTransactionDetails {
-  xdr: string
-  estimatedFee: string
-  sourceAccount: string
-  destination: string
-  amount: string
-  assetCode: string
-  assetIssuer: string
-  memo: string
+  xdr: string;
+  estimatedFee: string;
+  sourceAccount: string;
+  destination: string;
+  amount: string;
+  assetCode: string;
+  assetIssuer: string;
+  memo: string;
 }
 
 export default function WalletSection() {
-  const t = useTranslations("Account")
-  const { address, name } = useWalletStore()
-  const { connectWallet, disconnectWallet } = useWallet()
+  const t = useTranslations('Account');
+  const { address, name } = useWalletStore();
+  const { connectWallet, disconnectWallet } = useWallet();
   const {
     balances,
     transactions,
@@ -43,224 +62,227 @@ export default function WalletSection() {
     sendPayment,
     createTrustline,
     switchNetwork,
-  } = useStellarWallet(address)
+  } = useStellarWallet(address);
 
-  const [showPaymentModal, setShowPaymentModal] = useState(false)
-  const [showTrustlineModal, setShowTrustlineModal] = useState(false)
-  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showTrustlineModal, setShowTrustlineModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [paymentForm, setPaymentForm] = useState({
-    destination: "",
-    amount: "",
-    assetCode: "XLM",
-    assetIssuer: "",
-    memo: "",
-  })
+    destination: '',
+    amount: '',
+    assetCode: 'XLM',
+    assetIssuer: '',
+    memo: '',
+  });
   const [trustlineForm, setTrustlineForm] = useState({
-    assetCode: "",
-    assetIssuer: "",
-    limit: "",
-  })
-  const [isRefreshing, setIsRefreshing] = useState(false)
-  const [isSending, setIsSending] = useState(false)
-  const [isCreatingTrustline, setIsCreatingTrustline] = useState(false)
-  const [paymentError, setPaymentError] = useState<string | null>(null)
-  const [confirmTransactionDetails, setConfirmTransactionDetails] = useState<PreparedTransactionDetails | null>(null)
+    assetCode: '',
+    assetIssuer: '',
+    limit: '',
+  });
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [isCreatingTrustline, setIsCreatingTrustline] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [confirmTransactionDetails, setConfirmTransactionDetails] =
+    useState<PreparedTransactionDetails | null>(null);
 
   const handleCopyAddress = () => {
     if (address) {
-      navigator.clipboard.writeText(address)
-      toast.success("Address copied to clipboard")
+      navigator.clipboard.writeText(address);
+      toast.success('Address copied to clipboard');
     }
-  }
+  };
 
   const handleRefreshBalances = async () => {
-    setIsRefreshing(true)
-    await fetchBalances()
-    setIsRefreshing(false)
-    toast.success("Balances updated")
-  }
+    setIsRefreshing(true);
+    await fetchBalances();
+    setIsRefreshing(false);
+    toast.success('Balances updated');
+  };
 
   const formatBalance = (balance: string, decimals = 7) => {
-    const num = Number.parseFloat(balance)
-    if (num === 0) return "0"
-    return num.toFixed(decimals).replace(/\.?0+$/, "")
-  }
+    const num = Number.parseFloat(balance);
+    if (num === 0) return '0';
+    return num.toFixed(decimals).replace(/\.?0+$/, '');
+  };
 
   const getAssetIcon = (assetCode?: string) => {
-    if (!assetCode || assetCode === "XLM") {
+    if (!assetCode || assetCode === 'XLM') {
       return (
         <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
           XLM
         </div>
-      )
+      );
     }
-    if (assetCode === "USDT") {
+    if (assetCode === 'USDT') {
       return (
         <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
           $
         </div>
-      )
+      );
     }
-    if (assetCode === "USDC") {
+    if (assetCode === 'USDC') {
       return (
         <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
           $
         </div>
-      )
+      );
     }
     return (
       <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
         {assetCode.charAt(0)}
       </div>
-    )
-  }
+    );
+  };
 
   const validateAddress = (addr: string): boolean => {
     try {
-      Keypair.fromPublicKey(addr)
-      return true
+      Keypair.fromPublicKey(addr);
+      return true;
     } catch (e) {
-      return false
+      return false;
     }
-  }
+  };
 
   const handleMaxAmount = () => {
     const selectedAsset = balances.find(
-      (b) => b.asset_code === paymentForm.assetCode && b.asset_issuer === paymentForm.assetIssuer,
-    )
+      (b) => b.asset_code === paymentForm.assetCode && b.asset_issuer === paymentForm.assetIssuer
+    );
     if (selectedAsset) {
-      let maxAmount = Number.parseFloat(selectedAsset.balance)
+      let maxAmount = Number.parseFloat(selectedAsset.balance);
       // For XLM, account for minimum balance and transaction fees
-      if (paymentForm.assetCode === "XLM") {
+      if (paymentForm.assetCode === 'XLM') {
         // A typical base reserve is 0.5 XLM, and fee is 0.00001 XLM per operation.
         // For simplicity, let's reserve 1 XLM for future operations/minimum balance.
         // This is a simplified calculation and might need to be more precise based on actual network reserves.
-        maxAmount = Math.max(0, maxAmount - 1.5) // Reserve 1.5 XLM for base reserve + fees
+        maxAmount = Math.max(0, maxAmount - 1.5); // Reserve 1.5 XLM for base reserve + fees
       }
-      setPaymentForm((prev) => ({ ...prev, amount: maxAmount.toFixed(7).replace(/\.?0+$/, "") }))
+      setPaymentForm((prev) => ({ ...prev, amount: maxAmount.toFixed(7).replace(/\.?0+$/, '') }));
     }
-  }
+  };
 
   const getAvailableAssets = () => {
-    const assets = [{ code: "XLM", issuer: "" }]
+    const assets = [{ code: 'XLM', issuer: '' }];
     balances.forEach((balance) => {
-      if (balance.asset_code && balance.asset_code !== "XLM") {
+      if (balance.asset_code && balance.asset_code !== 'XLM') {
         assets.push({
           code: balance.asset_code,
-          issuer: balance.asset_issuer || "",
-        })
+          issuer: balance.asset_issuer || '',
+        });
       }
-    })
-    return assets
-  }
+    });
+    return assets;
+  };
 
   const getAssetBalance = (assetCode: string, assetIssuer: string) => {
-    const asset = balances.find((b) => (b.asset_code || "XLM") === assetCode && (b.asset_issuer || "") === assetIssuer)
-    return asset ? Number.parseFloat(asset.balance) : 0
-  }
+    const asset = balances.find(
+      (b) => (b.asset_code || 'XLM') === assetCode && (b.asset_issuer || '') === assetIssuer
+    );
+    return asset ? Number.parseFloat(asset.balance) : 0;
+  };
 
   const getUsdEquivalent = (amount: string, assetCode: string) => {
-    const rate = exchangeRates[assetCode]
+    const rate = exchangeRates[assetCode];
     if (rate) {
-      return (Number.parseFloat(amount) * rate).toFixed(2)
+      return (Number.parseFloat(amount) * rate).toFixed(2);
     }
-    return "N/A"
-  }
+    return 'N/A';
+  };
 
   const handlePreparePayment = async () => {
-    setPaymentError(null)
+    setPaymentError(null);
     if (!paymentForm.destination || !paymentForm.amount) {
-      setPaymentError("Please fill in destination and amount")
-      return
+      setPaymentError('Please fill in destination and amount');
+      return;
     }
 
     if (!validateAddress(paymentForm.destination)) {
-      setPaymentError("Invalid Stellar destination address")
-      return
+      setPaymentError('Invalid Stellar destination address');
+      return;
     }
 
-    const amountNum = Number.parseFloat(paymentForm.amount)
+    const amountNum = Number.parseFloat(paymentForm.amount);
     if (amountNum <= 0) {
-      setPaymentError("Amount must be greater than 0")
-      return
+      setPaymentError('Amount must be greater than 0');
+      return;
     }
 
-    const currentBalance = getAssetBalance(paymentForm.assetCode, paymentForm.assetIssuer)
+    const currentBalance = getAssetBalance(paymentForm.assetCode, paymentForm.assetIssuer);
     if (amountNum > currentBalance) {
-      setPaymentError("Insufficient balance")
-      return
+      setPaymentError('Insufficient balance');
+      return;
     }
 
-    setIsSending(true)
+    setIsSending(true);
     try {
       const details = await preparePaymentTransaction(
         paymentForm.destination,
         paymentForm.amount,
-        paymentForm.assetCode === "XLM" ? undefined : paymentForm.assetCode,
+        paymentForm.assetCode === 'XLM' ? undefined : paymentForm.assetCode,
         paymentForm.assetIssuer || undefined,
-        paymentForm.memo || undefined,
-      )
-      setConfirmTransactionDetails(details)
-      setShowPaymentModal(false)
-      setShowConfirmModal(true)
+        paymentForm.memo || undefined
+      );
+      setConfirmTransactionDetails(details);
+      setShowPaymentModal(false);
+      setShowConfirmModal(true);
     } catch (error) {
-      setPaymentError(error instanceof Error ? error.message : "Failed to prepare transaction")
+      setPaymentError(error instanceof Error ? error.message : 'Failed to prepare transaction');
     } finally {
-      setIsSending(false)
+      setIsSending(false);
     }
-  }
+  };
 
   const handleConfirmSend = async () => {
-    if (!confirmTransactionDetails) return
+    if (!confirmTransactionDetails) return;
 
-    setIsSending(true)
+    setIsSending(true);
     try {
-      const hash = await sendPayment(confirmTransactionDetails.xdr)
-      toast.success(`Payment sent successfully! Hash: ${hash.slice(0, 10)}...`)
-      setShowConfirmModal(false)
-      setPaymentForm({ destination: "", amount: "", assetCode: "XLM", assetIssuer: "", memo: "" })
-      setConfirmTransactionDetails(null)
+      const hash = await sendPayment(confirmTransactionDetails.xdr);
+      toast.success(`Payment sent successfully! Hash: ${hash.slice(0, 10)}...`);
+      setShowConfirmModal(false);
+      setPaymentForm({ destination: '', amount: '', assetCode: 'XLM', assetIssuer: '', memo: '' });
+      setConfirmTransactionDetails(null);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to send payment")
+      toast.error(error instanceof Error ? error.message : 'Failed to send payment');
     } finally {
-      setIsSending(false)
+      setIsSending(false);
     }
-  }
+  };
 
   const handleCreateTrustline = async () => {
     if (!trustlineForm.assetCode || !trustlineForm.assetIssuer) {
-      toast.error("Please fill in asset code and issuer")
-      return
+      toast.error('Please fill in asset code and issuer');
+      return;
     }
 
     if (!validateAddress(trustlineForm.assetIssuer)) {
-      toast.error("Invalid asset issuer address")
-      return
+      toast.error('Invalid asset issuer address');
+      return;
     }
 
-    setIsCreatingTrustline(true)
+    setIsCreatingTrustline(true);
 
     try {
       const hash = await createTrustline(
         trustlineForm.assetCode,
         trustlineForm.assetIssuer,
-        trustlineForm.limit || undefined,
-      )
+        trustlineForm.limit || undefined
+      );
 
-      toast.success(`Trustline created successfully! Hash: ${hash.slice(0, 10)}...`)
-      setShowTrustlineModal(false)
-      setTrustlineForm({ assetCode: "", assetIssuer: "", limit: "" })
+      toast.success(`Trustline created successfully! Hash: ${hash.slice(0, 10)}...`);
+      setShowTrustlineModal(false);
+      setTrustlineForm({ assetCode: '', assetIssuer: '', limit: '' });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to create trustline")
+      toast.error(error instanceof Error ? error.message : 'Failed to create trustline');
     } finally {
-      setIsCreatingTrustline(false)
+      setIsCreatingTrustline(false);
     }
-  }
+  };
 
-  const handleNetworkSwitch = async (newNetwork: "PUBLIC" | "TESTNET") => {
-    await switchNetwork(newNetwork)
-    toast.success(`Switched to ${newNetwork === "PUBLIC" ? "Mainnet" : "Testnet"}`)
-  }
+  const handleNetworkSwitch = async (newNetwork: 'PUBLIC' | 'TESTNET') => {
+    await switchNetwork(newNetwork);
+    toast.success(`Switched to ${newNetwork === 'PUBLIC' ? 'Mainnet' : 'Testnet'}`);
+  };
 
   if (!address) {
     return (
@@ -280,12 +302,15 @@ export default function WalletSection() {
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
-  const selectedAssetBalance = getAssetBalance(paymentForm.assetCode, paymentForm.assetIssuer)
-  const selectedAssetUsdValue = getUsdEquivalent(selectedAssetBalance.toString(), paymentForm.assetCode)
-  const sendingAmountUsdValue = getUsdEquivalent(paymentForm.amount, paymentForm.assetCode)
+  const selectedAssetBalance = getAssetBalance(paymentForm.assetCode, paymentForm.assetIssuer);
+  const selectedAssetUsdValue = getUsdEquivalent(
+    selectedAssetBalance.toString(),
+    paymentForm.assetCode
+  );
+  const sendingAmountUsdValue = getUsdEquivalent(paymentForm.amount, paymentForm.assetCode);
 
   return (
     <div className="space-y-6">
@@ -303,10 +328,14 @@ export default function WalletSection() {
             </Badge>
             <Badge
               variant="outline"
-              className={`${network === "PUBLIC" ? "border-green-600 text-green-600" : "border-orange-600 text-orange-600"}`}
+              className={`${network === 'PUBLIC' ? 'border-green-600 text-green-600' : 'border-orange-600 text-orange-600'}`}
             >
-              {network === "PUBLIC" ? <Globe className="h-3 w-3 mr-1" /> : <TestTube className="h-3 w-3 mr-1" />}
-              {network === "PUBLIC" ? "Mainnet" : "Testnet"}
+              {network === 'PUBLIC' ? (
+                <Globe className="h-3 w-3 mr-1" />
+              ) : (
+                <TestTube className="h-3 w-3 mr-1" />
+              )}
+              {network === 'PUBLIC' ? 'Mainnet' : 'Testnet'}
             </Badge>
             <Button
               variant="outline"
@@ -339,7 +368,10 @@ export default function WalletSection() {
                   variant="ghost"
                   size="sm"
                   onClick={() =>
-                    window.open(`https://stellar.expert/explorer/${network.toLowerCase()}/account/${address}`, "_blank")
+                    window.open(
+                      `https://stellar.expert/explorer/${network.toLowerCase()}/account/${address}`,
+                      '_blank'
+                    )
                   }
                   className="text-gray-500 hover:text-gray-700"
                 >
@@ -352,15 +384,15 @@ export default function WalletSection() {
               <label className="text-sm text-gray-600">Connected Via</label>
               <div className="mt-1 flex items-center justify-between">
                 <span className="bg-gray-50 px-3 py-2 rounded text-sm border border-gray-200 inline-block">
-                  {name || "Stellar Wallet"}
+                  {name || 'Stellar Wallet'}
                 </span>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleNetworkSwitch(network === "PUBLIC" ? "TESTNET" : "PUBLIC")}
+                  onClick={() => handleNetworkSwitch(network === 'PUBLIC' ? 'TESTNET' : 'PUBLIC')}
                   className="ml-2"
                 >
-                  Switch to {network === "PUBLIC" ? "Testnet" : "Mainnet"}
+                  Switch to {network === 'PUBLIC' ? 'Testnet' : 'Mainnet'}
                 </Button>
               </div>
             </div>
@@ -393,7 +425,7 @@ export default function WalletSection() {
             disabled={isRefreshing}
             className="text-gray-500 hover:text-gray-700"
           >
-            <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />
+            <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
           </Button>
         </div>
 
@@ -416,26 +448,38 @@ export default function WalletSection() {
                 <div className="flex items-center space-x-3">
                   {getAssetIcon(balance.asset_code)}
                   <div>
-                    <p className="text-gray-900 font-semibold">{balance.asset_code || "XLM"}</p>
+                    <p className="text-gray-900 font-semibold">{balance.asset_code || 'XLM'}</p>
                     {balance.asset_issuer && (
-                      <p className="text-gray-500 text-xs truncate max-w-32">{balance.asset_issuer}</p>
+                      <p className="text-gray-500 text-xs truncate max-w-32">
+                        {balance.asset_issuer}
+                      </p>
                     )}
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-900 font-bold text-lg">{formatBalance(balance.balance)}</p>
-                  {exchangeRates[balance.asset_code || "XLM"] && (
+                  <p className="text-gray-900 font-bold text-lg">
+                    {formatBalance(balance.balance)}
+                  </p>
+                  {exchangeRates[balance.asset_code || 'XLM'] && (
                     <p className="text-gray-500 text-sm">
-                      ~${getUsdEquivalent(balance.balance, balance.asset_code || "XLM")} USD
+                      ~${getUsdEquivalent(balance.balance, balance.asset_code || 'XLM')} USD
                     </p>
                   )}
-                  {balance.limit && <p className="text-gray-500 text-sm">Limit: {formatBalance(balance.limit)}</p>}
-                  {balance.buying_liabilities && Number.parseFloat(balance.buying_liabilities) > 0 && (
-                    <p className="text-orange-500 text-sm">Buying: {formatBalance(balance.buying_liabilities)}</p>
+                  {balance.limit && (
+                    <p className="text-gray-500 text-sm">Limit: {formatBalance(balance.limit)}</p>
                   )}
-                  {balance.selling_liabilities && Number.parseFloat(balance.selling_liabilities) > 0 && (
-                    <p className="text-blue-500 text-sm">Selling: {formatBalance(balance.selling_liabilities)}</p>
-                  )}
+                  {balance.buying_liabilities &&
+                    Number.parseFloat(balance.buying_liabilities) > 0 && (
+                      <p className="text-orange-500 text-sm">
+                        Buying: {formatBalance(balance.buying_liabilities)}
+                      </p>
+                    )}
+                  {balance.selling_liabilities &&
+                    Number.parseFloat(balance.selling_liabilities) > 0 && (
+                      <p className="text-blue-500 text-sm">
+                        Selling: {formatBalance(balance.selling_liabilities)}
+                      </p>
+                    )}
                 </div>
               </div>
             ))}
@@ -475,7 +519,10 @@ export default function WalletSection() {
             variant="outline"
             className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-transparent"
             onClick={() =>
-              window.open(`https://stellar.expert/explorer/${network.toLowerCase()}/account/${address}`, "_blank")
+              window.open(
+                `https://stellar.expert/explorer/${network.toLowerCase()}/account/${address}`,
+                '_blank'
+              )
             }
           >
             <ExternalLink className="h-4 w-4 mr-2" />
@@ -504,15 +551,16 @@ export default function WalletSection() {
                   id="destination"
                   value={paymentForm.destination}
                   onChange={(e) => {
-                    setPaymentForm((prev) => ({ ...prev, destination: e.target.value }))
-                    setPaymentError(null) // Clear error on change
+                    setPaymentForm((prev) => ({ ...prev, destination: e.target.value }));
+                    setPaymentError(null); // Clear error on change
                   }}
                   className="mt-1 bg-gray-50 border border-gray-200"
                   placeholder="GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
                 />
-                {!validateAddress(paymentForm.destination) && paymentForm.destination.length > 0 && (
-                  <p className="text-red-500 text-xs mt-1">Invalid Stellar address format</p>
-                )}
+                {!validateAddress(paymentForm.destination) &&
+                  paymentForm.destination.length > 0 && (
+                    <p className="text-red-500 text-xs mt-1">Invalid Stellar address format</p>
+                  )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -527,8 +575,8 @@ export default function WalletSection() {
                       step="0.0000001"
                       value={paymentForm.amount}
                       onChange={(e) => {
-                        setPaymentForm((prev) => ({ ...prev, amount: e.target.value }))
-                        setPaymentError(null) // Clear error on change
+                        setPaymentForm((prev) => ({ ...prev, amount: e.target.value }));
+                        setPaymentError(null); // Clear error on change
                       }}
                       className="bg-gray-50 border border-gray-200 pr-12"
                       placeholder="0.00"
@@ -554,13 +602,13 @@ export default function WalletSection() {
                   <Select
                     value={paymentForm.assetCode}
                     onValueChange={(value) => {
-                      const asset = getAvailableAssets().find((a) => a.code === value)
+                      const asset = getAvailableAssets().find((a) => a.code === value);
                       setPaymentForm((prev) => ({
                         ...prev,
                         assetCode: value,
-                        assetIssuer: asset?.issuer || "",
-                      }))
-                      setPaymentError(null) // Clear error on change
+                        assetIssuer: asset?.issuer || '',
+                      }));
+                      setPaymentError(null); // Clear error on change
                     }}
                   >
                     <SelectTrigger className="mt-1 bg-gray-50 border border-gray-200">
@@ -575,7 +623,8 @@ export default function WalletSection() {
                     </SelectContent>
                   </Select>
                   <p className="text-gray-500 text-xs mt-1">
-                    Balance: {formatBalance(selectedAssetBalance.toString())} {paymentForm.assetCode}
+                    Balance: {formatBalance(selectedAssetBalance.toString())}{' '}
+                    {paymentForm.assetCode}
                     {exchangeRates[paymentForm.assetCode] && ` (~$${selectedAssetUsdValue} USD)`}
                   </p>
                 </div>
@@ -601,7 +650,7 @@ export default function WalletSection() {
                   disabled={isSending}
                   className="flex-1 bg-[#375B42] hover:bg-[#2A4632] text-white"
                 >
-                  {isSending ? "Preparing..." : "Review & Send"}
+                  {isSending ? 'Preparing...' : 'Review & Send'}
                 </Button>
                 <Button
                   onClick={() => setShowPaymentModal(false)}
@@ -630,7 +679,12 @@ export default function WalletSection() {
                 <Input
                   id="assetCode"
                   value={trustlineForm.assetCode}
-                  onChange={(e) => setTrustlineForm((prev) => ({ ...prev, assetCode: e.target.value.toUpperCase() }))}
+                  onChange={(e) =>
+                    setTrustlineForm((prev) => ({
+                      ...prev,
+                      assetCode: e.target.value.toUpperCase(),
+                    }))
+                  }
                   className="mt-1 bg-gray-50 border border-gray-200"
                   placeholder="USDT, USDC, etc."
                 />
@@ -643,13 +697,16 @@ export default function WalletSection() {
                 <Input
                   id="assetIssuer"
                   value={trustlineForm.assetIssuer}
-                  onChange={(e) => setTrustlineForm((prev) => ({ ...prev, assetIssuer: e.target.value }))}
+                  onChange={(e) =>
+                    setTrustlineForm((prev) => ({ ...prev, assetIssuer: e.target.value }))
+                  }
                   className="mt-1 bg-gray-50 border border-gray-200"
                   placeholder="GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
                 />
-                {!validateAddress(trustlineForm.assetIssuer) && trustlineForm.assetIssuer.length > 0 && (
-                  <p className="text-red-500 text-xs mt-1">Invalid Stellar address format</p>
-                )}
+                {!validateAddress(trustlineForm.assetIssuer) &&
+                  trustlineForm.assetIssuer.length > 0 && (
+                    <p className="text-red-500 text-xs mt-1">Invalid Stellar address format</p>
+                  )}
               </div>
 
               <div>
@@ -672,7 +729,7 @@ export default function WalletSection() {
                   disabled={isCreatingTrustline}
                   className="flex-1 bg-[#375B42] hover:bg-[#2A4632] text-white"
                 >
-                  {isCreatingTrustline ? "Creating..." : "Create Trustline"}
+                  {isCreatingTrustline ? 'Creating...' : 'Create Trustline'}
                 </Button>
                 <Button
                   onClick={() => setShowTrustlineModal(false)}
@@ -704,19 +761,24 @@ export default function WalletSection() {
               </div>
               <div className="flex justify-between">
                 <span>To:</span>
-                <span className="font-semibold truncate max-w-[70%]">{confirmTransactionDetails.destination}</span>
+                <span className="font-semibold truncate max-w-[70%]">
+                  {confirmTransactionDetails.destination}
+                </span>
               </div>
               {confirmTransactionDetails.memo && (
                 <div className="flex justify-between">
                   <span>Memo:</span>
-                  <span className="font-semibold truncate max-w-[70%]">{confirmTransactionDetails.memo}</span>
+                  <span className="font-semibold truncate max-w-[70%]">
+                    {confirmTransactionDetails.memo}
+                  </span>
                 </div>
               )}
               <div className="flex justify-between">
                 <span>Estimated Fee:</span>
                 <span className="font-semibold">
                   {confirmTransactionDetails.estimatedFee} XLM
-                  {exchangeRates.XLM && ` (~$${getUsdEquivalent(confirmTransactionDetails.estimatedFee, "XLM")} USD)`}
+                  {exchangeRates.XLM &&
+                    ` (~$${getUsdEquivalent(confirmTransactionDetails.estimatedFee, 'XLM')} USD)`}
                 </span>
               </div>
               <div className="pt-2">
@@ -739,13 +801,19 @@ export default function WalletSection() {
                 disabled={isSending}
                 className="flex-1 bg-[#375B42] hover:bg-[#2A4632] text-white"
               >
-                {isSending ? "Confirming..." : "Confirm Send"}
+                {isSending ? 'Confirming...' : 'Confirm Send'}
               </Button>
               <Button
                 onClick={() => {
-                  setShowConfirmModal(false)
-                  setConfirmTransactionDetails(null)
-                  setPaymentForm({ destination: "", amount: "", assetCode: "XLM", assetIssuer: "", memo: "" })
+                  setShowConfirmModal(false);
+                  setConfirmTransactionDetails(null);
+                  setPaymentForm({
+                    destination: '',
+                    amount: '',
+                    assetCode: 'XLM',
+                    assetIssuer: '',
+                    memo: '',
+                  });
                 }}
                 variant="outline"
                 className="border-gray-300 text-gray-700 hover:bg-gray-50"
@@ -758,5 +826,5 @@ export default function WalletSection() {
         </div>
       )}
     </div>
-  )
+  );
 }

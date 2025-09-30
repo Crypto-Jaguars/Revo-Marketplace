@@ -315,17 +315,17 @@ export default function ContactPage() {
               >
                 View FAQ
               </Button>
-                              <Button
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10"
-                  onClick={() => {
-                    const subject = encodeURIComponent(t('emailSubject'));
-                    const body = t('emailBody'); // Already URL-encoded in translation
-                    window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
-                  }}
-                >
-                  Email Support
-                </Button>
+              <Button
+                variant="outline"
+                className="border-white text-white hover:bg-white/10"
+                onClick={() => {
+                  const subject = encodeURIComponent(t('emailSubject'));
+                  const body = t('emailBody'); // Already URL-encoded in translation
+                  window.location.href = `mailto:revolutionaryfarmers@gmail.com?subject=${subject}&body=${body}`;
+                }}
+              >
+                Email Support
+              </Button>
             </div>
           </CardContent>
         </Card>
