@@ -42,6 +42,31 @@
       }
     }
   },
+  "farmerProfile": {
+    "personalInfo": {
+      "title": "Información Personal",
+      "name": "Nombre",
+      "surname": "Apellido",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "namePlaceholder": "Ingresa tu nombre",
+      "surnamePlaceholder": "Ingresa tu apellido",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "phonePlaceholder": "Ingresa tu número de teléfono",
+      "save": "Guardar Información Personal",
+      "saving": "Guardando Información Personal...",
+      "validation": {
+        "nameMin": "El nombre debe tener al menos 2 caracteres",
+        "nameMax": "El nombre debe tener máximo 50 caracteres",
+        "surnameMin": "El apellido debe tener al menos 2 caracteres",
+        "surnameMax": "El apellido debe tener máximo 50 caracteres",
+        "emailInvalid": "Dirección de correo electrónico inválida",
+        "phoneMin": "El número de teléfono parece muy corto",
+        "phoneMax": "El número de teléfono parece muy largo",
+        "phoneFormat": "Formato de número de teléfono inválido"
+      }
+    }
+  },
   "Waitlist": {
     "title": "Únete a la Lista de Espera",
     "subtitle": "Sé el primero en saber cuando lancemos y obtén beneficios exclusivos de acceso anticipado.",

@@ -42,6 +42,31 @@
       }
     }
   },
+  "farmerProfile": {
+    "personalInfo": {
+      "title": "Personal Information",
+      "name": "Name",
+      "surname": "Surname", 
+      "email": "Email",
+      "phone": "Phone",
+      "namePlaceholder": "Enter your first name",
+      "surnamePlaceholder": "Enter your last name",
+      "emailPlaceholder": "Enter your email address",
+      "phonePlaceholder": "Enter your phone number",
+      "save": "Save Personal Information",
+      "saving": "Saving Personal Information...",
+      "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must be at most 50 characters",
+        "surnameMin": "Surname must be at least 2 characters",
+        "surnameMax": "Surname must be at most 50 characters",
+        "emailInvalid": "Invalid email address",
+        "phoneMin": "Phone number seems too short",
+        "phoneMax": "Phone number seems too long",
+        "phoneFormat": "Invalid phone number format"
+      }
+    }
+  },
   "Waitlist": {
     "title": "Join the Waitlist",
     "subtitle": "Be the first to know when we launch and get exclusive early access benefits.",
