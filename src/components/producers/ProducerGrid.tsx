@@ -1,83 +1,94 @@
 'use client';
 
-import React from 'react';
+import { useState } from 'react';
 import { Producer } from '@/types/producer';
 import { ProducerCard } from './ProducerCard';
-import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Grid3X3, List } from 'lucide-react';
 
 interface ProducerGridProps {
   producers: Producer[];
-  onProducerClick?: (producer: Producer) => void;
-  className?: string;
-  title?: string;
-  description?: string;
+  viewMode: 'grid' | 'list';
+  onViewModeChange: (mode: 'grid' | 'list') => void;
+  onProducerClick: (producer: Producer) => void;
 }
 
 export function ProducerGrid({ 
   producers, 
-  onProducerClick, 
-  className, 
-  title = "Featured Producers",
-  description = "Meet our trusted local farmers and producers"
+  viewMode, 
+  onViewModeChange,
+  onProducerClick 
 }: ProducerGridProps) {
+  const [displayedCount, setDisplayedCount] = useState(12);
+
+  const handleLoadMore = () => {
+    setDisplayedCount(prev => Math.min(prev + 12, producers.length));
+  };
+
+  const displayedProducers = producers.slice(0, displayedCount);
+  const hasMore = displayedCount < producers.length;
+
   return (
-    <section className={cn('w-full max-w-7xl mx-auto', className)}>
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-          {title}
-        </h2>
-        {description && (
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {description}
-          </p>
-        )}
+    <div className="space-y-6">
+      {/* View Mode Toggle */}
+      <div className="flex justify-end">
+        <div className="flex border border-gray-200 rounded-lg overflow-hidden">
+          <Button
+            variant={viewMode === 'grid' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => onViewModeChange('grid')}
+            className="rounded-none border-0"
+          >
+            <Grid3X3 className="w-4 h-4" />
+          </Button>
+          <Button
+            variant={viewMode === 'list' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => onViewModeChange('list')}
+            className="rounded-none border-0"
+          >
+            <List className="w-4 h-4" />
+          </Button>
+        </div>
       </div>
 
-      {/* Grid */}
-      <div className={cn(
-        'grid gap-6 w-full',
-        'grid-cols-1',        // 1 column on mobile
-        'sm:grid-cols-2',     // 2 columns on small screens
-        'lg:grid-cols-3',     // 3 columns on large screens
-        'place-items-center'   // Center items in their grid cells
-      )}>
-        {producers.map((producer) => (
-          <ProducerCard
-            key={producer.id}
-            producer={producer}
-            onClick={onProducerClick}
-            className="w-full max-w-sm"
-          />
-        ))}
-      </div>
-
-      {/* Empty State */}
-      {producers.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-gray-400 mb-4">
-            <svg
-              className="mx-auto h-12 w-12"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
-            </svg>
-          </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
-            No Producers Found
-          </h3>
-          <p className="text-gray-500">
-            We couldn&apos;t find any producers matching your criteria.
-          </p>
+      {/* Producers Grid/List */}
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {displayedProducers.map((producer) => (
+            <ProducerCard
+              key={producer.id}
+              producer={producer}
+              viewMode="grid"
+              onClick={() => onProducerClick(producer)}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {displayedProducers.map((producer) => (
+            <ProducerCard
+              key={producer.id}
+              producer={producer}
+              viewMode="list"
+              onClick={() => onProducerClick(producer)}
+            />
+          ))}
         </div>
       )}
-    </section>
+
+      {/* Load More Button */}
+      {hasMore && (
+        <div className="flex justify-center pt-8">
+          <Button
+            onClick={handleLoadMore}
+            variant="outline"
+            className="px-8 py-3 text-lg font-medium border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all duration-200"
+          >
+            Load More Producers
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }

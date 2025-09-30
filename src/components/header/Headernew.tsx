@@ -103,6 +103,9 @@ const Header = () => {
               >
                 {t('Marketplace.navigation.marketplace')}
               </Link>
+              <Link style={{ color: 'white' }} href={`/${language}/producers`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+                {t('Marketplace.navigation.producers')}
+              </Link>
             </div>
           </nav>
           <div className="flex items-center gap-4">
@@ -211,6 +214,14 @@ const Header = () => {
               className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md"
             >
               {t('Marketplace.navigation.marketplace')}
+            </Link>
+            <Link
+              style={{ color: 'white' }}
+              href={`/${language}/producers`}
+              onClick={() => setIsMenuOpen(false)}
+              className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md"
+            >
+              {t('Marketplace.navigation.producers')}
             </Link>
           </div>
         </div>
