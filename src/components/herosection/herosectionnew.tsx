@@ -171,7 +171,7 @@ function handleMouseLeave(){
             <Link href={`/${language}/invest`}>{tButton('investNow')}</Link>
           </Button>
         </div>
-      </div>
+      </main>
 
       {/* Mobile scroll indicator */}
       <div className="lg:hidden flex justify-center items-center py-2 bg-gradient-to-b from-[#81B8A2] to-[#6BA892]">
