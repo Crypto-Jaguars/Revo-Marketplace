@@ -56,3 +56,7 @@ export type {
   UserPreferences,
   ConnectedWallet,
 } from './slices/settings/types';
+
+// Passkey store
+export { usePasskeyStore } from './slices/passkey/index';
+export type { PasskeyState } from './slices/passkey/types';

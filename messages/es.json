@@ -475,6 +475,27 @@
     "buyerButton": "Comprador",
     "walletButton": "Conectar Billetera"
   },
+  "Auth": {
+    "title": "Bienvenido de Nuevo",
+    "subtitle": "Elige tu forma preferida de iniciar sesión",
+    "passkeyTitle": "Iniciar sesión con Passkey",
+    "passkeyDescription": "Autenticación biométrica rápida y segura",
+    "passkeyButton": "Usar Passkey",
+    "passkeyAvailable": "Disponible",
+    "emailTitle": "Email y Contraseña",
+    "emailDescription": "Método tradicional de inicio de sesión",
+    "emailButton": "Usar Email/Contraseña",
+    "walletTitle": "Conectar Billetera",
+    "walletDescription": "Iniciar sesión con tu billetera Stellar",
+    "walletButton": "Conectar Billetera",
+    "createPasskey": "¿No tienes un Passkey aún?",
+    "createPasskeyButton": "Crear un Passkey",
+    "securityTitle": "Autenticación Segura",
+    "securityDescription": "Todos los métodos de autenticación están protegidos con cifrado de nivel industrial. Tus datos biométricos nunca salen de tu dispositivo.",
+    "deviceNotSupported": "Tu dispositivo no soporta Passkeys. Por favor usa email/contraseña o conexión de billetera.",
+    "signingIn": "Iniciando sesión...",
+    "backToHome": "Volver al Inicio"
+  },
   "SignIn": {
     "title": "Iniciar Sesión",
     "subtitle": "Ingresa tus datos a continuación",
