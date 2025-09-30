@@ -43,7 +43,7 @@ const BenefitsGrid = () => {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: 'url(/images/crops-collage.png)',
+          backgroundImage: 'url(/images/crops-collage.jpg)',
           opacity: 0.06,
         }}
       />
