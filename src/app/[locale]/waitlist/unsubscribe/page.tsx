@@ -16,13 +16,13 @@ export default function UnsubscribePage() {
   const t = useTranslations('Unsubscribe');
   const searchParams = useSearchParams();
   const { language } = useLanguageStore();
-  
+
   const [email, setEmail] = useState('');
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
-  
+
   const emailParam = searchParams?.get('email');
   const tokenParam = searchParams?.get('token');
   const errorParam = searchParams?.get('error');
@@ -39,7 +39,7 @@ export default function UnsubscribePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError(t('errors.invalidEmail'));
       return;
@@ -83,25 +83,15 @@ export default function UnsubscribePage() {
           <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-8 h-8 text-revolutionary_green" />
           </div>
-          <h1 className="text-2xl font-semibold text-forest-900 mb-2">
-            {t('success.title')}
-          </h1>
-          <p className="text-gray-600 mb-6">
-            {t('success.message')}
-          </p>
-          <p className="text-sm text-gray-500 mb-8">
-            {t('success.resubscribe')}
-          </p>
+          <h1 className="text-2xl font-semibold text-forest-900 mb-2">{t('success.title')}</h1>
+          <p className="text-gray-600 mb-6">{t('success.message')}</p>
+          <p className="text-sm text-gray-500 mb-8">{t('success.resubscribe')}</p>
           <div className="space-y-3">
             <Button asChild className="w-full">
-              <Link href={`/${language}`}>
-                {t('success.backToHome')}
-              </Link>
+              <Link href={`/${language}`}>{t('success.backToHome')}</Link>
             </Button>
             <Button asChild variant="outline" className="w-full">
-              <Link href={`/${language}/waitlist`}>
-                {t('success.rejoin')}
-              </Link>
+              <Link href={`/${language}/waitlist`}>{t('success.rejoin')}</Link>
             </Button>
           </div>
         </div>
@@ -114,14 +104,10 @@ export default function UnsubscribePage() {
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <div className="flex items-center gap-3 mb-6">
           <Mail className="w-6 h-6 text-forest-900" />
-          <h1 className="text-2xl font-semibold text-forest-900">
-            {t('title')}
-          </h1>
+          <h1 className="text-2xl font-semibold text-forest-900">{t('title')}</h1>
         </div>
-        
-        <p className="text-gray-600 mb-6">
-          {t('description')}
-        </p>
+
+        <p className="text-gray-600 mb-6">{t('description')}</p>
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 flex items-start gap-2">
@@ -146,9 +132,7 @@ export default function UnsubscribePage() {
               required
             />
             {emailParam && tokenParam && (
-              <p className="text-xs text-gray-500 mt-1">
-                {t('fields.email.verified')}
-              </p>
+              <p className="text-xs text-gray-500 mt-1">{t('fields.email.verified')}</p>
             )}
           </div>
 
@@ -165,9 +149,7 @@ export default function UnsubscribePage() {
               rows={3}
               className="mt-1"
             />
-            <p className="text-xs text-gray-500 mt-1">
-              {t('fields.reason.help')}
-            </p>
+            <p className="text-xs text-gray-500 mt-1">{t('fields.reason.help')}</p>
           </div>
 
           <div className="pt-4 space-y-3">
@@ -197,9 +179,7 @@ export default function UnsubscribePage() {
           </div>
         </form>
 
-        <p className="text-xs text-center text-gray-500 mt-6">
-          {t('privacy')}
-        </p>
+        <p className="text-xs text-center text-gray-500 mt-6">{t('privacy')}</p>
       </div>
     </div>
   );

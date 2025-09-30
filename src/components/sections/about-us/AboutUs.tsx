@@ -31,7 +31,7 @@ export function AboutUs() {
 
   return (
     <section className="w-full py-16 md:py-24 relative overflow-hidden">
-        <Image
+      <Image
         src="/background-lp-sections.png"
         alt="Background"
         fill
@@ -39,7 +39,6 @@ export function AboutUs() {
         className="absolute top-0 left-0 w-full h-full -z-10 opacity-10"
       />
       <div className="container mx-auto px-6 max-w-6xl">
-
         <h2 className="text-3xl md:text-4xl font-bold text-forest-800 mb-8 text-center">
           {typewriterTitle}
         </h2>
@@ -60,4 +59,4 @@ export function AboutUs() {
       </div>
     </section>
   );
-};
+}
