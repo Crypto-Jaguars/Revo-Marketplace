@@ -6,6 +6,7 @@ import Bounded from '@/components/Bounded';
 import { ProducerGrid } from '@/components/producers/ProducerGrid';
 import { ProducerFilters, ProducerFilterValues } from '@/components/producers/ProducerFilters';
 import { producersMock } from '@/mocks/producers';
+import { Producer } from '@/types/producer';
 import {
   Select,
   SelectContent,
@@ -52,8 +53,8 @@ export default function ProducersPage() {
     setHasMore(true);
   }, [searchTerm]);
 
-  const handleProducerClick = useCallback((producerId: string) => {
-    console.log('Producer clicked:', producerId);
+  const handleProducerClick = useCallback((producer: Producer) => {
+    console.log('Producer clicked:', producer);
     // Navigate to producer profile
   }, []);
 
@@ -64,18 +65,18 @@ export default function ProducersPage() {
       const searchLower = filters.search.toLowerCase();
       filtered = filtered.filter(
         (producer) =>
-          producer.farmName[locale as 'en' | 'es'].toLowerCase().includes(searchLower) ||
-          producer.farmerName.toLowerCase().includes(searchLower) ||
-          producer.location.address.toLowerCase().includes(searchLower) ||
-          producer.products.some(product => 
-            product.name.toLowerCase().includes(searchLower)
+          producer.farmName.toLowerCase().includes(searchLower) ||
+          producer.name.toLowerCase().includes(searchLower) ||
+          producer.location.toLowerCase().includes(searchLower) ||
+          producer.specialties.some(specialty => 
+            specialty.toLowerCase().includes(searchLower)
           )
       );
     }
 
     if (filters.location && filters.location !== 'all') {
       filtered = filtered.filter((producer) =>
-        producer.location.address.toLowerCase().includes(filters.location.toLowerCase())
+        producer.location.toLowerCase().includes(filters.location.toLowerCase())
       );
     }
 
@@ -115,13 +116,13 @@ export default function ProducersPage() {
       case 'rating':
         return sorted.sort((a, b) => b.rating - a.rating);
       case 'name':
-        return sorted.sort((a, b) => a.farmName[locale as 'en' | 'es'].localeCompare(b.farmName[locale as 'en' | 'es']));
+        return sorted.sort((a, b) => a.farmName.localeCompare(b.farmName, locale));
       case 'products':
-        return sorted.sort((a, b) => b.products.length - a.products.length);
+        return sorted.sort((a, b) => b.products - a.products);
       default:
         return sorted;
     }
-  }, [filteredProducers, sortBy, locale]);
+  }, [filteredProducers, sortBy]);
 
   const paginatedProducers = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -169,7 +170,7 @@ export default function ProducersPage() {
 
   // Get unique values for filters
   const locations = useMemo(() => {
-    const uniqueLocations = Array.from(new Set(producersMock.map(p => p.location.address)));
+    const uniqueLocations = Array.from(new Set(producersMock.map(p => p.location)));
     return uniqueLocations;
   }, []);
 
@@ -334,14 +335,8 @@ export default function ProducersPage() {
               <ProducerGrid
                 producers={paginatedProducers}
                 viewMode={viewMode}
+                onViewModeChange={setViewMode}
                 onProducerClick={handleProducerClick}
-                hasMore={hasMore && paginatedProducers.length < sortedProducers.length}
-                onLoadMore={handleLoadMore}
-                isLoading={isLoading}
-                isFilterLoading={isFilterLoading}
-                currentPage={currentPage}
-                itemsPerPage={itemsPerPage}
-                onPageChange={handlePageChange}
               />
             </div>
           </div>

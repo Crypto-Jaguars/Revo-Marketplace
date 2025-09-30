@@ -27,7 +27,7 @@ export function ProducerCard({ producer, viewMode, onClick }: ProducerCardProps)
   if (viewMode === 'list') {
     return (
       <Card 
-        className="cursor-pointer hover:shadow-lg transition-all duration-200 border-0 bg-white shadow-md hover:shadow-xl"
+        className="cursor-pointer hover:shadow-xl transition-all duration-200 border-0 bg-white shadow-md"
         onClick={onClick}
       >
         <div className="flex">
@@ -103,7 +103,7 @@ export function ProducerCard({ producer, viewMode, onClick }: ProducerCardProps)
 
   return (
     <Card 
-      className="cursor-pointer hover:shadow-lg transition-all duration-200 border-0 bg-white shadow-md hover:shadow-xl"
+      className="cursor-pointer hover:shadow-xl transition-all duration-200 border-0 bg-white shadow-md"
       onClick={onClick}
     >
       <div className="relative">
@@ -169,7 +169,7 @@ export function ProducerCard({ producer, viewMode, onClick }: ProducerCardProps)
               </span>
             </span>
           </div>
-        </div>
+        </CardContent>
 
         <CardFooter className="p-4 sm:p-4 pt-0">
           <Button 
