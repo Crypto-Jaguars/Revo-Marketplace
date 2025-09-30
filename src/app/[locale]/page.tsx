@@ -7,6 +7,7 @@ import { AboutUs } from '@/components/sections/about-us/AboutUs';
 import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
 import CtaSection from '@/components/cta/CtaSection';
 import HeroSectionNew from '@/components/herosection/herosectionnew';
+import { NewMissionVision } from '@/components/about/NewMissionVision';
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -16,6 +17,7 @@ export default function Home() {
       
       <HeroSectionNew />
       <AboutUs />
+      <NewMissionVision />
       <HowWeWork />
       <CtaSection />
     </main>

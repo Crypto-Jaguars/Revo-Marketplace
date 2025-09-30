@@ -902,5 +902,50 @@
       "subtitle": "Únete a nuestra creciente comunidad de inversores que apoyan la agricultura sostenible y obtienen rendimientos competitivos.",
       "button": "Comienza a Invertir Hoy"
     }
+  },
+    "NewMissionVision": {
+    "title": "Misión y Visión",
+    "mission": {
+      "title": "Misión",
+      "points": [
+        {
+          "title": "Facilitar la Confianza",
+          "description": "Crear un entorno transparente y seguro para las transacciones agrícolas mediante la tecnología blockchain."
+        },
+        {
+          "title": "Empoderar a los Agricultores",
+          "description": "Proporcionar a los agricultores acceso directo al mercado, precios justos y herramientas financieras para hacer crecer su negocio."
+        },
+        {
+          "title": "Promover la Innovación",
+          "description": "Impulsar la adopción de tecnología en la agricultura para mejorar la eficiencia, la sostenibilidad y la trazabilidad."
+        },
+        {
+          "title": "Apoyar el Código Abierto",
+          "description": "Contribuir a la comunidad de código abierto construyendo y compartiendo herramientas que beneficien a todo el ecosistema."
+        }
+      ]
+    },
+    "vision": {
+      "title": "Visión",
+      "points": [
+        {
+          "title": "Transformar la Agricultura",
+          "description": "Ser la plataforma líder a nivel mundial para una cadena de suministro agrícola descentralizada, transparente y sostenible."
+        },
+        {
+          "title": "Alcance Global",
+          "description": "Conectar a agricultores y compradores de todo el mundo, fomentando una comunidad global basada en la confianza y el beneficio mutuo."
+        },
+        {
+          "title": "Inclusión Financiera",
+          "description": "Permitir la inclusión financiera de los agricultores no bancarizados a través de servicios financieros descentralizados."
+        },
+        {
+          "title": "Crecimiento Sostenible",
+          "description": "Promover prácticas agrícolas respetuosas con el medio ambiente y económicamente viables para un futuro sostenible."
+        }
+      ]
+    }
   }
 }
