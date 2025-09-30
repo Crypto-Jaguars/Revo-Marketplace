@@ -190,7 +190,8 @@
   "cta": {
     "ready": "Ready to Get Started?",
     "startSelling": "Start Selling",
-    "exploreProducts": "Explore Products"
+    "exploreProducts": "Explore Products",
+    "joinWaitlist" : "Join Waitlist"
   },
 
   "FarmerSubscription": {
@@ -1009,7 +1010,6 @@
     "deliveryPending": "Your order will be delivered soon.",
     "estimated": "Estimated: {date}",
     "pending": "Pending",
-    "processing": "Processing",
     "completed": "Completed",
     "cancelled": "Cancelled"
   },
@@ -1668,5 +1668,9 @@
         "disabled": "Disabled"
       }
     }
+  },
+  "Producers": {
+    "loadMore": "Load more producers",
+    "loadMoreAria": "Load more producers"
   }
 }
