@@ -23,6 +23,15 @@
     "investNow": "Invertir Ahora",
     "joinWaitlist": "Unirse a Lista de Espera"
   },
+  "RegistrationHero": {
+    "title": "Únete a Revolutionary Farmers",
+   "description": "Transforma tu viaje agrícola con tecnología de vanguardia, apoyo comunitario y prácticas sostenibles. Únete a miles de agricultores que ya están revolucionando la agricultura.",
+   "primaryCta": "Comienza tu Viaje",
+   "secondaryCta": "Aprende Más",
+   "trustIndicator1": "Más de 5000 Agricultores",
+   "trustIndicator2": "Soporte de Expertos 24/7",
+   "trustIndicator3": "Métodos Sostenibles"
+   },
   "AboutUs": {
     "title": "¿Qué es Revolutionary Farmers?",
     "description": "Revolutionary Farmers es una plataforma descentralizada que proporciona confianza y transparencia en las transacciones agrícolas mediante tecnología blockchain. Conectamos a los agricultores con los compradores, garantizando comercio justo, transacciones seguras y trazabilidad de los productos.",
