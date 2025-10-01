@@ -15,12 +15,23 @@ const buttonVariants = cva(
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        // 3D Hexagon Variants
+        'hexagon-base': 'hexagon-button-base hexagon-primary hexagon-focus hexagon-active hexagon-optimized',
+        'hexagon-elevated': 'hexagon-button-elevated hexagon-primary hexagon-focus hexagon-active hexagon-optimized',
+        'hexagon-premium': 'hexagon-button-premium hexagon-primary hexagon-focus hexagon-active hexagon-optimized',
+        'hexagon-secondary': 'hexagon-button-base hexagon-secondary hexagon-focus hexagon-active hexagon-optimized',
+        'hexagon-accent': 'hexagon-button-elevated hexagon-accent hexagon-focus hexagon-active hexagon-optimized',
       },
       size: {
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
+        // Hexagon Sizes
+        'hexagon-sm': 'hexagon-sm',
+        'hexagon-md': 'hexagon-md',
+        'hexagon-lg': 'hexagon-lg',
+        'hexagon-xl': 'hexagon-xl',
       },
     },
     defaultVariants: {
