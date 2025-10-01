@@ -1,4 +1,46 @@
 {
+  "common": {
+    "sortBy": {
+      "label": "Sort by",
+      "showing": "Showing",
+      "of": "of",
+      "price": "Price",
+      "stock": "Stock",
+      "rating": "Rating",
+      "latest": "Latest",
+      "name": "Name",
+      "distance": "Distance"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "account": "My Account",
+      "settings": "Settings",
+      "inventory": "Inventory",
+      "wallet": "Wallet",
+      "notifications": "Notifications",
+      "privacy": "Privacy",
+      "regional": "Regional",
+      "security": "Security",
+      "preferences": "Preferences",
+      "producers": "Producers"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "viewProfile": "View Profile"
+    },
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "delivered": "Delivered"
+    },
+    "products": "products",
+    "location": "Location",
+    "certifications": "Certifications"
+  },
+
   "HomePage": {
     "title": "Revolutionary",
     "subtitle": "Farmers",
@@ -597,6 +639,9 @@
     }
   },
   "Marketplace": {
+    "title": "Revolutionary Farmers Marketplace",
+    "description": "Discover fresh, locally-sourced produce directly from farmers using blockchain technology",
+    "availableProducts": "Available Products",
     "navigation": {
       "home": "Home",
       "products": "Products",
