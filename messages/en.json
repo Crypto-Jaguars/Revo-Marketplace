@@ -393,6 +393,18 @@
       "apply": "Apply Filter",
       "clear": "Clear filters"
     },
+    "categories": {
+      "Vegetables": "Vegetables",
+      "Eggs": "Eggs"
+    },
+    "farmingMethods": {
+      "organic": "Organic",
+      "conventional": "Conventional",
+      "free-range": "Free-Range",
+      "traditional": "Traditional",
+      "hydroponic": "Hydroponic",
+      "greenhouse": "Greenhouse"
+    },
     "cart": {
       "title": "Shopping Cart",
       "subtotal": "Subtotal",

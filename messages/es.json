@@ -399,6 +399,18 @@
       "apply": "Aplicar Filtro",
       "clear": "Limpiar Filtros"
     },
+    "categories": {
+      "Vegetables": "Verduras",
+      "Eggs": "Huevos"
+    },
+    "farmingMethods": {
+      "organic": "Orgánico",
+      "conventional": "Convencional",
+      "free-range": "Libre Pastoreo",
+      "traditional": "Tradicional",
+      "hydroponic": "Hidropónico",
+      "greenhouse": "Invernadero"
+    },
     "sortBy": {
       "showing": "Mostrando",
       "of": "de",
