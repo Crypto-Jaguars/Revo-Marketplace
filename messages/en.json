@@ -634,13 +634,7 @@
     "description": "We foster responsible trade through modern technology that ensures agility, clarity, and fair treatment for everyone.",
     "quickLinks": "Quick Links",
     "helpCompany": "Help & Company",
-    "My Account": "My Account",
-    "Login/Register": "Login/Register",
-    "Cart": "Cart",
-    "Shop": "Shop",
-    "FAQ": "FAQ",
     "Contact": "Contact",
-    "Our Team": "Our Team",
     "Twitter": "Twitter",
     "LinkedIn": "LinkedIn",
     "Instagram": "Instagram",
@@ -651,6 +645,29 @@
       "title": "Be an Early Adopter",
       "subtitle": "Join our waitlist and get exclusive benefits when we launch",
       "button": "Join Waitlist"
+    },
+    "columnTitles": {
+      "authentication": "Authentication",
+      "store": "Store",
+      "help": "Help"
+    },
+    "columnLabels": {
+      "authentication": {
+        "Login/Register": "Login/Register",
+        "My Account": "My Account"
+      },
+      "store": {
+        "Shop": "Shop",
+        "Cart": "Cart",
+        "Blog": "Blog",
+        "Compare": "Compare"
+      },
+      "help": {
+        "Our Team": "Our Team",
+        "Support": "Support",
+        "FAQ": "FAQ",
+        "Farmer Profile": "Farmer Profile"
+      }
     }
   },
   "SignUp": {
