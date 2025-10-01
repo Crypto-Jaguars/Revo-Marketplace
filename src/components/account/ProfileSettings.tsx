@@ -17,7 +17,7 @@ import { Bell, Globe, DollarSign, Lock } from 'lucide-react';
 import { toast } from 'sonner';
 
 export function ProfileSettings() {
-  const t = useTranslations('common.profileSettings');
+  const t = useTranslations('ProfileSettings');
   
   const [settings, setSettings] = useState({
     language: 'en',

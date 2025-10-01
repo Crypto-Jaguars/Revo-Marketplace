@@ -37,7 +37,7 @@ interface SecurityLog {
 }
 
 export default function SecuritySettings() {
-  const t = useTranslations('Account');
+  const t = useTranslations('SecuritySettings');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -72,28 +72,28 @@ export default function SecuritySettings() {
   const [securityLogs] = useState<SecurityLog[]>([
     {
       id: '1',
-      action: 'Password changed',
+      action: 'passwordChanged',
       timestamp: '2024-01-15T10:30:00Z',
       ip: '192.168.1.100',
       status: 'success',
     },
     {
       id: '2',
-      action: 'Failed login attempt',
+      action: 'failedLoginAttempt',
       timestamp: '2024-01-14T22:45:00Z',
       ip: '203.0.113.42',
       status: 'failed',
     },
     {
       id: '3',
-      action: 'Wallet connected',
+      action: 'walletConnected',
       timestamp: '2024-01-14T15:20:00Z',
       ip: '192.168.1.100',
       status: 'success',
     },
     {
       id: '4',
-      action: 'Suspicious login detected',
+      action: 'suspiciousLoginDetected',
       timestamp: '2024-01-13T03:15:00Z',
       ip: '198.51.100.25',
       status: 'warning',
@@ -102,17 +102,17 @@ export default function SecuritySettings() {
 
   const handlePasswordChange = async () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
-      toast.error('Please fill in all password fields');
+      toast.error(t('toast.fillAllFields'));
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      toast.error('New passwords do not match');
+      toast.error(t('toast.passwordsDoNotMatch'));
       return;
     }
 
     if (newPassword.length < 8) {
-      toast.error('Password must be at least 8 characters long');
+      toast.error(t('toast.passwordTooShort'));
       return;
     }
 
@@ -125,9 +125,9 @@ export default function SecuritySettings() {
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
-      toast.success('Password updated successfully');
+      toast.success(t('toast.passwordUpdated'));
     } catch (error) {
-      toast.error('Failed to update password');
+      toast.error(t('toast.passwordUpdateFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -141,9 +141,9 @@ export default function SecuritySettings() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setTwoFactorEnabled(enabled);
-      toast.success(enabled ? '2FA enabled successfully' : '2FA disabled successfully');
+      toast.success(enabled ? t('toast.twoFactorEnabled') : t('toast.twoFactorDisabled'));
     } catch (error) {
-      toast.error('Failed to update 2FA settings');
+      toast.error(t('toast.twoFactorUpdateFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -153,9 +153,9 @@ export default function SecuritySettings() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 500));
-      toast.success('Session terminated successfully');
+      toast.success(t('toast.sessionTerminated'));
     } catch (error) {
-      toast.error('Failed to terminate session');
+      toast.error(t('toast.sessionTerminateFailed'));
     }
   };
 
@@ -178,7 +178,7 @@ export default function SecuritySettings() {
 
     return (
       <Badge className={`${variants[status as keyof typeof variants]} text-white`}>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
+        {t(`securityActivity.status.${status}`)}
       </Badge>
     );
   };
@@ -189,12 +189,12 @@ export default function SecuritySettings() {
       <div className="border p-6 border-gray-200 rounded-sm">
         <h3 className="text-lg font-medium text-[#375B42] flex items-center space-x-2 mb-6">
           <Key className="h-5 w-5" />
-          <span>Password Settings</span>
+          <span>{t('passwordSettings.title')}</span>
         </h3>
         <div className="space-y-4">
           <div>
             <Label htmlFor="currentPassword" className="text-sm text-gray-600">
-              Current Password
+              {t('passwordSettings.currentPassword')}
             </Label>
             <div className="relative mt-1">
               <Input
@@ -203,7 +203,7 @@ export default function SecuritySettings() {
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 className="bg-gray-50 border-gray-200 text-gray-900 pr-10"
-                placeholder="Enter current password"
+                placeholder={t('passwordSettings.placeholders.currentPassword')}
               />
               <Button
                 type="button"
@@ -220,7 +220,7 @@ export default function SecuritySettings() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="newPassword" className="text-sm text-gray-600">
-                New Password
+                {t('passwordSettings.newPassword')}
               </Label>
               <Input
                 id="newPassword"
@@ -228,12 +228,12 @@ export default function SecuritySettings() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 className="mt-1 bg-gray-50 border-gray-200 text-gray-900"
-                placeholder="Enter new password"
+                placeholder={t('passwordSettings.placeholders.newPassword')}
               />
             </div>
             <div>
               <Label htmlFor="confirmPassword" className="text-sm text-gray-600">
-                Confirm New Password
+                {t('passwordSettings.confirmPassword')}
               </Label>
               <Input
                 id="confirmPassword"
@@ -241,22 +241,21 @@ export default function SecuritySettings() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="mt-1 bg-gray-50 border-gray-200 text-gray-900"
-                placeholder="Confirm new password"
+                placeholder={t('passwordSettings.placeholders.confirmPassword')}
               />
             </div>
           </div>
 
           <div className="flex justify-between items-center pt-4">
             <div className="text-sm text-gray-500">
-              Password must be at least 8 characters long and include uppercase, lowercase, numbers,
-              and symbols.
+              {t('passwordSettings.requirements')}
             </div>
             <Button
               onClick={handlePasswordChange}
               disabled={isLoading}
               className="bg-[#375B42] hover:bg-[#2A4632] text-white"
             >
-              {isLoading ? 'Updating...' : 'Update Password'}
+              {isLoading ? t('passwordSettings.updating') : t('passwordSettings.updateButton')}
             </Button>
           </div>
         </div>
@@ -266,14 +265,14 @@ export default function SecuritySettings() {
       <div className="border p-6 border-gray-200 rounded-sm">
         <h3 className="text-lg font-medium text-[#375B42] flex items-center space-x-2 mb-6">
           <Smartphone className="h-5 w-5" />
-          <span>Two-Factor Authentication</span>
+          <span>{t('twoFactor.title')}</span>
         </h3>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-900 font-semibold">Enable 2FA</p>
+              <p className="text-gray-900 font-semibold">{t('twoFactor.enable2FA')}</p>
               <p className="text-gray-600 text-sm">
-                Add an extra layer of security to your account with two-factor authentication
+                {t('twoFactor.description')}
               </p>
             </div>
             <Switch
@@ -287,11 +286,10 @@ export default function SecuritySettings() {
             <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
               <div className="flex items-center space-x-2 text-green-600 mb-2">
                 <CheckCircle className="h-4 w-4" />
-                <span className="font-semibold">2FA is enabled</span>
+                <span className="font-semibold">{t('twoFactor.enabled.title')}</span>
               </div>
               <p className="text-gray-600 text-sm mb-3">
-                Your account is protected with two-factor authentication using your authenticator
-                app.
+                {t('twoFactor.enabled.description')}
               </p>
               <div className="flex space-x-2">
                 <Button
@@ -299,14 +297,14 @@ export default function SecuritySettings() {
                   variant="outline"
                   className="border-green-600 text-green-600 hover:bg-green-50 bg-transparent"
                 >
-                  View Recovery Codes
+                  {t('twoFactor.enabled.viewRecoveryCodes')}
                 </Button>
                 <Button
                   size="sm"
                   variant="outline"
                   className="border-green-600 text-green-600 hover:bg-green-50 bg-transparent"
                 >
-                  Regenerate Codes
+                  {t('twoFactor.enabled.regenerateCodes')}
                 </Button>
               </div>
             </div>
@@ -316,11 +314,10 @@ export default function SecuritySettings() {
             <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
               <div className="flex items-center space-x-2 text-yellow-600 mb-2">
                 <AlertTriangle className="h-4 w-4" />
-                <span className="font-semibold">2FA is disabled</span>
+                <span className="font-semibold">{t('twoFactor.disabled.title')}</span>
               </div>
               <p className="text-gray-600 text-sm">
-                Enable two-factor authentication to secure your account with an additional
-                verification step.
+                {t('twoFactor.disabled.description')}
               </p>
             </div>
           )}
@@ -331,7 +328,7 @@ export default function SecuritySettings() {
       <div className="border p-6 border-gray-200 rounded-sm">
         <h3 className="text-lg font-medium text-[#375B42] flex items-center space-x-2 mb-6">
           <Shield className="h-5 w-5" />
-          <span>Active Sessions</span>
+          <span>{t('activeSessions.title')}</span>
         </h3>
         <div className="space-y-4">
           {sessions.map((session) => (
@@ -340,11 +337,11 @@ export default function SecuritySettings() {
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-1">
                     <p className="text-gray-900 font-semibold">{session.device}</p>
-                    {session.current && <Badge className="bg-[#375B42] text-white">Current</Badge>}
+                    {session.current && <Badge className="bg-[#375B42] text-white">{t('activeSessions.current')}</Badge>}
                   </div>
                   <div className="text-sm text-gray-600">
                     <p>{session.location}</p>
-                    <p>Last active: {formatDate(session.lastActive)}</p>
+                    <p>{t('activeSessions.lastActive')}: {formatDate(session.lastActive)}</p>
                   </div>
                 </div>
                 {!session.current && (
@@ -355,7 +352,7 @@ export default function SecuritySettings() {
                     className="border-red-600 text-red-600 hover:bg-red-50"
                   >
                     <Trash2 className="h-4 w-4 mr-1" />
-                    Terminate
+                    {t('activeSessions.terminate')}
                   </Button>
                 )}
               </div>
@@ -369,7 +366,7 @@ export default function SecuritySettings() {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-medium text-[#375B42] flex items-center space-x-2">
             <Shield className="h-5 w-5" />
-            <span>Security Activity</span>
+            <span>{t('securityActivity.title')}</span>
           </h3>
           <Button
             size="sm"
@@ -377,7 +374,7 @@ export default function SecuritySettings() {
             className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-transparent"
           >
             <Download className="h-4 w-4 mr-1" />
-            Export Log
+            {t('securityActivity.exportLog')}
           </Button>
         </div>
         <div className="space-y-4">
@@ -386,7 +383,7 @@ export default function SecuritySettings() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div>
-                    <p className="text-gray-900 font-semibold">{log.action}</p>
+                    <p className="text-gray-900 font-semibold">{t(`securityActivity.actions.${log.action}`)}</p>
                     <div className="text-sm text-gray-600">
                       <span>IP: {log.ip}</span>
                       <span className="mx-2">•</span>

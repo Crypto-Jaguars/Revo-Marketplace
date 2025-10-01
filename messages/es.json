@@ -41,67 +41,7 @@
     },
     "products": "productos",
     "location": "Ubicación",
-    "certifications": "Certificaciones",
-    "contactInfo": {
-      "title": "Información de Contacto",
-      "location": "Ubicación",
-      "phone": "Teléfono",
-      "email": "Email",
-      "schedule": "Horario de Atención",
-      "weekdays": "Lun - Sáb",
-      "sunday": "Dom",
-      "socialMedia": "Redes Sociales",
-      "editAriaLabel": "Editar información de contacto",
-      "visitFacebook": "Visitar página de Facebook",
-      "visitInstagram": "Visitar página de Instagram",
-      "contactWhatsApp": "Contactar por WhatsApp",
-      "visitWebsite": "Visitar sitio web"
-    },
-    "profileSettings": {
-      "generalPreferences": {
-        "title": "Preferencias Generales",
-        "description": "Configura tu idioma, moneda y ajustes de visualización."
-      },
-      "language": {
-        "label": "Idioma",
-        "placeholder": "Seleccionar idioma",
-        "options": {
-          "en": "Inglés",
-          "es": "Español",
-          "fr": "Francés",
-          "de": "Alemán"
-        }
-      },
-      "currency": {
-        "label": "Moneda Preferida",
-        "placeholder": "Seleccionar moneda",
-        "options": {
-          "USD": "USD - Dólar Estadounidense",
-          "EUR": "EUR - Euro",
-          "GBP": "GBP - Libra Esterlina",
-          "XLM": "XLM - Stellar Lumens"
-        }
-      },
-      "darkMode": "Modo Oscuro",
-      "notifications": {
-        "title": "Configuración de Notificaciones",
-        "description": "Gestiona cómo recibes las notificaciones.",
-        "email": "Notificaciones por Email",
-        "sms": "Notificaciones por SMS"
-      },
-      "privacy": {
-        "title": "Configuración de Privacidad",
-        "description": "Controla la visibilidad de tu perfil.",
-        "publicProfile": "Perfil Público"
-      },
-      "saveButton": "Guardar Toda la Configuración",
-      "toast": {
-        "saved": "¡Toda la configuración guardada con éxito!",
-        "updated": "¡{setting} actualizado a {value}!",
-        "enabled": "¡{setting} habilitado!",
-        "disabled": "¡{setting} deshabilitado!"
-      }
-    }
+    "certifications": "Certificaciones"
   },
 
   "HomePage": {
@@ -1282,5 +1222,434 @@
       "home": "Inicio",
       "producers": "Productores"
     }
+  },
+  "ContactInfo": {
+    "title": "Información de Contacto",
+    "location": "Ubicación",
+    "phone": "Teléfono",
+    "email": "Email",
+    "schedule": "Horario de Atención",
+    "weekdays": "Lun - Sáb",
+    "sunday": "Dom",
+    "socialMedia": "Redes Sociales",
+    "editAriaLabel": "Editar información de contacto",
+    "visitFacebook": "Visitar página de Facebook",
+    "visitInstagram": "Visitar página de Instagram",
+    "contactWhatsApp": "Contactar por WhatsApp",
+    "visitWebsite": "Visitar sitio web"
+  },
+
+  "ProfileSettings": {
+    "generalPreferences": {
+      "title": "Preferencias Generales",
+      "description": "Configura tu idioma, moneda y ajustes de visualización."
+    },
+    "language": {
+      "label": "Idioma",
+      "placeholder": "Seleccionar idioma",
+      "options": {
+        "en": "Inglés",
+        "es": "Español",
+        "fr": "Francés",
+        "de": "Alemán"
+      }
+    },
+    "currency": {
+      "label": "Moneda Preferida",
+      "placeholder": "Seleccionar moneda",
+      "options": {
+        "USD": "USD - Dólar Estadounidense",
+        "EUR": "EUR - Euro",
+        "GBP": "GBP - Libra Esterlina",
+        "XLM": "XLM - Stellar Lumens"
+      }
+    },
+    "darkMode": "Modo Oscuro",
+    "notifications": {
+      "title": "Configuración de Notificaciones",
+      "description": "Gestiona cómo recibes las notificaciones.",
+      "email": "Notificaciones por Email",
+      "sms": "Notificaciones por SMS"
+    },
+    "privacy": {
+      "title": "Configuración de Privacidad",
+      "description": "Controla la visibilidad de tu perfil.",
+      "publicProfile": "Perfil Público"
+    },
+    "saveButton": "Guardar Toda la Configuración",
+    "toast": {
+      "saved": "¡Toda la configuración guardada con éxito!",
+      "updated": "¡{setting} actualizado a {value}!",
+      "enabled": "¡{setting} habilitado!",
+      "disabled": "¡{setting} deshabilitado!"
+    }
+  },
+
+  "ProfileTabs": {
+    "tabs": {
+      "profile": "Perfil",
+      "wallet": "Billetera",
+      "transactions": "Transacciones",
+      "farming": "Agricultura",
+      "settings": "Configuración"
+    },
+    "walletSummary": {
+      "title": "Resumen de Billetera",
+      "totalBalance": "Balance Total de Billetera",
+      "totalTransactions": "Total de Transacciones",
+      "farmingActivities": "Actividades Agrícolas",
+      "activeContracts": "Contratos Activos",
+      "xlmEquivalent": "(equivalente en XLM)",
+      "transactionsRecorded": "transacciones registradas",
+      "activitiesLogged": "actividades registradas",
+      "activeEscrowContracts": "contratos de depósito activos"
+    }
+  },
+
+  "ProfileForm": {
+    "title": "Información del Perfil",
+    "description": "Gestiona tus datos personales y de la granja.",
+    "personalInfo": {
+      "title": "Información Personal",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Email",
+      "phone": "Teléfono",
+      "address": "Dirección",
+      "city": "Ciudad",
+      "state": "Estado / Provincia",
+      "zip": "Código Postal",
+      "country": "País"
+    },
+    "farmInfo": {
+      "title": "Información de la Granja",
+      "farmName": "Nombre de la Granja",
+      "farmSize": "Tamaño de la Granja",
+      "farmType": "Tipo de Granja",
+      "farmTypePlaceholder": "Seleccionar tipo de granja",
+      "farmTypes": {
+        "Organic Vegetables": "Verduras Orgánicas",
+        "Dairy Farm": "Granja Lechera",
+        "Grain Crops": "Cultivos de Granos",
+        "Fruit Orchard": "Huerto de Frutas",
+        "Livestock": "Ganado",
+        "Mixed Farming": "Agricultura Mixta"
+      },
+      "establishedDate": "Fecha de Establecimiento",
+      "datePlaceholder": "Seleccionar fecha",
+      "website": "Sitio Web",
+      "bio": "Biografía"
+    },
+    "saveButton": "Guardar Cambios",
+    "toast": {
+      "success": "¡Perfil actualizado con éxito!"
+    }
+  },
+
+  "WalletSection": {
+    "connectWallet": {
+      "title": "Conecta tu Billetera Stellar",
+      "description": "Conecta tu billetera para gestionar tus activos Stellar y ver el historial de transacciones",
+      "button": "Conectar Billetera"
+    },
+    "walletInfo": {
+      "title": "Información de la Billetera",
+      "connected": "Conectado",
+      "mainnet": "Red Principal",
+      "testnet": "Red de Pruebas",
+      "disconnect": "Desconectar",
+      "walletAddress": "Dirección de la Billetera",
+      "connectedVia": "Conectado a través de",
+      "switchTo": "Cambiar a"
+    },
+    "error": "Error",
+    "balances": {
+      "title": "Saldos de Activos",
+      "loading": "Cargando saldos...",
+      "noAssets": "No se encontraron activos en esta billetera",
+      "limit": "Límite",
+      "buying": "Compra",
+      "selling": "Venta"
+    },
+    "quickActions": {
+      "title": "Acciones Rápidas",
+      "sendPayment": "Enviar Pago",
+      "addAsset": "Agregar Activo",
+      "copyAddress": "Copiar Dirección",
+      "viewExplorer": "Ver Explorador"
+    },
+    "paymentModal": {
+      "title": "Enviar Pago",
+      "destinationAddress": "Dirección de Destino",
+      "destinationPlaceholder": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "amount": "Cantidad",
+      "amountPlaceholder": "0.00",
+      "max": "Máximo",
+      "asset": "Activo",
+      "memo": "Memo (Opcional)",
+      "memoPlaceholder": "Memo opcional",
+      "balance": "Saldo",
+      "reviewSend": "Revisar y Enviar",
+      "preparing": "Preparando...",
+      "cancel": "Cancelar",
+      "invalidAddress": "Formato de dirección Stellar inválido",
+      "errors": {
+        "fillFields": "Por favor completa la dirección de destino y la cantidad",
+        "invalidAddress": "Dirección de destino Stellar inválida",
+        "amountGreater": "La cantidad debe ser mayor que 0",
+        "insufficientBalance": "Saldo insuficiente"
+      }
+    },
+    "trustlineModal": {
+      "title": "Agregar Línea de Confianza de Activo",
+      "assetCode": "Código del Activo",
+      "assetCodePlaceholder": "USDT, USDC, etc.",
+      "assetIssuer": "Emisor del Activo",
+      "assetIssuerPlaceholder": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "trustLimit": "Límite de Confianza (Opcional)",
+      "trustLimitPlaceholder": "Dejar vacío para máximo",
+      "createTrustline": "Crear Línea de Confianza",
+      "creating": "Creando...",
+      "cancel": "Cancelar",
+      "invalidAddress": "Formato de dirección Stellar inválido",
+      "errors": {
+        "fillFields": "Por favor completa el código del activo y el emisor",
+        "invalidIssuer": "Dirección del emisor del activo inválida"
+      }
+    },
+    "confirmModal": {
+      "title": "Confirmar Transacción",
+      "sending": "Enviando",
+      "to": "Para",
+      "memo": "Memo",
+      "estimatedFee": "Tarifa Estimada",
+      "transactionXdr": "XDR de la Transacción",
+      "confirmSend": "Confirmar Envío",
+      "confirming": "Confirmando...",
+      "cancel": "Cancelar"
+    },
+    "toast": {
+      "addressCopied": "Dirección copiada al portapapeles",
+      "balancesUpdated": "Saldos actualizados",
+      "paymentSent": "¡Pago enviado con éxito! Hash: {hash}...",
+      "trustlineCreated": "¡Línea de confianza creada con éxito! Hash: {hash}...",
+      "networkSwitched": "Cambiado a {network}",
+      "paymentFailed": "Error al enviar el pago",
+      "trustlineFailed": "Error al crear la línea de confianza"
+    }
+  },
+
+  "TransactionHistory": {
+    "title": "Historial de Transacciones",
+    "description": "Ver y gestionar tu historial de transacciones",
+    "export": "Exportar",
+    "searchPlaceholder": "Buscar transacciones...",
+    "filterTypes": {
+      "all": "Todos los Tipos",
+      "payment": "Pagos",
+      "create_account": "Creación de Cuenta",
+      "manage_offer": "Ofertas",
+      "change_trust": "Líneas de Confianza"
+    },
+    "status": {
+      "success": "Éxito",
+      "pending": "Pendiente",
+      "failed": "Fallido"
+    },
+    "transactionTypes": {
+      "payment": "pago",
+      "create_account": "creación de cuenta",
+      "manage_offer": "ofertas",
+      "change_trust": "líneas de confianza"
+    },
+    "labels": {
+      "from": "De",
+      "to": "Para",
+      "fee": "Tarifa"
+    },
+    "messages": {
+      "loading": "Cargando transacciones...",
+      "error": "Error al cargar las transacciones",
+      "noTransactions": "No se encontraron transacciones",
+      "noMatches": "No hay transacciones que coincidan con tu búsqueda",
+      "loadMore": "Cargar Más Transacciones"
+    }
+  },
+
+  "FarmingActivity": {
+    "title": "Operaciones Agrícolas",
+    "description": "Rastrea tus actividades agrícolas y gestiona contratos de depósito",
+    "tabs": {
+      "activities": "Actividades Recientes",
+      "contracts": "Contratos de Depósito"
+    },
+    "activities": {
+      "title": "Actividades Recientes",
+      "addActivity": "Agregar Actividad",
+      "labels": {
+        "yield": "Rendimiento",
+        "quality": "Calidad",
+        "quantity": "Cantidad",
+        "variety": "Variedad",
+        "findings": "Hallazgos",
+        "notes": "Notas",
+        "progress": "Progreso"
+      }
+    },
+    "contracts": {
+      "title": "Contratos de Depósito",
+      "newContract": "Nuevo Contrato",
+      "buyer": "Comprador",
+      "labels": {
+        "amount": "Cantidad",
+        "quantity": "Cantidad",
+        "delivery": "Entrega",
+        "progress": "Progreso",
+        "terms": "Términos"
+      },
+      "actions": {
+        "viewDetails": "Ver Detalles",
+        "activateContract": "Activar Contrato"
+      }
+    },
+    "status": {
+      "completed": "Completado",
+      "inProgress": "En Progreso",
+      "scheduled": "Programado",
+      "active": "Activo",
+      "pending": "Pendiente",
+      "draft": "Borrador"
+    }
+  },
+
+  "SecuritySettings": {
+    "passwordSettings": {
+      "title": "Configuración de Contraseña",
+      "currentPassword": "Contraseña Actual",
+      "newPassword": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña",
+      "placeholders": {
+        "currentPassword": "Ingresa tu contraseña actual",
+        "newPassword": "Ingresa tu nueva contraseña",
+        "confirmPassword": "Confirma tu nueva contraseña"
+      },
+      "requirements": "La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas, números y símbolos.",
+      "updateButton": "Actualizar Contraseña",
+      "updating": "Actualizando..."
+    },
+    "twoFactor": {
+      "title": "Autenticación de Dos Factores",
+      "enable2FA": "Habilitar 2FA",
+      "description": "Agrega una capa adicional de seguridad a tu cuenta con autenticación de dos factores",
+      "enabled": {
+        "title": "2FA está habilitado",
+        "description": "Tu cuenta está protegida con autenticación de dos factores usando tu aplicación autenticadora.",
+        "viewRecoveryCodes": "Ver Códigos de Recuperación",
+        "regenerateCodes": "Regenerar Códigos"
+      },
+      "disabled": {
+        "title": "2FA está deshabilitado",
+        "description": "Habilita la autenticación de dos factores para asegurar tu cuenta con un paso de verificación adicional."
+      }
+    },
+    "activeSessions": {
+      "title": "Sesiones Activas",
+      "current": "Actual",
+      "lastActive": "Última actividad",
+      "terminate": "Terminar"
+    },
+    "securityActivity": {
+      "title": "Actividad de Seguridad",
+      "exportLog": "Exportar Registro",
+      "actions": {
+        "passwordChanged": "Contraseña cambiada",
+        "failedLoginAttempt": "Intento de inicio de sesión fallido",
+        "walletConnected": "Billetera conectada",
+        "suspiciousLoginDetected": "Inicio de sesión sospechoso detectado"
+      },
+      "status": {
+        "success": "Éxito",
+        "failed": "Fallido",
+        "warning": "Advertencia"
+      }
+    },
+    "toast": {
+      "fillAllFields": "Por favor completa todos los campos de contraseña",
+      "passwordsDoNotMatch": "Las nuevas contraseñas no coinciden",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+      "passwordUpdated": "Contraseña actualizada con éxito",
+      "passwordUpdateFailed": "Error al actualizar la contraseña",
+      "twoFactorEnabled": "2FA habilitado con éxito",
+      "twoFactorDisabled": "2FA deshabilitado con éxito",
+      "twoFactorUpdateFailed": "Error al actualizar la configuración de 2FA",
+      "sessionTerminated": "Sesión terminada con éxito",
+      "sessionTerminateFailed": "Error al terminar la sesión"
+    }
+  },
+
+  "CartPage": {
+    "title": "Tu Carrito",
+    "emptyCart": {
+      "title": "Tu carrito está vacío",
+      "description": "Parece que aún no has agregado productos agrícolas a tu carrito.",
+      "browseProducts": "Explorar Productos"
+    },
+    "emptyAfterRemoval": {
+      "title": "Tu carrito está vacío",
+      "description": "Has eliminado todos los artículos de tu carrito.",
+      "restoreItems": "Restaurar Artículos Eliminados",
+      "browseProducts": "Explorar Productos"
+    },
+    "items": {
+      "title": "Artículos",
+      "item": "Artículo",
+      "items": "Artículos",
+      "selectAll": "Seleccionar Todo",
+      "deselectAll": "Deseleccionar Todo",
+      "removeSelected": "Eliminar Seleccionados",
+      "resetCart": "Restablecer Carrito",
+      "clearCart": "Vaciar Carrito"
+    },
+    "removedItems": {
+      "item": "artículo",
+      "items": "artículos",
+      "removedFromCart": "eliminado del carrito",
+      "undo": "Deshacer"
+    },
+    "farmer": {
+      "subtotal": "Subtotal",
+      "items": "artículos",
+      "deliveryAvailable": "Entrega Disponible",
+      "pickupAvailable": "Recogida Disponible"
+    },
+    "checkout": {
+      "processing": "Procesando..."
+    },
+    "escrowProtection": {
+      "title": "Protección de Depósito",
+      "description": "Revolutionary Farmers utiliza un sistema de depósito para proteger tanto a compradores como a vendedores. Tu pago se mantendrá seguro hasta que confirmes la recepción de tus productos agrícolas."
+    }
+  },
+
+  "CartItem": {
+    "seller": "Vendedor",
+    "quantityControls": {
+      "decreaseQuantity": "Disminuir cantidad",
+      "increaseQuantity": "Aumentar cantidad"
+    },
+    "actions": {
+      "saveForLater": "Guardar para después"
+    }
+  },
+
+  "CartSummary": {
+    "title": "Resumen del Pedido",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "tax": "Impuestos",
+    "escrowFee": "Tarifa de Depósito",
+    "total": "Total",
+    "checkoutButton": "Proceder al Pago de Depósito",
+    "escrowNote": "Tu pago se mantendrá en depósito hasta que confirmes la recepción de los productos"
   }
 }
