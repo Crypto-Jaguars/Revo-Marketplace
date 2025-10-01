@@ -411,6 +411,28 @@
       "hydroponic": "Hidropónico",
       "greenhouse": "Invernadero"
     },
+    "productNames": {
+      "Organic Tomatoes": "Tomates Orgánicos",
+      "Fresh Eggs": "Huevos Frescos",
+      "Organic Roma Tomatoes": "Tomates Roma Orgánicos",
+      "Free-Range Brown Eggs": "Huevos Marrones de Libre Pastoreo",
+      "Heirloom Cherry Tomatoes": "Tomates Cherry Tradicionales",
+      "Organic Quail Eggs": "Huevos de Codorniz Orgánicos",
+      "Beefsteak Tomatoes": "Tomates Beefsteak",
+      "Duck Eggs Premium": "Huevos de Pato Premium",
+      "Vine Ripened Tomatoes": "Tomates Madurados en Rama",
+      "Heritage Breed Eggs": "Huevos de Razas Tradicionales",
+      "Greenhouse Tomatoes": "Tomates de Invernadero",
+      "Jumbo Farm Eggs": "Huevos Jumbo de Granja",
+      "Specialty Quail Eggs": "Huevos de Codorniz Especiales",
+      "Eggs 1": "Huevos de Codorniz 1",
+      "Eggs 2": "Huevos de Codorniz 2",
+      "Eggs 3": "Huevos de Codorniz 3",
+      "Eggs 4": "Huevos de Codorniz 4",
+      "Eggs 5": "Huevos de Codorniz 5",
+      "Eggs 6": "Huevos de Codorniz 6",
+      "Cafè": "Café"
+    },
     "sortBy": {
       "showing": "Mostrando",
       "of": "de",
@@ -443,7 +465,10 @@
     "buttons": {
       "relatedItems": "Productos Relacionados",
       "buyNow": "Comprar Ahora",
-      "addToCart": "Agregar al Carrito"
+      "addToCart": "Agregar al Carrito",
+      "adding": "Agregando...",
+      "added": "Agregado",
+      "addAgain": "Agregar de Nuevo"
     },
     "delivery": {
       "free": "Envío Gratis",

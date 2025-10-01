@@ -405,6 +405,28 @@
       "hydroponic": "Hydroponic",
       "greenhouse": "Greenhouse"
     },
+    "productNames": {
+      "Organic Tomatoes": "Organic Tomatoes",
+      "Fresh Eggs": "Fresh Eggs",
+      "Organic Roma Tomatoes": "Organic Roma Tomatoes",
+      "Free-Range Brown Eggs": "Free-Range Brown Eggs",
+      "Heirloom Cherry Tomatoes": "Heirloom Cherry Tomatoes",
+      "Organic Quail Eggs": "Organic Quail Eggs",
+      "Beefsteak Tomatoes": "Beefsteak Tomatoes",
+      "Duck Eggs Premium": "Duck Eggs Premium",
+      "Vine Ripened Tomatoes": "Vine Ripened Tomatoes",
+      "Heritage Breed Eggs": "Heritage Breed Eggs",
+      "Greenhouse Tomatoes": "Greenhouse Tomatoes",
+      "Jumbo Farm Eggs": "Jumbo Farm Eggs",
+      "Specialty Quail Eggs": "Specialty Quail Eggs",
+      "Eggs 1": "Quail Eggs 1",
+      "Eggs 2": "Quail Eggs 2",
+      "Eggs 3": "Quail Eggs 3",
+      "Eggs 4": "Quail Eggs 4",
+      "Eggs 5": "Quail Eggs 5",
+      "Eggs 6": "Quail Eggs 6",
+      "Cafè": "Coffee"
+    },
     "cart": {
       "title": "Shopping Cart",
       "subtotal": "Subtotal",
@@ -446,7 +468,10 @@
     "buttons": {
       "relatedItems": "Related Items",
       "buyNow": "Buy Now",
-      "addToCart": "Add to Cart"
+      "addToCart": "Add to Cart",
+      "adding": "Adding...",
+      "added": "Added",
+      "addAgain": "Add Again"
     },
     "delivery": {
       "free": "Free Delivery",
