@@ -27,7 +27,10 @@
     },
     "actions": {
       "cancel": "Cancel",
-      "viewProfile": "View Profile"
+      "viewProfile": "View Profile",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "edit": "Edit"
     },
     "status": {
       "pending": "Pending",
@@ -38,7 +41,67 @@
     },
     "products": "products",
     "location": "Location",
-    "certifications": "Certifications"
+    "certifications": "Certifications",
+    "contactInfo": {
+      "title": "Contact Information",
+      "location": "Location",
+      "phone": "Phone",
+      "email": "Email",
+      "schedule": "Business Hours",
+      "weekdays": "Mon - Sat",
+      "sunday": "Sun",
+      "socialMedia": "Social Media",
+      "editAriaLabel": "Edit contact information",
+      "visitFacebook": "Visit Facebook page",
+      "visitInstagram": "Visit Instagram page",
+      "contactWhatsApp": "Contact via WhatsApp",
+      "visitWebsite": "Visit website"
+    },
+    "profileSettings": {
+      "generalPreferences": {
+        "title": "General Preferences",
+        "description": "Configure your language, currency, and display settings."
+      },
+      "language": {
+        "label": "Language",
+        "placeholder": "Select language",
+        "options": {
+          "en": "English",
+          "es": "Spanish",
+          "fr": "French",
+          "de": "German"
+        }
+      },
+      "currency": {
+        "label": "Preferred Currency",
+        "placeholder": "Select currency",
+        "options": {
+          "USD": "USD - United States Dollar",
+          "EUR": "EUR - Euro",
+          "GBP": "GBP - British Pound",
+          "XLM": "XLM - Stellar Lumens"
+        }
+      },
+      "darkMode": "Dark Mode",
+      "notifications": {
+        "title": "Notification Settings",
+        "description": "Manage how you receive notifications.",
+        "email": "Email Notifications",
+        "sms": "SMS Notifications"
+      },
+      "privacy": {
+        "title": "Privacy Settings",
+        "description": "Control your profile visibility.",
+        "publicProfile": "Public Profile"
+      },
+      "saveButton": "Save All Settings",
+      "toast": {
+        "saved": "All settings saved successfully!",
+        "updated": "{setting} updated to {value}!",
+        "enabled": "{setting} enabled!",
+        "disabled": "{setting} disabled!"
+      }
+    }
   },
 
   "HomePage": {

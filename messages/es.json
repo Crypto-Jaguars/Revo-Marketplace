@@ -27,7 +27,10 @@
     },
     "actions": {
       "cancel": "Cancelar",
-      "viewProfile": "Ver Perfil"
+      "viewProfile": "Ver Perfil",
+      "connect": "Conectar",
+      "disconnect": "Desconectar",
+      "edit": "Editar"
     },
     "status": {
       "pending": "Pendiente",
@@ -38,7 +41,67 @@
     },
     "products": "productos",
     "location": "Ubicación",
-    "certifications": "Certificaciones"
+    "certifications": "Certificaciones",
+    "contactInfo": {
+      "title": "Información de Contacto",
+      "location": "Ubicación",
+      "phone": "Teléfono",
+      "email": "Email",
+      "schedule": "Horario de Atención",
+      "weekdays": "Lun - Sáb",
+      "sunday": "Dom",
+      "socialMedia": "Redes Sociales",
+      "editAriaLabel": "Editar información de contacto",
+      "visitFacebook": "Visitar página de Facebook",
+      "visitInstagram": "Visitar página de Instagram",
+      "contactWhatsApp": "Contactar por WhatsApp",
+      "visitWebsite": "Visitar sitio web"
+    },
+    "profileSettings": {
+      "generalPreferences": {
+        "title": "Preferencias Generales",
+        "description": "Configura tu idioma, moneda y ajustes de visualización."
+      },
+      "language": {
+        "label": "Idioma",
+        "placeholder": "Seleccionar idioma",
+        "options": {
+          "en": "Inglés",
+          "es": "Español",
+          "fr": "Francés",
+          "de": "Alemán"
+        }
+      },
+      "currency": {
+        "label": "Moneda Preferida",
+        "placeholder": "Seleccionar moneda",
+        "options": {
+          "USD": "USD - Dólar Estadounidense",
+          "EUR": "EUR - Euro",
+          "GBP": "GBP - Libra Esterlina",
+          "XLM": "XLM - Stellar Lumens"
+        }
+      },
+      "darkMode": "Modo Oscuro",
+      "notifications": {
+        "title": "Configuración de Notificaciones",
+        "description": "Gestiona cómo recibes las notificaciones.",
+        "email": "Notificaciones por Email",
+        "sms": "Notificaciones por SMS"
+      },
+      "privacy": {
+        "title": "Configuración de Privacidad",
+        "description": "Controla la visibilidad de tu perfil.",
+        "publicProfile": "Perfil Público"
+      },
+      "saveButton": "Guardar Toda la Configuración",
+      "toast": {
+        "saved": "¡Toda la configuración guardada con éxito!",
+        "updated": "¡{setting} actualizado a {value}!",
+        "enabled": "¡{setting} habilitado!",
+        "disabled": "¡{setting} deshabilitado!"
+      }
+    }
   },
 
   "HomePage": {

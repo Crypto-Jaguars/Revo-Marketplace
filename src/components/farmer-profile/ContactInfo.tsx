@@ -2,6 +2,7 @@
 
 import React, { memo, useMemo, useCallback } from 'react';
 import { Edit3, Phone, Mail, MapPin, Clock, Facebook, Instagram, Globe } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface ContactData {
   phone: string;
@@ -19,6 +20,8 @@ interface ContactInfoProps {
 }
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
+  const t = useTranslations('common');
+  
   const contactData = useMemo<ContactData>(() => ({
     phone: '+34 123 456 789',
     email: 'contacto@granjaelparaiso.es',
@@ -53,15 +56,15 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
   return (
     <section className="bg-white p-6 mb-8 rounded-lg shadow-sm">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Información de Contacto</h2>
+        <h2 className="text-xl font-semibold text-gray-900">{t('contactInfo.title')}</h2>
         {isOwner && (
           <button
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
             onClick={handleEdit}
-            aria-label="Editar información de contacto"
+            aria-label={t('contactInfo.editAriaLabel')}
           >
             <Edit3 size={16} />
-            Editar
+            {t('actions.edit')}
           </button>
         )}
       </div>
@@ -71,7 +74,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
         <div className="flex items-start space-x-3">
           <MapPin className="w-6 h-6 text-filter_active stroke-2 flex-shrink-0 mt-1" fill="none" />
           <div className="min-w-0">
-            <h3 className="font-semibold text-gray-900 mb-1">Ubicación</h3>
+            <h3 className="font-semibold text-gray-900 mb-1">{t('contactInfo.location')}</h3>
             <p className="text-gray-600">{contactData.location}</p>
           </div>
         </div>
@@ -80,7 +83,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
         <div className="flex items-start space-x-3">
           <Phone className="w-6 h-6 text-filter_active stroke-2 flex-shrink-0 mt-1" fill="none" />
           <div className="min-w-0">
-            <h3 className="font-semibold text-gray-900 mb-1">Teléfono</h3>
+            <h3 className="font-semibold text-gray-900 mb-1">{t('contactInfo.phone')}</h3>
             <p className="text-gray-600">{contactData.phone}</p>
           </div>
         </div>
@@ -89,7 +92,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
         <div className="flex items-start space-x-3">
           <Mail className="w-6 h-6 text-filter_active stroke-2 flex-shrink-0 mt-1" fill="none" />
           <div className="min-w-0">
-            <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
+            <h3 className="font-semibold text-gray-900 mb-1">{t('contactInfo.email')}</h3>
             <p className="text-gray-600 break-all">{contactData.email}</p>
           </div>
         </div>
@@ -98,10 +101,10 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
         <div className="flex items-start space-x-3">
           <Clock className="w-6 h-6 text-filter_active stroke-2 flex-shrink-0 mt-1" fill="none" />
           <div className="min-w-0">
-            <h3 className="font-semibold text-gray-900 mb-1">Horario de Atención</h3>
+            <h3 className="font-semibold text-gray-900 mb-1">{t('contactInfo.schedule')}</h3>
             <div className="text-gray-600 space-y-1">
-              <p>Lun - Sáb: {contactData.schedule.weekdays}</p>
-              <p>Dom: {contactData.schedule.weekend}</p>
+              <p>{t('contactInfo.weekdays')}: {contactData.schedule.weekdays}</p>
+              <p>{t('contactInfo.sunday')}: {contactData.schedule.weekend}</p>
             </div>
           </div>
         </div>
@@ -109,33 +112,33 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
 
       {/* Redes Sociales */}
       <div className="mt-8 pt-6 border-t border-gray-200">
-        <h3 className="font-semibold text-gray-900 mb-4">Redes Sociales</h3>
+        <h3 className="font-semibold text-gray-900 mb-4">{t('contactInfo.socialMedia')}</h3>
         <div className="flex items-center space-x-6">
           <button
             onClick={() => handleSocialClick('Facebook')}
             className="text-filter_active hover:opacity-75 transition-opacity"
-            aria-label="Visitar página de Facebook"
+            aria-label={t('contactInfo.visitFacebook')}
           >
             <Facebook className="w-6 h-6 stroke-2" fill="none" />
           </button>
           <button
             onClick={() => handleSocialClick('Instagram')}
             className="text-filter_active hover:opacity-75 transition-opacity"
-            aria-label="Visitar página de Instagram"
+            aria-label={t('contactInfo.visitInstagram')}
           >
             <Instagram className="w-6 h-6 stroke-2" fill="none" />
           </button>
           <button
             onClick={() => handleSocialClick('WhatsApp')}
             className="text-filter_active hover:opacity-75 transition-opacity"
-            aria-label="Contactar por WhatsApp"
+            aria-label={t('contactInfo.contactWhatsApp')}
           >
             <Phone className="w-6 h-6 stroke-2" fill="none" />
           </button>
           <button
             onClick={() => handleSocialClick('Website')}
             className="text-filter_active hover:opacity-75 transition-opacity"
-            aria-label="Visitar sitio web"
+            aria-label={t('contactInfo.visitWebsite')}
           >
             <Globe className="w-6 h-6 stroke-2" fill="none" />
           </button>

@@ -11,6 +11,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle'; // I did import the component ThemeToggle, it switches between light and dark
 import { usePathname, useRouter } from 'next/navigation';
 import { useLanguageStore } from '@/store';
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +20,7 @@ const Header = () => {
   const { language } = useLanguageStore();
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations('common');
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
@@ -85,7 +87,7 @@ const Header = () => {
               className="text-white bg-primary hover:bg-primary/90 rounded-full focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium text-sm px-5 py-3 text-center transition-colors"
               aria-label="Disconnect wallet"
             >
-              Disconnect
+              {t('actions.disconnect')}
             </button>
           </>
         ) : (
@@ -95,7 +97,7 @@ const Header = () => {
             className="text-white bg-primary hover:bg-primary/90 rounded-full focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium text-sm px-5 py-3 text-center transition-colors"
             aria-label="Connect wallet"
           >
-            Connect
+            {t('actions.connect')}
           </button>
         )}
       </div>
