@@ -64,13 +64,22 @@ export default function InteractiveHeroGallery({ className = '' }: InteractiveHe
       animate="visible"
     >
       {galleryItems.map((item, index) => (
-        <motion.div
+        <motion.button
           key={index}
+          type="button"
           variants={imageVariants}
-          className={`relative h-64 md:h-80 lg:h-96 rounded-lg cursor-pointer transition-all duration-500 ${
+          className={`relative h-64 md:h-80 lg:h-96 rounded-lg cursor-pointer transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500 ${
             expandedIndex === index ? 'w-72 md:w-96' : 'w-24 md:w-28'
           }`}
           onMouseEnter={() => handleMouseEnter(index)}
+          onFocus={() => handleMouseEnter(index)}
+          onClick={() => handleMouseEnter(index)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              handleMouseEnter(index);
+            }
+          }}
         >
           <Image
             src={item.src}
@@ -87,7 +96,7 @@ export default function InteractiveHeroGallery({ className = '' }: InteractiveHe
               </p>
             </div>
           )}
-        </motion.div>
+        </motion.button>
       ))}
     </motion.div>
   );
