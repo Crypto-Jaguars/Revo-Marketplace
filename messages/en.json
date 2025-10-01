@@ -7,6 +7,7 @@
   "Hero": {
     "title": "Trust from Farm to Table",
     "subtitle": "Transforming commerce with technology that ensures speed, transparency, and fairness.",
+    "description": "Revolutionary Farmers is a blockchain-powered marketplace that connects farmers directly with consumers, ensuring transparency, fair pricing, and traceability from farm to table. Our platform empowers agricultural communities while providing consumers with access to fresh, authentic produce.",
     "imageText": {
       "processed": "Processed",
       "harvest": "Harvest",
@@ -1719,7 +1720,8 @@
     "producerCard": {
       "lastUsed": "Last used",
       "location": "Location"
-    },
+    }
+  },
   "Producers": {
     "hero": {
       "title": "Our Producers",
@@ -1796,8 +1798,7 @@
       "home": "Home",
       "producers": "Producers"
     }
-  }
-},
+  },
   "RegistrationHero": {
     "title": "Join Revolutionary Farmers",
     "description": "Transform your farming journey with cutting-edge technology, community support, and sustainable practices. Join thousands of farmers already revolutionizing agriculture.",
