@@ -210,9 +210,7 @@ setExpandedIndex(index);
             <Link href={`/${language}/invest`}>{tButton('investNow')}</Link>
           </Button>
         </div>
-        </main>
-      
-
+      </main>
       {/* Mobile scroll indicator */}
       <div className="lg:hidden flex justify-center items-center py-2 bg-gradient-to-b from-[#81B8A2] to-[#6BA892]">
         <div className="flex items-center gap-2 text-white/70 text-sm">
