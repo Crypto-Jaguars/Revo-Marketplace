@@ -255,6 +255,7 @@ const HexagonDemo = () => {
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
+              aria-pressed={activeDemo === section.id}
             >
               {section.label}
             </button>

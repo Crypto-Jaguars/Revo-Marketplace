@@ -334,15 +334,15 @@
     transform: perspective(1000px) rotateX(-8deg) rotateY(4deg) scale(1.05);
   }
 
-  .hexagon-hover:hover .hexagon-shadow-base {
-    box-shadow: 
+  .hexagon-hover:hover.hexagon-shadow-base {
+    box-shadow:
       0 6px 12px rgba(0, 0, 0, 0.15),
       0 3px 6px rgba(0, 0, 0, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  .hexagon-hover:hover .hexagon-shadow-medium {
-    box-shadow: 
+  .hexagon-hover:hover.hexagon-shadow-medium {
+    box-shadow:
       0 8px 16px rgba(0, 0, 0, 0.18),
       0 4px 8px rgba(0, 0, 0, 0.12),
       0 2px 4px rgba(0, 0, 0, 0.08),
@@ -350,8 +350,8 @@
       inset 0 -1px 0 rgba(0, 0, 0, 0.08);
   }
 
-  .hexagon-hover:hover .hexagon-shadow-deep {
-    box-shadow: 
+  .hexagon-hover:hover.hexagon-shadow-deep {
+    box-shadow:
       0 12px 24px rgba(0, 0, 0, 0.2),
       0 6px 12px rgba(0, 0, 0, 0.15),
       0 3px 6px rgba(0, 0, 0, 0.1),
