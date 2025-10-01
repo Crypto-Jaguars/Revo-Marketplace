@@ -42,7 +42,7 @@ export default function HeroSection() {
               style={{ color: '#FFFFFF' }}
               className="!text-[#FFFFFF]"
             >
-              {t('exploreMarketplace')}
+              {t('exploreMarketplace')}555555555555555555
             </Link>
           </Button>
           <Button
