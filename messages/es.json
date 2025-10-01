@@ -1104,100 +1104,83 @@
     "emailSubject": "Consulta de Producto - Revolutionary Farmers",
     "emailBody": "Hola Revolutionary Farmers,\\n\\nEstoy buscando un producto específico que no pude encontrar en su mercado.\\n\\nDetalles del producto:\\n- Nombre del producto: \\n- Categoría: \\n- Cantidad necesaria: \\n- Fecha de entrega preferida: \\n\\nNotas adicionales:\\n\\nPor favor, háganme saber si pueden ayudarme a encontrar este producto o conectarme con un productor adecuado.\\n\\n¡Gracias por su asistencia!\\n\\nSaludos cordiales"
   },
-  "ProducersPage": {
-    "title": "Nuestros Productores",
-    "subtitle": "Conoce nuestra red de agricultores y productores de confianza comprometidos con la agricultura sostenible",
-    "rating": "Calificación",
-    "specialties": "Especialidades",
-    "certifications": "Certificaciones",
-    "products": "productos",
-    "viewProfile": "Ver Perfil",
-    "joinNetwork": {
-      "title": "¿Interesado en Unirte a Nuestra Red?",
-      "description": "Siempre estamos buscando agricultores y productores apasionados para unirse a nuestra comunidad",
-      "button": "Convertirse en Productor"
+
+  "Producers": {
+    "hero": {
+      "title": "Nuestros Productores",
+      "description": "Descubre increíbles productores locales que están transformando la agricultura con prácticas sostenibles y métodos de cultivo innovadores.",
+      "searchPlaceholder": "Buscar por productor, producto o ubicación...",
+      "locationText": "Mostrando productores cerca de tu ubicación",
+      "resultsFor": "Resultados para"
+    },
+    "filters": {
+      "label": "Filtros",
+      "search": "Buscar productores...",
+      "location": "Ubicación",
+      "certification": "Certificación",
+      "farmingMethod": "Método de Cultivo",
+      "distance": "Distancia",
+      "rating": "Calificación",
+      "apply": "Aplicar Filtro",
+      "clear": "Limpiar Filtros",
+      "active": "Filtros activos",
+      "any": "Cualquiera",
+      "labels": {
+        "search": "Búsqueda",
+        "location": "Ubicación",
+        "cert": "Cert.",
+        "method": "Método",
+        "distance": "Dist.",
+        "rating": "Calificación"
+      },
+      "clearAll": "Limpiar todos los filtros",
+      "clearSearch": "Limpiar búsqueda",
+      "clearLocation": "Limpiar filtro de ubicación",
+      "clearCertification": "Limpiar filtro de certificación",
+      "clearMethod": "Limpiar filtro de método de cultivo",
+      "clearDistance": "Limpiar filtro de distancia",
+      "clearRating": "Limpiar filtro de calificación"
+    },
+    "sortBy": {
+      "showing": "Mostrando",
+      "of": "de",
+      "producers": "Productores",
+      "label": "Ordenar por",
+      "distance": "Distancia",
+      "rating": "Calificación",
+      "name": "Nombre",
+      "products": "Cantidad de Productos"
     },
     "producerCard": {
-      "lastUsed": "Usado por última vez",
-      "location": "Ubicación"
+      "market": "Mercado",
+      "farmer": "Agricultor",
+      "location": "Ubicación",
+      "distance": "Distancia",
+      "certifications": "Certificaciones",
+      "organic": "Orgánico Certificado",
+      "fairTrade": "Comercio Justo",
+      "viewProfile": "Ver Perfil",
+      "addToCart": "Agregar al Carrito",
+      "products": "Productos",
+      "reviews": "Reseñas",
+      "rating": "Calificación",
+      "kmAway": "A {distance} km de distancia",
+      "milesAway": "A {distance} millas de distancia"
     },
-    "Producers": {
-      "hero": {
-        "title": "Nuestros Productores",
-        "description": "Descubre increíbles productores locales que están transformando la agricultura con prácticas sostenibles y métodos de cultivo innovadores.",
-        "searchPlaceholder": "Buscar por productor, producto o ubicación...",
-        "locationText": "Mostrando productores cerca de tu ubicación"
-      },
-      "filters": {
-        "label": "Filtros",
-        "search": "Buscar productores...",
-        "location": "Ubicación",
-        "certification": "Certificación",
-        "farmingMethod": "Método de Cultivo",
-        "distance": "Distancia",
-        "rating": "Calificación",
-        "apply": "Aplicar Filtro",
-        "clear": "Limpiar Filtros",
-        "active": "Filtros activos",
-        "any": "Cualquiera",
-        "labels": {
-          "search": "Búsqueda",
-          "location": "Ubicación",
-          "cert": "Cert.",
-          "method": "Método",
-          "distance": "Dist.",
-          "rating": "Calificación"
-        },
-        "clearAll": "Limpiar todos los filtros",
-        "clearSearch": "Limpiar búsqueda",
-        "clearLocation": "Limpiar filtro de ubicación",
-        "clearCertification": "Limpiar filtro de certificación",
-        "clearMethod": "Limpiar filtro de método de cultivo",
-        "clearDistance": "Limpiar filtro de distancia",
-        "clearRating": "Limpiar filtro de calificación"
-      },
-      "sortBy": {
-        "showing": "Mostrando",
-        "of": "de",
-        "producers": "Productores",
-        "label": "Ordenar por",
-        "distance": "Distancia",
-        "rating": "Calificación",
-        "name": "Nombre",
-        "products": "Cantidad de Productos"
-      },
-      "producerCard": {
-        "market": "Mercado",
-        "farmer": "Agricultor",
-        "location": "Ubicación",
-        "distance": "Distancia",
-        "certifications": "Certificaciones",
-        "organic": "Orgánico Certificado",
-        "fairTrade": "Comercio Justo",
-        "viewProfile": "Ver Perfil",
-        "addToCart": "Agregar al Carrito",
-        "products": "Productos",
-        "reviews": "Reseñas",
-        "rating": "Calificación",
-        "kmAway": "A {distance} km de distancia",
-        "milesAway": "A {distance} millas de distancia"
-      },
-      "cta": {
-        "title": "¿Eres productor?",
-        "description": "Únete a nuestra comunidad de agricultores sostenibles y conecta directamente con consumidores que valoran la calidad y transparencia.",
-        "joinButton": "Únete como Productor"
-      },
-      "loadMore": "Cargar más productores",
-      "loadMoreAria": "Cargar más productores",
-      "empty": {
-        "title": "No se encontraron productores",
-        "description": "Intenta ajustar tus filtros o criterios de búsqueda para encontrar productores en tu área."
-      },
-      "breadcrumb": {
-        "home": "Inicio",
-        "producers": "Productores"
-      }
+    "cta": {
+      "title": "¿Eres productor?",
+      "description": "Únete a nuestra comunidad de agricultores sostenibles y conecta directamente con consumidores que valoran la calidad y transparencia.",
+      "joinButton": "Únete como Productor"
+    },
+    "loadMore": "Cargar más productores",
+    "loadMoreAria": "Cargar más productores",
+    "empty": {
+      "title": "No se encontraron productores",
+      "description": "Intenta ajustar tus filtros o criterios de búsqueda para encontrar productores en tu área."
+    },
+    "breadcrumb": {
+      "home": "Inicio",
+      "producers": "Productores"
     }
   }
-}}
-
+}

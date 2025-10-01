@@ -298,7 +298,7 @@ export default function ProducersPage() {
                   {filteredProducers.length} {t('breadcrumb.producers')}
                 </h2>
                 <p className="text-sm text-gray-300">
-                  {filters.search ? `Results for "${filters.search}"` : t('hero.locationText')}
+                  {filters.search ? `${t('hero.resultsFor')} "${filters.search}"` : t('hero.locationText')}
                 </p>
               </div>
             </div>

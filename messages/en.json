@@ -1819,30 +1819,14 @@
     "emailSubject": "Product Inquiry - Revolutionary Farmers",
     "emailBody": "Hello Revolutionary Farmers,\\n\\nI am looking for a specific product that I couldn't find in your marketplace.\\n\\nProduct details:\\n- Product name: \\n- Category: \\n- Quantity needed: \\n- Preferred delivery date: \\n\\nAdditional notes:\\n\\nPlease let me know if you can help me find this product or connect me with a suitable producer.\\n\\nThank you for your assistance!\\n\\nBest regards"
   },
-  "ProducersPage": {
-    "title": "Our Producers",
-    "subtitle": "Meet our network of trusted farmers and producers committed to sustainable agriculture",
-    "rating": "Rating",
-    "specialties": "Specialties",
-    "certifications": "Certifications",
-    "products": "products",
-    "viewProfile": "View Profile",
-    "joinNetwork": {
-      "title": "Interested in Joining Our Network?",
-      "description": "We're always looking for passionate farmers and producers to join our community",
-      "button": "Become a Producer"
-    },
-    "producerCard": {
-      "lastUsed": "Last used",
-      "location": "Location"
-    }
-  },
+
   "Producers": {
     "hero": {
       "title": "Our Producers",
       "description": "Discover amazing local producers who are transforming agriculture with sustainable practices and innovative farming methods.",
       "searchPlaceholder": "Search by producer, product or location...",
-      "locationText": "Showing producers near your location"
+      "locationText": "Showing producers near your location",
+      "resultsFor": "Results for"
     },
     "filters": {
       "label": "Filters",
