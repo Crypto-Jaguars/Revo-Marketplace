@@ -71,8 +71,8 @@ export function ProfileSettings() {
                 <SelectContent>
                   <SelectItem value="en">{t('language.options.en')}</SelectItem>
                   <SelectItem value="es">{t('language.options.es')}</SelectItem>
-                  <SelectItem value="fr">{t('language.options.fr')}</SelectItem>
-                  <SelectItem value="de">{t('language.options.de')}</SelectItem>
+                  {/* <SelectItem value="fr">{t('language.options.fr')}</SelectItem>
+                  <SelectItem value="de">{t('language.options.de')}</SelectItem> */}
                 </SelectContent>
               </Select>
             </div>

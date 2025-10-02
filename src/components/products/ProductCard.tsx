@@ -23,7 +23,7 @@ const ProductCard = memo<ProductCardProps>(({ product, viewMode, onClick, locale
   const [isHovered, setIsHovered] = useState(false);
 
   const translatedName = useMemo(() => {
-    return t(`productNames.${product.name}`);
+    return t(`productNames.${product.name}`, { defaultValue: product.name });
   }, [product.name, t]);
 
   const formatPrice = useCallback(
@@ -132,7 +132,7 @@ const ProductCard = memo<ProductCardProps>(({ product, viewMode, onClick, locale
               value={product.rating as number & { __brand: 'ValidRating' }}
               max={5}
               readOnly
-              aria-label={`Product rated ${product.rating} out of 5 stars`}
+              aria-label={t('productCard.ratingLabel', { rating: product.rating })}
             />
             <span className="text-sm text-gray-600">{product.rating}/5</span>
           </div>

@@ -30,7 +30,9 @@
       "viewProfile": "Ver Perfil",
       "connect": "Conectar",
       "disconnect": "Desconectar",
-      "edit": "Editar"
+      "edit": "Editar",
+      "closeMenu": "Cerrar menú",
+      "openMenu": "Abrir menú"
     },
     "status": {
       "pending": "Pendiente",
@@ -435,6 +437,9 @@
       "Eggs 5": "Huevos de Codorniz 5",
       "Eggs 6": "Huevos de Codorniz 6",
       "Cafè": "Café"
+    },
+    "productCard": {
+      "ratingLabel": "Calificación: {rating} de 5 estrellas"
     },
     "sortBy": {
       "showing": "Mostrando",
@@ -1460,6 +1465,8 @@
       "payment": "pago",
       "create_account": "creación de cuenta",
       "manage_offer": "ofertas",
+      "path_payment": "pago por ruta",
+      "manage_data": "gestión de datos",
       "change_trust": "líneas de confianza"
     },
     "labels": {

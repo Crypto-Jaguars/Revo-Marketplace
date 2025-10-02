@@ -30,7 +30,9 @@
       "viewProfile": "View Profile",
       "connect": "Connect",
       "disconnect": "Disconnect",
-      "edit": "Edit"
+      "edit": "Edit",
+      "closeMenu": "Close menu",
+      "openMenu": "Open menu"
     },
     "status": {
       "pending": "Pending",
@@ -429,6 +431,9 @@
       "Eggs 5": "Quail Eggs 5",
       "Eggs 6": "Quail Eggs 6",
       "Cafè": "Coffee"
+    },
+    "productCard": {
+      "ratingLabel": "Rating: {rating} out of 5 stars"
     },
     "cart": {
       "title": "Shopping Cart",
@@ -2175,6 +2180,8 @@
       "payment": "payment",
       "create_account": "account creation",
       "manage_offer": "offers",
+      "path_payment": "path payment",
+      "manage_data": "manage data",
       "change_trust": "trustlines"
     },
     "labels": {

@@ -21,6 +21,7 @@ interface ContactInfoProps {
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
   const t = useTranslations('ContactInfo');
+  const tCommon = useTranslations('Common');
   
   const contactData = useMemo<ContactData>(() => ({
     phone: '+34 123 456 789',
@@ -64,7 +65,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isOwner = false }) => {
             aria-label={t('editAriaLabel')}
           >
             <Edit3 size={16} />
-            Editar
+            {tCommon('actions.edit')}
           </button>
         )}
       </div>

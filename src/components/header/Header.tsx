@@ -85,7 +85,7 @@ const Header = () => {
               type="button"
               onClick={handleDisconnect}
               className="text-white bg-primary hover:bg-primary/90 rounded-full focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium text-sm px-5 py-3 text-center transition-colors"
-              aria-label="Disconnect wallet"
+              aria-label={t('actions.disconnect')}
             >
               {t('actions.disconnect')}
             </button>
@@ -95,7 +95,7 @@ const Header = () => {
             type="button"
             onClick={handleConnect}
             className="text-white bg-primary hover:bg-primary/90 rounded-full focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium text-sm px-5 py-3 text-center transition-colors"
-            aria-label="Connect wallet"
+            aria-label={t('actions.connect')}
           >
             {t('actions.connect')}
           </button>
@@ -108,7 +108,7 @@ const Header = () => {
           className="p-2 text-white hover:bg-primary/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMenuOpen ? t('actions.closeMenu') : t('actions.openMenu')}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

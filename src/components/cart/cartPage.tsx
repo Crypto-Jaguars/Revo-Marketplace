@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useCartStore } from '@/store';
+import { useCartStore, useLanguageStore } from '@/store';
 import CartItemComponent from './cartItem';
 import CartSummary from './cartSummary';
 import { Button } from '@/components/ui/button';
@@ -10,9 +10,12 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export default function CartPage() {
   const t = useTranslations('CartPage');
+  const { language } = useLanguageStore();
+
   const {
     Items,
     removeItem,
@@ -110,15 +113,12 @@ export default function CartPage() {
         <h1 className="text-2xl font-bold mb-8">{t('title')}</h1>
         <div className="bg-muted/30 rounded-lg p-12 text-center">
           <h2 className="text-xl font-medium mb-4">{t('emptyCart.title')}</h2>
-          <p className="text-muted-foreground mb-6">
-            {t('emptyCart.description')}
-          </p>
-          <Button
-            asChild
-            className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]"
-          >
-            <a href="/en/products">{t('emptyCart.browseProducts')}</a>
-          </Button>
+          <p className="text-muted-foreground mb-6">{t('emptyCart.description')}</p>
+          <Link href={`/${language}/products`}>
+            <Button className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
+              {t('emptyCart.browseProducts')}
+            </Button>
+          </Link>
         </div>
       </div>
     );
@@ -130,20 +130,18 @@ export default function CartPage() {
         <h1 className="text-2xl font-bold mb-8">{t('title')}</h1>
         <div className="bg-muted/30 rounded-lg p-12 text-center">
           <h2 className="text-xl font-medium mb-4">{t('emptyAfterRemoval.title')}</h2>
-          <p className="text-muted-foreground mb-6">
-            {t('emptyAfterRemoval.description')}
-          </p>
+          <p className="text-muted-foreground mb-6">{t('emptyAfterRemoval.description')}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={undoRemove} className="flex items-center gap-2">
               <Undo2 className="h-4 w-4" />
               {t('emptyAfterRemoval.restoreItems')}
             </Button>
-            <Button
-              asChild
-              className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]"
-            >
-              <a href="/en/products">{t('emptyAfterRemoval.browseProducts')}</a>
-            </Button>
+
+            <Link href={`/${language}/products`}>
+              <Button className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
+                {t('emptyAfterRemoval.browseProducts')}
+              </Button>
+            </Link>
           </div>
         </div>
         <ToastContainer />
@@ -166,7 +164,9 @@ export default function CartPage() {
         <Alert className="mb-6 bg-muted/30 border-muted">
           <div className="flex justify-between items-center w-full">
             <AlertDescription>
-              {lastRemovedItems.length} {lastRemovedItems.length === 1 ? t('removedItems.item') : t('removedItems.items')} {t('removedItems.removedFromCart')}
+              {lastRemovedItems.length}{' '}
+              {lastRemovedItems.length === 1 ? t('removedItems.item') : t('removedItems.items')}{' '}
+              {t('removedItems.removedFromCart')}
             </AlertDescription>
             <Button
               variant="outline"
@@ -197,7 +197,9 @@ export default function CartPage() {
                 </h2>
                 {Items.length > 1 && (
                   <Button variant="outline" size="sm" onClick={selectAllItems} className="text-xs">
-                    {selectedItems.length === Items.length ? t('items.deselectAll') : t('items.selectAll')}
+                    {selectedItems.length === Items.length
+                      ? t('items.deselectAll')
+                      : t('items.selectAll')}
                   </Button>
                 )}
               </div>
@@ -259,7 +261,9 @@ export default function CartPage() {
 
                     <div className="bg-muted/20 p-4">
                       <div className="flex justify-between mb-2">
-                        <span>{t('farmer.subtotal')} ({farmerItems.length} {t('farmer.items')})</span>
+                        <span>
+                          {t('farmer.subtotal')} ({farmerItems.length} {t('farmer.items')})
+                        </span>
                         <span className="font-medium">
                           ${subtotalByFarmer[farmerId].toFixed(2)}
                         </span>
@@ -306,9 +310,7 @@ export default function CartPage() {
 
             <div className="mt-6 p-4 border rounded-lg">
               <h3 className="font-medium mb-2">{t('escrowProtection.title')}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t('escrowProtection.description')}
-              </p>
+              <p className="text-sm text-muted-foreground">{t('escrowProtection.description')}</p>
             </div>
           </div>
         </div>
