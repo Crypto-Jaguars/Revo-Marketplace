@@ -60,9 +60,12 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 flex flex-col px-4 sm:px-8 md:px-40 py-3 z-50" style={{ backgroundImage: "url('/images/header-bg.png')" }}>
+      <header
+        className="sticky top-0 left-0 right-0 flex flex-col px-4 sm:px-8 md:px-40 py-3 z-50"
+        style={{ backgroundImage: "url('/images/header-bg.png')" }}
+      >
         <div className="absolute inset-0 bg-green-700/90"></div>
-        
+
         {/* Desktop Header */}
         <div className="hidden md:flex w-full justify-between items-center relative z-10">
           <div className="flex flex-row gap-2 items-center text-white">
@@ -79,25 +82,44 @@ const Header = () => {
           </div>
           <nav aria-label="Main navigation">
             <div className="flex gap-6 items-center text-white">
-              <Link style={{ color: 'white' }} href={`/${language}`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+              <Link
+                style={{ color: 'white' }}
+                href={`/${language}`}
+                className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer"
+              >
                 {t('Marketplace.navigation.home')}
               </Link>
-              <Link style={{ color: 'white' }} href={`/${language}/products`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+              <Link
+                style={{ color: 'white' }}
+                href={`/${language}/products`}
+                className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer"
+              >
                 {t('Marketplace.navigation.products')}
               </Link>
-              <Link style={{ color: 'white' }} href={`/${language}/marketplace`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+              <Link
+                style={{ color: 'white' }}
+                href={`/${language}/marketplace`}
+                className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer"
+              >
                 {t('Marketplace.navigation.marketplace')}
+              </Link>
+              <Link style={{ color: 'white' }} href={`/${language}/producers`} className="font-semibold text-base p-2 border border-transparent hover:border-white rounded-full cursor-pointer">
+                {t('Marketplace.navigation.producers')}
               </Link>
             </div>
           </nav>
-          <div className='flex items-center gap-4'>
+          <div className="flex items-center gap-4">
             <div className="relative flex items-center">
               <input
                 type="search"
                 placeholder={t('Marketplace.search.placeholder')}
                 className="bg-white/20 text-white placeholder-gray-300 rounded-full py-2 pl-10 pr-4 focus:outline-none w-40 border border-white"
               />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'white' }} size={20} />
+              <Search
+                className="absolute left-3 top-1/2 -translate-y-1/2"
+                style={{ color: 'white' }}
+                size={20}
+              />
             </div>
             <button aria-label="Cart" className="p-2">
               <ShoppingCart size={24} style={{ color: 'white' }} />
@@ -117,10 +139,23 @@ const Header = () => {
         <div className="md:hidden flex flex-col w-full relative z-10 text-white">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
-              <button onClick={toggleMenu} className="p-2" aria-expanded={isMenuOpen} aria-controls="mobile-menu">
-                {isMenuOpen ? <X size={24} style={{ color: 'white' }} /> : <Menu size={24} style={{ color: 'white' }} />}
+              <button
+                onClick={toggleMenu}
+                className="p-2"
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-menu"
+              >
+                {isMenuOpen ? (
+                  <X size={24} style={{ color: 'white' }} />
+                ) : (
+                  <Menu size={24} style={{ color: 'white' }} />
+                )}
               </button>
-              <button onClick={handleLogoClick} className="flex justify-center items-center size-[30px] bg-white" aria-label="Home">
+              <button
+                onClick={handleLogoClick}
+                className="flex justify-center items-center size-[30px] bg-white"
+                aria-label="Home"
+              >
                 <Image src="/logo.svg" width={20} height={20} alt="Website logo" priority />
               </button>
             </div>
@@ -144,7 +179,11 @@ const Header = () => {
               placeholder={t('Marketplace.search.placeholder')}
               className="bg-white/20 placeholder-gray-300 rounded-full py-2 pl-10 pr-4 focus:outline-none w-full"
             />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={20} style={{ color: 'white' }} />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2"
+              size={20}
+              style={{ color: 'white' }}
+            />
           </div>
         </div>
       </header>
@@ -152,9 +191,38 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-green-700/95 shadow-lg pt-24 z-40">
           <div className="flex flex-col items-center gap-2 p-4 text-white">
-            <Link style={{ color: 'white' }} href={`/${language}`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.home')}</Link>
-            <Link style={{ color: 'white' }} href={`/${language}/products`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.products')}</Link>
-            <Link style={{ color: 'white' }} href={`/${language}/marketplace`} onClick={() => setIsMenuOpen(false)} className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md">{t('Marketplace.navigation.marketplace')}</Link>
+            <Link
+              style={{ color: 'white' }}
+              href={`/${language}`}
+              onClick={() => setIsMenuOpen(false)}
+              className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md"
+            >
+              {t('Marketplace.navigation.home')}
+            </Link>
+            <Link
+              style={{ color: 'white' }}
+              href={`/${language}/products`}
+              onClick={() => setIsMenuOpen(false)}
+              className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md"
+            >
+              {t('Marketplace.navigation.products')}
+            </Link>
+            <Link
+              style={{ color: 'white' }}
+              href={`/${language}/marketplace`}
+              onClick={() => setIsMenuOpen(false)}
+              className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md"
+            >
+              {t('Marketplace.navigation.marketplace')}
+            </Link>
+            <Link
+              style={{ color: 'white' }}
+              href={`/${language}/producers`}
+              onClick={() => setIsMenuOpen(false)}
+              className="font-semibold py-2 w-full text-center hover:bg-white/10 rounded-md"
+            >
+              {t('Marketplace.navigation.producers')}
+            </Link>
           </div>
         </div>
       )}

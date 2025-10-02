@@ -60,12 +60,13 @@ export default function ReviewCard({
   };
 
   const renderStars = (rating: number) => {
+    const roundedRating = Math.round(rating);
     return (
       <div className="flex">
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`w-4 h-4 ${i < rating ? 'fill-[#375B42] text-[#375B42] outline-[#375B42]' : 'text-muted-foreground'}`}
+            className={`w-4 h-4 ${i < roundedRating ? 'fill-[#375B42] text-[#375B42] outline-[#375B42]' : 'text-muted-foreground'}`}
           />
         ))}
       </div>

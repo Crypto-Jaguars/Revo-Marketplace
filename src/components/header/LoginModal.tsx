@@ -5,7 +5,7 @@ import { X } from 'lucide-react';
 
 interface LoginModalProps {
   onClose: () => void;
-  t: (key: string) => string; 
+  t: (key: string) => string;
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, t }) => {
@@ -21,10 +21,16 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, t }) => {
         </button>
         <h2 className="text-xl font-bold text-center mb-5">{t('SignIn.title')}</h2>
         <div className="flex flex-col gap-3">
-          <button style={{color:'white'}} className="py-2 px-4 bg-gradient-to-b from-green-500 to-green-700 text-white text-sm font-semibold rounded-full border-2 border-green-800 shadow-lg transition-transform transform hover:scale-105 hover:brightness-95 active:translate-y-px">
+          <button
+            style={{ color: 'white' }}
+            className="py-2 px-4 bg-gradient-to-b from-green-500 to-green-700 text-white text-sm font-semibold rounded-full border-2 border-green-800 shadow-lg transition-transform transform hover:scale-105 hover:brightness-95 active:translate-y-px"
+          >
             {t('LoginModal.farmerButton')}
           </button>
-          <button style={{color:'white'}} className="py-2 px-4 bg-gradient-to-b from-green-500 to-green-700 text-white text-sm font-semibold rounded-full border-2 border-green-800 shadow-lg transition-transform transform hover:scale-105 hover:brightness-95 active:translate-y-px">
+          <button
+            style={{ color: 'white' }}
+            className="py-2 px-4 bg-gradient-to-b from-green-500 to-green-700 text-white text-sm font-semibold rounded-full border-2 border-green-800 shadow-lg transition-transform transform hover:scale-105 hover:brightness-95 active:translate-y-px"
+          >
             {t('LoginModal.buyerButton')}
           </button>
           <button className="border border-green-600 text-green-600 py-2 rounded-full shadow-md hover:bg-green-50 transition-colors text-sm">

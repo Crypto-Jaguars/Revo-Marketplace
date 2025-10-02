@@ -35,6 +35,12 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    /* Color palette */
+    --color-primary: #2a7035;
+    --color-primary-light: #38b66a;
+    --color-primary-dark: #1f5f35;
+
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -70,10 +76,17 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: url('/Home.png'); /* default image for background */
-    background-size: cover; /* image increases or decreases its size based on the size of the window */
-    background-repeat: no-repeat; /* It ensures that image does not repeat */
-    background-position: center; /* It centers the image in the body, in horizontal and vertical way */
+    font-family: var(--font-plus-jakarta-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url('/Home.png');
+    /* default image for background */
+    background-size: cover;
+    /* image increases or decreases its size based on the size of the window */
+    background-repeat: no-repeat;
+    /* It ensures that image does not repeat */
+    background-position: center;
+    /* It centers the image in the body, in horizontal and vertical way */
   }
 
   /* Ligth mode */
@@ -97,9 +110,33 @@
     }
 
     .languageIcon {
-      color: rgb(
-        255 255 255
-      ) !important; /* It keeps languageIcon in whithe in both modes using !important */
+      color: rgb(255 255 255) !important;
+      /* It keeps languageIcon in whithe in both modes using !important */
+    }
+
+    .font-regular {
+      font-weight: 400;
+    }
+    .font-medium {
+      font-weight: 500;
+    }
+    .font-semibold {
+      font-weight: 600;
+    }
+    .font-bold {
+      font-weight: 700;
+    }
+    .font-extrabold {
+      font-weight: 800;
+    }
+    .text-primary-custom {
+      color: var(--color-primary);
+    }
+    .text-primary-light-custom {
+      color: var(--color-primary-light);
+    }
+    .text-primary-dark-custom {
+      color: var(--color-primary-dark);
     }
   }
 }
@@ -112,5 +149,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-

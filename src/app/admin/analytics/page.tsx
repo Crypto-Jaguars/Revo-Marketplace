@@ -4,17 +4,17 @@ import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  BarChart, 
-  Download, 
-  Eye, 
-  MousePointer, 
-  Send, 
-  CheckCircle, 
+import {
+  BarChart,
+  Download,
+  Eye,
+  MousePointer,
+  Send,
+  CheckCircle,
   TrendingUp,
   Globe,
   Users,
-  Calendar
+  Calendar,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -89,11 +89,11 @@ export default function AnalyticsPage() {
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       setLoading(true);
       setError(null);
-      
+
       // Login via secure endpoint
       const loginResponse = await fetch('/api/admin/login', {
         method: 'POST',
@@ -112,7 +112,7 @@ export default function AnalyticsPage() {
 
       // Clear the key from memory after successful login
       setAdminKey('');
-      
+
       // Fetch analytics data
       await fetchAnalytics();
     } catch (err) {
@@ -178,9 +178,7 @@ export default function AnalyticsPage() {
               <BarChart className="w-5 h-5" />
               Analytics Dashboard
             </CardTitle>
-            <CardDescription>
-              Enter the admin API key to access analytics data
-            </CardDescription>
+            <CardDescription>Enter the admin API key to access analytics data</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleAuth} className="space-y-4">
@@ -198,9 +196,7 @@ export default function AnalyticsPage() {
                   required
                 />
               </div>
-              {error && (
-                <p className="text-sm text-red-600">{error}</p>
-              )}
+              {error && <p className="text-sm text-red-600">{error}</p>}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? 'Authenticating...' : 'Access Dashboard'}
               </Button>
@@ -239,9 +235,10 @@ export default function AnalyticsPage() {
 
   if (!data) return null;
 
-  const conversionRate = data.total.pageViews > 0 
-    ? ((data.total.successfulSignups / data.total.pageViews) * 100).toFixed(2)
-    : '0';
+  const conversionRate =
+    data.total.pageViews > 0
+      ? ((data.total.successfulSignups / data.total.pageViews) * 100).toFixed(2)
+      : '0';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -253,18 +250,14 @@ export default function AnalyticsPage() {
               <BarChart className="w-8 h-8 text-brand-500" />
               Waitlist Analytics
             </h1>
-            <p className="text-gray-600 mt-1">
-              Real-time insights into your waitlist performance
-            </p>
+            <p className="text-gray-600 mt-1">Real-time insights into your waitlist performance</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => downloadCSV('summary')}>
               <Download className="w-4 h-4 mr-2" />
               Export Summary
             </Button>
-            <Button onClick={fetchAnalytics}>
-              Refresh
-            </Button>
+            <Button onClick={fetchAnalytics}>Refresh</Button>
             <Button variant="outline" onClick={handleLogout}>
               Logout
             </Button>
@@ -313,9 +306,7 @@ export default function AnalyticsPage() {
                 <TrendingUp className="w-5 h-5" />
                 Conversion Funnels by Source
               </CardTitle>
-              <CardDescription>
-                Performance breakdown by traffic source
-              </CardDescription>
+              <CardDescription>Performance breakdown by traffic source</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -341,15 +332,17 @@ export default function AnalyticsPage() {
                         <div className="text-gray-500">Submits</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-purple-600 font-medium">{funnel.successfulSignups}</div>
+                        <div className="text-purple-600 font-medium">
+                          {funnel.successfulSignups}
+                        </div>
                         <div className="text-gray-500">Success</div>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="w-full mt-4"
                 onClick={() => downloadCSV('funnels')}
               >
@@ -382,8 +375,8 @@ export default function AnalyticsPage() {
                     </div>
                   ))}
                 </div>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="w-full mt-4"
                   onClick={() => downloadCSV('sources')}
                 >
@@ -414,8 +407,8 @@ export default function AnalyticsPage() {
                     </div>
                   ))}
                 </div>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="w-full mt-4"
                   onClick={() => downloadCSV('countries')}
                 >
@@ -434,9 +427,7 @@ export default function AnalyticsPage() {
               <Calendar className="w-5 h-5" />
               Performance Over Time
             </CardTitle>
-            <CardDescription>
-              Compare metrics across different time periods
-            </CardDescription>
+            <CardDescription>Compare metrics across different time periods</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
@@ -470,9 +461,15 @@ export default function AnalyticsPage() {
                   </tr>
                   <tr>
                     <td className="py-2">Successful Signups</td>
-                    <td className="text-right py-2 font-medium text-green-600">{data.total.successfulSignups}</td>
-                    <td className="text-right py-2 text-green-600">{data.week.successfulSignups}</td>
-                    <td className="text-right py-2 text-green-600">{data.today.successfulSignups}</td>
+                    <td className="text-right py-2 font-medium text-green-600">
+                      {data.total.successfulSignups}
+                    </td>
+                    <td className="text-right py-2 text-green-600">
+                      {data.week.successfulSignups}
+                    </td>
+                    <td className="text-right py-2 text-green-600">
+                      {data.today.successfulSignups}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -484,19 +481,19 @@ export default function AnalyticsPage() {
   );
 }
 
-function MetricCard({ 
-  title, 
-  value, 
-  change, 
-  changeLabel, 
-  icon, 
-  color = 'blue' 
-}: { 
-  title: string; 
-  value: string | number; 
-  change?: number; 
-  changeLabel?: string; 
-  icon: React.ReactNode; 
+function MetricCard({
+  title,
+  value,
+  change,
+  changeLabel,
+  icon,
+  color = 'blue',
+}: {
+  title: string;
+  value: string | number;
+  change?: number;
+  changeLabel?: string;
+  icon: React.ReactNode;
   color?: string;
 }) {
   const colorClasses = {

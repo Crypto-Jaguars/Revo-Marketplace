@@ -2,23 +2,29 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { 
-  Globe, 
-  Languages, 
-  DollarSign, 
-  Clock, 
+import {
+  Globe,
+  Languages,
+  DollarSign,
+  Clock,
   Calendar,
   Hash,
   Settings,
   CheckCircle,
   AlertTriangle,
-  Info
+  Info,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useSettingsStore } from '@/store';
 import WithAuthProtect from '@/constants/helpers/WithAuth';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -26,11 +32,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 function RegionalSettingsPage() {
   const t = useTranslations('Settings.regional');
   const locale = useLocale();
-  const { 
-    regional, 
-    updateRegionalSettings,
-    setLoading 
-  } = useSettingsStore();
+  const { regional, updateRegionalSettings, setLoading } = useSettingsStore();
 
   const breadcrumbItems = [
     { label: t('breadcrumb.home'), href: '/' },
@@ -83,12 +85,12 @@ function RegionalSettingsPage() {
   const handleSaveSettings = async () => {
     setLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
   };
 
   const formatCurrency = (currencyCode: string, amount: number) => {
-    const currency = currencies.find(c => c.code === currencyCode);
+    const currency = currencies.find((c) => c.code === currencyCode);
     if (!currency) return `${amount}`;
     return `${currency.symbol}${amount.toLocaleString()}`;
   };
@@ -123,17 +125,10 @@ function RegionalSettingsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {t('title')}
-            </h1>
-            <p className="text-gray-600">
-              {t('description')}
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+            <p className="text-gray-600">{t('description')}</p>
           </div>
-          <Button
-            onClick={handleSaveSettings}
-            className="flex items-center gap-2"
-          >
+          <Button onClick={handleSaveSettings} className="flex items-center gap-2">
             <Settings className="w-4 h-4" />
             {t('actions.save')}
           </Button>
@@ -155,18 +150,12 @@ function RegionalSettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t('language.setting')}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {t('language.description')}
-                    </p>
+                    <p className="font-medium text-gray-900">{t('language.setting')}</p>
+                    <p className="text-sm text-gray-600">{t('language.description')}</p>
                   </div>
                   <Select
                     value={regional.language}
-                    onValueChange={(value) => 
-                      updateRegionalSettings({ language: value })
-                    }
+                    onValueChange={(value) => updateRegionalSettings({ language: value })}
                   >
                     <SelectTrigger className="w-48">
                       <SelectValue />
@@ -186,19 +175,13 @@ function RegionalSettingsPage() {
 
                 {/* Language Preview */}
                 <div className="p-4 border rounded-lg">
-                  <h4 className="font-medium text-gray-900 mb-3">
-                    {t('language.preview')}
-                  </h4>
+                  <h4 className="font-medium text-gray-900 mb-3">{t('language.preview')}</h4>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600" />
-                      <span className="text-sm">
-                        {t('language.previewText')}
-                      </span>
+                      <span className="text-sm">{t('language.previewText')}</span>
                     </div>
-                    <div className="text-sm text-gray-600">
-                      {t('language.previewDescription')}
-                    </div>
+                    <div className="text-sm text-gray-600">{t('language.previewDescription')}</div>
                   </div>
                 </div>
               </div>
@@ -217,18 +200,12 @@ function RegionalSettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t('currency.setting')}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {t('currency.description')}
-                    </p>
+                    <p className="font-medium text-gray-900">{t('currency.setting')}</p>
+                    <p className="text-sm text-gray-600">{t('currency.description')}</p>
                   </div>
                   <Select
                     value={regional.currency}
-                    onValueChange={(value) => 
-                      updateRegionalSettings({ currency: value })
-                    }
+                    onValueChange={(value) => updateRegionalSettings({ currency: value })}
                   >
                     <SelectTrigger className="w-48">
                       <SelectValue />
@@ -238,7 +215,9 @@ function RegionalSettingsPage() {
                         <SelectItem key={currency.code} value={currency.code}>
                           <div className="flex items-center gap-2">
                             <span>{currency.symbol}</span>
-                            <span>{currency.name} ({currency.code})</span>
+                            <span>
+                              {currency.name} ({currency.code})
+                            </span>
                           </div>
                         </SelectItem>
                       ))}
@@ -248,9 +227,7 @@ function RegionalSettingsPage() {
 
                 {/* Currency Preview */}
                 <div className="p-4 border rounded-lg">
-                  <h4 className="font-medium text-gray-900 mb-3">
-                    {t('currency.preview')}
-                  </h4>
+                  <h4 className="font-medium text-gray-900 mb-3">{t('currency.preview')}</h4>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-gray-600">{t('currency.previewPrice')}: </span>
@@ -261,7 +238,7 @@ function RegionalSettingsPage() {
                     <div>
                       <span className="text-gray-600">{t('currency.previewTotal')}: </span>
                       <span className="font-medium">
-                        {formatCurrency(regional.currency, 5678.90)}
+                        {formatCurrency(regional.currency, 5678.9)}
                       </span>
                     </div>
                   </div>
@@ -282,18 +259,12 @@ function RegionalSettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">
-                      {t('timezone.setting')}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {t('timezone.description')}
-                    </p>
+                    <p className="font-medium text-gray-900">{t('timezone.setting')}</p>
+                    <p className="text-sm text-gray-600">{t('timezone.description')}</p>
                   </div>
                   <Select
                     value={regional.timezone}
-                    onValueChange={(value) => 
-                      updateRegionalSettings({ timezone: value })
-                    }
+                    onValueChange={(value) => updateRegionalSettings({ timezone: value })}
                   >
                     <SelectTrigger className="w-64">
                       <SelectValue />
@@ -310,22 +281,18 @@ function RegionalSettingsPage() {
 
                 {/* Timezone Preview */}
                 <div className="p-4 border rounded-lg">
-                  <h4 className="font-medium text-gray-900 mb-3">
-                    {t('timezone.preview')}
-                  </h4>
+                  <h4 className="font-medium text-gray-900 mb-3">{t('timezone.preview')}</h4>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-blue-600" />
                       <span className="text-sm">
-                        {new Date().toLocaleString('en-US', { 
+                        {new Date().toLocaleString('en-US', {
                           timeZone: regional.timezone,
-                          timeZoneName: 'short'
+                          timeZoneName: 'short',
                         })}
                       </span>
                     </div>
-                    <div className="text-sm text-gray-600">
-                      {t('timezone.previewDescription')}
-                    </div>
+                    <div className="text-sm text-gray-600">{t('timezone.previewDescription')}</div>
                   </div>
                 </div>
               </div>
@@ -350,9 +317,7 @@ function RegionalSettingsPage() {
                     </label>
                     <Select
                       value={regional.dateFormat}
-                      onValueChange={(value) => 
-                        updateRegionalSettings({ dateFormat: value })
-                      }
+                      onValueChange={(value) => updateRegionalSettings({ dateFormat: value })}
                     >
                       <SelectTrigger className="mt-1">
                         <SelectValue />
@@ -368,9 +333,7 @@ function RegionalSettingsPage() {
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
                     <span className="text-sm text-gray-600">{t('formats.preview')}: </span>
-                    <span className="text-sm font-medium">
-                      {formatDate(regional.dateFormat)}
-                    </span>
+                    <span className="text-sm font-medium">{formatDate(regional.dateFormat)}</span>
                   </div>
                 </div>
 
@@ -382,9 +345,7 @@ function RegionalSettingsPage() {
                     </label>
                     <Select
                       value={regional.numberFormat}
-                      onValueChange={(value) => 
-                        updateRegionalSettings({ numberFormat: value })
-                      }
+                      onValueChange={(value) => updateRegionalSettings({ numberFormat: value })}
                     >
                       <SelectTrigger className="mt-1">
                         <SelectValue />
@@ -423,34 +384,22 @@ function RegionalSettingsPage() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('summary.language')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('summary.language')}</span>
                   <Badge variant="outline" className="capitalize">
-                    {languages.find(l => l.code === regional.language)?.name || regional.language}
+                    {languages.find((l) => l.code === regional.language)?.name || regional.language}
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('summary.currency')}
-                  </span>
-                  <Badge variant="outline">
-                    {regional.currency}
-                  </Badge>
+                  <span className="text-sm text-gray-600">{t('summary.currency')}</span>
+                  <Badge variant="outline">{regional.currency}</Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('summary.timezone')}
-                  </span>
-                  <Badge variant="outline">
-                    {regional.timezone}
-                  </Badge>
+                  <span className="text-sm text-gray-600">{t('summary.timezone')}</span>
+                  <Badge variant="outline">{regional.timezone}</Badge>
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    {t('summary.lastUpdated')}
-                  </span>
+                  <span className="text-sm text-gray-600">{t('summary.lastUpdated')}</span>
                   <span className="text-sm">1 day ago</span>
                 </div>
               </div>
@@ -467,23 +416,15 @@ function RegionalSettingsPage() {
                 <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
                   <Info className="w-4 h-4 text-blue-600 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-blue-800">
-                      {t('tips.language.title')}
-                    </p>
-                    <p className="text-xs text-blue-700 mt-1">
-                      {t('tips.language.description')}
-                    </p>
+                    <p className="text-sm font-medium text-blue-800">{t('tips.language.title')}</p>
+                    <p className="text-xs text-blue-700 mt-1">{t('tips.language.description')}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
                   <CheckCircle className="w-4 h-4 text-green-600 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-green-800">
-                      {t('tips.currency.title')}
-                    </p>
-                    <p className="text-xs text-green-700 mt-1">
-                      {t('tips.currency.description')}
-                    </p>
+                    <p className="text-sm font-medium text-green-800">{t('tips.currency.title')}</p>
+                    <p className="text-xs text-green-700 mt-1">{t('tips.currency.description')}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg">
@@ -492,9 +433,7 @@ function RegionalSettingsPage() {
                     <p className="text-sm font-medium text-yellow-800">
                       {t('tips.timezone.title')}
                     </p>
-                    <p className="text-xs text-yellow-700 mt-1">
-                      {t('tips.timezone.description')}
-                    </p>
+                    <p className="text-xs text-yellow-700 mt-1">{t('tips.timezone.description')}</p>
                   </div>
                 </div>
               </div>
@@ -508,19 +447,11 @@ function RegionalSettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Globe className="w-4 h-4 mr-2" />
                   {t('quickActions.detectLocation')}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => {}}
-                >
+                <Button variant="outline" className="w-full justify-start" onClick={() => {}}>
                   <Settings className="w-4 h-4 mr-2" />
                   {t('quickActions.resetToDefaults')}
                 </Button>
@@ -533,4 +464,4 @@ function RegionalSettingsPage() {
   );
 }
 
-export default WithAuthProtect(RegionalSettingsPage); 
+export default WithAuthProtect(RegionalSettingsPage);

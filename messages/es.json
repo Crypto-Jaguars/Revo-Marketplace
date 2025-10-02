@@ -42,14 +42,6 @@
       }
     }
   },
-  "Producers": {
-    "title": "Nuestros Productores",
-    "description": "Conecta directamente con quienes cultivan alimentos frescos y locales. Explora productos, conoce historias y apoya a la comunidad.",
-    "searchPlaceholder": "Buscar por productor, producto o ubicación...",
-    "filters": "Filtrar",
-    "locationText": "Mostrando productores cerca de tu ubicación"
-  },
-
   "Waitlist": {
     "title": "Únete a la Lista de Espera",
     "subtitle": "Sé el primero en saber cuando lancemos y obtén beneficios exclusivos de acceso anticipado.",
@@ -78,54 +70,9 @@
       "signups": "Registros Tempranos",
       "countries": "Países",
       "launchDate": "Fecha de Lanzamiento"
-    },
-    "trustBadges": "Confiado por organizaciones líderes",
-    "fields": {
-      "name": {
-        "label": "Nombre",
-        "placeholder": "Juan Pérez"
-      },
-      "email": {
-        "label": "Correo",
-        "placeholder": "juan@ejemplo.com"
-      },
-      "role": {
-        "label": "Me interesa como...",
-        "placeholder": "Selecciona tu rol"
-      },
-      "consent": {
-        "label": "Acepto recibir actualizaciones sobre el lanzamiento y noticias de Revo Farmers",
-        "description": "Puedes cancelar la suscripción en cualquier momento"
-      }
-    },
-    "roles": {
-      "farmer": "Agricultor/Productor",
-      "investor": "Inversionista",
-      "consumer": "Consumidor/Comprador",
-      "partner": "Socio Comercial",
-      "other": "Otro"
-    },
-    "submit": "Unirse a la Lista",
-    "submitting": "Uniéndose...",
-    "privacy": "Respetamos tu privacidad y nunca compartiremos tu información.",
-    "success": {
-      "title": "¡Bienvenido a bordo!",
-      "message": "¡Gracias por unirte! Revisa tu correo para la confirmación.",
-      "emailSent": "Confirmación enviada a {email}",
-      "sharePrompt": "¡Ayúdanos a correr la voz!",
-      "addAnother": "Agregar otro correo"
-    },
-    "social": {
-      "shareText": "¡Me uní a la lista de espera de Revo Farmers! Únete a revolucionar la agricultura 🌱",
-      "share": "Compartir"
-    },
-    "errors": {
-      "emailExists": "Este correo ya está registrado",
-      "invalidEmail": "Por favor ingresa un correo válido",
-      "rateLimited": "Demasiadas solicitudes. Por favor intenta más tarde.",
-      "generic": "Algo salió mal. Por favor intenta de nuevo."
     }
   },
+
   "Unsubscribe": {
     "title": "Cancelar Suscripción de la Lista",
     "description": "Lamentamos verte partir. Por favor confirma tu dirección de correo para cancelar tu suscripción a la lista de espera de Revo Farmers.",
@@ -197,10 +144,11 @@
   },
 
   "cta": {
-      "ready": "¿Listo para Comenzar?",
-      "startSelling": "Empieza a Vender",
-      "exploreProducts": "Explorar Productos"
-    },
+    "ready": "¿Listo para Comenzar?",
+    "startSelling": "Empieza a Vender",
+    "exploreProducts": "Explorar Productos",
+    "joinWaitlist": "Unirse a la Lista de Espera"
+  },
 
   "FarmerSubscription": {
     "ctaLabel": "Empezar a Vender",
@@ -345,7 +293,7 @@
     },
     "empty": {
       "title": "No se encontraron productos",
-      "description": "Intenta ajustar tus filtros o criterios de búsqueda para encontrar lo que buscas."
+      "description": "Intenta ajustar tus filtros o explora nuestros productores"
     },
     "pagination": {
       "previous": "Anterior",
@@ -387,7 +335,8 @@
       "products": "Productos",
       "farm": "Granja",
       "farms": "Granjas",
-      "marketplace": "Mercado"
+      "marketplace": "Mercado",
+      "producers": "Productores"
     },
     "search": {
       "placeholder": "Buscar productos..."
@@ -595,7 +544,7 @@
           "title": "Precipitación",
           "unit": "mm"
         },
-        "growingSeason": {  
+        "growingSeason": {
           "title": "Temporada de Crecimiento",
           "unit": "días"
         }
@@ -871,6 +820,60 @@
     "title": "Preguntas Frecuentes",
     "subtitle": "Encuentra respuestas a preguntas comunes sobre Revolutionary Farmers, nuestra plataforma y cómo estamos transformando la agricultura a través de la tecnología blockchain."
   },
+  "JoinFarmer": {
+    "title": "Únete a Revolutionary Farmers",
+    "subtitle": "Conviértete en parte del futuro de la agricultura. Conecta directamente con los consumidores y haz crecer tu negocio.",
+    "benefits": {
+      "directSales": {
+        "title": "Ventas Directas",
+        "description": "Vende directamente a los consumidores sin intermediarios"
+      },
+      "growingCommunity": {
+        "title": "Comunidad en Crecimiento",
+        "description": "Únete a una red de agricultores sostenibles"
+      },
+      "securePayments": {
+        "title": "Pagos Seguros",
+        "description": "Pagos garantizados a través de tecnología blockchain"
+      },
+      "easyManagement": {
+        "title": "Gestión Fácil",
+        "description": "Herramientas simples para gestionar tus listados y pedidos"
+      }
+    },
+    "application": {
+      "title": "Solicitud de Agricultor",
+      "subtitle": "Completa este formulario para comenzar tu viaje con Revolutionary Farmers",
+      "fields": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Correo Electrónico",
+        "phone": "Número de Teléfono",
+        "farmName": "Nombre de la Granja",
+        "farmAddress": "Dirección de la Granja",
+        "farmSize": "Tamaño de la Granja (hectáreas)",
+        "farmingMethod": "Método de Cultivo",
+        "mainCrops": "Cultivos Principales",
+        "description": "Cuéntanos sobre tu granja"
+      },
+      "placeholders": {
+        "farmingMethod": "ej., Orgánico, Convencional, Sostenible",
+        "mainCrops": "ej., Tomates, Lechuga, Zanahorias",
+        "description": "Comparte tu filosofía de cultivo, experiencia y qué hace especial a tu granja..."
+      },
+      "terms": {
+        "agree": "Acepto los",
+        "termsOfService": "Términos de Servicio",
+        "and": "y",
+        "privacyPolicy": "Política de Privacidad"
+      },
+      "submit": "Enviar Solicitud",
+      "submitting": "Enviando Solicitud...",
+      "success": "¡Solicitud enviada con éxito! Te contactaremos pronto.",
+      "error": "Error al enviar la solicitud. Por favor, inténtalo de nuevo.",
+      "termsError": "Por favor acepta los términos y condiciones"
+    }
+  },
   "Invest": {
     "title": "Oportunidades de Inversión para Agricultores",
     "subtitle": "Apoya la agricultura sostenible mientras obtienes rendimientos. Invierte directamente en proyectos agrícolas que marcan la diferencia.",
@@ -909,6 +912,107 @@
       "subtitle": "Únete a nuestra creciente comunidad de inversores que apoyan la agricultura sostenible y obtienen rendimientos competitivos.",
       "button": "Comienza a Invertir Hoy"
     }
+  },
+  "ContactSection": {
+    "title": "¿No encuentras el producto que buscas?",
+    "description": "Ponte en contacto con nosotros o explora nuestra red de productores de confianza",
+    "talkToUs": "Habla con Nosotros",
+    "viewProducers": "Ver Nuestros Productores",
+    "emailSubject": "Consulta de Producto - Revolutionary Farmers",
+    "emailBody": "Hola Revolutionary Farmers,\\n\\nEstoy buscando un producto específico que no pude encontrar en su mercado.\\n\\nDetalles del producto:\\n- Nombre del producto: \\n- Categoría: \\n- Cantidad necesaria: \\n- Fecha de entrega preferida: \\n\\nNotas adicionales:\\n\\nPor favor, háganme saber si pueden ayudarme a encontrar este producto o conectarme con un productor adecuado.\\n\\n¡Gracias por su asistencia!\\n\\nSaludos cordiales"
+  },
+  "ProducersPage": {
+    "title": "Nuestros Productores",
+    "subtitle": "Conoce nuestra red de agricultores y productores de confianza comprometidos con la agricultura sostenible",
+    "rating": "Calificación",
+    "specialties": "Especialidades",
+    "certifications": "Certificaciones",
+    "products": "productos",
+    "viewProfile": "Ver Perfil",
+    "joinNetwork": {
+      "title": "¿Interesado en Unirte a Nuestra Red?",
+      "description": "Siempre estamos buscando agricultores y productores apasionados para unirse a nuestra comunidad",
+      "button": "Convertirse en Productor"
+    },
+    "producerCard": {
+      "lastUsed": "Usado por última vez",
+      "location": "Ubicación"
+    },
+  "Producers": {
+    "hero": {
+      "title": "Nuestros Productores",
+      "description": "Descubre increíbles productores locales que están transformando la agricultura con prácticas sostenibles y métodos de cultivo innovadores.",
+      "searchPlaceholder": "Buscar por productor, producto o ubicación...",
+      "locationText": "Mostrando productores cerca de tu ubicación"
+    },
+    "filters": {
+      "label": "Filtros",
+      "search": "Buscar productores...",
+      "location": "Ubicación",
+      "certification": "Certificación",
+      "farmingMethod": "Método de Cultivo",
+      "distance": "Distancia",
+      "rating": "Calificación",
+      "apply": "Aplicar Filtro",
+      "clear": "Limpiar Filtros",
+      "active": "Filtros activos",
+      "any": "Cualquiera",
+      "labels": {
+        "search": "Búsqueda",
+        "location": "Ubicación",
+        "cert": "Cert.",
+        "method": "Método",
+        "distance": "Dist.",
+        "rating": "Calificación"
+      },
+      "clearAll": "Limpiar todos los filtros",
+      "clearSearch": "Limpiar búsqueda",
+      "clearLocation": "Limpiar filtro de ubicación",
+      "clearCertification": "Limpiar filtro de certificación",
+      "clearMethod": "Limpiar filtro de método de cultivo",
+      "clearDistance": "Limpiar filtro de distancia",
+      "clearRating": "Limpiar filtro de calificación"
+    },
+    "sortBy": {
+      "showing": "Mostrando",
+      "of": "de",
+      "producers": "Productores",
+      "label": "Ordenar por",
+      "distance": "Distancia",
+      "rating": "Calificación",
+      "name": "Nombre",
+      "products": "Cantidad de Productos"
+    },
+    "producerCard": {
+      "market": "Mercado",
+      "farmer": "Agricultor",
+      "location": "Ubicación",
+      "distance": "Distancia",
+      "certifications": "Certificaciones",
+      "organic": "Orgánico Certificado",
+      "fairTrade": "Comercio Justo",
+      "viewProfile": "Ver Perfil",
+      "addToCart": "Agregar al Carrito",
+      "products": "Productos",
+      "reviews": "Reseñas",
+      "rating": "Calificación",
+      "kmAway": "A {distance} km de distancia",
+      "milesAway": "A {distance} millas de distancia"
+    },
+    "cta": {
+      "title": "¿Eres productor?",
+      "description": "Únete a nuestra comunidad de agricultores sostenibles y conecta directamente con consumidores que valoran la calidad y transparencia.",
+      "joinButton": "Únete como Productor"
+    },
+    "loadMore": "Cargar más productores",
+    "loadMoreAria": "Cargar más productores",
+    "empty": {
+      "title": "No se encontraron productores",
+      "description": "Intenta ajustar tus filtros o criterios de búsqueda para encontrar productores en tu área."
+    },
+    "breadcrumb": {
+      "home": "Inicio",
+      "producers": "Productores"
+    }
   }
-}
-
+}}
