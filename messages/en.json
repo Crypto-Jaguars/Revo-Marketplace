@@ -1719,8 +1719,7 @@
     "producerCard": {
       "lastUsed": "Last used",
       "location": "Location"
-    }
-  },
+    },
   "Producers": {
     "hero": {
       "title": "Our Producers",
@@ -1797,5 +1796,15 @@
       "home": "Home",
       "producers": "Producers"
     }
+  }
+},
+  "RegistrationHero": {
+    "title": "Join Revolutionary Farmers",
+    "description": "Transform your farming journey with cutting-edge technology, community support, and sustainable practices. Join thousands of farmers already revolutionizing agriculture.",
+    "primaryCta": "Start Your Journey",
+    "secondaryCta": "Learn More",
+    "trustIndicator1": "5000+ Farmers Joined",
+    "trustIndicator2": "24/7 Expert Support",
+    "trustIndicator3": "Sustainable Methods"
   }
 }
