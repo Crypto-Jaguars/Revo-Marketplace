@@ -42,6 +42,14 @@
       }
     }
   },
+  "Producers": {
+    "title": "Our Producers",
+    "description": "Connect directly with those who grow fresh, local food. Explore products, learn stories and support your community.",
+    "searchPlaceholder": "Search by producer, product or location...",
+    "filters": "Filters",
+    "locationText": "Showing producers near your location"
+  },
+
   "Waitlist": {
     "title": "Join the Waitlist",
     "subtitle": "Be the first to know when we launch and get exclusive early access benefits.",

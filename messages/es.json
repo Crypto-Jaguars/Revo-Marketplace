@@ -42,6 +42,14 @@
       }
     }
   },
+  "Producers": {
+    "title": "Nuestros Productores",
+    "description": "Conecta directamente con quienes cultivan alimentos frescos y locales. Explora productos, conoce historias y apoya a la comunidad.",
+    "searchPlaceholder": "Buscar por productor, producto o ubicación...",
+    "filters": "Filtrar",
+    "locationText": "Mostrando productores cerca de tu ubicación"
+  },
+
   "Waitlist": {
     "title": "Únete a la Lista de Espera",
     "subtitle": "Sé el primero en saber cuando lancemos y obtén beneficios exclusivos de acceso anticipado.",
