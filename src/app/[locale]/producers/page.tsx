@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useSearchStore } from '@/store';
 import { Filter, X, Search } from 'lucide-react';
+import ProducerHeroSection from './HeroSection';
 
 // Using shared type from ProducerFilters component
 type ProducerFiltersState = ProducerFilterValues;
@@ -187,15 +188,7 @@ export default function ProducersPage() {
   return (
     <Bounded>
       {/* Hero Section */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-4">{t('hero.title')}</h1>
-        <p className="text-gray-500 text-lg mb-6">
-          {t('hero.description')}
-        </p>
-        <p className="text-gray-600 text-sm">
-          {t('hero.locationText')}
-        </p>
-      </div>
+      <ProducerHeroSection />
 
       {/* Mobile Search and Filter */}
       <div className="md:hidden mb-6 space-y-4">
