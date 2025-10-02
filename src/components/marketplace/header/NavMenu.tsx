@@ -49,4 +49,4 @@ export function NavMenu({ className }: NavMenuProps) {
       ))}
     </nav>
   );
-};
+}

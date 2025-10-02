@@ -5,11 +5,7 @@ export const waitlistFormSchema = z.object({
   email: z
     .string()
     .transform((val) => val.trim().toLowerCase())
-    .pipe(
-      z.string()
-        .min(1, 'Email is required')
-        .email('Please enter a valid email address')
-    ),
+    .pipe(z.string().min(1, 'Email is required').email('Please enter a valid email address')),
   role: z.enum(['farmer', 'investor', 'consumer', 'partner', 'other']).optional(),
   consent: z
     .boolean()

@@ -4,7 +4,7 @@ import type React from 'react';
 
 import type { Product } from '@/types/product';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, memo, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { Rating } from '@/components/ui/rating';
@@ -18,7 +18,7 @@ interface ProductCardProps {
   locale?: string;
 }
 
-export function ProductCard({ product, viewMode, onClick, locale = 'en' }: ProductCardProps) {
+const ProductCard = memo<ProductCardProps>(({ product, viewMode, onClick, locale = 'en' }) => {
   const t = useTranslations('Products');
   const [isHovered, setIsHovered] = useState(false);
 
@@ -40,6 +40,18 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
     },
     [locale]
   );
+
+  const discountedPrice = useMemo(
+    () => calculateDiscountedPrice(product.price.amount, product.discount),
+    [product.price.amount, product.discount]
+  );
+
+  const imageSrc = useMemo(() => {
+    return product.images?.length > 0 &&
+      (product.images[0].startsWith('/') || product.images[0].startsWith('http'))
+      ? product.images[0]
+      : '/images/cart-small.png';
+  }, [product.images]);
 
   const cardClassName = cn(
     'w-full cursor-pointer transition-all',
@@ -82,17 +94,13 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
         )}
       >
         <Image
-          src={
-            product.images?.length > 0 &&
-            (product.images[0].startsWith('/') || product.images[0].startsWith('http'))
-              ? product.images[0]
-              : '/images/cart-small.png'
-          }
+          src={imageSrc}
           alt={product.name}
           className="object-contain"
           width={200}
           height={200}
           sizes="(max-width: 295px) 100vw, 295px"
+          loading="lazy"
         />
 
         {/* Add to Cart Button (appears on hover) */}
@@ -128,7 +136,7 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
 
         <div className="flex items-center justify-start gap-2">
           <p className="text-base font-semibold text-black">
-            {formatPrice(calculateDiscountedPrice(product.price.amount, product.discount))}
+            {formatPrice(discountedPrice)}
           </p>
           {product.discount > 0 && (
             <>
@@ -149,4 +157,8 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
       </div>
     </div>
   );
-}
+});
+
+ProductCard.displayName = 'ProductCard';
+
+export { ProductCard };

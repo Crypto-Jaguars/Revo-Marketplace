@@ -39,10 +39,10 @@ export function LanguageSwitcherDropdown({ onClose }: LanguageSwitcherDropdownPr
   };
 
   return (
-    <div ref={dropdownRef} className="w-32 bg-white rounded-md shadow-lg overflow-hidden">
+    <div ref={dropdownRef} className="w-32 bg-[#83e591] rounded-md shadow-lg overflow-hidden">
       <button
         onClick={() => changeLanguage('en')}
-        className={`flex items-center w-full px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 ${
+        className={`flex items-center w-full px-4 py-2 text-sm text-white ${
           language === 'en' ? 'font-medium' : ''
         }`}
       >
@@ -51,7 +51,7 @@ export function LanguageSwitcherDropdown({ onClose }: LanguageSwitcherDropdownPr
       <div className="h-[1px] bg-black my-1 mx-2"></div>
       <button
         onClick={() => changeLanguage('es')}
-        className={`flex items-center w-full px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 ${
+        className={`flex items-center w-full px-4 py-2 text-sm text-white ${
           language === 'es' ? 'font-medium' : ''
         }`}
       >

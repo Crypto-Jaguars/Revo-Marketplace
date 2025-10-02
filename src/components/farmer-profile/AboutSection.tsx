@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import { Edit3, Save, X } from 'lucide-react';
 
 interface FarmData {
@@ -16,26 +16,27 @@ interface AboutSectionProps {
 }
 
 const defaultFarmData: FarmData = {
-  description: "Somos una granja familiar con más de 20 años de experiencia en agricultura orgánica. Nos especializamos en el cultivo de frutas y verduras de temporada, utilizando métodos sostenibles y respetuosos con el medio ambiente.",
-  agricultureType: "Orgánica Certificada",
-  farmSize: "15 Hectáreas",
-  experience: "20+ Años"
+  description:
+    'Somos una granja familiar con más de 20 años de experiencia en agricultura orgánica. Nos especializamos en el cultivo de frutas y verduras de temporada, utilizando métodos sostenibles y respetuosos con el medio ambiente.',
+  agricultureType: 'Orgánica Certificada',
+  farmSize: '15 Hectáreas',
+  experience: '20+ Años',
 };
 
-const AboutSection: React.FC<AboutSectionProps> = ({ 
-  isOwner = false, 
-  initialData = defaultFarmData
+const AboutSection: React.FC<AboutSectionProps> = ({
+  isOwner = false,
+  initialData = defaultFarmData,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(initialData);
   const [tempData, setTempData] = useState(initialData);
 
-  const handleEdit = () => {
+  const handleEdit = useCallback(() => {
     setTempData(formData);
     setIsEditing(true);
-  };
+  }, [formData]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     try {
       // TODO: Replace with actual API call
       // await saveFarmData(tempData);
@@ -45,19 +46,19 @@ const AboutSection: React.FC<AboutSectionProps> = ({
       console.error('Error saving farm data:', error);
       // TODO: Show user-friendly error message
     }
-  };
+  }, [tempData]);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     setTempData(formData);
     setIsEditing(false);
-  };
+  }, [formData]);
 
-  const handleInputChange = (field: keyof FarmData, value: string) => {
-    setTempData(prev => ({
+  const handleInputChange = useCallback((field: keyof FarmData, value: string) => {
+    setTempData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
-  };
+  }, []);
 
   return (
     <section className="bg-white p-6 mb-8 rounded-lg shadow-sm">
@@ -106,9 +107,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
             aria-label="Descripción de la granja"
           />
         ) : (
-          <p className="text-gray-600 leading-relaxed">
-            {formData.description}
-          </p>
+          <p className="text-gray-600 leading-relaxed">{formData.description}</p>
         )}
       </div>
 
@@ -169,4 +168,4 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   );
 };
 
-export default AboutSection;
+export default memo(AboutSection);

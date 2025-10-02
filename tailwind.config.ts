@@ -10,12 +10,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-plus-jakarta-sans)', 'system-ui', 'sans-serif'],
+        primary: ['var(--font-plus-jakarta-sans)', 'system-ui', 'sans-serif'],
+      },
+
+      fontWeight: {
+        regular: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+        extrabold: '800',
+      },
 
       textColor: {
-        'white-light': 'rgb(0 0 0)', 
-        'white-dark': 'rgb(255 255 255)'
+        'white-light': 'rgb(0 0 0)',
+        'white-dark': 'rgb(255 255 255)',
       },
-      
+
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
@@ -40,6 +52,8 @@ const config: Config = {
         },
         primary: {
           DEFAULT: '#006BE4',
+          light: '#38b66a',
+          dark: '#1f5f35',
           foreground: '#FFFFFF',
         },
         primary_green: {
