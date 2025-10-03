@@ -184,7 +184,7 @@
     "success": {
       "title": "Welcome aboard!",
       "message": "Thanks for joining! Check your email for confirmation.",
-      "emailSent": "Confirmation sent to {{email}}",
+      "emailSent": "Confirmation sent to {email}",
       "sharePrompt": "Help us spread the word!",
       "addAnother": "Add another email"
     },
@@ -786,9 +786,9 @@
     "emailLabel": "Email or Phone Number",
     "passwordLabel": "Password",
     "submit": "Log In",
-    "submitting": "Loging...",
+    "submitting": "Logging...",
     "successTitle": "Success!",
-    "successMessage": "Loged In. Redirecting to main page...",
+    "successMessage": "Logged In. Redirecting to main page...",
     "errorTitle": "Error",
     "errorMessage": "Something went wrong. Please try again.",
     "forgetPassword": "Forget Password?",
@@ -1960,6 +1960,14 @@
   },
 
   "ProfileSettings": {
+    "settingNames": {
+      "language": "Language",
+      "currency": "Currency",
+      "darkMode": "Dark Mode",
+      "emailNotifications": "Email Notifications",
+      "smsNotifications": "SMS Notifications",
+      "privacyPublicProfile": "Public Profile"
+    },
     "generalPreferences": {
       "title": "General Preferences",
       "description": "Configure your language, currency, and display settings."
@@ -1969,9 +1977,7 @@
       "placeholder": "Select language",
       "options": {
         "en": "English",
-        "es": "Spanish",
-        "fr": "French",
-        "de": "German"
+        "es": "Spanish"
       }
     },
     "currency": {

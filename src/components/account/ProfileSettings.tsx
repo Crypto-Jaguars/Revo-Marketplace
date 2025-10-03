@@ -30,13 +30,12 @@ export function ProfileSettings() {
 
   const handleSelectChange = (id: string, value: string) => {
     setSettings((prev) => ({ ...prev, [id]: value }));
-    const settingName = id.replace(/([A-Z])/g, ' $1').toLowerCase();
-    toast.success(t('toast.updated', { setting: settingName, value }));
+    toast.success(t('toast.updated', { setting: t(`settingNames.${id}`), value }));
   };
 
   const handleSwitchChange = (id: string, checked: boolean) => {
     setSettings((prev) => ({ ...prev, [id]: checked }));
-    const settingName = id.replace(/([A-Z])/g, ' $1').toLowerCase();
+    const settingName = t(`settingNames.${id}`);
     toast.success(checked ? t('toast.enabled', { setting: settingName }) : t('toast.disabled', { setting: settingName }));
   };
 
@@ -71,8 +70,6 @@ export function ProfileSettings() {
                 <SelectContent>
                   <SelectItem value="en">{t('language.options.en')}</SelectItem>
                   <SelectItem value="es">{t('language.options.es')}</SelectItem>
-                  {/* <SelectItem value="fr">{t('language.options.fr')}</SelectItem>
-                  <SelectItem value="de">{t('language.options.de')}</SelectItem> */}
                 </SelectContent>
               </Select>
             </div>

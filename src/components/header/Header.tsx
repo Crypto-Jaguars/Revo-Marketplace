@@ -64,7 +64,7 @@ const Header = () => {
       <button
         onClick={handleLogoClick}
         className="md:m-0 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg"
-        aria-label="Home"
+        aria-label={t('breadcrumb.home')}
       >
         <Image src="/logo.svg" width={40} height={40} alt="Website logo" priority />
       </button>
