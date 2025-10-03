@@ -30,7 +30,7 @@ export default function ProducerCard({ producer, onContact, onViewDetails }: Pro
       className={cn(
         'flex flex-col md:flex-row items-stretch',
         'rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden',
-        'bg-gradient-to-br from-[#F5F7F5] via-[#E6EFE8] to-[#D8E8DE] text-white'
+        'bg-gradient-to-br from-[#F5F7F5] via-[#E6EFE8] to-[#D8E8DE]'
       )}
     >
       {/* Image (fixed aspect square for consistency) */}
@@ -49,7 +49,7 @@ export default function ProducerCard({ producer, onContact, onViewDetails }: Pro
         <div className="space-y-3">
           {/* Market + Farmer */}
           <div>
-            <h3 className="text-lg font-bold text-white !important">{producer.marketName}</h3>
+            <h3 className="text-lg font-bold">{producer.marketName}</h3>
             <p className="text-sm opacity-80">Farmer: {producer.farmerName}</p>
           </div>
 
