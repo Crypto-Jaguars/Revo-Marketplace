@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import StepCard from './StepCard';
 import ToggleUserType from './ToggleUserType';
 import { useTranslations } from 'next-intl';
-import { ShoppingCart, CreditCard, Truck, Store, Package, ThumbsUp } from 'lucide-react';
+import { Store, Package, ThumbsUp, LineChart, ShieldCheck, TruckIcon } from 'lucide-react';
 import Image from 'next/image';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 export function HowWeWork() {
   const t = useTranslations('HowWeWork');
   const [activeType, setActiveType] = useState<'farmer' | 'buyer'>('farmer');
+
+  // Use typewriter effect for the main title with default 100ms speed
+  const typewriterTitle = useTypewriter(t('title'));
 
   const farmerSteps = [
     {
@@ -29,17 +33,17 @@ export function HowWeWork() {
 
   const buyerSteps = [
     {
-      icon: <ShoppingCart className="w-10 h-10" style={{ color: '#FFFFFF' }} />,
+      icon: <LineChart className="w-10 h-10" style={{ color: '#FFFFFF' }} />,
       title: t('buyerSteps.browsePurchase.title'),
       description: t('buyerSteps.browsePurchase.description'),
     },
     {
-      icon: <CreditCard className="w-10 h-10" style={{ color: '#FFFFFF' }} />,
+      icon: <ShieldCheck className="w-10 h-10" style={{ color: '#FFFFFF' }} />,
       title: t('buyerSteps.securePayment.title'),
       description: t('buyerSteps.securePayment.description'),
     },
     {
-      icon: <Truck className="w-10 h-10" style={{ color: '#FFFFFF' }} />,
+      icon: <TruckIcon className="w-10 h-10" style={{ color: '#FFFFFF' }} />,
       title: t('buyerSteps.deliveryTracking.title'),
       description: t('buyerSteps.deliveryTracking.description'),
     },
@@ -56,7 +60,7 @@ export function HowWeWork() {
       />
       <div className="container mx-auto px-6 max-w-6xl relative z-10 ">
         <h2 className="text-3xl md:text-4xl font-bold text-forest-800 mb-8 text-center">
-          {t('title')}
+          {typewriterTitle}
         </h2>
         <div className="mb-12 flex justify-center">
           <ToggleUserType activeType={activeType} onChange={setActiveType} />
@@ -68,6 +72,7 @@ export function HowWeWork() {
               icon={step.icon}
               title={step.title}
               description={step.description}
+              index={index}
             />
           ))}
         </div>
