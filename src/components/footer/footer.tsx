@@ -1,24 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import { RiInstagramLine, RiLinkedinLine, RiTwitterLine } from 'react-icons/ri';
+import { RiInstagramLine, RiLinkedinLine, RiTwitterXLine } from 'react-icons/ri';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { ReactElement } from 'react';
+import { Button } from '@/components/ui/button';
+import { Sparkles } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 interface FooterLinkItem {
   label: string;
   href: string;
   onClick?: () => void;
-}
-
-interface SocialLink {
-  label: string;
-  href: string;
-  component: ReactElement;
-  disabled?: boolean;
-  tooltip?: string;
 }
 
 const Footer = () => {
@@ -47,11 +42,14 @@ const Footer = () => {
     column2: [
       { label: t('Shop'), href: `/${locale}/products` },
       { label: t('Cart'), href: `/${locale}/cart` },
+      { label: t('Blog'), href: `/${locale}/blog` },
+      { label: t('Compare'), href: `/${locale}/compare` },
     ],
     column3: [
-      { label: t('FAQ'), href: `/${locale}/faq` },
-      { label: t('Contact'), href: '#', onClick: handleContactClick },
       { label: t('Our Team'), href: `/${locale}/our-team` },
+      { label: t('Support'), href: '#', onClick: handleContactClick },
+      { label: t('FAQ'), href: `/${locale}/faq` },
+      { label: t('Farmer Profile'), href: `/${locale}/farmer-profile` },
     ],
   };
 
@@ -66,11 +64,11 @@ const Footer = () => {
     {
       label: t('Twitter'),
       href: 'https://x.com/RevoFarmers',
-      component: <RiTwitterLine size={20} />,
+      component: <RiTwitterXLine size={20} />,
     },
     {
       label: t('LinkedIn'),
-      href: 'https://www.linkedin.com/company/revofarmers/',
+      href: 'https://www.linkedin.com/company/105548242/admin/dashboard/',
       component: <RiLinkedinLine size={20} />,
     },
   ];
@@ -100,27 +98,30 @@ const Footer = () => {
         </div>
       )}
 
-      <div className="font-bold px-4 sm:px-8 md:px-40">
+      <div className="px-4 sm:px-8 md:px-40">
         <div
           className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url("/images/footer-img.png")' }}
+          style={{ backgroundImage: 'url("/images/crops-collage.png")' }}
         ></div>
 
         <div className="relative z-10 py-16">
           <div className="flex flex-col md:flex-row justify-between items-start gap-x-8 gap-y-12">
             <div className="flex flex-col gap-4 lg:w-1/2">
               <div className="flex items-center gap-3">
+                
                 <Image
-                  src="/logo.svg"
+                  src="/images/revo-logo.png"
                   alt="Revolutionary Farmers"
                   width={40}
                   height={40}
                   className="w-10 h-10"
                 />
-                <span className="text-gray-50 font-bold text-xl">Revolutionary Farmers</span>
+                <span className="text-gray-50 font-semibold text-xl">Revolutionary Farmers</span>
               </div>
 
-              <p className="text-gray-50/90 text-sm leading-relaxed max-w-md">{t('description')}</p>
+              <p className="text-gray-50/90 text-sm leading-relaxed max-w-md font-normal">
+                {t('description')}
+              </p>
 
               <div className="flex gap-4 items-center">
                 {socialLinks.map((social) => (
@@ -162,11 +163,14 @@ const Footer = () => {
 
             <div className="flex gap-12 lg:gap-20">
               <div className="flex flex-col gap-3">
+                <h4 className="text-gray-50 font-semibold text-sm mb-1">
+                  {t('columnTitles.authentication')}
+                </h4>
                 {navigationLinks.column1.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
-                    className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm"
+                    className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm font-normal"
                   >
                     {link.label}
                   </Link>
@@ -174,11 +178,14 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col gap-3">
+                <h4 className="text-gray-50 font-semibold text-sm mb-1">
+                  {t('columnTitles.store')}
+                </h4>
                 {navigationLinks.column2.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
-                    className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm"
+                    className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm font-normal"
                   >
                     {link.label}
                   </Link>
@@ -186,12 +193,15 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col gap-3">
+                <h4 className="text-gray-50 font-semibold text-sm mb-1">
+                  {t('columnTitles.help')}
+                </h4>
                 {navigationLinks.column3.map((link, index) =>
                   link.onClick ? (
                     <button
                       key={index}
                       onClick={link.onClick}
-                      className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm text-left"
+                      className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm text-left font-normal"
                     >
                       {link.label}
                     </button>
@@ -199,7 +209,7 @@ const Footer = () => {
                     <Link
                       key={index}
                       href={link.href}
-                      className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm"
+                      className="text-gray-50/90 hover:text-gray-50 transition-colors text-sm font-normal"
                     >
                       {link.label}
                     </Link>
@@ -211,11 +221,11 @@ const Footer = () => {
         </div>
 
         <div className="relative z-10 flex items-center justify-center border-t border-white/10 py-5">
-          <p className="text-gray-50/85 text-sm">{t('copyright', { year: currentYear })}</p>
+            <p className="text-gray-50/85 text-sm">{t('copyright', { year: currentYear })}</p>
         </div>
       </div>
     </footer>
   );
 };
 
-export default Footer;
+export default Footer;       

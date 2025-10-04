@@ -14,7 +14,7 @@ export default function HeroSectionNew() {
   const t = useTranslations('Hero');
   const tButton = useTranslations('HeroSection');
   const { language } = useLanguageStore();
-  const [expandedIndex, setExpandedIndex] = useState(0);
+  const [expandedIndex, setExpandedIndex] = useState(1);
 
   
   // Use typewriter effect for the main title with 120ms speed
@@ -22,16 +22,16 @@ export default function HeroSectionNew() {
 function handleMouseEnter(index: number){
 setExpandedIndex(index);
 }
-function handleMouseLeave(){
-  setExpandedIndex(0)
-}
+// function handleMouseLeave(){
+//   setExpandedIndex(0)
+// }
 
-  function handleMouseEnter(index: number) {
-    setExpandedIndex(index);
-  }
+//   function handleMouseEnter(index: number) {
+//     setExpandedIndex(index);
+//   }
 
   function handleMouseLeave() {
-    setExpandedIndex(0);
+    setExpandedIndex(1);
   }
 
   const containerVariants = {
@@ -83,12 +83,25 @@ function handleMouseLeave(){
         >
           <motion.div
             variants={imageVariants}
-            className={`relative h-full rounded-lg cursor-pointer transition-all duration-500 ${expandedIndex === 0 ? 'w-72 md:w-96' : 'w-24 md:w-28'}`}
+            className={`relative h-64 md:h-80 rounded-lg cursor-pointer transition-all duration-500 ${expandedIndex === 0 ? 'w-72 md:w-96' : 'w-24 md:w-28'}`}
             onMouseEnter={() => handleMouseEnter(0)}
+            onClick={() => setExpandedIndex(0)}
+            whileHover={{ scale: 1.02, rotate: expandedIndex !== 0 ? 2 : 0 }}
+            transition={{ duration: 0.3 }}
+            role="button"
+            tabIndex={0}
+            aria-label={t('imageText.processed')}
+            aria-pressed={expandedIndex === 0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setExpandedIndex(0);
+              }
+            }}
           >
             <Image
               src="/images/sliderimage1.png"
-              alt="Description 1"
+              alt="Processed products"
               layout="fill"
               objectFit="cover"
               className="rounded-lg"
@@ -104,12 +117,25 @@ function handleMouseLeave(){
           </motion.div>
           <motion.div
             variants={imageVariants}
-            className={`relative h-full rounded-lg cursor-pointer transition-all duration-500 ${expandedIndex === 1 ? 'w-72 md:w-96' : 'w-24 md:w-28'}`}
+            className={`relative h-64 md:h-80 rounded-lg cursor-pointer transition-all duration-500 ${expandedIndex === 1 ? 'w-72 md:w-96' : 'w-24 md:w-28'}`}
             onMouseEnter={() => handleMouseEnter(1)}
+            onClick={() => setExpandedIndex(1)}
+            whileHover={{ scale: 1.02, rotate: expandedIndex !== 1 ? 2 : 0 }}
+            transition={{ duration: 0.3 }}
+            role="button"
+            tabIndex={0}
+            aria-label={t('imageText.harvest')}
+            aria-pressed={expandedIndex === 1}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setExpandedIndex(1);
+              }
+            }}
           >
             <Image
               src="/images/sliderimage2.png"
-              alt="Description 2"
+              alt="Harvest time"
               layout="fill"
               objectFit="cover"
               className="rounded-lg"
@@ -125,12 +151,25 @@ function handleMouseLeave(){
           </motion.div>
           <motion.div
             variants={imageVariants}
-            className={`relative h-full rounded-lg cursor-pointer transition-all duration-500 ${expandedIndex === 2 ? 'w-72 md:w-96' : 'w-24 md:w-28'}`}
+            className={`relative h-64 md:h-80 rounded-lg cursor-pointer transition-all duration-500 ${expandedIndex === 2 ? 'w-72 md:w-96' : 'w-24 md:w-28'}`}
             onMouseEnter={() => handleMouseEnter(2)}
+            onClick={() => setExpandedIndex(2)}
+            whileHover={{ scale: 1.02, rotate: expandedIndex !== 2 ? 2 : 0 }}
+            transition={{ duration: 0.3 }}
+            role="button"
+            tabIndex={0}
+            aria-label={t('imageText.freshness')}
+            aria-pressed={expandedIndex === 2}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setExpandedIndex(2);
+              }
+            }}
           >
             <Image
               src="/images/sliderimage3.png"
-              alt="Description 3"
+              alt="Fresh produce"
               layout="fill"
               objectFit="cover"
               className="rounded-lg"
@@ -171,8 +210,7 @@ function handleMouseLeave(){
             <Link href={`/${language}/invest`}>{tButton('investNow')}</Link>
           </Button>
         </div>
-      </div>
-
+      </main>
       {/* Mobile scroll indicator */}
       <div className="lg:hidden flex justify-center items-center py-2 bg-gradient-to-b from-[#81B8A2] to-[#6BA892]">
         <div className="flex items-center gap-2 text-white/70 text-sm">
