@@ -1695,6 +1695,51 @@
       }
     }
   },
+    "NewMissionVision": {
+    "title": "Mission and Vision",
+    "mission": {
+      "title": "Mission",
+      "points": [
+        {
+          "title": "Facilitate Trust",
+          "description": "Create a transparent and secure environment for agricultural transactions through blockchain technology."
+        },
+        {
+          "title": "Empower Farmers",
+          "description": "Provide farmers with direct market access, fair pricing, and financial tools to grow their business."
+        },
+        {
+          "title": "Promote Innovation",
+          "description": "Drive the adoption of technology in agriculture to enhance efficiency, sustainability, and traceability."
+        },
+        {
+          "title": "Support Open Source",
+          "description": "Contribute to the open-source community by building and sharing tools that benefit the entire ecosystem."
+        }
+      ]
+    },
+    "vision": {
+      "title": "Vision",
+      "points": [
+        {
+          "title": "Transform Agriculture",
+          "description": "To be the leading global platform for a decentralized, transparent, and sustainable agricultural supply chain."
+        },
+        {
+          "title": "Global Reach",
+          "description": "Connect farmers and buyers worldwide, fostering a global community built on trust and mutual benefit."
+        },
+        {
+          "title": "Financial Inclusion",
+          "description": "Enable financial inclusion for unbanked farmers through decentralized financial services."
+        },
+        {
+          "title": "Sustainable Growth",
+          "description": "Promote environmentally friendly and economically viable farming practices for a sustainable future."
+        }
+      ]
+    }
+  },
   "ContactSection": {
     "title": "Can't find the product you're looking for?",
     "description": "Get in touch with us or explore our network of trusted producers",

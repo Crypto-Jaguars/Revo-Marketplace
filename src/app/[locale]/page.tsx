@@ -7,6 +7,7 @@ import { AboutUs } from '@/components/sections/about-us/AboutUs';
 import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
 import CtaSection from '@/components/cta/CtaSection';
 import HeroSectionNew from '@/components/herosection/herosectionnew';
+import { NewMissionVision } from '@/components/about/NewMissionVision';
 import RegistrationHeroSection from '@/components/herosection/RegistrationHeroSection';
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <HeroSectionNew />
       <RegistrationHeroSection />
       <AboutUs />
+      <NewMissionVision />
       <HowWeWork />
       <CtaSection />
     </main>
