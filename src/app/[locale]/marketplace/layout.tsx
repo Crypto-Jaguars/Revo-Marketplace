@@ -1,5 +1,3 @@
-'use client';
-
 import MarketplaceHeader from '@/components/marketplace/header/MarketplaceHeader';
 
 interface MarketplaceLayoutProps {

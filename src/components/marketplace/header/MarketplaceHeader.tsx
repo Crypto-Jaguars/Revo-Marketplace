@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useLanguageStore } from '@/store';
 import { SearchBar } from './SearchBar';
 import { NavMenu } from './NavMenu';
-import CartWidget from './CartWidget';
 import { UserMenu } from './UserMenu';
 import { LanguageSwitcher } from '@/components/header/LanguageSwitcher';
 import { Menu, X, Store } from 'lucide-react';
@@ -30,7 +29,7 @@ const MarketplaceHeader = () => {
         }}
       >
         {/* Overlay for opacity control */}
-        <div className="absolute inset-0 bg-[#22c55e]/90"></div>
+        <div className="absolute inset-0 bg-[#22c55e]/10"></div>
 
         {/* Content */}
         <div className="relative z-10 border-b border-white/20">
