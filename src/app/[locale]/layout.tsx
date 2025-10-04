@@ -70,7 +70,6 @@ export default function RootLayout({ children, params: { locale } }: RootLayoutP
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           />
-          <script src="/js/checkout-redirect.js" async></script>
         </head>
         <body
           className={`${plusJakartaSans.variable} font-sans antialiased bg-home-background bg-no-repeat bg-cover min-h-screen`}
@@ -86,16 +85,6 @@ export default function RootLayout({ children, params: { locale } }: RootLayoutP
   return (
     <html lang={currentLocale}>
       <head>
-        {/* Preload Plus Jakarta Sans for critical rendering */}
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-          as="style"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        />
         <script src="/js/checkout-redirect.js" async></script>
       </head>
       <body
