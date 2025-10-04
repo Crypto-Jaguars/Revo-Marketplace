@@ -7,7 +7,7 @@ import { NavMenu } from './NavMenu';
 import CartWidget from './CartWidget';
 import { UserMenu } from './UserMenu';
 import { LanguageSwitcher } from '@/components/header/LanguageSwitcher';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Store } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import CartDropdown from '@/components/cart/cartDropdown';
 
@@ -17,78 +17,94 @@ const MarketplaceHeader = () => {
   const t = useTranslations('Marketplace.navigation');
 
   return (
-    <header className="w-full bg-white ">
-      <div className="w-full bg-filter_active">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-end">
-          <LanguageSwitcher />
-        </div>
-      </div>
+    <header className="w-full relative">
+      {/* Main Header with Green Background and Crops Overlay */}
+      <div
+        className="relative bg-[#22c55e]"
+        style={{
+          backgroundImage: 'url(/images/crops-collage.jpg)',
+          backgroundBlendMode: 'overlay',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Overlay for opacity control */}
+        <div className="absolute inset-0 bg-[#22c55e]/90"></div>
 
-      <div className="border-b">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 text-gray-600 hover:text-gray-900"
-                aria-label="Toggle menu"
-              >
-                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
+        {/* Content */}
+        <div className="relative z-10 border-b border-white/20">
+          <div className="max-w-7xl mx-auto px-4 py-4">
+            <div className="flex items-center justify-between gap-4">
+              {/* Left: Hamburger + Logo */}
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="md:hidden p-2 text-white hover:text-white/80 transition-colors"
+                  aria-label="Toggle menu"
+                >
+                  {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </button>
 
-              <Link href={`/${language}`}>
-                <Image
-                  src="/logo.svg"
-                  alt="Revolutionary Farmers"
-                  width={40}
-                  height={40}
-                  priority
-                  className="object-contain"
-                />
-              </Link>
+                <Link href={`/${language}`} className="flex items-center">
+                  <Image
+                    src="/logo.svg"
+                    alt="Revolutionary Farmers"
+                    width={40}
+                    height={40}
+                    priority
+                    className="object-contain"
+                  />
+                </Link>
+              </div>
+
+              {/* Center: Navigation (Desktop) */}
+              <NavMenu className="hidden md:flex" />
+
+              {/* Center-Right: Search (Desktop) */}
+              <div className="flex-1 max-w-md mx-4 hidden md:block">
+                <SearchBar />
+              </div>
+
+              {/* Right: Language + Cart + Login */}
+              <div className="flex items-center gap-4">
+                <LanguageSwitcher />
+                <CartDropdown />
+                <UserMenu />
+              </div>
             </div>
 
-            <NavMenu className="hidden md:flex" />
-
-            <div className="flex-1 max-w-2xl mx-8 hidden md:block">
+            {/* Mobile Search Bar */}
+            <div className="mt-4 md:hidden">
               <SearchBar />
             </div>
+          </div>
 
-            <div className="flex items-center space-x-6">
-              <CartDropdown />
-              <UserMenu />
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-white/20 bg-[#22c55e]/95">
+              <div className="p-4 space-y-2">
+                <Link
+                  href={`/${language}`}
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-white/10 rounded-md transition-colors font-medium"
+                  style={{ color: 'white' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Store className="h-5 w-5" />
+                  <span>{t('home')}</span>
+                </Link>
+                <Link
+                  href={`/${language}/producers`}
+                  className="block px-4 py-2 hover:bg-white/10 rounded-md transition-colors font-medium"
+                  style={{ color: 'white' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t('producers')}
+                </Link>
+              </div>
             </div>
-          </div>
-
-          <div className="mt-4 md:hidden">
-            <SearchBar />
-          </div>
+          )}
         </div>
-
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t">
-            <div className="p-4 space-y-4">
-              <Link
-                href={`/${language}`}
-                className="block px-4 py-2 text-gray-600 hover:text-gray-900"
-              >
-                {t('home')}
-              </Link>
-              <Link
-                href={`/${language}/products`}
-                className="block px-4 py-2 text-gray-600 hover:text-gray-900"
-              >
-                {t('products')}
-              </Link>
-              <Link
-                href={`/${language}/farm`}
-                className="block px-4 py-2 text-gray-600 hover:text-gray-900"
-              >
-                {t('farm')}
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </header>
   );
