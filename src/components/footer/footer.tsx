@@ -3,10 +3,12 @@
 import Image from 'next/image';
 import { RiInstagramLine, RiLinkedinLine, RiTwitterXLine } from 'react-icons/ri';
 import { useTranslations } from 'next-intl';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import type { ReactElement } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sparkles } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 interface FooterLinkItem {
   label: string;
