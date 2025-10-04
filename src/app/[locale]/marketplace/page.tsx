@@ -28,6 +28,9 @@ const ProductFilters = dynamic(() => import('@/components/products/ProductFilter
 
 export default function MarketplacePage() {
   const t = useTranslations('Products');
+  const tMarketplace = useTranslations('Marketplace');
+  const tCommon = useTranslations('common');
+  
   const { searchTerm } = useSearchStore();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'price' | 'date' | 'stock'>('date');
@@ -148,9 +151,9 @@ export default function MarketplacePage() {
   return (
     <Bounded>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-4">Revolutionary Farmers Marketplace</h1>
+        <h1 className="text-4xl font-bold text-white mb-4">{tMarketplace('title')}</h1>
         <p className="text-gray-300 text-lg">
-          Discover fresh, locally-sourced produce directly from farmers using blockchain technology
+          {tMarketplace('description')}
         </p>
       </div>
 
@@ -167,24 +170,24 @@ export default function MarketplacePage() {
           <div className="flex flex-col h-full">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h2 className="text-2xl font-semibold text-white">Available Products</h2>
+                <h2 className="text-2xl font-semibold text-white">{tMarketplace('availableProducts')}</h2>
               </div>
               {sortedProducts.length > 0 && (
                 <div className="flex items-center">
                   <div className="text-black/50 text-sm mr-4">
-                    Showing {(currentPage - 1) * itemsPerPage + 1}-
-                    {Math.min(currentPage * itemsPerPage, sortedProducts.length)} of{' '}
-                    {sortedProducts.length} products
+                    {tCommon('sortBy.showing')} {(currentPage - 1) * itemsPerPage + 1}-
+                    {Math.min(currentPage * itemsPerPage, sortedProducts.length)} {tCommon('sortBy.of')}{' '}
+                    {sortedProducts.length} {tCommon('products')}
                   </div>
-                  <span className="text-black/50 text-sm font-medium mr-2">Sort by:</span>
+                  <span className="text-black/50 text-sm font-medium mr-2">{tCommon('sortBy.label')}:</span>
                   <Select value={sortBy} onValueChange={handleSortChange}>
                     <SelectTrigger className="w-[180px] border-0 active:border-0">
-                      <SelectValue placeholder="Sort by" />
+                      <SelectValue placeholder={tCommon('sortBy.label')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="price">Price</SelectItem>
-                      <SelectItem value="date">Latest</SelectItem>
-                      <SelectItem value="stock">Stock</SelectItem>
+                      <SelectItem value="price">{tCommon('sortBy.price')}</SelectItem>
+                      <SelectItem value="date">{tCommon('sortBy.latest')}</SelectItem>
+                      <SelectItem value="stock">{tCommon('sortBy.stock')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

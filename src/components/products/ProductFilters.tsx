@@ -26,6 +26,14 @@ const ProductFilters = memo<ProductFiltersProps>(({
   farmingMethods,
 }) => {
   const t = useTranslations('Products');
+  
+  const translateCategory = useCallback((category: string) => {
+    return t(`categories.${category}`);
+  }, [t]);
+  
+  const translateFarmingMethod = useCallback((method: string) => {
+    return t(`farmingMethods.${method}`);
+  }, [t]);
 
   const { maxPrice } = useMemo(() => {
     const prices = productsMock.map((product) =>
@@ -158,7 +166,7 @@ const ProductFilters = memo<ProductFiltersProps>(({
               })
             }
           >
-            <span className="text-gray-700">{category}</span>
+            <span className="text-gray-700">{translateCategory(category)}</span>
             <svg
               className={`h-5 w-5 transition-transform ${
                 localFilters.category === category ? 'rotate-90' : ''
