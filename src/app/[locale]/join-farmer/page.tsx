@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Leaf, Shield, Users, Zap } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -23,34 +24,51 @@ export default function JoinFarmerPage() {
     email: '',
     phone: '',
     farmName: '',
-    farmAddress: '',
+    farmLocation: '',
     farmSize: '',
     farmingMethod: '',
-    mainCrops: '',
+    products: [] as string[],
     description: '',
     agreedToTerms: false,
   });
+
+  const products = [
+    'Arroz', 'Maíz', 'Frijoles', 'Quinoa',
+    'Banano', 'Mango', 'Piña', 'Fresas',
+    'Tomate', 'Lechuga', 'Brócoli', 'Zanahoria',
+    'Café Arábica', 'Café Robusta', 'Albahaca', 'Orégano',
+    'Cilantro', 'Oliva', 'Coco', 'Aguacate',
+    'Miel de Flores', 'Miel Orgánica'
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleProductChange = (product: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      products: prev.products.includes(product)
+        ? prev.products.filter(p => p !== product)
+        : [...prev.products, product]
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.agreedToTerms) {
-      toast.error(t('application.termsError'));
+      toast.error("Debe aceptar los Términos de Servicio y la Política de Privacidad."); 
       return;
     }
 
     setIsSubmitting(true);
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      toast.success(t('application.success'));
+      toast.success("Application submitted successfully!");
       router.push('/');
     } catch (error) {
-      toast.error(t('application.error'));
+      toast.error("There was an error submitting your application.");
     } finally {
       setIsSubmitting(false);
     }
@@ -103,17 +121,16 @@ export default function JoinFarmerPage() {
           ))}
         </div>
 
-        <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-          <CardHeader>
-            <CardTitle className="text-2xl text-white">{t('application.title')}</CardTitle>
-            <CardDescription className="text-gray-300">{t('application.subtitle')}</CardDescription>
-          </CardHeader>
-          <CardContent>
+        <Card className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl mb-16">
+          <div className="text-center pt-8 pb-4">
+            <h1 className="text-2xl font-bold text-gray-800">Farmer Application</h1>
+          </div>
+          <CardContent className="p-8 pt-4">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="firstName" className="text-white">
-                    {t('application.fields.firstName')} *
+                  <Label htmlFor="firstName" className="text-sm font-semibold text-gray-700">
+                    First Name *
                   </Label>
                   <Input
                     id="firstName"
@@ -121,12 +138,13 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    placeholder="Tu nombre completo"
+                    className="border-gray-300 text-gray-800"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="lastName" className="text-white">
-                    {t('application.fields.lastName')} *
+                  <Label htmlFor="lastName" className="text-sm font-semibold text-gray-700">
+                    Last Name *
                   </Label>
                   <Input
                     id="lastName"
@@ -134,15 +152,16 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    placeholder="Tu apellido"
+                    className="border-gray-300 text-gray-800"
                   />
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="email" className="text-white">
-                    {t('application.fields.email')} *
+                  <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                    Email *
                   </Label>
                   <Input
                     id="email"
@@ -151,12 +170,13 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    placeholder="tu@email.com"
+                    className="border-gray-300 text-gray-800"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="phone" className="text-white">
-                    {t('application.fields.phone')} *
+                  <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">
+                    Phone *
                   </Label>
                   <Input
                     id="phone"
@@ -165,14 +185,15 @@ export default function JoinFarmerPage() {
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                    placeholder="+506 1234 5678"
+                    className="border-gray-300 text-gray-800"
                   />
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="farmName" className="text-white">
-                  {t('application.fields.farmName')} *
+                <Label htmlFor="farmName" className="text-sm font-semibold text-gray-700">
+                  Farm Name *
                 </Label>
                 <Input
                   id="farmName"
@@ -180,79 +201,105 @@ export default function JoinFarmerPage() {
                   required
                   value={formData.farmName}
                   onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                  placeholder="Nombre de tu finca o negocio agrícola"
+                  className="border-gray-300 text-gray-800"
                 />
               </div>
 
               <div>
-                <Label htmlFor="farmAddress" className="text-white">
-                  {t('application.fields.farmAddress')} *
+                <Label htmlFor="farmLocation" className="text-sm font-semibold text-gray-700">
+                  Farm Location *
                 </Label>
                 <Input
-                  id="farmAddress"
-                  name="farmAddress"
+                  id="farmLocation"
+                  name="farmLocation"
                   required
-                  value={formData.farmAddress}
+                  value={formData.farmLocation}
                   onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                  placeholder="Provincia, cantón, distrito"
+                  className="border-gray-300 text-gray-800"
                 />
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="farmSize" className="text-white">
-                    {t('application.fields.farmSize')}
+                  <Label htmlFor="farmSize" className="text-sm font-semibold text-gray-700">
+                    Farm Size
                   </Label>
-                  <Input
-                    id="farmSize"
-                    name="farmSize"
-                    type="number"
+                  <Select
                     value={formData.farmSize}
-                    onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
-                  />
+                    onValueChange={(value) => setFormData((prev) => ({ ...prev, farmSize: value }))}
+                  >
+                    <SelectTrigger className="border-gray-300 text-gray-800">
+                      <SelectValue placeholder="Select farm size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="small">Small (0-5 hectares)</SelectItem>
+                      <SelectItem value="medium">Medium (5-20 hectares)</SelectItem>
+                      <SelectItem value="large">Large (20+ hectares)</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div>
-                  <Label htmlFor="farmingMethod" className="text-white">
-                    {t('application.fields.farmingMethod')}
+                  <Label htmlFor="farmingMethod" className="text-sm font-semibold text-gray-700">
+                    Farming Method
                   </Label>
-                  <Input
-                    id="farmingMethod"
-                    name="farmingMethod"
-                    placeholder={t('application.placeholders.farmingMethod')}
+                  <Select
                     value={formData.farmingMethod}
-                    onChange={handleInputChange}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
-                  />
+                    onValueChange={(value) => setFormData((prev) => ({ ...prev, farmingMethod: value }))}
+                  >
+                    <SelectTrigger className="border-gray-300 text-gray-800">
+                      <SelectValue placeholder="Select farming method" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="organic">Organic</SelectItem>
+                      <SelectItem value="conventional">Conventional</SelectItem>
+                      <SelectItem value="sustainable">Sustainable</SelectItem>
+                      <SelectItem value="mixed">Mixed</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="mainCrops" className="text-white">
-                  {t('application.fields.mainCrops')}
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">
+                  Products You Grow *
                 </Label>
-                <Input
-                  id="mainCrops"
-                  name="mainCrops"
-                  placeholder={t('application.placeholders.mainCrops')}
-                  value={formData.mainCrops}
-                  onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
-                />
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {products.map((product) => (
+                    <div
+                      key={product}
+                      className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition-all"
+                    >
+                      <Checkbox
+                        id={product}
+                        checked={formData.products.includes(product)}
+                        onCheckedChange={() => handleProductChange(product)}
+                        className="w-4 h-4 rounded text-green-600 border-gray-400 focus:ring-green-500"
+                      />
+                      <Label
+                        htmlFor={product}
+                        className="text-sm text-gray-700 cursor-pointer select-none"
+                      >
+                        {product}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div>
-                <Label htmlFor="description" className="text-white">
-                  {t('application.fields.description')}
+                <Label htmlFor="description" className="text-sm font-semibold text-gray-700">
+                  Tell us about your farm
                 </Label>
                 <Textarea
                   id="description"
                   name="description"
                   rows={4}
-                  placeholder={t('application.placeholders.description')}
+                  placeholder="Describe your experience, farming methods, certifications, and any additional information you consider important..."
                   value={formData.description}
                   onChange={handleInputChange}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-gray-300"
+                  className="border-gray-300 text-gray-800"
                 />
               </div>
 
@@ -263,15 +310,16 @@ export default function JoinFarmerPage() {
                   onCheckedChange={(checked) =>
                     setFormData((prev) => ({ ...prev, agreedToTerms: checked as boolean }))
                   }
+                  className="border-gray-400 text-green-600 focus:ring-green-500"
                 />
-                <Label htmlFor="agreedToTerms" className="text-white text-sm">
-                  {t('application.terms.agree')}{' '}
-                  <a href="/terms-of-use" className="text-blue-400 hover:underline">
-                    {t('application.terms.termsOfService')}
+                <Label htmlFor="agreedToTerms" className="text-sm text-gray-700">
+                  I accept the{' '}
+                  <a href="/terms-of-use" className="text-green-600 hover:underline">
+                    Terms of Service
                   </a>{' '}
-                  {t('application.terms.and')}{' '}
-                  <a href="/privacy-policy" className="text-blue-400 hover:underline">
-                    {t('application.terms.privacyPolicy')}
+                  and{' '}
+                  <a href="/privacy-policy" className="text-green-600 hover:underline">
+                    Privacy Policy
                   </a>
                 </Label>
               </div>
@@ -279,9 +327,9 @@ export default function JoinFarmerPage() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 mt-4"
               >
-                {isSubmitting ? t('application.submitting') : t('application.submit')}
+                {isSubmitting ? 'Submitting Application...' : 'Submit Application'}
               </Button>
             </form>
           </CardContent>
