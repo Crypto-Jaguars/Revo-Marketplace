@@ -47,7 +47,7 @@ interface PreparedTransactionDetails {
 }
 
 export default function WalletSection() {
-  const t = useTranslations('Account');
+  const t = useTranslations('WalletSection');
   const { address, name } = useWalletStore();
   const { connectWallet, disconnectWallet } = useWallet();
   const {
@@ -89,7 +89,7 @@ export default function WalletSection() {
   const handleCopyAddress = () => {
     if (address) {
       navigator.clipboard.writeText(address);
-      toast.success('Address copied to clipboard');
+      toast.success(t('toast.addressCopied'));
     }
   };
 
@@ -97,7 +97,7 @@ export default function WalletSection() {
     setIsRefreshing(true);
     await fetchBalances();
     setIsRefreshing(false);
-    toast.success('Balances updated');
+    toast.success(t('toast.balancesUpdated'));
   };
 
   const formatBalance = (balance: string, decimals = 7) => {
@@ -192,24 +192,24 @@ export default function WalletSection() {
   const handlePreparePayment = async () => {
     setPaymentError(null);
     if (!paymentForm.destination || !paymentForm.amount) {
-      setPaymentError('Please fill in destination and amount');
+      setPaymentError(t('paymentModal.errors.fillFields'));
       return;
     }
 
     if (!validateAddress(paymentForm.destination)) {
-      setPaymentError('Invalid Stellar destination address');
+      setPaymentError(t('paymentModal.errors.invalidAddress'));
       return;
     }
 
     const amountNum = Number.parseFloat(paymentForm.amount);
     if (amountNum <= 0) {
-      setPaymentError('Amount must be greater than 0');
+      setPaymentError(t('paymentModal.errors.amountGreater'));
       return;
     }
 
     const currentBalance = getAssetBalance(paymentForm.assetCode, paymentForm.assetIssuer);
     if (amountNum > currentBalance) {
-      setPaymentError('Insufficient balance');
+      setPaymentError(t('paymentModal.errors.insufficientBalance'));
       return;
     }
 
@@ -238,12 +238,12 @@ export default function WalletSection() {
     setIsSending(true);
     try {
       const hash = await sendPayment(confirmTransactionDetails.xdr);
-      toast.success(`Payment sent successfully! Hash: ${hash.slice(0, 10)}...`);
+      toast.success(t('toast.paymentSent', { hash: hash.slice(0, 10) }));
       setShowConfirmModal(false);
       setPaymentForm({ destination: '', amount: '', assetCode: 'XLM', assetIssuer: '', memo: '' });
       setConfirmTransactionDetails(null);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to send payment');
+      toast.error(error instanceof Error ? error.message : t('toast.paymentFailed'));
     } finally {
       setIsSending(false);
     }
@@ -251,12 +251,12 @@ export default function WalletSection() {
 
   const handleCreateTrustline = async () => {
     if (!trustlineForm.assetCode || !trustlineForm.assetIssuer) {
-      toast.error('Please fill in asset code and issuer');
+      toast.error(t('trustlineModal.errors.fillFields'));
       return;
     }
 
     if (!validateAddress(trustlineForm.assetIssuer)) {
-      toast.error('Invalid asset issuer address');
+      toast.error(t('trustlineModal.errors.invalidIssuer'));
       return;
     }
 
@@ -269,11 +269,11 @@ export default function WalletSection() {
         trustlineForm.limit || undefined
       );
 
-      toast.success(`Trustline created successfully! Hash: ${hash.slice(0, 10)}...`);
+      toast.success(t('toast.trustlineCreated', { hash: hash.slice(0, 10) }));
       setShowTrustlineModal(false);
       setTrustlineForm({ assetCode: '', assetIssuer: '', limit: '' });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to create trustline');
+      toast.error(error instanceof Error ? error.message : t('toast.trustlineFailed'));
     } finally {
       setIsCreatingTrustline(false);
     }
@@ -281,7 +281,8 @@ export default function WalletSection() {
 
   const handleNetworkSwitch = async (newNetwork: 'PUBLIC' | 'TESTNET') => {
     await switchNetwork(newNetwork);
-    toast.success(`Switched to ${newNetwork === 'PUBLIC' ? 'Mainnet' : 'Testnet'}`);
+    const networkName = newNetwork === 'PUBLIC' ? t('walletInfo.mainnet') : t('walletInfo.testnet');
+    toast.success(t('toast.networkSwitched', { network: networkName }));
   };
 
   if (!address) {
@@ -289,16 +290,16 @@ export default function WalletSection() {
       <div className="space-y-6">
         <div className="border p-6 border-gray-200 rounded-sm text-center">
           <Wallet className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-2">Connect Your Stellar Wallet</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-2">{t('connectWallet.title')}</h2>
           <p className="text-gray-600 mb-6">
-            Connect your wallet to manage your Stellar assets and view transaction history
+            {t('connectWallet.description')}
           </p>
           <Button
             onClick={connectWallet}
             className="bg-[#375B42] hover:bg-[#2A4632] text-white font-semibold px-8 py-3"
           >
             <Wallet className="h-4 w-4 mr-2" />
-            Connect Wallet
+            {t('connectWallet.button')}
           </Button>
         </div>
       </div>
@@ -319,12 +320,12 @@ export default function WalletSection() {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-medium text-[#375B42] flex items-center space-x-2">
             <Wallet className="h-5 w-5" />
-            <span>Wallet Information</span>
+            <span>{t('walletInfo.title')}</span>
           </h3>
           <div className="flex items-center space-x-2">
             <Badge className="bg-[#375B42] text-white">
               <CheckCircle className="h-3 w-3 mr-1" />
-              Connected
+              {t('walletInfo.connected')}
             </Badge>
             <Badge
               variant="outline"
@@ -335,7 +336,7 @@ export default function WalletSection() {
               ) : (
                 <TestTube className="h-3 w-3 mr-1" />
               )}
-              {network === 'PUBLIC' ? 'Mainnet' : 'Testnet'}
+              {network === 'PUBLIC' ? t('walletInfo.mainnet') : t('walletInfo.testnet')}
             </Badge>
             <Button
               variant="outline"
@@ -343,7 +344,7 @@ export default function WalletSection() {
               onClick={disconnectWallet}
               className="border-red-600 text-red-600 hover:bg-red-50 bg-transparent"
             >
-              Disconnect
+              {t('walletInfo.disconnect')}
             </Button>
           </div>
         </div>
@@ -351,7 +352,7 @@ export default function WalletSection() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm text-gray-600">Wallet Address</label>
+              <label className="text-sm text-gray-600">{t('walletInfo.walletAddress')}</label>
               <div className="flex items-center space-x-2 mt-1">
                 <code className="bg-gray-50 px-3 py-2 rounded text-sm flex-1 truncate border border-gray-200">
                   {address}
@@ -381,7 +382,7 @@ export default function WalletSection() {
             </div>
 
             <div>
-              <label className="text-sm text-gray-600">Connected Via</label>
+              <label className="text-sm text-gray-600">{t('walletInfo.connectedVia')}</label>
               <div className="mt-1 flex items-center justify-between">
                 <span className="bg-gray-50 px-3 py-2 rounded text-sm border border-gray-200 inline-block">
                   {name || 'Stellar Wallet'}
@@ -392,7 +393,7 @@ export default function WalletSection() {
                   onClick={() => handleNetworkSwitch(network === 'PUBLIC' ? 'TESTNET' : 'PUBLIC')}
                   className="ml-2"
                 >
-                  Switch to {network === 'PUBLIC' ? 'Testnet' : 'Mainnet'}
+                  {t('walletInfo.switchTo')} {network === 'PUBLIC' ? t('walletInfo.testnet') : t('walletInfo.mainnet')}
                 </Button>
               </div>
             </div>
@@ -405,7 +406,7 @@ export default function WalletSection() {
         <div className="border border-red-200 bg-red-50 p-4 rounded-sm">
           <div className="flex items-center space-x-2 text-red-600">
             <AlertCircle className="h-4 w-4" />
-            <span className="font-semibold">Error</span>
+            <span className="font-semibold">{t('error')}</span>
           </div>
           <p className="text-red-600 text-sm mt-1">{error}</p>
         </div>
@@ -416,7 +417,7 @@ export default function WalletSection() {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-medium text-[#375B42] flex items-center space-x-2">
             <DollarSign className="h-5 w-5" />
-            <span>Asset Balances</span>
+            <span>{t('balances.title')}</span>
           </h3>
           <Button
             variant="ghost"
@@ -432,11 +433,11 @@ export default function WalletSection() {
         {isLoading ? (
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#375B42] mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading balances...</p>
+            <p className="text-gray-600">{t('balances.loading')}</p>
           </div>
         ) : balances.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-gray-600">No assets found in this wallet</p>
+            <p className="text-gray-600">{t('balances.noAssets')}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -466,18 +467,18 @@ export default function WalletSection() {
                     </p>
                   )}
                   {balance.limit && (
-                    <p className="text-gray-500 text-sm">Limit: {formatBalance(balance.limit)}</p>
+                    <p className="text-gray-500 text-sm">{t('balances.limit')}: {formatBalance(balance.limit)}</p>
                   )}
                   {balance.buying_liabilities &&
                     Number.parseFloat(balance.buying_liabilities) > 0 && (
                       <p className="text-orange-500 text-sm">
-                        Buying: {formatBalance(balance.buying_liabilities)}
+                        {t('balances.buying')}: {formatBalance(balance.buying_liabilities)}
                       </p>
                     )}
                   {balance.selling_liabilities &&
                     Number.parseFloat(balance.selling_liabilities) > 0 && (
                       <p className="text-blue-500 text-sm">
-                        Selling: {formatBalance(balance.selling_liabilities)}
+                        {t('balances.selling')}: {formatBalance(balance.selling_liabilities)}
                       </p>
                     )}
                 </div>
@@ -489,7 +490,7 @@ export default function WalletSection() {
 
       {/* Quick Actions */}
       <div className="border p-6 border-gray-200 rounded-sm">
-        <h3 className="text-lg font-medium text-[#375B42] mb-4">Quick Actions</h3>
+        <h3 className="text-lg font-medium text-[#375B42] mb-4">{t('quickActions.title')}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Button
             onClick={() => setShowPaymentModal(true)}
@@ -497,7 +498,7 @@ export default function WalletSection() {
             disabled={balances.length === 0}
           >
             <Send className="h-4 w-4 mr-2" />
-            Send Payment
+            {t('quickActions.sendPayment')}
           </Button>
           <Button
             onClick={() => setShowTrustlineModal(true)}
@@ -505,7 +506,7 @@ export default function WalletSection() {
             className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-transparent"
           >
             <Plus className="h-4 w-4 mr-2" />
-            Add Asset
+            {t('quickActions.addAsset')}
           </Button>
           <Button
             variant="outline"
@@ -513,7 +514,7 @@ export default function WalletSection() {
             onClick={handleCopyAddress}
           >
             <Copy className="h-4 w-4 mr-2" />
-            Copy Address
+            {t('quickActions.copyAddress')}
           </Button>
           <Button
             variant="outline"
@@ -526,7 +527,7 @@ export default function WalletSection() {
             }
           >
             <ExternalLink className="h-4 w-4 mr-2" />
-            View Explorer
+            {t('quickActions.viewExplorer')}
           </Button>
         </div>
       </div>
@@ -535,7 +536,7 @@ export default function WalletSection() {
       {showPaymentModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white border border-gray-200 rounded-sm w-full max-w-md mx-4 p-6">
-            <h3 className="text-lg font-medium text-[#375B42] mb-4">Send Payment</h3>
+            <h3 className="text-lg font-medium text-[#375B42] mb-4">{t('paymentModal.title')}</h3>
             <div className="space-y-4">
               {paymentError && (
                 <div className="flex items-center space-x-2 text-red-600 text-sm">
@@ -545,7 +546,7 @@ export default function WalletSection() {
               )}
               <div>
                 <Label htmlFor="destination" className="text-sm text-gray-600">
-                  Destination Address *
+                  {t('paymentModal.destinationAddress')} *
                 </Label>
                 <Input
                   id="destination"
@@ -555,18 +556,18 @@ export default function WalletSection() {
                     setPaymentError(null); // Clear error on change
                   }}
                   className="mt-1 bg-gray-50 border border-gray-200"
-                  placeholder="GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                  placeholder={t('paymentModal.destinationPlaceholder')}
                 />
                 {!validateAddress(paymentForm.destination) &&
                   paymentForm.destination.length > 0 && (
-                    <p className="text-red-500 text-xs mt-1">Invalid Stellar address format</p>
+                    <p className="text-red-500 text-xs mt-1">{t('paymentModal.invalidAddress')}</p>
                   )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="amount" className="text-sm text-gray-600">
-                    Amount *
+                    {t('paymentModal.amount')} *
                   </Label>
                   <div className="relative mt-1">
                     <Input
@@ -579,7 +580,7 @@ export default function WalletSection() {
                         setPaymentError(null); // Clear error on change
                       }}
                       className="bg-gray-50 border border-gray-200 pr-12"
-                      placeholder="0.00"
+                      placeholder={t('paymentModal.amountPlaceholder')}
                     />
                     <Button
                       variant="ghost"
@@ -587,7 +588,7 @@ export default function WalletSection() {
                       className="absolute right-1 top-1/2 -translate-y-1/2 h-7 px-2 text-xs"
                       onClick={handleMaxAmount}
                     >
-                      Max
+                      {t('paymentModal.max')}
                     </Button>
                   </div>
                   {paymentForm.amount && exchangeRates[paymentForm.assetCode] && (
@@ -597,7 +598,7 @@ export default function WalletSection() {
 
                 <div>
                   <Label htmlFor="asset" className="text-sm text-gray-600">
-                    Asset
+                    {t('paymentModal.asset')}
                   </Label>
                   <Select
                     value={paymentForm.assetCode}
@@ -623,7 +624,7 @@ export default function WalletSection() {
                     </SelectContent>
                   </Select>
                   <p className="text-gray-500 text-xs mt-1">
-                    Balance: {formatBalance(selectedAssetBalance.toString())}{' '}
+                    {t('paymentModal.balance')}: {formatBalance(selectedAssetBalance.toString())}{' '}
                     {paymentForm.assetCode}
                     {exchangeRates[paymentForm.assetCode] && ` (~$${selectedAssetUsdValue} USD)`}
                   </p>
@@ -632,14 +633,14 @@ export default function WalletSection() {
 
               <div>
                 <Label htmlFor="memo" className="text-sm text-gray-600">
-                  Memo (Optional)
+                  {t('paymentModal.memo')}
                 </Label>
                 <Textarea
                   id="memo"
                   value={paymentForm.memo}
                   onChange={(e) => setPaymentForm((prev) => ({ ...prev, memo: e.target.value }))}
                   className="mt-1 bg-gray-50 border border-gray-200"
-                  placeholder="Optional memo"
+                  placeholder={t('paymentModal.memoPlaceholder')}
                   rows={2}
                 />
               </div>
@@ -650,7 +651,7 @@ export default function WalletSection() {
                   disabled={isSending}
                   className="flex-1 bg-[#375B42] hover:bg-[#2A4632] text-white"
                 >
-                  {isSending ? 'Preparing...' : 'Review & Send'}
+                  {isSending ? t('paymentModal.preparing') : t('paymentModal.reviewSend')}
                 </Button>
                 <Button
                   onClick={() => setShowPaymentModal(false)}
@@ -658,7 +659,7 @@ export default function WalletSection() {
                   className="border-gray-300 text-gray-700 hover:bg-gray-50"
                   disabled={isSending}
                 >
-                  Cancel
+                  {t('paymentModal.cancel')}
                 </Button>
               </div>
             </div>
@@ -670,11 +671,11 @@ export default function WalletSection() {
       {showTrustlineModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white border border-gray-200 rounded-sm w-full max-w-md mx-4 p-6">
-            <h3 className="text-lg font-medium text-[#375B42] mb-4">Add Asset Trustline</h3>
+            <h3 className="text-lg font-medium text-[#375B42] mb-4">{t('trustlineModal.title')}</h3>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="assetCode" className="text-sm text-gray-600">
-                  Asset Code *
+                  {t('trustlineModal.assetCode')} *
                 </Label>
                 <Input
                   id="assetCode"
@@ -686,13 +687,13 @@ export default function WalletSection() {
                     }))
                   }
                   className="mt-1 bg-gray-50 border border-gray-200"
-                  placeholder="USDT, USDC, etc."
+                  placeholder={t('trustlineModal.assetCodePlaceholder')}
                 />
               </div>
 
               <div>
                 <Label htmlFor="assetIssuer" className="text-sm text-gray-600">
-                  Asset Issuer *
+                  {t('trustlineModal.assetIssuer')} *
                 </Label>
                 <Input
                   id="assetIssuer"
@@ -701,17 +702,17 @@ export default function WalletSection() {
                     setTrustlineForm((prev) => ({ ...prev, assetIssuer: e.target.value }))
                   }
                   className="mt-1 bg-gray-50 border border-gray-200"
-                  placeholder="GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                  placeholder={t('trustlineModal.assetIssuerPlaceholder')}
                 />
                 {!validateAddress(trustlineForm.assetIssuer) &&
                   trustlineForm.assetIssuer.length > 0 && (
-                    <p className="text-red-500 text-xs mt-1">Invalid Stellar address format</p>
+                    <p className="text-red-500 text-xs mt-1">{t('trustlineModal.invalidAddress')}</p>
                   )}
               </div>
 
               <div>
                 <Label htmlFor="limit" className="text-sm text-gray-600">
-                  Trust Limit (Optional)
+                  {t('trustlineModal.trustLimit')}
                 </Label>
                 <Input
                   id="limit"
@@ -719,7 +720,7 @@ export default function WalletSection() {
                   value={trustlineForm.limit}
                   onChange={(e) => setTrustlineForm((prev) => ({ ...prev, limit: e.target.value }))}
                   className="mt-1 bg-gray-50 border border-gray-200"
-                  placeholder="Leave empty for maximum"
+                  placeholder={t('trustlineModal.trustLimitPlaceholder')}
                 />
               </div>
 
@@ -729,7 +730,7 @@ export default function WalletSection() {
                   disabled={isCreatingTrustline}
                   className="flex-1 bg-[#375B42] hover:bg-[#2A4632] text-white"
                 >
-                  {isCreatingTrustline ? 'Creating...' : 'Create Trustline'}
+                  {isCreatingTrustline ? t('trustlineModal.creating') : t('trustlineModal.createTrustline')}
                 </Button>
                 <Button
                   onClick={() => setShowTrustlineModal(false)}
@@ -737,7 +738,7 @@ export default function WalletSection() {
                   className="border-gray-300 text-gray-700 hover:bg-gray-50"
                   disabled={isCreatingTrustline}
                 >
-                  Cancel
+                  {t('trustlineModal.cancel')}
                 </Button>
               </div>
             </div>
@@ -749,10 +750,10 @@ export default function WalletSection() {
       {showConfirmModal && confirmTransactionDetails && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white border border-gray-200 rounded-sm w-full max-w-md mx-4 p-6">
-            <h3 className="text-lg font-medium text-[#375B42] mb-4">Confirm Transaction</h3>
+            <h3 className="text-lg font-medium text-[#375B42] mb-4">{t('confirmModal.title')}</h3>
             <div className="space-y-3 text-sm text-gray-700">
               <div className="flex justify-between">
-                <span>Sending:</span>
+                <span>{t('confirmModal.sending')}:</span>
                 <span className="font-semibold">
                   {confirmTransactionDetails.amount} {confirmTransactionDetails.assetCode}
                   {exchangeRates[confirmTransactionDetails.assetCode] &&
@@ -760,21 +761,21 @@ export default function WalletSection() {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>To:</span>
+                <span>{t('confirmModal.to')}:</span>
                 <span className="font-semibold truncate max-w-[70%]">
                   {confirmTransactionDetails.destination}
                 </span>
               </div>
               {confirmTransactionDetails.memo && (
                 <div className="flex justify-between">
-                  <span>Memo:</span>
+                  <span>{t('confirmModal.memo')}:</span>
                   <span className="font-semibold truncate max-w-[70%]">
                     {confirmTransactionDetails.memo}
                   </span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span>Estimated Fee:</span>
+                <span>{t('confirmModal.estimatedFee')}:</span>
                 <span className="font-semibold">
                   {confirmTransactionDetails.estimatedFee} XLM
                   {exchangeRates.XLM &&
@@ -783,7 +784,7 @@ export default function WalletSection() {
               </div>
               <div className="pt-2">
                 <Label htmlFor="xdr" className="text-sm text-gray-600 flex items-center">
-                  Transaction XDR <Info className="h-3 w-3 ml-1 text-gray-400" />
+                  {t('confirmModal.transactionXdr')} <Info className="h-3 w-3 ml-1 text-gray-400" />
                 </Label>
                 <Textarea
                   id="xdr"
@@ -801,7 +802,7 @@ export default function WalletSection() {
                 disabled={isSending}
                 className="flex-1 bg-[#375B42] hover:bg-[#2A4632] text-white"
               >
-                {isSending ? 'Confirming...' : 'Confirm Send'}
+                {isSending ? t('confirmModal.confirming') : t('confirmModal.confirmSend')}
               </Button>
               <Button
                 onClick={() => {
@@ -819,7 +820,7 @@ export default function WalletSection() {
                 className="border-gray-300 text-gray-700 hover:bg-gray-50"
                 disabled={isSending}
               >
-                Cancel
+                {t('confirmModal.cancel')}
               </Button>
             </div>
           </div>

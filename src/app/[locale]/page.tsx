@@ -8,6 +8,7 @@ import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
 import CtaSection from '@/components/cta/CtaSection';
 import HeroSectionNew from '@/components/herosection/herosectionnew';
 import ProducerCTA from '@/components/cta/producer-Cta';
+import { NewMissionVision } from '@/components/about/NewMissionVision';
 import RegistrationHeroSection from '@/components/herosection/RegistrationHeroSection';
 
 
@@ -19,6 +20,7 @@ export default function Home() {
       <HeroSectionNew />
       <RegistrationHeroSection />
       <AboutUs />
+      <NewMissionVision />
       <HowWeWork />
       <CtaSection />
       <ProducerCTA />

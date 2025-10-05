@@ -1,4 +1,51 @@
 {
+  "common": {
+    "sortBy": {
+      "label": "Ordenar por",
+      "showing": "Mostrando",
+      "of": "de",
+      "price": "Precio",
+      "stock": "Stock",
+      "rating": "Calificación",
+      "latest": "Más recientes",
+      "name": "Nombre",
+      "distance": "Distancia"
+    },
+    "breadcrumb": {
+      "home": "Inicio",
+      "dashboard": "Panel de Control",
+      "account": "Mi Cuenta",
+      "settings": "Configuración",
+      "inventory": "Inventario",
+      "wallet": "Billetera",
+      "notifications": "Notificaciones",
+      "privacy": "Privacidad",
+      "regional": "Regional",
+      "security": "Seguridad",
+      "preferences": "Preferencias",
+      "producers": "Productores"
+    },
+    "actions": {
+      "cancel": "Cancelar",
+      "viewProfile": "Ver Perfil",
+      "connect": "Conectar",
+      "disconnect": "Desconectar",
+      "edit": "Editar",
+      "closeMenu": "Cerrar menú",
+      "openMenu": "Abrir menú"
+    },
+    "status": {
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "delivered": "Entregado"
+    },
+    "products": "productos",
+    "location": "Ubicación",
+    "certifications": "Certificaciones"
+  },
+
   "HomePage": {
     "title": "Revolutionary",
     "subtitle": "Farmers",
@@ -7,13 +54,13 @@
   "Hero": {
     "title": "Confianza del Campo a la Mesa",
     "subtitle": "Transformamos el comercio con tecnología que garantiza velocidad, transparencia y justicia.",
+    "description": "Revolutionary Farmers es un mercado impulsado por blockchain que conecta a los agricultores directamente con los consumidores, garantizando transparencia, precios justos y trazabilidad del campo a la mesa. Nuestra plataforma empodera a las comunidades agrícolas mientras proporciona a los consumidores acceso a productos frescos y auténticos.",
     "imageText": {
       "processed": "Procesado",
       "harvest": "Cosecha",
       "freshness": "Frescura"
     }
   },
-
   "HeroSection": {
     "title": "Revolutionary Farmers",
     "subtitle": "De la Granja a la Mesa",
@@ -23,7 +70,15 @@
     "investNow": "Invertir Ahora",
     "joinWaitlist": "Unirse a Lista de Espera"
   },
-
+  "RegistrationHero": {
+    "title": "Únete a Revolutionary Farmers",
+   "description": "Transforma tu viaje agrícola con tecnología de vanguardia, apoyo comunitario y prácticas sostenibles. Únete a miles de agricultores que ya están revolucionando la agricultura.",
+   "primaryCta": "Comienza tu Viaje",
+   "secondaryCta": "Aprende Más",
+   "trustIndicator1": "Más de 5000 Agricultores",
+   "trustIndicator2": "Soporte de Expertos 24/7",
+   "trustIndicator3": "Métodos Sostenibles"
+   },
   "AboutUs": {
     "title": "¿Qué es Revolutionary Farmers?",
     "description": "Revolutionary Farmers es una plataforma descentralizada que proporciona confianza y transparencia en las transacciones agrícolas mediante tecnología blockchain. Conectamos a los agricultores con los compradores, garantizando comercio justo, transacciones seguras y trazabilidad de los productos.",
@@ -212,14 +267,12 @@
       }
     }
   },
-
   "cta": {
     "ready": "¿Listo para Comenzar?",
     "startSelling": "Empieza a Vender",
     "exploreProducts": "Explorar Productos",
     "joinWaitlist": "Unirse a la Lista de Espera"
   },
-
   "FarmerSubscription": {
     "ctaLabel": "Empezar a Vender",
     "title": "Suscripción de Agricultor",
@@ -281,7 +334,6 @@
       "spamDetected": "Se detectó un envío sospechoso."
     }
   },
-
   "ItemsHeader": {
     "initializeEscrow": "Crear Escrow",
     "claimEarnings": "Reclamar Ganancias de Escrow"
@@ -352,6 +404,43 @@
       "apply": "Aplicar Filtro",
       "clear": "Limpiar Filtros"
     },
+    "categories": {
+      "Vegetables": "Verduras",
+      "Eggs": "Huevos"
+    },
+    "farmingMethods": {
+      "organic": "Orgánico",
+      "conventional": "Convencional",
+      "free-range": "Libre Pastoreo",
+      "traditional": "Tradicional",
+      "hydroponic": "Hidropónico",
+      "greenhouse": "Invernadero"
+    },
+    "productNames": {
+      "Organic Tomatoes": "Tomates Orgánicos",
+      "Fresh Eggs": "Huevos Frescos",
+      "Organic Roma Tomatoes": "Tomates Roma Orgánicos",
+      "Free-Range Brown Eggs": "Huevos Marrones de Libre Pastoreo",
+      "Heirloom Cherry Tomatoes": "Tomates Cherry Tradicionales",
+      "Organic Quail Eggs": "Huevos de Codorniz Orgánicos",
+      "Beefsteak Tomatoes": "Tomates Beefsteak",
+      "Duck Eggs Premium": "Huevos de Pato Premium",
+      "Vine Ripened Tomatoes": "Tomates Madurados en Rama",
+      "Heritage Breed Eggs": "Huevos de Razas Tradicionales",
+      "Greenhouse Tomatoes": "Tomates de Invernadero",
+      "Jumbo Farm Eggs": "Huevos Jumbo de Granja",
+      "Specialty Quail Eggs": "Huevos de Codorniz Especiales",
+      "Eggs 1": "Huevos de Codorniz 1",
+      "Eggs 2": "Huevos de Codorniz 2",
+      "Eggs 3": "Huevos de Codorniz 3",
+      "Eggs 4": "Huevos de Codorniz 4",
+      "Eggs 5": "Huevos de Codorniz 5",
+      "Eggs 6": "Huevos de Codorniz 6",
+      "Cafè": "Café"
+    },
+    "productCard": {
+      "ratingLabel": "Calificación: {rating} de 5 estrellas"
+    },
     "sortBy": {
       "showing": "Mostrando",
       "of": "de",
@@ -384,7 +473,10 @@
     "buttons": {
       "relatedItems": "Productos Relacionados",
       "buyNow": "Comprar Ahora",
-      "addToCart": "Agregar al Carrito"
+      "addToCart": "Agregar al Carrito",
+      "adding": "Agregando...",
+      "added": "Agregado",
+      "addAgain": "Agregar de Nuevo"
     },
     "delivery": {
       "free": "Envío Gratis",
@@ -400,6 +492,9 @@
     }
   },
   "Marketplace": {
+    "title": "Mercado Revolutionary Farmers",
+    "description": "Descubre productos frescos de origen local directamente de agricultores usando tecnología blockchain",
+    "availableProducts": "Productos Disponibles",
     "navigation": {
       "home": "Inicio",
       "products": "Productos",
@@ -436,14 +531,8 @@
     "copyright": "© Copyright Revolutionary Farmers {year}. Todos los derechos reservados.",
     "description": "Fomentamos un comercio responsable mediante tecnología moderna que garantiza agilidad, claridad y trato justo para todos.",
     "quickLinks": "Enlaces Rápidos",
-    "helpCompany": "Ayuda y Compañía",
-    "My Account": "Mi Cuenta",
-    "Login/Register": "Iniciar Sesión/Registrarse",
-    "Cart": "Carrito",
-    "Shop": "Tienda",
-    "FAQ": "Preguntas Frecuentes",
+    "helpCompany": "Ayuda & Compañía",
     "Contact": "Contacto",
-    "Our Team": "Nuestro Equipo",
     "Twitter": "Twitter",
     "LinkedIn": "LinkedIn",
     "Instagram": "Instagram",
@@ -454,7 +543,31 @@
       "title": "Sé un Adoptador Temprano",
       "subtitle": "Únete a nuestra lista de espera y obtén beneficios exclusivos cuando lancemos",
       "button": "Unirse a la Lista"
+    },
+    "columnTitles": {
+      "authentication": "Autenticación",
+      "store": "Tienda",
+      "help": "Ayuda"
+    },
+    "columnLabels": {
+      "authentication": {
+        "Login/Register": "Iniciar Sesión/Registrarse",
+        "My Account": "Mi Cuenta"
+      },
+      "store": {
+        "Shop": "Tienda",
+        "Cart": "Carrito",
+        "Blog": "Blog",
+        "Compare": "Comparar"
+      },
+      "help": {
+        "Our Team": "Nuestro Equipo",
+        "Support": "Soporte",
+        "FAQ": "Preguntas Frecuentes",
+        "Farmer Profile": "Perfil de Agricultor"
+      }
     }
+
   },
   "SignUp": {
     "title": "Crear una cuenta",
@@ -997,6 +1110,51 @@
     "buttonText": "Únete como Productor",
 },
 
+    "NewMissionVision": {
+    "title": "Misión y Visión",
+    "mission": {
+      "title": "Misión",
+      "points": [
+        {
+          "title": "Facilitar la Confianza",
+          "description": "Crear un entorno transparente y seguro para las transacciones agrícolas mediante la tecnología blockchain."
+        },
+        {
+          "title": "Empoderar a los Agricultores",
+          "description": "Proporcionar a los agricultores acceso directo al mercado, precios justos y herramientas financieras para hacer crecer su negocio."
+        },
+        {
+          "title": "Promover la Innovación",
+          "description": "Impulsar la adopción de tecnología en la agricultura para mejorar la eficiencia, la sostenibilidad y la trazabilidad."
+        },
+        {
+          "title": "Apoyar el Código Abierto",
+          "description": "Contribuir a la comunidad de código abierto construyendo y compartiendo herramientas que beneficien a todo el ecosistema."
+        }
+      ]
+    },
+    "vision": {
+      "title": "Visión",
+      "points": [
+        {
+          "title": "Transformar la Agricultura",
+          "description": "Ser la plataforma líder a nivel mundial para una cadena de suministro agrícola descentralizada, transparente y sostenible."
+        },
+        {
+          "title": "Alcance Global",
+          "description": "Conectar a agricultores y compradores de todo el mundo, fomentando una comunidad global basada en la confianza y el beneficio mutuo."
+        },
+        {
+          "title": "Inclusión Financiera",
+          "description": "Permitir la inclusión financiera de los agricultores no bancarizados a través de servicios financieros descentralizados."
+        },
+        {
+          "title": "Crecimiento Sostenible",
+          "description": "Promover prácticas agrícolas respetuosas con el medio ambiente y económicamente viables para un futuro sostenible."
+        }
+      ]
+    }
+  },
   "ContactSection": {
     "title": "¿No encuentras el producto que buscas?",
     "description": "Ponte en contacto con nosotros o explora nuestra red de productores de confianza",
@@ -1005,29 +1163,14 @@
     "emailSubject": "Consulta de Producto - Revolutionary Farmers",
     "emailBody": "Hola Revolutionary Farmers,\\n\\nEstoy buscando un producto específico que no pude encontrar en su mercado.\\n\\nDetalles del producto:\\n- Nombre del producto: \\n- Categoría: \\n- Cantidad necesaria: \\n- Fecha de entrega preferida: \\n\\nNotas adicionales:\\n\\nPor favor, háganme saber si pueden ayudarme a encontrar este producto o conectarme con un productor adecuado.\\n\\n¡Gracias por su asistencia!\\n\\nSaludos cordiales"
   },
-  "ProducersPage": {
-    "title": "Nuestros Productores",
-    "subtitle": "Conoce nuestra red de agricultores y productores de confianza comprometidos con la agricultura sostenible",
-    "rating": "Calificación",
-    "specialties": "Especialidades",
-    "certifications": "Certificaciones",
-    "products": "productos",
-    "viewProfile": "Ver Perfil",
-    "joinNetwork": {
-      "title": "¿Interesado en Unirte a Nuestra Red?",
-      "description": "Siempre estamos buscando agricultores y productores apasionados para unirse a nuestra comunidad",
-      "button": "Convertirse en Productor"
-    },
-    "producerCard": {
-      "lastUsed": "Usado por última vez",
-      "location": "Ubicación"
-    }
+
   "Producers": {
     "hero": {
       "title": "Nuestros Productores",
       "description": "Descubre increíbles productores locales que están transformando la agricultura con prácticas sostenibles y métodos de cultivo innovadores.",
       "searchPlaceholder": "Buscar por productor, producto o ubicación...",
-      "locationText": "Mostrando productores cerca de tu ubicación"
+      "locationText": "Mostrando productores cerca de tu ubicación",
+      "resultsFor": "Resultados para"
     },
     "filters": {
       "label": "Filtros",
@@ -1100,4 +1243,443 @@
     }
 
   
+}
+  },
+  "ContactInfo": {
+    "title": "Información de Contacto",
+    "location": "Ubicación",
+    "phone": "Teléfono",
+    "email": "Email",
+    "schedule": "Horario de Atención",
+    "weekdays": "Lun - Sáb",
+    "sunday": "Dom",
+    "socialMedia": "Redes Sociales",
+    "editAriaLabel": "Editar información de contacto",
+    "visitFacebook": "Visitar página de Facebook",
+    "visitInstagram": "Visitar página de Instagram",
+    "contactWhatsApp": "Contactar por WhatsApp",
+    "visitWebsite": "Visitar sitio web"
+  },
+
+  "ProfileSettings": {
+    "settingNames": {
+      "language": "Idioma",
+      "currency": "Moneda",
+      "darkMode": "Modo Oscuro",
+      "emailNotifications": "Notificaciones por Email",
+      "smsNotifications": "Notificaciones por SMS",
+      "privacyPublicProfile": "Perfil Público"
+    },
+    "generalPreferences": {
+      "title": "Preferencias Generales",
+      "description": "Configura tu idioma, moneda y ajustes de visualización."
+    },
+    "language": {
+      "label": "Idioma",
+      "placeholder": "Seleccionar idioma",
+      "options": {
+        "en": "Inglés",
+        "es": "Español"
+      }
+    },
+    "currency": {
+      "label": "Moneda Preferida",
+      "placeholder": "Seleccionar moneda",
+      "options": {
+        "USD": "USD - Dólar Estadounidense",
+        "EUR": "EUR - Euro",
+        "GBP": "GBP - Libra Esterlina",
+        "XLM": "XLM - Stellar Lumens"
+      }
+    },
+    "darkMode": "Modo Oscuro",
+    "notifications": {
+      "title": "Configuración de Notificaciones",
+      "description": "Gestiona cómo recibes las notificaciones.",
+      "email": "Notificaciones por Email",
+      "sms": "Notificaciones por SMS"
+    },
+    "privacy": {
+      "title": "Configuración de Privacidad",
+      "description": "Controla la visibilidad de tu perfil.",
+      "publicProfile": "Perfil Público"
+    },
+    "saveButton": "Guardar Toda la Configuración",
+    "toast": {
+      "saved": "¡Toda la configuración guardada con éxito!",
+      "updated": "¡{setting} actualizado a {value}!",
+      "enabled": "¡{setting} habilitado!",
+      "disabled": "¡{setting} deshabilitado!"
+    }
+  },
+
+  "ProfileTabs": {
+    "tabs": {
+      "profile": "Perfil",
+      "wallet": "Billetera",
+      "transactions": "Transacciones",
+      "farming": "Agricultura",
+      "settings": "Configuración"
+    },
+    "walletSummary": {
+      "title": "Resumen de Billetera",
+      "totalBalance": "Balance Total de Billetera",
+      "totalTransactions": "Total de Transacciones",
+      "farmingActivities": "Actividades Agrícolas",
+      "activeContracts": "Contratos Activos",
+      "xlmEquivalent": "(equivalente en XLM)",
+      "transactionsRecorded": "transacciones registradas",
+      "activitiesLogged": "actividades registradas",
+      "activeEscrowContracts": "contratos de depósito activos"
+    }
+  },
+
+  "ProfileForm": {
+    "title": "Información del Perfil",
+    "description": "Gestiona tus datos personales y de la granja.",
+    "personalInfo": {
+      "title": "Información Personal",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Email",
+      "phone": "Teléfono",
+      "address": "Dirección",
+      "city": "Ciudad",
+      "state": "Estado / Provincia",
+      "zip": "Código Postal",
+      "country": "País"
+    },
+    "farmInfo": {
+      "title": "Información de la Granja",
+      "farmName": "Nombre de la Granja",
+      "farmSize": "Tamaño de la Granja",
+      "farmType": "Tipo de Granja",
+      "farmTypePlaceholder": "Seleccionar tipo de granja",
+      "farmTypes": {
+        "Organic Vegetables": "Verduras Orgánicas",
+        "Dairy Farm": "Granja Lechera",
+        "Grain Crops": "Cultivos de Granos",
+        "Fruit Orchard": "Huerto de Frutas",
+        "Livestock": "Ganado",
+        "Mixed Farming": "Agricultura Mixta"
+      },
+      "establishedDate": "Fecha de Establecimiento",
+      "datePlaceholder": "Seleccionar fecha",
+      "website": "Sitio Web",
+      "bio": "Biografía"
+    },
+    "saveButton": "Guardar Cambios",
+    "toast": {
+      "success": "¡Perfil actualizado con éxito!"
+    }
+  },
+
+  "WalletSection": {
+    "connectWallet": {
+      "title": "Conecta tu Billetera Stellar",
+      "description": "Conecta tu billetera para gestionar tus activos Stellar y ver el historial de transacciones",
+      "button": "Conectar Billetera"
+    },
+    "walletInfo": {
+      "title": "Información de la Billetera",
+      "connected": "Conectado",
+      "mainnet": "Red Principal",
+      "testnet": "Red de Pruebas",
+      "disconnect": "Desconectar",
+      "walletAddress": "Dirección de la Billetera",
+      "connectedVia": "Conectado a través de",
+      "switchTo": "Cambiar a"
+    },
+    "error": "Error",
+    "balances": {
+      "title": "Saldos de Activos",
+      "loading": "Cargando saldos...",
+      "noAssets": "No se encontraron activos en esta billetera",
+      "limit": "Límite",
+      "buying": "Compra",
+      "selling": "Venta"
+    },
+    "quickActions": {
+      "title": "Acciones Rápidas",
+      "sendPayment": "Enviar Pago",
+      "addAsset": "Agregar Activo",
+      "copyAddress": "Copiar Dirección",
+      "viewExplorer": "Ver Explorador"
+    },
+    "paymentModal": {
+      "title": "Enviar Pago",
+      "destinationAddress": "Dirección de Destino",
+      "destinationPlaceholder": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "amount": "Cantidad",
+      "amountPlaceholder": "0.00",
+      "max": "Máximo",
+      "asset": "Activo",
+      "memo": "Memo (Opcional)",
+      "memoPlaceholder": "Memo opcional",
+      "balance": "Saldo",
+      "reviewSend": "Revisar y Enviar",
+      "preparing": "Preparando...",
+      "cancel": "Cancelar",
+      "invalidAddress": "Formato de dirección Stellar inválido",
+      "errors": {
+        "fillFields": "Por favor completa la dirección de destino y la cantidad",
+        "invalidAddress": "Dirección de destino Stellar inválida",
+        "amountGreater": "La cantidad debe ser mayor que 0",
+        "insufficientBalance": "Saldo insuficiente"
+      }
+    },
+    "trustlineModal": {
+      "title": "Agregar Línea de Confianza de Activo",
+      "assetCode": "Código del Activo",
+      "assetCodePlaceholder": "USDT, USDC, etc.",
+      "assetIssuer": "Emisor del Activo",
+      "assetIssuerPlaceholder": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "trustLimit": "Límite de Confianza (Opcional)",
+      "trustLimitPlaceholder": "Dejar vacío para máximo",
+      "createTrustline": "Crear Línea de Confianza",
+      "creating": "Creando...",
+      "cancel": "Cancelar",
+      "invalidAddress": "Formato de dirección Stellar inválido",
+      "errors": {
+        "fillFields": "Por favor completa el código del activo y el emisor",
+        "invalidIssuer": "Dirección del emisor del activo inválida"
+      }
+    },
+    "confirmModal": {
+      "title": "Confirmar Transacción",
+      "sending": "Enviando",
+      "to": "Para",
+      "memo": "Memo",
+      "estimatedFee": "Tarifa Estimada",
+      "transactionXdr": "XDR de la Transacción",
+      "confirmSend": "Confirmar Envío",
+      "confirming": "Confirmando...",
+      "cancel": "Cancelar"
+    },
+    "toast": {
+      "addressCopied": "Dirección copiada al portapapeles",
+      "balancesUpdated": "Saldos actualizados",
+      "paymentSent": "¡Pago enviado con éxito! Hash: {hash}...",
+      "trustlineCreated": "¡Línea de confianza creada con éxito! Hash: {hash}...",
+      "networkSwitched": "Cambiado a {network}",
+      "paymentFailed": "Error al enviar el pago",
+      "trustlineFailed": "Error al crear la línea de confianza"
+    }
+  },
+
+  "TransactionHistory": {
+    "title": "Historial de Transacciones",
+    "description": "Ver y gestionar tu historial de transacciones",
+    "export": "Exportar",
+    "searchPlaceholder": "Buscar transacciones...",
+    "filterTypes": {
+      "all": "Todos los Tipos",
+      "payment": "Pagos",
+      "create_account": "Creación de Cuenta",
+      "manage_offer": "Ofertas",
+      "change_trust": "Líneas de Confianza"
+    },
+    "status": {
+      "success": "Éxito",
+      "pending": "Pendiente",
+      "failed": "Fallido"
+    },
+    "transactionTypes": {
+      "payment": "pago",
+      "create_account": "creación de cuenta",
+      "manage_offer": "ofertas",
+      "path_payment": "pago por ruta",
+      "manage_data": "gestión de datos",
+      "change_trust": "líneas de confianza"
+    },
+    "labels": {
+      "from": "De",
+      "to": "Para",
+      "fee": "Tarifa"
+    },
+    "messages": {
+      "loading": "Cargando transacciones...",
+      "error": "Error al cargar las transacciones",
+      "noTransactions": "No se encontraron transacciones",
+      "noMatches": "No hay transacciones que coincidan con tu búsqueda",
+      "loadMore": "Cargar Más Transacciones"
+    }
+  },
+
+  "FarmingActivity": {
+    "title": "Operaciones Agrícolas",
+    "description": "Rastrea tus actividades agrícolas y gestiona contratos de depósito",
+    "tabs": {
+      "activities": "Actividades Recientes",
+      "contracts": "Contratos de Depósito"
+    },
+    "activities": {
+      "title": "Actividades Recientes",
+      "addActivity": "Agregar Actividad",
+      "labels": {
+        "yield": "Rendimiento",
+        "quality": "Calidad",
+        "quantity": "Cantidad",
+        "variety": "Variedad",
+        "findings": "Hallazgos",
+        "notes": "Notas",
+        "progress": "Progreso"
+      }
+    },
+    "contracts": {
+      "title": "Contratos de Depósito",
+      "newContract": "Nuevo Contrato",
+      "buyer": "Comprador",
+      "labels": {
+        "amount": "Cantidad",
+        "quantity": "Cantidad",
+        "delivery": "Entrega",
+        "progress": "Progreso",
+        "terms": "Términos"
+      },
+      "actions": {
+        "viewDetails": "Ver Detalles",
+        "activateContract": "Activar Contrato"
+      }
+    },
+    "status": {
+      "completed": "Completado",
+      "inProgress": "En Progreso",
+      "scheduled": "Programado",
+      "active": "Activo",
+      "pending": "Pendiente",
+      "draft": "Borrador"
+    }
+  },
+
+  "SecuritySettings": {
+    "passwordSettings": {
+      "title": "Configuración de Contraseña",
+      "currentPassword": "Contraseña Actual",
+      "newPassword": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña",
+      "placeholders": {
+        "currentPassword": "Ingresa tu contraseña actual",
+        "newPassword": "Ingresa tu nueva contraseña",
+        "confirmPassword": "Confirma tu nueva contraseña"
+      },
+      "requirements": "La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas, números y símbolos.",
+      "updateButton": "Actualizar Contraseña",
+      "updating": "Actualizando..."
+    },
+    "twoFactor": {
+      "title": "Autenticación de Dos Factores",
+      "enable2FA": "Habilitar 2FA",
+      "description": "Agrega una capa adicional de seguridad a tu cuenta con autenticación de dos factores",
+      "enabled": {
+        "title": "2FA está habilitado",
+        "description": "Tu cuenta está protegida con autenticación de dos factores usando tu aplicación autenticadora.",
+        "viewRecoveryCodes": "Ver Códigos de Recuperación",
+        "regenerateCodes": "Regenerar Códigos"
+      },
+      "disabled": {
+        "title": "2FA está deshabilitado",
+        "description": "Habilita la autenticación de dos factores para asegurar tu cuenta con un paso de verificación adicional."
+      }
+    },
+    "activeSessions": {
+      "title": "Sesiones Activas",
+      "current": "Actual",
+      "lastActive": "Última actividad",
+      "terminate": "Terminar"
+    },
+    "securityActivity": {
+      "title": "Actividad de Seguridad",
+      "exportLog": "Exportar Registro",
+      "actions": {
+        "passwordChanged": "Contraseña cambiada",
+        "failedLoginAttempt": "Intento de inicio de sesión fallido",
+        "walletConnected": "Billetera conectada",
+        "suspiciousLoginDetected": "Inicio de sesión sospechoso detectado"
+      },
+      "status": {
+        "success": "Éxito",
+        "failed": "Fallido",
+        "warning": "Advertencia"
+      }
+    },
+    "toast": {
+      "fillAllFields": "Por favor completa todos los campos de contraseña",
+      "passwordsDoNotMatch": "Las nuevas contraseñas no coinciden",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+      "passwordUpdated": "Contraseña actualizada con éxito",
+      "passwordUpdateFailed": "Error al actualizar la contraseña",
+      "twoFactorEnabled": "2FA habilitado con éxito",
+      "twoFactorDisabled": "2FA deshabilitado con éxito",
+      "twoFactorUpdateFailed": "Error al actualizar la configuración de 2FA",
+      "sessionTerminated": "Sesión terminada con éxito",
+      "sessionTerminateFailed": "Error al terminar la sesión"
+    }
+  },
+
+  "CartPage": {
+    "title": "Tu Carrito",
+    "emptyCart": {
+      "title": "Tu carrito está vacío",
+      "description": "Parece que aún no has agregado productos agrícolas a tu carrito.",
+      "browseProducts": "Explorar Productos"
+    },
+    "emptyAfterRemoval": {
+      "title": "Tu carrito está vacío",
+      "description": "Has eliminado todos los artículos de tu carrito.",
+      "restoreItems": "Restaurar Artículos Eliminados",
+      "browseProducts": "Explorar Productos"
+    },
+    "items": {
+      "title": "Artículos",
+      "item": "Artículo",
+      "items": "Artículos",
+      "selectAll": "Seleccionar Todo",
+      "deselectAll": "Deseleccionar Todo",
+      "removeSelected": "Eliminar Seleccionados",
+      "resetCart": "Restablecer Carrito",
+      "clearCart": "Vaciar Carrito"
+    },
+    "removedItems": {
+      "item": "artículo",
+      "items": "artículos",
+      "removedFromCart": "eliminado del carrito",
+      "undo": "Deshacer"
+    },
+    "farmer": {
+      "subtotal": "Subtotal",
+      "items": "artículos",
+      "deliveryAvailable": "Entrega Disponible",
+      "pickupAvailable": "Recogida Disponible"
+    },
+    "checkout": {
+      "processing": "Procesando..."
+    },
+    "escrowProtection": {
+      "title": "Protección de Depósito",
+      "description": "Revolutionary Farmers utiliza un sistema de depósito para proteger tanto a compradores como a vendedores. Tu pago se mantendrá seguro hasta que confirmes la recepción de tus productos agrícolas."
+    }
+  },
+
+  "CartItem": {
+    "seller": "Vendedor",
+    "quantityControls": {
+      "decreaseQuantity": "Disminuir cantidad",
+      "increaseQuantity": "Aumentar cantidad"
+    },
+    "actions": {
+      "saveForLater": "Guardar para después"
+    }
+  },
+
+  "CartSummary": {
+    "title": "Resumen del Pedido",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "tax": "Impuestos",
+    "escrowFee": "Tarifa de Depósito",
+    "total": "Total",
+    "checkoutButton": "Proceder al Pago de Depósito",
+    "escrowNote": "Tu pago se mantendrá en depósito hasta que confirmes la recepción de los productos"
+  }
 }

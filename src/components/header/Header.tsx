@@ -11,6 +11,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle'; // I did import the component ThemeToggle, it switches between light and dark
 import { usePathname, useRouter } from 'next/navigation';
 import { useLanguageStore } from '@/store';
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +20,7 @@ const Header = () => {
   const { language } = useLanguageStore();
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations('common');
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
@@ -62,7 +64,7 @@ const Header = () => {
       <button
         onClick={handleLogoClick}
         className="md:m-0 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg"
-        aria-label="Home"
+        aria-label={t('breadcrumb.home')}
       >
         <Image src="/logo.svg" width={40} height={40} alt="Website logo" priority />
       </button>
@@ -83,9 +85,9 @@ const Header = () => {
               type="button"
               onClick={handleDisconnect}
               className="text-white bg-primary hover:bg-primary/90 rounded-full focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium text-sm px-5 py-3 text-center transition-colors"
-              aria-label="Disconnect wallet"
+              aria-label={t('actions.disconnect')}
             >
-              Disconnect
+              {t('actions.disconnect')}
             </button>
           </>
         ) : (
@@ -93,9 +95,9 @@ const Header = () => {
             type="button"
             onClick={handleConnect}
             className="text-white bg-primary hover:bg-primary/90 rounded-full focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium text-sm px-5 py-3 text-center transition-colors"
-            aria-label="Connect wallet"
+            aria-label={t('actions.connect')}
           >
-            Connect
+            {t('actions.connect')}
           </button>
         )}
       </div>
@@ -106,7 +108,7 @@ const Header = () => {
           className="p-2 text-white hover:bg-primary/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMenuOpen ? t('actions.closeMenu') : t('actions.openMenu')}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
