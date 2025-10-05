@@ -46,7 +46,7 @@
     "personalInfo": {
       "title": "Personal Information",
       "name": "Name",
-      "surname": "Surname", 
+      "surname": "Surname",
       "email": "Email",
       "phone": "Phone",
       "namePlaceholder": "Enter your first name",
@@ -178,6 +178,7 @@
   },
   "HowWeWork": {
     "title": "How We Work",
+    "subtitle": "Empowering Farmers and Buyers with Blockchain Technology",
     "toggle": {
       "farmer": "Farmer",
       "buyer": "Buyer",
@@ -216,7 +217,7 @@
     "ready": "Ready to Get Started?",
     "startSelling": "Start Selling",
     "exploreProducts": "Explore Products",
-    "joinWaitlist" : "Join Waitlist"
+    "joinWaitlist": "Join Waitlist"
   },
 
   "FarmerSubscription": {
@@ -1720,84 +1721,84 @@
       "lastUsed": "Last used",
       "location": "Location"
     },
-  "Producers": {
-    "hero": {
-      "title": "Our Producers",
-      "description": "Discover amazing local producers who are transforming agriculture with sustainable practices and innovative farming methods.",
-      "searchPlaceholder": "Search by producer, product or location...",
-      "locationText": "Showing producers near your location"
-    },
-    "filters": {
-      "label": "Filters",
-      "search": "Search producers...",
-      "location": "Location",
-      "certification": "Certification",
-      "farmingMethod": "Farming Method",
-      "distance": "Distance",
-      "rating": "Rating",
-      "apply": "Apply Filter",
-      "clear": "Clear filters",
-      "active": "Active Filters",
-      "any": "Any",
-      "labels": {
-        "search": "Search",
-        "location": "Location",
-        "cert": "Cert.",
-        "method": "Method",
-        "distance": "Distance",
-        "rating": "Rating"
+    "Producers": {
+      "hero": {
+        "title": "Our Producers",
+        "description": "Discover amazing local producers who are transforming agriculture with sustainable practices and innovative farming methods.",
+        "searchPlaceholder": "Search by producer, product or location...",
+        "locationText": "Showing producers near your location"
       },
-      "clearAll": "Clear all filters",
-      "clearSearch": "Clear search",
-      "clearLocation": "Clear location filter",
-      "clearCertification": "Clear certification filter",
-      "clearMethod": "Clear farming method filter",
-      "clearDistance": "Clear distance filter",
-      "clearRating": "Clear rating filter"
-    },
-    "sortBy": {
-      "showing": "Showing",
-      "of": "of",
-      "producers": "Producers",
-      "label": "Sort by",
-      "distance": "Distance",
-      "rating": "Rating",
-      "name": "Name",
-      "products": "Products Count"
-    },
-    "producerCard": {
-      "market": "Market",
-      "farmer": "Farmer",
-      "location": "Location",
-      "distance": "Distance",
-      "certifications": "Certifications",
-      "organic": "Certified Organic",
-      "fairTrade": "Fair Trade",
-      "viewProfile": "View Profile",
-      "addToCart": "Add to Cart",
-      "products": "Products",
-      "reviews": "Reviews",
-      "rating": "Rating",
-      "kmAway": "{distance} km away",
-      "milesAway": "{distance} miles away"
-    },
-    "cta": {
-      "title": "Are you a producer?",
-      "description": "Join our community of sustainable farmers and connect directly with consumers who value quality and transparency.",
-      "joinButton": "Join as Producer"
-    },
-    "loadMore": "Load more producers",
-    "loadMoreAria": "Load more producers",
-    "empty": {
-      "title": "No producers found",
-      "description": "Try adjusting your filters or search criteria to find producers in your area."
-    },
-    "breadcrumb": {
-      "home": "Home",
-      "producers": "Producers"
+      "filters": {
+        "label": "Filters",
+        "search": "Search producers...",
+        "location": "Location",
+        "certification": "Certification",
+        "farmingMethod": "Farming Method",
+        "distance": "Distance",
+        "rating": "Rating",
+        "apply": "Apply Filter",
+        "clear": "Clear filters",
+        "active": "Active Filters",
+        "any": "Any",
+        "labels": {
+          "search": "Search",
+          "location": "Location",
+          "cert": "Cert.",
+          "method": "Method",
+          "distance": "Distance",
+          "rating": "Rating"
+        },
+        "clearAll": "Clear all filters",
+        "clearSearch": "Clear search",
+        "clearLocation": "Clear location filter",
+        "clearCertification": "Clear certification filter",
+        "clearMethod": "Clear farming method filter",
+        "clearDistance": "Clear distance filter",
+        "clearRating": "Clear rating filter"
+      },
+      "sortBy": {
+        "showing": "Showing",
+        "of": "of",
+        "producers": "Producers",
+        "label": "Sort by",
+        "distance": "Distance",
+        "rating": "Rating",
+        "name": "Name",
+        "products": "Products Count"
+      },
+      "producerCard": {
+        "market": "Market",
+        "farmer": "Farmer",
+        "location": "Location",
+        "distance": "Distance",
+        "certifications": "Certifications",
+        "organic": "Certified Organic",
+        "fairTrade": "Fair Trade",
+        "viewProfile": "View Profile",
+        "addToCart": "Add to Cart",
+        "products": "Products",
+        "reviews": "Reviews",
+        "rating": "Rating",
+        "kmAway": "{distance} km away",
+        "milesAway": "{distance} miles away"
+      },
+      "cta": {
+        "title": "Are you a producer?",
+        "description": "Join our community of sustainable farmers and connect directly with consumers who value quality and transparency.",
+        "joinButton": "Join as Producer"
+      },
+      "loadMore": "Load more producers",
+      "loadMoreAria": "Load more producers",
+      "empty": {
+        "title": "No producers found",
+        "description": "Try adjusting your filters or search criteria to find producers in your area."
+      },
+      "breadcrumb": {
+        "home": "Home",
+        "producers": "Producers"
+      }
     }
-  }
-},
+  },
   "RegistrationHero": {
     "title": "Join Revolutionary Farmers",
     "description": "Transform your farming journey with cutting-edge technology, community support, and sustainable practices. Join thousands of farmers already revolutionizing agriculture.",
