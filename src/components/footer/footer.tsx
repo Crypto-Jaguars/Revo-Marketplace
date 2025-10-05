@@ -121,7 +121,7 @@ const Footer = () => {
                   height={40}
                   className="w-10 h-10"
                 />
-                <span className="text-gray-50 font-bold text-xl">Revolutionary Farmers</span>
+                <span className="text-gray-50 font-bold text-xl"> Revolutionary Farmers</span>
               </div>
 
               <p className="text-gray-50/90 text-sm leading-relaxed max-w-md">{t('description')}</p>
