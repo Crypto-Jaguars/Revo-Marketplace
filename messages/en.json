@@ -1811,6 +1811,20 @@
       }
     }
   },
+
+  "producerCTA": {
+    "title": "Are You a Producer?",
+    "subtitle": "Join Our Marketplace Today",
+    "description": "Join our marketplace and connect directly with consumers who value fresh, quality produce. Expand your reach, increase your sales, and build lasting relationships with customers who appreciate your hard work.",
+    "benefit1Title": "Direct Sales",
+    "benefit1Desc": "Sell directly to consumers without intermediaries",
+    "benefit2Title": "Fair Pricing",
+    "benefit2Desc": "Set your own prices and maximize your profits",
+    "benefit3Title": "Community Building",
+    "benefit3Desc": "Build relationships with local consumers",
+    "buttonText": "Join as Producer"
+},
+
     "NewMissionVision": {
     "title": "Mission and Vision",
     "mission": {
@@ -1942,6 +1956,8 @@
       "home": "Home",
       "producers": "Producers"
     }
+
+  
   },
   "ContactInfo": {
     "title": "Contact Information",
