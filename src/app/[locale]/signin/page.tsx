@@ -136,7 +136,7 @@ export default function SignInPage() {
                 )}
               />
 
-              <div className="flex flex row">
+              <div className="flex flex-row">
                 <Button
                   type="submit"
                   className="w-[40%] bg-green-800 hover:bg-green-700 rounded-full py-6 text-lg"
