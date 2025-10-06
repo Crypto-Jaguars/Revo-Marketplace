@@ -10,18 +10,6 @@ export default function RegistrationHeroSection() {
   const t = useTranslations('RegistrationHero');
   const { language } = useLanguageStore();
 
-  // Content based on your requirements
-  const heroContent = {
-    title: 'Join Revolutionary Farmers',
-    description:
-      'Transform your farming journey with cutting-edge technology, community support, and sustainable practices. Join thousands of farmers already revolutionizing agriculture.',
-    primaryCta: 'Start Your Journey',
-    secondaryCta: 'Learn More',
-    trustIndicator1: '5000+ Farmers Joined',
-    trustIndicator2: '24/7 Expert Support',
-    trustIndicator3: 'Sustainable Methods',
-  };
-
   return (
     <section
       className="relative w-full min-h-screen flex items-center justify-center bg-cover bg-center bg-fixed overflow-hidden"
@@ -32,9 +20,8 @@ export default function RegistrationHeroSection() {
         `,
       }}
       role="banner"
-      aria-label={heroContent.title}
+      aria-label={t('title')}
     >
-      {/* Enhanced background overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#2a7035]/80 via-[#2a7035]/70 to-[#38b66a]/80" />
 
       <motion.div
@@ -43,17 +30,15 @@ export default function RegistrationHeroSection() {
         transition={{ duration: 0.8 }}
         className="relative z-10 max-w-4xl px-4 sm:px-6 text-center"
       >
-        {/* Main Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 sm:mb-8 text-white leading-tight tracking-tight"
         >
-          {heroContent.title}
+          {t('title')}
         </motion.h1>
 
-        {/* Decorative Line - Using specified gradient colors */}
         <motion.div
           initial={{ width: 0, opacity: 0 }}
           animate={{ width: '12rem', opacity: 1 }}
@@ -65,17 +50,15 @@ export default function RegistrationHeroSection() {
           aria-hidden="true"
         />
 
-        {/* Description - Centered with max-width */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-sm sm:text-lg lg:text-xl xl:text-2xl mb-8 sm:mb-12 text-white/95 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed drop-shadow-sm px-4"
         >
-          {heroContent.description}
+          {t('description')}
         </motion.p>
 
-        {/* Call to Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,7 +75,7 @@ export default function RegistrationHeroSection() {
             }}
           >
             <Link href={`/${language}/register`} className="!text-white">
-              {heroContent.primaryCta}
+              {t('primaryCta')}
             </Link>
           </Button>
 
@@ -103,12 +86,11 @@ export default function RegistrationHeroSection() {
             className="px-6 sm:px-8 py-5 sm:py-6 w-full md:w-auto text-base sm:text-lg font-semibold text-white border-2 border-white/30 bg-white/10 hover:bg-white/20 hover:border-white/50 rounded-full backdrop-blur-sm transition-all duration-300 min-w-[200px] sm:min-w-[220px]"
           >
             <Link href={`/${language}/learn-more`} className="!text-white">
-              {heroContent.secondaryCta}
+              {t('secondaryCta')}
             </Link>
           </Button>
         </motion.div>
 
-        {/* Trust Indicators */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
