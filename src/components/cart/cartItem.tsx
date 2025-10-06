@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import type { CartItem } from '@/store';
 import RemoveButton from '@/components/cart/RemoveItem/RemoveButton';
 import UndoNotification from '@/components/cart/RemoveItem/UndoNotification';
+import { useTranslations } from 'next-intl';
 
 interface CartItemProps {
   item: CartItem;
@@ -34,6 +35,7 @@ export default function CartItemComponent({
   selectedItems = [],
   onToggleSelect,
 }: CartItemProps) {
+  const t = useTranslations('CartItem');
   const [showUndoNotification, setShowUndoNotification] = useState(false);
 
   const handleIncrement = async () => {
@@ -145,7 +147,7 @@ export default function CartItemComponent({
 
           {item.farmer && (
             <div className="mt-1 flex items-center text-xs text-muted-foreground">
-              <span>Seller: </span>
+              <span>{t('seller')}: </span>
               <div className="flex items-center ml-1">
                 <span>{item.farmer.farmName}</span>
               </div>
@@ -172,7 +174,7 @@ export default function CartItemComponent({
                 disabled={item.quantity <= 1}
               >
                 <Minus className="h-3 w-3" />
-                <span className="sr-only">Decrease quantity</span>
+                <span className="sr-only">{t('quantityControls.decreaseQuantity')}</span>
               </Button>
               <span className="w-8 text-center text-sm">{item.quantity}</span>
               <Button
@@ -183,7 +185,7 @@ export default function CartItemComponent({
                 disabled={item.stockQuantity ? item.quantity >= item.stockQuantity : false}
               >
                 <Plus className="h-3 w-3" />
-                <span className="sr-only">Increase quantity</span>
+                <span className="sr-only">{t('quantityControls.increaseQuantity')}</span>
               </Button>
             </div>
 
@@ -196,7 +198,7 @@ export default function CartItemComponent({
                   onClick={() => onSaveForLater(item.id)}
                 >
                   <Heart className="h-4 w-4" />
-                  <span className="sr-only">Save for later</span>
+                  <span className="sr-only">{t('actions.saveForLater')}</span>
                 </Button>
               )}
               <RemoveButton itemId={item.id} itemName={item.name} />

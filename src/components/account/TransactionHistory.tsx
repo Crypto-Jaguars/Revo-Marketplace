@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,7 @@ import { useWalletStore } from '@/store/walletStore';
 import { useStellarWallet } from '@/hooks/useStellarWallet';
 
 export function TransactionHistory() {
+  const t = useTranslations('TransactionHistory');
   const { address } = useWalletStore();
   const { transactions, isLoading, error } = useStellarWallet(address);
   const [searchTerm, setSearchTerm] = useState('');
@@ -44,13 +46,13 @@ export function TransactionHistory() {
       case 'success':
         return (
           <Badge variant="default" className="bg-green-100 text-green-800">
-            Success
+            {t('status.success')}
           </Badge>
         );
       case 'pending':
-        return <Badge variant="secondary">Pending</Badge>;
+        return <Badge variant="secondary">{t('status.pending')}</Badge>;
       case 'failed':
-        return <Badge variant="destructive">Failed</Badge>;
+        return <Badge variant="destructive">{t('status.failed')}</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -74,7 +76,7 @@ export function TransactionHistory() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Transaction History</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-center py-8">
@@ -89,10 +91,10 @@ export function TransactionHistory() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Transaction History</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8 text-red-600">Error loading transactions: {error}</div>
+          <div className="text-center py-8 text-red-600">{t('messages.error')}: {error}</div>
         </CardContent>
       </Card>
     );
@@ -103,12 +105,12 @@ export function TransactionHistory() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Transaction History</CardTitle>
-            <CardDescription>View and manage your transaction history</CardDescription>
+            <CardTitle>{t('title')}</CardTitle>
+            <CardDescription>{t('description')}</CardDescription>
           </div>
           <Button variant="outline" size="sm">
             <Download className="h-4 w-4 mr-2" />
-            Export
+            {t('export')}
           </Button>
         </div>
       </CardHeader>
@@ -118,7 +120,7 @@ export function TransactionHistory() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              placeholder="Search transactions..."
+              placeholder={t('searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -130,11 +132,11 @@ export function TransactionHistory() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="payment">Payments</SelectItem>
-              <SelectItem value="create_account">Account Creation</SelectItem>
-              <SelectItem value="manage_offer">Offers</SelectItem>
-              <SelectItem value="change_trust">Trustlines</SelectItem>
+              <SelectItem value="all">{t('filterTypes.all')}</SelectItem>
+              <SelectItem value="payment">{t('filterTypes.payment')}</SelectItem>
+              <SelectItem value="create_account">{t('filterTypes.create_account')}</SelectItem>
+              <SelectItem value="manage_offer">{t('filterTypes.manage_offer')}</SelectItem>
+              <SelectItem value="change_trust">{t('filterTypes.change_trust')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -144,8 +146,8 @@ export function TransactionHistory() {
           {filteredTransactions.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
               {transactions.length === 0
-                ? 'No transactions found'
-                : 'No transactions match your search'}
+                ? t('messages.noTransactions')
+                : t('messages.noMatches')}
             </div>
           ) : (
             filteredTransactions.map((transaction) => (
@@ -159,12 +161,14 @@ export function TransactionHistory() {
                   </div>
                   <div>
                     <div className="flex items-center space-x-2">
-                      <p className="font-medium capitalize">{transaction.type.replace('_', ' ')}</p>
+                      <p className="font-medium capitalize">
+                        {t(`transactionTypes.${transaction.type}`) || transaction.type.replace('_', ' ')}
+                      </p>
                       {getStatusBadge(transaction.status)}
                     </div>
                     <div className="text-sm text-gray-500 space-y-1">
-                      <p>From: {formatAddress(transaction.from)}</p>
-                      <p>To: {formatAddress(transaction.to)}</p>
+                      <p>{t('labels.from')}: {formatAddress(transaction.from)}</p>
+                      <p>{t('labels.to')}: {formatAddress(transaction.to)}</p>
                       <p>{formatDate(transaction.timestamp)}</p>
                     </div>
                   </div>
@@ -174,7 +178,7 @@ export function TransactionHistory() {
                     {Number.parseFloat(transaction.amount).toFixed(2)} {transaction.asset}
                   </p>
                   <p className="text-sm text-gray-500">
-                    Fee: {Number.parseFloat(transaction.fee).toFixed(7)} XLM
+                    {t('labels.fee')}: {Number.parseFloat(transaction.fee).toFixed(7)} XLM
                   </p>
                 </div>
               </div>
@@ -185,7 +189,7 @@ export function TransactionHistory() {
         {filteredTransactions.length > 0 && (
           <div className="mt-4 text-center">
             <Button variant="outline" size="sm">
-              Load More Transactions
+              {t('messages.loadMore')}
             </Button>
           </div>
         )}

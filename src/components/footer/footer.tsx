@@ -33,21 +33,21 @@ const Footer = () => {
   };
 
   const navigationLinks = {
-    column1: [
-      { label: t('Login/Register'), href: `/${locale}/signin` },
-      { label: t('My Account'), href: `/${locale}/account` },
+    authentication: [
+      { label: t('columnLabels.authentication.Login/Register'), href: `/${locale}/signin` },
+      { label: t('columnLabels.authentication.My Account'), href: `/${locale}/account` },
     ],
-    column2: [
-      { label: t('Shop'), href: `/${locale}/products` },
-      { label: t('Cart'), href: `/${locale}/cart` },
-      { label: t('Blog'), href: `/${locale}/blog` },
-      { label: t('Compare'), href: `/${locale}/compare` },
+    store: [
+      { label: t('columnLabels.store.Shop'), href: `/${locale}/products` },
+      { label: t('columnLabels.store.Cart'), href: `/${locale}/cart` },
+      { label: t('columnLabels.store.Blog'), href: `/${locale}/blog` },
+      { label: t('columnLabels.store.Compare'), href: `/${locale}/compare` },
     ],
-    column3: [
-      { label: t('Our Team'), href: `/${locale}/our-team` },
-      { label: t('Support'), href: '#', onClick: handleContactClick },
-      { label: t('FAQ'), href: `/${locale}/faq` },
-      { label: t('Farmer Profile'), href: `/${locale}/farmer-profile` },
+    help: [
+      { label: t('columnLabels.help.Our Team'), href: `/${locale}/our-team` },
+      { label: t('columnLabels.help.Support'), href: '#', onClick: handleContactClick },
+      { label: t('columnLabels.help.FAQ'), href: `/${locale}/faq` },
+      { label: t('columnLabels.help.Farmer Profile'), href: `/${locale}/farmer-profile` },
     ],
   };
 
@@ -164,7 +164,7 @@ const Footer = () => {
                 <h4 className="text-gray-50 font-semibold text-sm mb-1">
                   {t('columnTitles.authentication')}
                 </h4>
-                {navigationLinks.column1.map((link, index) => (
+                {navigationLinks.authentication.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
@@ -179,7 +179,7 @@ const Footer = () => {
                 <h4 className="text-gray-50 font-semibold text-sm mb-1">
                   {t('columnTitles.store')}
                 </h4>
-                {navigationLinks.column2.map((link, index) => (
+                {navigationLinks.store.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
@@ -194,7 +194,7 @@ const Footer = () => {
                 <h4 className="text-gray-50 font-semibold text-sm mb-1">
                   {t('columnTitles.help')}
                 </h4>
-                {navigationLinks.column3.map((link, index) =>
+                {navigationLinks.help.map((link, index) =>
                   link.onClick ? (
                     <button
                       key={index}
