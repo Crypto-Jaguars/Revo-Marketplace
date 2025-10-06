@@ -5,12 +5,14 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useLanguageStore } from '@/store';
+import { AnimatedSection } from '../AnimatedSection/AnimatedSection';
 
 export default function HeroSection() {
   const t = useTranslations('HeroSection');
   const { language } = useLanguageStore();
 
   return (
+    <AnimatedSection>
     <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F5F7F5] via-[#E6EFE8] to-[#D8E8DE]">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -67,6 +69,7 @@ export default function HeroSection() {
           </Button>
         </div>
       </motion.div>
-    </div>
+      </div>
+    </AnimatedSection>
   );
 }
