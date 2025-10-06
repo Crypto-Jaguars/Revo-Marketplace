@@ -35,6 +35,12 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    /* Color palette */
+    --color-primary: #2a7035;
+    --color-primary-light: #38b66a;
+    --color-primary-dark: #1f5f35;
+
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -70,10 +76,17 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: url('/Home.png'); /* default image for background */
-    background-size: cover; /* image increases or decreases its size based on the size of the window */
-    background-repeat: no-repeat; /* It ensures that image does not repeat */
-    background-position: center; /* It centers the image in the body, in horizontal and vertical way */
+    font-family: var(--font-plus-jakarta-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url('/Home.png');
+    /* default image for background */
+    background-size: cover;
+    /* image increases or decreases its size based on the size of the window */
+    background-repeat: no-repeat;
+    /* It ensures that image does not repeat */
+    background-position: center;
+    /* It centers the image in the body, in horizontal and vertical way */
   }
 
   /* Ligth mode */
@@ -97,9 +110,33 @@
     }
 
     .languageIcon {
-      color: rgb(
-        255 255 255
-      ) !important; /* It keeps languageIcon in whithe in both modes using !important */
+      color: rgb(255 255 255) !important;
+      /* It keeps languageIcon in whithe in both modes using !important */
+    }
+
+    .font-regular {
+      font-weight: 400;
+    }
+    .font-medium {
+      font-weight: 500;
+    }
+    .font-semibold {
+      font-weight: 600;
+    }
+    .font-bold {
+      font-weight: 700;
+    }
+    .font-extrabold {
+      font-weight: 800;
+    }
+    .text-primary-custom {
+      color: var(--color-primary);
+    }
+    .text-primary-light-custom {
+      color: var(--color-primary-light);
+    }
+    .text-primary-dark-custom {
+      color: var(--color-primary-dark);
     }
   }
 }
@@ -113,4 +150,245 @@
   }
 }
 
+/* 3D Hexagon Effects System */
+@layer utilities {
+  /* Hexagon Shape Base */
+  .hexagon-shape {
+    position: relative;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
 
+  /* 3D Shadow System - Base Shadows */
+  .hexagon-shadow-base {
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 1px 2px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .hexagon-shadow-medium {
+    box-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.12),
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .hexagon-shadow-deep {
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.15),
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.06),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      inset 0 2px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Lighting and Highlights */
+  .hexagon-highlight-top {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+  }
+
+  .hexagon-highlight-left {
+    position: relative;
+  }
+
+  .hexagon-highlight-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 30%
+    );
+    clip-path: inherit;
+    pointer-events: none;
+  }
+
+  /* Beveled Edges */
+  .hexagon-bevel {
+    position: relative;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+  }
+
+  .hexagon-bevel::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: inherit;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Surface Effects */
+  .hexagon-convex {
+    background: radial-gradient(
+      ellipse at center top,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+  }
+
+  .hexagon-metallic {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.1) 25%,
+      rgba(0, 0, 0, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 75%,
+      rgba(255, 255, 255, 0.2) 100%
+    );
+  }
+
+  /* 3D Transform States */
+  .hexagon-3d-base {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+
+  .hexagon-3d-elevated {
+    transform: perspective(1000px) rotateX(-5deg) rotateY(2deg) scale(1.02);
+  }
+
+  .hexagon-3d-pressed {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-1deg) scale(0.98);
+  }
+
+  /* Smooth Transitions */
+  .hexagon-transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hexagon-transition-bounce {
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .hexagon-transition-elastic {
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Color Variants */
+  .hexagon-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .hexagon-secondary {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+  }
+
+  .hexagon-accent {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  /* Size Variants */
+  .hexagon-sm {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+
+  .hexagon-md {
+    width: 3rem;
+    height: 3rem;
+    font-size: 0.875rem;
+  }
+
+  .hexagon-lg {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1rem;
+  }
+
+  .hexagon-xl {
+    width: 5rem;
+    height: 5rem;
+    font-size: 1.125rem;
+  }
+
+  /* Hover States */
+  .hexagon-hover:hover {
+    transform: perspective(1000px) rotateX(-8deg) rotateY(4deg) scale(1.05);
+  }
+
+  .hexagon-hover:hover.hexagon-shadow-base {
+    box-shadow:
+      0 6px 12px rgba(0, 0, 0, 0.15),
+      0 3px 6px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .hexagon-hover:hover.hexagon-shadow-medium {
+    box-shadow:
+      0 8px 16px rgba(0, 0, 0, 0.18),
+      0 4px 8px rgba(0, 0, 0, 0.12),
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      inset 0 2px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  .hexagon-hover:hover.hexagon-shadow-deep {
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.2),
+      0 6px 12px rgba(0, 0, 0, 0.15),
+      0 3px 6px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.06),
+      inset 0 3px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  /* Active States */
+  .hexagon-active:active {
+    transform: perspective(1000px) rotateX(3deg) rotateY(-2deg) scale(0.95);
+  }
+
+  /* Combined Effect Classes */
+  .hexagon-button-base {
+    @apply hexagon-shape hexagon-shadow-base hexagon-highlight-top hexagon-convex hexagon-transition-smooth hexagon-hover;
+  }
+
+  .hexagon-button-elevated {
+    @apply hexagon-shape hexagon-shadow-medium hexagon-highlight-left hexagon-bevel hexagon-transition-bounce hexagon-hover;
+  }
+
+  .hexagon-button-premium {
+    @apply hexagon-shape hexagon-shadow-deep hexagon-metallic hexagon-bevel hexagon-transition-elastic hexagon-hover;
+  }
+
+  /* Focus States for Accessibility */
+  .hexagon-focus:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    transform: perspective(1000px) rotateX(-5deg) rotateY(2deg) scale(1.02);
+  }
+
+  /* Performance Optimizations */
+  .hexagon-optimized {
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    transform-origin: center center;
+  }
+}

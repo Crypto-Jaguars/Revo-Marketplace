@@ -1,4 +1,51 @@
 {
+  "common": {
+    "sortBy": {
+      "label": "Sort by",
+      "showing": "Showing",
+      "of": "of",
+      "price": "Price",
+      "stock": "Stock",
+      "rating": "Rating",
+      "latest": "Latest",
+      "name": "Name",
+      "distance": "Distance"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "account": "My Account",
+      "settings": "Settings",
+      "inventory": "Inventory",
+      "wallet": "Wallet",
+      "notifications": "Notifications",
+      "privacy": "Privacy",
+      "regional": "Regional",
+      "security": "Security",
+      "preferences": "Preferences",
+      "producers": "Producers"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "viewProfile": "View Profile",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "edit": "Edit",
+      "closeMenu": "Close menu",
+      "openMenu": "Open menu"
+    },
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "delivered": "Delivered"
+    },
+    "products": "products",
+    "location": "Location",
+    "certifications": "Certifications"
+  },
+
   "HomePage": {
     "title": "Revolutionary",
     "subtitle": "Farmers",
@@ -7,13 +54,13 @@
   "Hero": {
     "title": "Trust from Farm to Table",
     "subtitle": "Transforming commerce with technology that ensures speed, transparency, and fairness.",
+    "description": "Revolutionary Farmers is a blockchain-powered marketplace that connects farmers directly with consumers, ensuring transparency, fair pricing, and traceability from farm to table. Our platform empowers agricultural communities while providing consumers with access to fresh, authentic produce.",
     "imageText": {
       "processed": "Processed",
       "harvest": "Harvest",
       "freshness": "Freshness"
     }
   },
-
   "HeroSection": {
     "title": "Revolutionary Farmers",
     "subtitle": "Farm to Table Trust",
@@ -22,6 +69,15 @@
     "joinAsFarmer": "Join as a Farmer",
     "investNow": "Invest Now",
     "joinWaitlist": "Join Waitlist"
+  },
+  "RegistrationHero": {
+    "title": "Join Revolutionary Farmers",
+    "description": "Transform your farming journey with cutting-edge technology, community support, and sustainable practices. Join thousands of farmers already revolutionizing agriculture.",
+    "primaryCta": "Start Your Journey",
+    "secondaryCta": "Learn More",
+    "trustIndicator1": "5000+ Farmers Joined",
+    "trustIndicator2": "24/7 Expert Support",
+    "trustIndicator3": "Sustainable Methods"
   },
 
   "AboutUs": {
@@ -39,6 +95,31 @@
       "supplyChain": {
         "title": "Sustainable Supply Chain",
         "description": "Transparent and traceable agricultural products."
+      }
+    }
+  },
+  "farmerProfile": {
+    "personalInfo": {
+      "title": "Personal Information",
+      "name": "Name",
+      "surname": "Surname", 
+      "email": "Email",
+      "phone": "Phone",
+      "namePlaceholder": "Enter your first name",
+      "surnamePlaceholder": "Enter your last name",
+      "emailPlaceholder": "Enter your email address",
+      "phonePlaceholder": "Enter your phone number",
+      "save": "Save Personal Information",
+      "saving": "Saving Personal Information...",
+      "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must be at most 50 characters",
+        "surnameMin": "Surname must be at least 2 characters",
+        "surnameMax": "Surname must be at most 50 characters",
+        "emailInvalid": "Invalid email address",
+        "phoneMin": "Phone number seems too short",
+        "phoneMax": "Phone number seems too long",
+        "phoneFormat": "Invalid phone number format"
       }
     }
   },
@@ -103,7 +184,7 @@
     "success": {
       "title": "Welcome aboard!",
       "message": "Thanks for joining! Check your email for confirmation.",
-      "emailSent": "Confirmation sent to {{email}}",
+      "emailSent": "Confirmation sent to {email}",
       "sharePrompt": "Help us spread the word!",
       "addAnother": "Add another email"
     },
@@ -190,7 +271,8 @@
   "cta": {
     "ready": "Ready to Get Started?",
     "startSelling": "Start Selling",
-    "exploreProducts": "Explore Products"
+    "exploreProducts": "Explore Products",
+    "joinWaitlist" : "Join Waitlist"
   },
 
   "FarmerSubscription": {
@@ -316,6 +398,43 @@
       "apply": "Apply Filter",
       "clear": "Clear filters"
     },
+    "categories": {
+      "Vegetables": "Vegetables",
+      "Eggs": "Eggs"
+    },
+    "farmingMethods": {
+      "organic": "Organic",
+      "conventional": "Conventional",
+      "free-range": "Free-Range",
+      "traditional": "Traditional",
+      "hydroponic": "Hydroponic",
+      "greenhouse": "Greenhouse"
+    },
+    "productNames": {
+      "Organic Tomatoes": "Organic Tomatoes",
+      "Fresh Eggs": "Fresh Eggs",
+      "Organic Roma Tomatoes": "Organic Roma Tomatoes",
+      "Free-Range Brown Eggs": "Free-Range Brown Eggs",
+      "Heirloom Cherry Tomatoes": "Heirloom Cherry Tomatoes",
+      "Organic Quail Eggs": "Organic Quail Eggs",
+      "Beefsteak Tomatoes": "Beefsteak Tomatoes",
+      "Duck Eggs Premium": "Duck Eggs Premium",
+      "Vine Ripened Tomatoes": "Vine Ripened Tomatoes",
+      "Heritage Breed Eggs": "Heritage Breed Eggs",
+      "Greenhouse Tomatoes": "Greenhouse Tomatoes",
+      "Jumbo Farm Eggs": "Jumbo Farm Eggs",
+      "Specialty Quail Eggs": "Specialty Quail Eggs",
+      "Eggs 1": "Quail Eggs 1",
+      "Eggs 2": "Quail Eggs 2",
+      "Eggs 3": "Quail Eggs 3",
+      "Eggs 4": "Quail Eggs 4",
+      "Eggs 5": "Quail Eggs 5",
+      "Eggs 6": "Quail Eggs 6",
+      "Cafè": "Coffee"
+    },
+    "productCard": {
+      "ratingLabel": "Rating: {rating} out of 5 stars"
+    },
     "cart": {
       "title": "Shopping Cart",
       "subtotal": "Subtotal",
@@ -336,7 +455,7 @@
     },
     "empty": {
       "title": "No products found",
-      "description": "Try adjusting your filters or search criteria to find what you're looking for."
+      "description": "Try adjusting your filters or browse our producers"
     },
     "pagination": {
       "previous": "Previous",
@@ -357,7 +476,10 @@
     "buttons": {
       "relatedItems": "Related Items",
       "buyNow": "Buy Now",
-      "addToCart": "Add to Cart"
+      "addToCart": "Add to Cart",
+      "adding": "Adding...",
+      "added": "Added",
+      "addAgain": "Add Again"
     },
     "delivery": {
       "free": "Free Delivery",
@@ -562,12 +684,16 @@
     }
   },
   "Marketplace": {
+    "title": "Revolutionary Farmers Marketplace",
+    "description": "Discover fresh, locally-sourced produce directly from farmers using blockchain technology",
+    "availableProducts": "Available Products",
     "navigation": {
       "home": "Home",
       "products": "Products",
       "farm": "Farm",
       "farms": "Farms",
-      "marketplace": "Marketplace"
+      "marketplace": "Marketplace",
+      "producers": "Producers"
     },
     "search": {
       "placeholder": "Search for products..."
@@ -598,13 +724,7 @@
     "description": "We foster responsible trade through modern technology that ensures agility, clarity, and fair treatment for everyone.",
     "quickLinks": "Quick Links",
     "helpCompany": "Help & Company",
-    "My Account": "My Account",
-    "Login/Register": "Login/Register",
-    "Cart": "Cart",
-    "Shop": "Shop",
-    "FAQ": "FAQ",
     "Contact": "Contact",
-    "Our Team": "Our Team",
     "Twitter": "Twitter",
     "LinkedIn": "LinkedIn",
     "Instagram": "Instagram",
@@ -615,6 +735,29 @@
       "title": "Be an Early Adopter",
       "subtitle": "Join our waitlist and get exclusive benefits when we launch",
       "button": "Join Waitlist"
+    },
+    "columnTitles": {
+      "authentication": "Authentication",
+      "store": "Store",
+      "help": "Help"
+    },
+    "columnLabels": {
+      "authentication": {
+        "Login/Register": "Login/Register",
+        "My Account": "My Account"
+      },
+      "store": {
+        "Shop": "Shop",
+        "Cart": "Cart",
+        "Blog": "Blog",
+        "Compare": "Compare"
+      },
+      "help": {
+        "Our Team": "Our Team",
+        "Support": "Support",
+        "FAQ": "FAQ",
+        "Farmer Profile": "Farmer Profile"
+      }
     }
   },
   "SignUp": {
@@ -643,9 +786,9 @@
     "emailLabel": "Email or Phone Number",
     "passwordLabel": "Password",
     "submit": "Log In",
-    "submitting": "Loging...",
+    "submitting": "Logging...",
     "successTitle": "Success!",
-    "successMessage": "Loged In. Redirecting to main page...",
+    "successMessage": "Logged In. Redirecting to main page...",
     "errorTitle": "Error",
     "errorMessage": "Something went wrong. Please try again.",
     "forgetPassword": "Forget Password?",
@@ -1009,7 +1152,6 @@
     "deliveryPending": "Your order will be delivered soon.",
     "estimated": "Estimated: {date}",
     "pending": "Pending",
-    "processing": "Processing",
     "completed": "Completed",
     "cancelled": "Cancelled"
   },
@@ -1110,6 +1252,60 @@
   "FAQ": {
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to common questions about Revolutionary Farmers, our platform, and how we're transforming agriculture through blockchain technology."
+  },
+  "JoinFarmer": {
+    "title": "Join Revolutionary Farmers",
+    "subtitle": "Become part of the future of agriculture. Connect directly with consumers and grow your business.",
+    "benefits": {
+      "directSales": {
+        "title": "Direct Sales",
+        "description": "Sell directly to consumers without intermediaries"
+      },
+      "growingCommunity": {
+        "title": "Growing Community",
+        "description": "Join a network of sustainable farmers"
+      },
+      "securePayments": {
+        "title": "Secure Payments",
+        "description": "Guaranteed payments through blockchain technology"
+      },
+      "easyManagement": {
+        "title": "Easy Management",
+        "description": "Simple tools to manage your listings and orders"
+      }
+    },
+    "application": {
+      "title": "Farmer Application",
+      "subtitle": "Fill out this form to start your journey with Revolutionary Farmers",
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "farmName": "Farm Name",
+        "farmAddress": "Farm Address",
+        "farmSize": "Farm Size (acres)",
+        "farmingMethod": "Farming Method",
+        "mainCrops": "Main Crops",
+        "description": "Tell us about your farm"
+      },
+      "placeholders": {
+        "farmingMethod": "e.g., Organic, Conventional, Sustainable",
+        "mainCrops": "e.g., Tomatoes, Lettuce, Carrots",
+        "description": "Share your farming philosophy, experience, and what makes your farm special..."
+      },
+      "terms": {
+        "agree": "I agree to the",
+        "termsOfService": "Terms of Service",
+        "and": "and",
+        "privacyPolicy": "Privacy Policy"
+      },
+      "submit": "Submit Application",
+      "submitting": "Submitting Application...",
+      "success": "Application submitted successfully! We will contact you soon.",
+      "error": "Error submitting application. Please try again.",
+      "termsError": "Please accept the terms and conditions"
+    }
   },
   "Settings": {
     "title": "Settings",
@@ -1614,5 +1810,590 @@
         "disabled": "Disabled"
       }
     }
+  },
+
+  "producerCTA": {
+    "title": "Are You a Producer?",
+    "subtitle": "Join Our Marketplace Today",
+    "description": "Join our marketplace and connect directly with consumers who value fresh, quality produce. Expand your reach, increase your sales, and build lasting relationships with customers who appreciate your hard work.",
+    "benefit1Title": "Direct Sales",
+    "benefit1Desc": "Sell directly to consumers without intermediaries",
+    "benefit2Title": "Fair Pricing",
+    "benefit2Desc": "Set your own prices and maximize your profits",
+    "benefit3Title": "Community Building",
+    "benefit3Desc": "Build relationships with local consumers",
+    "buttonText": "Join as Producer"
+},
+
+    "NewMissionVision": {
+    "title": "Mission and Vision",
+    "mission": {
+      "title": "Mission",
+      "points": [
+        {
+          "title": "Facilitate Trust",
+          "description": "Create a transparent and secure environment for agricultural transactions through blockchain technology."
+        },
+        {
+          "title": "Empower Farmers",
+          "description": "Provide farmers with direct market access, fair pricing, and financial tools to grow their business."
+        },
+        {
+          "title": "Promote Innovation",
+          "description": "Drive the adoption of technology in agriculture to enhance efficiency, sustainability, and traceability."
+        },
+        {
+          "title": "Support Open Source",
+          "description": "Contribute to the open-source community by building and sharing tools that benefit the entire ecosystem."
+        }
+      ]
+    },
+    "vision": {
+      "title": "Vision",
+      "points": [
+        {
+          "title": "Transform Agriculture",
+          "description": "To be the leading global platform for a decentralized, transparent, and sustainable agricultural supply chain."
+        },
+        {
+          "title": "Global Reach",
+          "description": "Connect farmers and buyers worldwide, fostering a global community built on trust and mutual benefit."
+        },
+        {
+          "title": "Financial Inclusion",
+          "description": "Enable financial inclusion for unbanked farmers through decentralized financial services."
+        },
+        {
+          "title": "Sustainable Growth",
+          "description": "Promote environmentally friendly and economically viable farming practices for a sustainable future."
+        }
+      ]
+    }
+  },
+  "ContactSection": {
+    "title": "Can't find the product you're looking for?",
+    "description": "Get in touch with us or explore our network of trusted producers",
+    "talkToUs": "Talk to Us",
+    "viewProducers": "View Our Producers",
+    "emailSubject": "Product Inquiry - Revolutionary Farmers",
+    "emailBody": "Hello Revolutionary Farmers,\\n\\nI am looking for a specific product that I couldn't find in your marketplace.\\n\\nProduct details:\\n- Product name: \\n- Category: \\n- Quantity needed: \\n- Preferred delivery date: \\n\\nAdditional notes:\\n\\nPlease let me know if you can help me find this product or connect me with a suitable producer.\\n\\nThank you for your assistance!\\n\\nBest regards"
+  },
+
+  "Producers": {
+    "hero": {
+      "title": "Our Producers",
+      "description": "Discover amazing local producers who are transforming agriculture with sustainable practices and innovative farming methods.",
+      "searchPlaceholder": "Search by producer, product or location...",
+      "locationText": "Showing producers near your location",
+      "resultsFor": "Results for"
+    },
+    "filters": {
+      "label": "Filters",
+      "search": "Search producers...",
+      "location": "Location",
+      "certification": "Certification",
+      "farmingMethod": "Farming Method",
+      "distance": "Distance",
+      "rating": "Rating",
+      "apply": "Apply Filter",
+      "clear": "Clear filters",
+      "active": "Active Filters",
+      "any": "Any",
+      "labels": {
+        "search": "Search",
+        "location": "Location",
+        "cert": "Cert.",
+        "method": "Method",
+        "distance": "Distance",
+        "rating": "Rating"
+      },
+      "clearAll": "Clear all filters",
+      "clearSearch": "Clear search",
+      "clearLocation": "Clear location filter",
+      "clearCertification": "Clear certification filter",
+      "clearMethod": "Clear farming method filter",
+      "clearDistance": "Clear distance filter",
+      "clearRating": "Clear rating filter"
+    },
+    "sortBy": {
+      "showing": "Showing",
+      "of": "of",
+      "producers": "Producers",
+      "label": "Sort by",
+      "distance": "Distance",
+      "rating": "Rating",
+      "name": "Name",
+      "products": "Products Count"
+    },
+    "producerCard": {
+      "market": "Market",
+      "farmer": "Farmer",
+      "location": "Location",
+      "distance": "Distance",
+      "certifications": "Certifications",
+      "organic": "Certified Organic",
+      "fairTrade": "Fair Trade",
+      "viewProfile": "View Profile",
+      "addToCart": "Add to Cart",
+      "products": "Products",
+      "reviews": "Reviews",
+      "rating": "Rating",
+      "kmAway": "{distance} km away",
+      "milesAway": "{distance} miles away"
+    },
+    "cta": {
+      "title": "Are you a producer?",
+      "description": "Join our community of sustainable farmers and connect directly with consumers who value quality and transparency.",
+      "joinButton": "Join as Producer"
+    },
+    "loadMore": "Load more producers",
+    "loadMoreAria": "Load more producers",
+    "empty": {
+      "title": "No producers found",
+      "description": "Try adjusting your filters or search criteria to find producers in your area."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "producers": "Producers"
+    }
+
+  
+  },
+  "ContactInfo": {
+    "title": "Contact Information",
+    "location": "Location",
+    "phone": "Phone",
+    "email": "Email",
+    "schedule": "Business Hours",
+    "weekdays": "Mon - Sat",
+    "sunday": "Sun",
+    "socialMedia": "Social Media",
+    "editAriaLabel": "Edit contact information",
+    "visitFacebook": "Visit Facebook page",
+    "visitInstagram": "Visit Instagram page",
+    "contactWhatsApp": "Contact via WhatsApp",
+    "visitWebsite": "Visit website"
+  },
+
+  "ProfileSettings": {
+    "settingNames": {
+      "language": "Language",
+      "currency": "Currency",
+      "darkMode": "Dark Mode",
+      "emailNotifications": "Email Notifications",
+      "smsNotifications": "SMS Notifications",
+      "privacyPublicProfile": "Public Profile"
+    },
+    "generalPreferences": {
+      "title": "General Preferences",
+      "description": "Configure your language, currency, and display settings."
+    },
+    "language": {
+      "label": "Language",
+      "placeholder": "Select language",
+      "options": {
+        "en": "English",
+        "es": "Spanish"
+      }
+    },
+    "currency": {
+      "label": "Preferred Currency",
+      "placeholder": "Select currency",
+      "options": {
+        "USD": "USD - United States Dollar",
+        "EUR": "EUR - Euro",
+        "GBP": "GBP - British Pound",
+        "XLM": "XLM - Stellar Lumens"
+      }
+    },
+    "darkMode": "Dark Mode",
+    "notifications": {
+      "title": "Notification Settings",
+      "description": "Manage how you receive notifications.",
+      "email": "Email Notifications",
+      "sms": "SMS Notifications"
+    },
+    "privacy": {
+      "title": "Privacy Settings",
+      "description": "Control your profile visibility.",
+      "publicProfile": "Public Profile"
+    },
+    "saveButton": "Save All Settings",
+    "toast": {
+      "saved": "All settings saved successfully!",
+      "updated": "{setting} updated to {value}!",
+      "enabled": "{setting} enabled!",
+      "disabled": "{setting} disabled!"
+    }
+  },
+
+  "ProfileTabs": {
+    "tabs": {
+      "profile": "Profile",
+      "wallet": "Wallet",
+      "transactions": "Transactions",
+      "farming": "Farming",
+      "settings": "Settings"
+    },
+    "walletSummary": {
+      "title": "Wallet Summary",
+      "totalBalance": "Total Wallet Balance",
+      "totalTransactions": "Total Transactions",
+      "farmingActivities": "Farming Activities",
+      "activeContracts": "Active Contracts",
+      "xlmEquivalent": "(XLM equivalent)",
+      "transactionsRecorded": "transactions recorded",
+      "activitiesLogged": "activities logged",
+      "activeEscrowContracts": "active escrow contracts"
+    }
+  },
+
+  "ProfileForm": {
+    "title": "Profile Information",
+    "description": "Manage your personal and farm details.",
+    "personalInfo": {
+      "title": "Personal Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "city": "City",
+      "state": "State / Province",
+      "zip": "Zip / Postal Code",
+      "country": "Country"
+    },
+    "farmInfo": {
+      "title": "Farm Information",
+      "farmName": "Farm Name",
+      "farmSize": "Farm Size",
+      "farmType": "Farm Type",
+      "farmTypePlaceholder": "Select farm type",
+      "farmTypes": {
+        "Organic Vegetables": "Organic Vegetables",
+        "Dairy Farm": "Dairy Farm",
+        "Grain Crops": "Grain Crops",
+        "Fruit Orchard": "Fruit Orchard",
+        "Livestock": "Livestock",
+        "Mixed Farming": "Mixed Farming"
+      },
+      "establishedDate": "Established Date",
+      "datePlaceholder": "Pick a date",
+      "website": "Website",
+      "bio": "Bio"
+    },
+    "saveButton": "Save Changes",
+    "toast": {
+      "success": "Profile updated successfully!"
+    }
+  },
+
+  "WalletSection": {
+    "connectWallet": {
+      "title": "Connect Your Stellar Wallet",
+      "description": "Connect your wallet to manage your Stellar assets and view transaction history",
+      "button": "Connect Wallet"
+    },
+    "walletInfo": {
+      "title": "Wallet Information",
+      "connected": "Connected",
+      "mainnet": "Mainnet",
+      "testnet": "Testnet",
+      "disconnect": "Disconnect",
+      "walletAddress": "Wallet Address",
+      "connectedVia": "Connected Via",
+      "switchTo": "Switch to"
+    },
+    "error": "Error",
+    "balances": {
+      "title": "Asset Balances",
+      "loading": "Loading balances...",
+      "noAssets": "No assets found in this wallet",
+      "limit": "Limit",
+      "buying": "Buying",
+      "selling": "Selling"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "sendPayment": "Send Payment",
+      "addAsset": "Add Asset",
+      "copyAddress": "Copy Address",
+      "viewExplorer": "View Explorer"
+    },
+    "paymentModal": {
+      "title": "Send Payment",
+      "destinationAddress": "Destination Address",
+      "destinationPlaceholder": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "amount": "Amount",
+      "amountPlaceholder": "0.00",
+      "max": "Max",
+      "asset": "Asset",
+      "memo": "Memo (Optional)",
+      "memoPlaceholder": "Optional memo",
+      "balance": "Balance",
+      "reviewSend": "Review & Send",
+      "preparing": "Preparing...",
+      "cancel": "Cancel",
+      "invalidAddress": "Invalid Stellar address format",
+      "errors": {
+        "fillFields": "Please fill in destination and amount",
+        "invalidAddress": "Invalid Stellar destination address",
+        "amountGreater": "Amount must be greater than 0",
+        "insufficientBalance": "Insufficient balance"
+      }
+    },
+    "trustlineModal": {
+      "title": "Add Asset Trustline",
+      "assetCode": "Asset Code",
+      "assetCodePlaceholder": "USDT, USDC, etc.",
+      "assetIssuer": "Asset Issuer",
+      "assetIssuerPlaceholder": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "trustLimit": "Trust Limit (Optional)",
+      "trustLimitPlaceholder": "Leave empty for maximum",
+      "createTrustline": "Create Trustline",
+      "creating": "Creating...",
+      "cancel": "Cancel",
+      "invalidAddress": "Invalid Stellar address format",
+      "errors": {
+        "fillFields": "Please fill in asset code and issuer",
+        "invalidIssuer": "Invalid asset issuer address"
+      }
+    },
+    "confirmModal": {
+      "title": "Confirm Transaction",
+      "sending": "Sending",
+      "to": "To",
+      "memo": "Memo",
+      "estimatedFee": "Estimated Fee",
+      "transactionXdr": "Transaction XDR",
+      "confirmSend": "Confirm Send",
+      "confirming": "Confirming...",
+      "cancel": "Cancel"
+    },
+    "toast": {
+      "addressCopied": "Address copied to clipboard",
+      "balancesUpdated": "Balances updated",
+      "paymentSent": "Payment sent successfully! Hash: {hash}...",
+      "trustlineCreated": "Trustline created successfully! Hash: {hash}...",
+      "networkSwitched": "Switched to {network}",
+      "paymentFailed": "Failed to send payment",
+      "trustlineFailed": "Failed to create trustline"
+    }
+  },
+
+  "TransactionHistory": {
+    "title": "Transaction History",
+    "description": "View and manage your transaction history",
+    "export": "Export",
+    "searchPlaceholder": "Search transactions...",
+    "filterTypes": {
+      "all": "All Types",
+      "payment": "Payments",
+      "create_account": "Account Creation",
+      "manage_offer": "Offers",
+      "change_trust": "Trustlines"
+    },
+    "status": {
+      "success": "Success",
+      "pending": "Pending",
+      "failed": "Failed"
+    },
+    "transactionTypes": {
+      "payment": "payment",
+      "create_account": "account creation",
+      "manage_offer": "offers",
+      "path_payment": "path payment",
+      "manage_data": "manage data",
+      "change_trust": "trustlines"
+    },
+    "labels": {
+      "from": "From",
+      "to": "To",
+      "fee": "Fee"
+    },
+    "messages": {
+      "loading": "Loading transactions...",
+      "error": "Error loading transactions",
+      "noTransactions": "No transactions found",
+      "noMatches": "No transactions match your search",
+      "loadMore": "Load More Transactions"
+    }
+  },
+
+  "FarmingActivity": {
+    "title": "Farming Operations",
+    "description": "Track your farming activities and manage escrow contracts",
+    "tabs": {
+      "activities": "Recent Activities",
+      "contracts": "Escrow Contracts"
+    },
+    "activities": {
+      "title": "Recent Activities",
+      "addActivity": "Add Activity",
+      "labels": {
+        "yield": "Yield",
+        "quality": "Quality",
+        "quantity": "Quantity",
+        "variety": "Variety",
+        "findings": "Findings",
+        "notes": "Notes",
+        "progress": "Progress"
+      }
+    },
+    "contracts": {
+      "title": "Escrow Contracts",
+      "newContract": "New Contract",
+      "buyer": "Buyer",
+      "labels": {
+        "amount": "Amount",
+        "quantity": "Quantity",
+        "delivery": "Delivery",
+        "progress": "Progress",
+        "terms": "Terms"
+      },
+      "actions": {
+        "viewDetails": "View Details",
+        "activateContract": "Activate Contract"
+      }
+    },
+    "status": {
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "scheduled": "Scheduled",
+      "active": "Active",
+      "pending": "Pending",
+      "draft": "Draft"
+    }
+  },
+
+  "SecuritySettings": {
+    "passwordSettings": {
+      "title": "Password Settings",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "placeholders": {
+        "currentPassword": "Enter current password",
+        "newPassword": "Enter new password",
+        "confirmPassword": "Confirm new password"
+      },
+      "requirements": "Password must be at least 8 characters long and include uppercase, lowercase, numbers, and symbols.",
+      "updateButton": "Update Password",
+      "updating": "Updating..."
+    },
+    "twoFactor": {
+      "title": "Two-Factor Authentication",
+      "enable2FA": "Enable 2FA",
+      "description": "Add an extra layer of security to your account with two-factor authentication",
+      "enabled": {
+        "title": "2FA is enabled",
+        "description": "Your account is protected with two-factor authentication using your authenticator app.",
+        "viewRecoveryCodes": "View Recovery Codes",
+        "regenerateCodes": "Regenerate Codes"
+      },
+      "disabled": {
+        "title": "2FA is disabled",
+        "description": "Enable two-factor authentication to secure your account with an additional verification step."
+      }
+    },
+    "activeSessions": {
+      "title": "Active Sessions",
+      "current": "Current",
+      "lastActive": "Last active",
+      "terminate": "Terminate"
+    },
+    "securityActivity": {
+      "title": "Security Activity",
+      "exportLog": "Export Log",
+      "actions": {
+        "passwordChanged": "Password changed",
+        "failedLoginAttempt": "Failed login attempt",
+        "walletConnected": "Wallet connected",
+        "suspiciousLoginDetected": "Suspicious login detected"
+      },
+      "status": {
+        "success": "Success",
+        "failed": "Failed",
+        "warning": "Warning"
+      }
+    },
+    "toast": {
+      "fillAllFields": "Please fill in all password fields",
+      "passwordsDoNotMatch": "New passwords do not match",
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "passwordUpdated": "Password updated successfully",
+      "passwordUpdateFailed": "Failed to update password",
+      "twoFactorEnabled": "2FA enabled successfully",
+      "twoFactorDisabled": "2FA disabled successfully",
+      "twoFactorUpdateFailed": "Failed to update 2FA settings",
+      "sessionTerminated": "Session terminated successfully",
+      "sessionTerminateFailed": "Failed to terminate session"
+    }
+  },
+
+  "CartPage": {
+    "title": "Your Cart",
+    "emptyCart": {
+      "title": "Your cart is empty",
+      "description": "Looks like you haven't added any agricultural products to your cart yet.",
+      "browseProducts": "Browse Products"
+    },
+    "emptyAfterRemoval": {
+      "title": "Your cart is empty",
+      "description": "You've removed all items from your cart.",
+      "restoreItems": "Restore Removed Items",
+      "browseProducts": "Browse Products"
+    },
+    "items": {
+      "title": "Items",
+      "item": "Item",
+      "items": "Items",
+      "selectAll": "Select All",
+      "deselectAll": "Deselect All",
+      "removeSelected": "Remove Selected",
+      "resetCart": "Reset Cart",
+      "clearCart": "Clear Cart"
+    },
+    "removedItems": {
+      "item": "item",
+      "items": "items",
+      "removedFromCart": "removed from cart",
+      "undo": "Undo"
+    },
+    "farmer": {
+      "subtotal": "Subtotal",
+      "items": "items",
+      "deliveryAvailable": "Delivery Available",
+      "pickupAvailable": "Pickup Available"
+    },
+    "checkout": {
+      "processing": "Processing..."
+    },
+    "escrowProtection": {
+      "title": "Escrow Protection",
+      "description": "Revolutionary Farmers uses an escrow system to protect both buyers and sellers. Your payment will be held securely until you confirm receipt of your agricultural products."
+    }
+  },
+
+  "CartItem": {
+    "seller": "Seller",
+    "quantityControls": {
+      "decreaseQuantity": "Decrease quantity",
+      "increaseQuantity": "Increase quantity"
+    },
+    "actions": {
+      "saveForLater": "Save for later"
+    }
+  },
+
+  "CartSummary": {
+    "title": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "escrowFee": "Escrow Fee",
+    "total": "Total",
+    "checkoutButton": "Proceed to Escrow Checkout",
+    "escrowNote": "Your payment will be held in escrow until you confirm receipt of goods"
   }
 }

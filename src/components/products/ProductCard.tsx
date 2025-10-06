@@ -4,7 +4,7 @@ import type React from 'react';
 
 import type { Product } from '@/types/product';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, memo, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { Rating } from '@/components/ui/rating';
@@ -18,9 +18,13 @@ interface ProductCardProps {
   locale?: string;
 }
 
-export function ProductCard({ product, viewMode, onClick, locale = 'en' }: ProductCardProps) {
+const ProductCard = memo<ProductCardProps>(({ product, viewMode, onClick, locale = 'en' }) => {
   const t = useTranslations('Products');
   const [isHovered, setIsHovered] = useState(false);
+
+  const translatedName = useMemo(() => {
+    return t(`productNames.${product.name}`, { defaultValue: product.name });
+  }, [product.name, t]);
 
   const formatPrice = useCallback(
     (amount: number) => {
@@ -40,6 +44,18 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
     },
     [locale]
   );
+
+  const discountedPrice = useMemo(
+    () => calculateDiscountedPrice(product.price.amount, product.discount),
+    [product.price.amount, product.discount]
+  );
+
+  const imageSrc = useMemo(() => {
+    return product.images?.length > 0 &&
+      (product.images[0].startsWith('/') || product.images[0].startsWith('http'))
+      ? product.images[0]
+      : '/images/cart-small.png';
+  }, [product.images]);
 
   const cardClassName = cn(
     'w-full cursor-pointer transition-all',
@@ -82,17 +98,13 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
         )}
       >
         <Image
-          src={
-            product.images?.length > 0 &&
-            (product.images[0].startsWith('/') || product.images[0].startsWith('http'))
-              ? product.images[0]
-              : '/images/cart-small.png'
-          }
-          alt={product.name}
+          src={imageSrc}
+          alt={translatedName}
           className="object-contain"
           width={200}
           height={200}
           sizes="(max-width: 295px) 100vw, 295px"
+          loading="lazy"
         />
 
         {/* Add to Cart Button (appears on hover) */}
@@ -114,13 +126,13 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
 
       <div className="py-4 space-y-2">
         <div className="flex flex-col justify-between items-start gap-1">
-          <h3 className="text-base font-medium line-clamp-2">{product.name}</h3>
+          <h3 className="text-base font-medium line-clamp-2">{translatedName}</h3>
           <div className="flex items-center gap-1">
             <Rating
               value={product.rating as number & { __brand: 'ValidRating' }}
               max={5}
               readOnly
-              aria-label={`Product rated ${product.rating} out of 5 stars`}
+              aria-label={t('productCard.ratingLabel', { rating: product.rating })}
             />
             <span className="text-sm text-gray-600">{product.rating}/5</span>
           </div>
@@ -128,7 +140,7 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
 
         <div className="flex items-center justify-start gap-2">
           <p className="text-base font-semibold text-black">
-            {formatPrice(calculateDiscountedPrice(product.price.amount, product.discount))}
+            {formatPrice(discountedPrice)}
           </p>
           {product.discount > 0 && (
             <>
@@ -149,4 +161,8 @@ export function ProductCard({ product, viewMode, onClick, locale = 'en' }: Produ
       </div>
     </div>
   );
-}
+});
+
+ProductCard.displayName = 'ProductCard';
+
+export { ProductCard };

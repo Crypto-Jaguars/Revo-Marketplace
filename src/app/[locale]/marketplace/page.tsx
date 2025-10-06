@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { ProductGrid } from '@/components/products/ProductGrid';
+import dynamic from 'next/dynamic';
 import { productsMock } from '@/mocks/products';
 import Bounded from '@/components/Bounded';
 import { useTranslations } from 'next-intl';
@@ -12,12 +12,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ProductFilters } from '@/components/products/ProductFilters';
 import { calculateDiscountedPrice } from '@/constants/helpers/CalculateDiscountedPrice';
 import { useSearchStore } from '@/store';
+import type { ProductFilters as ProductFiltersType } from '@/components/products/ProductFilters';
+import ContactSection from '@/components/marketplace/ContactSection';
+
+// Dynamic imports for better performance
+const ProductGrid = dynamic(() => import('@/components/products/ProductGrid').then(mod => ({ default: mod.ProductGrid })), {
+  loading: () => <div className="animate-pulse h-96 bg-gray-200 rounded-lg" />
+});
+
+const ProductFilters = dynamic(() => import('@/components/products/ProductFilters').then(mod => ({ default: mod.ProductFilters })), {
+  loading: () => <div className="animate-pulse h-64 bg-gray-200 rounded-lg" />
+});
 
 export default function MarketplacePage() {
   const t = useTranslations('Products');
+  const tMarketplace = useTranslations('Marketplace');
+  const tCommon = useTranslations('common');
+  
   const { searchTerm } = useSearchStore();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'price' | 'date' | 'stock'>('date');
@@ -34,7 +47,7 @@ export default function MarketplacePage() {
     };
   }, []);
 
-  const [filters, setFilters] = useState<ProductFilters>({
+  const [filters, setFilters] = useState<ProductFiltersType>({
     search: searchTerm,
     category: '',
     farmingMethod: '',
@@ -105,7 +118,7 @@ export default function MarketplacePage() {
     []
   );
 
-  const handleFilterChange = useCallback(async (newFilters: Partial<ProductFilters>) => {
+  const handleFilterChange = useCallback(async (newFilters: Partial<ProductFiltersType>) => {
     setIsFilterLoading(true);
     setFilters((prev) => ({ ...prev, ...newFilters }));
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -138,9 +151,9 @@ export default function MarketplacePage() {
   return (
     <Bounded>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-4">Revolutionary Farmers Marketplace</h1>
+        <h1 className="text-4xl font-bold text-white mb-4">{tMarketplace('title')}</h1>
         <p className="text-gray-300 text-lg">
-          Discover fresh, locally-sourced produce directly from farmers using blockchain technology
+          {tMarketplace('description')}
         </p>
       </div>
 
@@ -157,24 +170,24 @@ export default function MarketplacePage() {
           <div className="flex flex-col h-full">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h2 className="text-2xl font-semibold text-white">Available Products</h2>
+                <h2 className="text-2xl font-semibold text-white">{tMarketplace('availableProducts')}</h2>
               </div>
               {sortedProducts.length > 0 && (
                 <div className="flex items-center">
                   <div className="text-black/50 text-sm mr-4">
-                    Showing {(currentPage - 1) * itemsPerPage + 1}-
-                    {Math.min(currentPage * itemsPerPage, sortedProducts.length)} of{' '}
-                    {sortedProducts.length} products
+                    {tCommon('sortBy.showing')} {(currentPage - 1) * itemsPerPage + 1}-
+                    {Math.min(currentPage * itemsPerPage, sortedProducts.length)} {tCommon('sortBy.of')}{' '}
+                    {sortedProducts.length} {tCommon('products')}
                   </div>
-                  <span className="text-black/50 text-sm font-medium mr-2">Sort by:</span>
+                  <span className="text-black/50 text-sm font-medium mr-2">{tCommon('sortBy.label')}:</span>
                   <Select value={sortBy} onValueChange={handleSortChange}>
                     <SelectTrigger className="w-[180px] border-0 active:border-0">
-                      <SelectValue placeholder="Sort by" />
+                      <SelectValue placeholder={tCommon('sortBy.label')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="price">Price</SelectItem>
-                      <SelectItem value="date">Latest</SelectItem>
-                      <SelectItem value="stock">Stock</SelectItem>
+                      <SelectItem value="price">{tCommon('sortBy.price')}</SelectItem>
+                      <SelectItem value="date">{tCommon('sortBy.latest')}</SelectItem>
+                      <SelectItem value="stock">{tCommon('sortBy.stock')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -183,11 +196,14 @@ export default function MarketplacePage() {
 
             <div className="flex-grow">
               {sortedProducts.length === 0 ? (
-                <div className="bg-white rounded-lg shadow-sm h-full flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <p className="text-xl mb-2">No products found</p>
-                    <p>Try adjusting your filters</p>
+                <div className="space-y-8">
+                  <div className="bg-white rounded-lg shadow-sm flex items-center justify-center py-12">
+                    <div className="text-center text-gray-500">
+                      <p className="text-xl mb-2">{t('empty.title')}</p>
+                      <p>{t('empty.description')}</p>
+                    </div>
                   </div>
+                  <ContactSection />
                 </div>
               ) : (
                 <ProductGrid

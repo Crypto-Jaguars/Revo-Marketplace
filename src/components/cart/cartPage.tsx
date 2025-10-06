@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useCartStore } from '@/store';
+import { useCartStore, useLanguageStore } from '@/store';
 import CartItemComponent from './cartItem';
 import CartSummary from './cartSummary';
 import { Button } from '@/components/ui/button';
@@ -9,8 +9,13 @@ import { Loader2, AlertCircle, Truck, Store, Undo2, Trash2 } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export default function CartPage() {
+  const t = useTranslations('CartPage');
+  const { language } = useLanguageStore();
+
   const {
     Items,
     removeItem,
@@ -105,18 +110,15 @@ export default function CartPage() {
   if (Items.length === 0 && lastRemovedItems.length === 0) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-4">
-        <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
+        <h1 className="text-2xl font-bold mb-8">{t('title')}</h1>
         <div className="bg-muted/30 rounded-lg p-12 text-center">
-          <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
-          <p className="text-muted-foreground mb-6">
-            Looks like you haven&apos;t added any agricultural products to your cart yet.
-          </p>
-          <Button
-            asChild
-            className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]"
-          >
-            <a href="/en/products">Browse Products</a>
-          </Button>
+          <h2 className="text-xl font-medium mb-4">{t('emptyCart.title')}</h2>
+          <p className="text-muted-foreground mb-6">{t('emptyCart.description')}</p>
+          <Link href={`/${language}/products`}>
+            <Button className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
+              {t('emptyCart.browseProducts')}
+            </Button>
+          </Link>
         </div>
       </div>
     );
@@ -125,23 +127,21 @@ export default function CartPage() {
   if (Items.length === 0 && lastRemovedItems.length > 0) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-4">
-        <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
+        <h1 className="text-2xl font-bold mb-8">{t('title')}</h1>
         <div className="bg-muted/30 rounded-lg p-12 text-center">
-          <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
-          <p className="text-muted-foreground mb-6">
-            You&apos;ve removed all items from your cart.
-          </p>
+          <h2 className="text-xl font-medium mb-4">{t('emptyAfterRemoval.title')}</h2>
+          <p className="text-muted-foreground mb-6">{t('emptyAfterRemoval.description')}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={undoRemove} className="flex items-center gap-2">
               <Undo2 className="h-4 w-4" />
-              Restore Removed Items
+              {t('emptyAfterRemoval.restoreItems')}
             </Button>
-            <Button
-              asChild
-              className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]"
-            >
-              <a href="/en/products">Browse Products</a>
-            </Button>
+
+            <Link href={`/${language}/products`}>
+              <Button className="bg-[#375B42] dark:bg-background-dark hover:bg-[#375B42] dark:hover:bg-[#2C4733]">
+                {t('emptyAfterRemoval.browseProducts')}
+              </Button>
+            </Link>
           </div>
         </div>
         <ToastContainer />
@@ -151,7 +151,7 @@ export default function CartPage() {
 
   return (
     <div className="max-w-6xl mx-auto py-12 px-4">
-      <h1 className="text-2xl font-bold mb-8">Your Cart</h1>
+      <h1 className="text-2xl font-bold mb-8">{t('title')}</h1>
 
       {error && (
         <Alert variant="destructive" className="mb-6">
@@ -164,8 +164,9 @@ export default function CartPage() {
         <Alert className="mb-6 bg-muted/30 border-muted">
           <div className="flex justify-between items-center w-full">
             <AlertDescription>
-              {lastRemovedItems.length} {lastRemovedItems.length === 1 ? 'item' : 'items'} removed
-              from cart
+              {lastRemovedItems.length}{' '}
+              {lastRemovedItems.length === 1 ? t('removedItems.item') : t('removedItems.items')}{' '}
+              {t('removedItems.removedFromCart')}
             </AlertDescription>
             <Button
               variant="outline"
@@ -174,7 +175,7 @@ export default function CartPage() {
               className="flex items-center gap-1"
             >
               <Undo2 className="h-3 w-3" />
-              Undo
+              {t('removedItems.undo')}
             </Button>
           </div>
         </Alert>
@@ -192,11 +193,13 @@ export default function CartPage() {
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-4">
                 <h2 className="text-lg font-medium">
-                  {Items.length} {Items.length === 1 ? 'Item' : 'Items'}
+                  {Items.length} {Items.length === 1 ? t('items.item') : t('items.items')}
                 </h2>
                 {Items.length > 1 && (
                   <Button variant="outline" size="sm" onClick={selectAllItems} className="text-xs">
-                    {selectedItems.length === Items.length ? 'Deselect All' : 'Select All'}
+                    {selectedItems.length === Items.length
+                      ? t('items.deselectAll')
+                      : t('items.selectAll')}
                   </Button>
                 )}
               </div>
@@ -209,14 +212,14 @@ export default function CartPage() {
                     className="flex items-center gap-1"
                   >
                     <Trash2 className="h-3 w-3" />
-                    Remove Selected
+                    {t('items.removeSelected')}
                   </Button>
                 )}
                 <Button variant="outline" size="sm" onClick={resetCart}>
-                  Reset Cart
+                  {t('items.resetCart')}
                 </Button>
                 <Button variant="outline" size="sm" onClick={clearCart}>
-                  Clear Cart
+                  {t('items.clearCart')}
                 </Button>
               </div>
             </div>
@@ -258,7 +261,9 @@ export default function CartPage() {
 
                     <div className="bg-muted/20 p-4">
                       <div className="flex justify-between mb-2">
-                        <span>Subtotal ({farmerItems.length} items)</span>
+                        <span>
+                          {t('farmer.subtotal')} ({farmerItems.length} {t('farmer.items')})
+                        </span>
                         <span className="font-medium">
                           ${subtotalByFarmer[farmerId].toFixed(2)}
                         </span>
@@ -269,14 +274,14 @@ export default function CartPage() {
                           {farmerItems.some((item) => item.availableForDelivery) && (
                             <div className="flex items-center gap-1">
                               <Truck className="h-3 w-3" />
-                              <span>Delivery Available</span>
+                              <span>{t('farmer.deliveryAvailable')}</span>
                             </div>
                           )}
 
                           {farmerItems.some((item) => item.pickupAvailable) && (
                             <div className="flex items-center gap-1">
                               <Store className="h-3 w-3" />
-                              <span>Pickup Available</span>
+                              <span>{t('farmer.pickupAvailable')}</span>
                             </div>
                           )}
                         </div>
@@ -299,17 +304,13 @@ export default function CartPage() {
             {isCheckingOut && (
               <div className="mt-4 p-4 bg-primary/10 rounded-lg flex items-center justify-center">
                 <Loader2 className="h-5 w-5 animate-spin mr-2" />
-                <span>Processing...</span>
+                <span>{t('checkout.processing')}</span>
               </div>
             )}
 
             <div className="mt-6 p-4 border rounded-lg">
-              <h3 className="font-medium mb-2">Escrow Protection</h3>
-              <p className="text-sm text-muted-foreground">
-                Revolutionary Farmers uses an escrow system to protect both buyers and sellers. Your
-                payment will be held securely until you confirm receipt of your agricultural
-                products.
-              </p>
+              <h3 className="font-medium mb-2">{t('escrowProtection.title')}</h3>
+              <p className="text-sm text-muted-foreground">{t('escrowProtection.description')}</p>
             </div>
           </div>
         </div>

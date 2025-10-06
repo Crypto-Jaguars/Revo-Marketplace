@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
+import { useState, useCallback, useRef, useEffect, useMemo, memo } from 'react';
 import { useTranslations } from 'next-intl';
 import { productsMock } from '@/mocks/products';
 import { calculateDiscountedPrice } from '@/constants/helpers/CalculateDiscountedPrice';
@@ -20,12 +20,20 @@ export interface ProductFilters {
   priceRange: [number, number];
 }
 
-export function ProductFilters({
+const ProductFilters = memo<ProductFiltersProps>(({
   onFilterChange,
   categories,
   farmingMethods,
-}: ProductFiltersProps) {
+}) => {
   const t = useTranslations('Products');
+  
+  const translateCategory = useCallback((category: string) => {
+    return t(`categories.${category}`);
+  }, [t]);
+  
+  const translateFarmingMethod = useCallback((method: string) => {
+    return t(`farmingMethods.${method}`);
+  }, [t]);
 
   const { maxPrice } = useMemo(() => {
     const prices = productsMock.map((product) =>
@@ -158,7 +166,7 @@ export function ProductFilters({
               })
             }
           >
-            <span className="text-gray-700">{category}</span>
+            <span className="text-gray-700">{translateCategory(category)}</span>
             <svg
               className={`h-5 w-5 transition-transform ${
                 localFilters.category === category ? 'rotate-90' : ''
@@ -236,4 +244,8 @@ export function ProductFilters({
       )}
     </div>
   );
-}
+});
+
+ProductFilters.displayName = 'ProductFilters';
+
+export { ProductFilters };
