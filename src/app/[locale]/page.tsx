@@ -5,6 +5,7 @@ import HeroSection from '@/components/herosection/heroSection';
 import { useTranslations } from 'next-intl';
 import { AboutUs } from '@/components/sections/about-us/AboutUs';
 import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
+import { WaitlistCta } from '@/components/sections/waitlist-cta/WaitlistCta';
 import CtaSection from '@/components/cta/CtaSection';
 import HeroSectionNew from '@/components/herosection/herosectionnew';
 import ProducerCTA from '@/components/cta/producer-Cta';
@@ -22,6 +23,7 @@ export default function Home() {
       <AboutUs />
       <NewMissionVision />
       <HowWeWork />
+      <WaitlistCta />
       <CtaSection />
       <ProducerCTA />
     </main>
