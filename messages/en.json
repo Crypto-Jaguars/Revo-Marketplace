@@ -98,6 +98,14 @@
       }
     }
   },
+  "Producers": {
+    "title": "Our Producers",
+    "description": "Connect directly with those who grow fresh, local food. Explore products, learn stories and support your community.",
+    "searchPlaceholder": "Search by producer, product or location...",
+    "filters": "Filters",
+    "locationText": "Showing producers near your location"
+  },
+
   "farmerProfile": {
     "personalInfo": {
       "title": "Personal Information",
