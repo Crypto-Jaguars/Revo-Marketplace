@@ -1171,9 +1171,6 @@
       "home": "Inicio",
       "producers": "Productores"
     }
-
-  
-}
   },
   "ContactInfo": {
     "title": "Información de Contacto",
@@ -1612,4 +1609,5 @@
     "checkoutButton": "Proceder al Pago de Depósito",
     "escrowNote": "Tu pago se mantendrá en depósito hasta que confirmes la recepción de los productos"
   }
+}
 }
