@@ -5,9 +5,13 @@ import HeroSection from '@/components/herosection/heroSection';
 import { useTranslations } from 'next-intl';
 import { AboutUs } from '@/components/sections/about-us/AboutUs';
 import { HowWeWork } from '@/components/sections/how-it-works/HowItWorks';
+import { WaitlistCta } from '@/components/sections/waitlist-cta/WaitlistCta';
 import CtaSection from '@/components/cta/CtaSection';
 import HeroSectionNew from '@/components/herosection/herosectionnew';
+import ProducerCTA from '@/components/cta/producer-Cta';
+import { NewMissionVision } from '@/components/about/NewMissionVision';
 import RegistrationHeroSection from '@/components/herosection/RegistrationHeroSection';
+
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -17,8 +21,11 @@ export default function Home() {
       <HeroSectionNew />
       <RegistrationHeroSection />
       <AboutUs />
+      <NewMissionVision />
       <HowWeWork />
+      <WaitlistCta />
       <CtaSection />
+      <ProducerCTA />
     </main>
   );
 }

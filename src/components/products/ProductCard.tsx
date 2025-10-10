@@ -22,6 +22,10 @@ const ProductCard = memo<ProductCardProps>(({ product, viewMode, onClick, locale
   const t = useTranslations('Products');
   const [isHovered, setIsHovered] = useState(false);
 
+  const translatedName = useMemo(() => {
+    return t(`productNames.${product.name}`, { defaultValue: product.name });
+  }, [product.name, t]);
+
   const formatPrice = useCallback(
     (amount: number) => {
       return new Intl.NumberFormat(locale, {
@@ -95,7 +99,7 @@ const ProductCard = memo<ProductCardProps>(({ product, viewMode, onClick, locale
       >
         <Image
           src={imageSrc}
-          alt={product.name}
+          alt={translatedName}
           className="object-contain"
           width={200}
           height={200}
@@ -122,13 +126,13 @@ const ProductCard = memo<ProductCardProps>(({ product, viewMode, onClick, locale
 
       <div className="py-4 space-y-2">
         <div className="flex flex-col justify-between items-start gap-1">
-          <h3 className="text-base font-medium line-clamp-2">{product.name}</h3>
+          <h3 className="text-base font-medium line-clamp-2">{translatedName}</h3>
           <div className="flex items-center gap-1">
             <Rating
               value={product.rating as number & { __brand: 'ValidRating' }}
               max={5}
               readOnly
-              aria-label={`Product rated ${product.rating} out of 5 stars`}
+              aria-label={t('productCard.ratingLabel', { rating: product.rating })}
             />
             <span className="text-sm text-gray-600">{product.rating}/5</span>
           </div>

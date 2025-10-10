@@ -6,6 +6,7 @@ import { useCartStore } from '@/store';
 import { Button } from '@/components/ui/button';
 import type { Product } from '@/types/product';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface AddToCartButtonProps {
   product: Product;
@@ -26,6 +27,7 @@ export function AddToCartButton({
   showIcon = true,
   fullWidth = false,
 }: AddToCartButtonProps) {
+  const t = useTranslations('Products.buttons');
   const { addItem, Items, loading } = useCartStore();
   const [isAdded, setIsAdded] = useState(false);
 
@@ -75,17 +77,17 @@ export function AddToCartButton({
       {loading ? (
         <>
           <Loader2 className={cn('h-4 w-4 animate-spin', showIcon && 'mr-2')} />
-          <span>Adding...</span>
+          <span>{t('adding')}</span>
         </>
       ) : isAdded ? (
         <>
           <Check className={cn('h-4 w-4', showIcon && 'mr-2')} />
-          <span>Added</span>
+          <span>{t('added')}</span>
         </>
       ) : (
         <>
           {showIcon && <ShoppingCart className="h-4 w-4 mr-2" />}
-          <span>{isInCart ? 'Add Again' : 'Add to Cart'}</span>
+          <span>{isInCart ? t('addAgain') : t('addToCart')}</span>
         </>
       )}
     </Button>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -115,6 +116,7 @@ const escrowContracts = [
 ];
 
 export function FarmingActivity() {
+  const t = useTranslations('FarmingActivity');
   const [activeTab, setActiveTab] = useState('activities');
 
   const getActivityIcon = (type: string) => {
@@ -137,17 +139,17 @@ export function FarmingActivity() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <Badge className="bg-green-100 text-green-800">Completed</Badge>;
+        return <Badge className="bg-green-100 text-green-800">{t('status.completed')}</Badge>;
       case 'in_progress':
-        return <Badge className="bg-blue-100 text-blue-800">In Progress</Badge>;
+        return <Badge className="bg-blue-100 text-blue-800">{t('status.inProgress')}</Badge>;
       case 'scheduled':
-        return <Badge className="bg-yellow-100 text-yellow-800">Scheduled</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800">{t('status.scheduled')}</Badge>;
       case 'active':
-        return <Badge className="bg-green-100 text-green-800">Active</Badge>;
+        return <Badge className="bg-green-100 text-green-800">{t('status.active')}</Badge>;
       case 'pending':
-        return <Badge className="bg-yellow-100 text-yellow-800">Pending</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800">{t('status.pending')}</Badge>;
       case 'draft':
-        return <Badge variant="secondary">Draft</Badge>;
+        return <Badge variant="secondary">{t('status.draft')}</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -164,22 +166,22 @@ export function FarmingActivity() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Farming Operations</CardTitle>
-        <CardDescription>Track your farming activities and manage escrow contracts</CardDescription>
+        <CardTitle>{t('title')}</CardTitle>
+        <CardDescription>{t('description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="activities">Recent Activities</TabsTrigger>
-            <TabsTrigger value="contracts">Escrow Contracts</TabsTrigger>
+            <TabsTrigger value="activities">{t('tabs.activities')}</TabsTrigger>
+            <TabsTrigger value="contracts">{t('tabs.contracts')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="activities" className="space-y-4">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">Recent Activities</h3>
+              <h3 className="text-lg font-semibold">{t('activities.title')}</h3>
               <Button size="sm">
                 <Plus className="h-4 w-4 mr-2" />
-                Add Activity
+                {t('activities.addActivity')}
               </Button>
             </div>
 
@@ -210,7 +212,7 @@ export function FarmingActivity() {
                   {activity.status === 'in_progress' && activity.progress && (
                     <div className="mb-3">
                       <div className="flex justify-between text-sm mb-1">
-                        <span>Progress</span>
+                        <span>{t('activities.labels.progress')}</span>
                         <span>{activity.progress}%</span>
                       </div>
                       <Progress value={activity.progress} className="h-2" />
@@ -220,31 +222,31 @@ export function FarmingActivity() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     {activity.yield && (
                       <div>
-                        <span className="font-medium">Yield: </span>
+                        <span className="font-medium">{t('activities.labels.yield')}: </span>
                         <span>{activity.yield}</span>
                       </div>
                     )}
                     {activity.quality && (
                       <div>
-                        <span className="font-medium">Quality: </span>
+                        <span className="font-medium">{t('activities.labels.quality')}: </span>
                         <span>{activity.quality}</span>
                       </div>
                     )}
                     {activity.quantity && (
                       <div>
-                        <span className="font-medium">Quantity: </span>
+                        <span className="font-medium">{t('activities.labels.quantity')}: </span>
                         <span>{activity.quantity}</span>
                       </div>
                     )}
                     {activity.variety && (
                       <div>
-                        <span className="font-medium">Variety: </span>
+                        <span className="font-medium">{t('activities.labels.variety')}: </span>
                         <span>{activity.variety}</span>
                       </div>
                     )}
                     {activity.findings && (
                       <div className="md:col-span-2">
-                        <span className="font-medium">Findings: </span>
+                        <span className="font-medium">{t('activities.labels.findings')}: </span>
                         <span>{activity.findings}</span>
                       </div>
                     )}
@@ -261,7 +263,7 @@ export function FarmingActivity() {
 
                   {activity.notes && (
                     <div className="mt-3 text-sm text-gray-600">
-                      <span className="font-medium">Notes: </span>
+                      <span className="font-medium">{t('activities.labels.notes')}: </span>
                       {activity.notes}
                     </div>
                   )}
@@ -272,10 +274,10 @@ export function FarmingActivity() {
 
           <TabsContent value="contracts" className="space-y-4">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">Escrow Contracts</h3>
+              <h3 className="text-lg font-semibold">{t('contracts.title')}</h3>
               <Button size="sm">
                 <Plus className="h-4 w-4 mr-2" />
-                New Contract
+                {t('contracts.newContract')}
               </Button>
             </div>
 
@@ -286,26 +288,26 @@ export function FarmingActivity() {
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="font-medium">{contract.title}</h4>
-                      <p className="text-sm text-gray-600 mt-1">Buyer: {contract.buyer}</p>
+                      <p className="text-sm text-gray-600 mt-1">{t('contracts.buyer')}: {contract.buyer}</p>
                     </div>
                     {getStatusBadge(contract.status)}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-3">
                     <div>
-                      <span className="font-medium">Amount: </span>
+                      <span className="font-medium">{t('contracts.labels.amount')}: </span>
                       <span className="text-green-600">{contract.amount}</span>
                     </div>
                     <div>
-                      <span className="font-medium">Quantity: </span>
+                      <span className="font-medium">{t('contracts.labels.quantity')}: </span>
                       <span>{contract.quantity}</span>
                     </div>
                     <div>
-                      <span className="font-medium">Delivery: </span>
+                      <span className="font-medium">{t('contracts.labels.delivery')}: </span>
                       <span>{formatDate(contract.deliveryDate)}</span>
                     </div>
                     <div>
-                      <span className="font-medium">Progress: </span>
+                      <span className="font-medium">{t('contracts.labels.progress')}: </span>
                       <span>{contract.progress}%</span>
                     </div>
                   </div>
@@ -315,15 +317,15 @@ export function FarmingActivity() {
                   </div>
 
                   <div className="text-sm text-gray-600">
-                    <span className="font-medium">Terms: </span>
+                    <span className="font-medium">{t('contracts.labels.terms')}: </span>
                     {contract.terms}
                   </div>
 
                   <div className="flex justify-end space-x-2 mt-3">
                     <Button variant="outline" size="sm">
-                      View Details
+                      {t('contracts.actions.viewDetails')}
                     </Button>
-                    {contract.status === 'draft' && <Button size="sm">Activate Contract</Button>}
+                    {contract.status === 'draft' && <Button size="sm">{t('contracts.actions.activateContract')}</Button>}
                   </div>
                 </div>
               ))}
