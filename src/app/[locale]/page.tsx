@@ -4,7 +4,7 @@ import Bounded from '@/components/Bounded';
 import HeroSection from '@/components/herosection/heroSection';
 import { useTranslations } from 'next-intl';
 import { AboutUs } from '@/components/sections/about-us/AboutUs';
-import { HowWeWork } from '@/components/sections/how-we-work/HowWeWork';
+import { HowWeWork } from '@/components/sections/how-it-works/HowItWorks';
 import { WaitlistCta } from '@/components/sections/waitlist-cta/WaitlistCta';
 import CtaSection from '@/components/cta/CtaSection';
 import HeroSectionNew from '@/components/herosection/herosectionnew';
